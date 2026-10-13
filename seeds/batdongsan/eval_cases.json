@@ -1,0 +1,1166 @@
+[
+ {
+  "query": "ờ căn hộ 1 phòng ngủ hoa sen residence còn hàng không",
+  "expected_skus": [
+   "CH-HS-1PN"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "dạ cho em hỏi căn hộ một phòng ngủ hoa sen rê si đẩn ạ",
+  "expected_skus": [
+   "CH-HS-1PN"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "bên mình có hoa sen 2pn 72 mét không",
+  "expected_skus": [
+   "CH-HS-2PN"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "à căn hộ hai phòng ngủ hoa sen rê si đần ạ",
+  "expected_skus": [
+   "CH-HS-2PN"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "alo căn hộ 3 phòng ngủ hoa sen residence còn hàng không",
+  "expected_skus": [
+   "CH-HS-3PN"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "can ho 3pn hoa sen gia sao",
+  "expected_skus": [
+   "CH-HS-3PN"
+  ],
+  "expected_status": "matched",
+  "category": "no_accent",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "shop có bán sông xanh 2pn view sông không",
+  "expected_skus": [
+   "CH-SX-2PN"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "ờ căn hộ hai phòng ngủ sông xanh tao ơ ạ",
+  "expected_skus": [
+   "CH-SX-2PN"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "dạ vâng căn hộ 3 phòng ngủ sông xanh tower còn hàng không",
+  "expected_skus": [
+   "CH-SX-3PN"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "dạ vâng căn hộ ba phòng ngủ sông xanh tao ơ ạ",
+  "expected_skus": [
+   "CH-SX-3PN"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "cho mình hỏi căn áp mái sông xanh không",
+  "expected_skus": [
+   "CH-SX-PH"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "penthouse song xanh tower gia sao",
+  "expected_skus": [
+   "CH-SX-PH"
+  ],
+  "expected_status": "matched",
+  "category": "no_accent",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "ờ căn hộ 1 phòng ngủ cộng bình minh garden còn hàng không",
+  "expected_skus": [
+   "CH-BM-1PN"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "à căn hổ một phòng ngũ cổng một bình minh ga đần ạ",
+  "expected_skus": [
+   "CH-BM-1PN"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "bên mình có bình minh 2pn bàn giao thô không",
+  "expected_skus": [
+   "CH-BM-2PN"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "dạ cho em hỏi căn hộ hai phòng ngũ bình minh ga đần ạ",
+  "expected_skus": [
+   "CH-BM-2PN"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "chị ơi căn studio bình minh garden còn hàng không",
+  "expected_skus": [
+   "CH-BM-ST"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "can studio binh minh gia sao",
+  "expected_skus": [
+   "CH-BM-ST"
+  ],
+  "expected_status": "matched",
+  "category": "no_accent",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "cho mình hỏi chung cư gò vấp có sổ không",
+  "expected_skus": [
+   "CH-GV-2PN"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "chị ơi căn hộ lan anh a pát mẩn gò vầp ạ",
+  "expected_skus": [
+   "CH-GV-2PN"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "alo căn hộ cảng xanh riverside còn hàng không",
+  "expected_skus": [
+   "CH-NB-2PN"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "em hỏi chút căn hổ cảng xanh ri vơ sai ạ",
+  "expected_skus": [
+   "CH-NB-2PN"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "cho mình hỏi căn vừa ở vừa làm văn phòng quận 7 không",
+  "expected_skus": [
+   "CH-OT-Q7"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "officetel hoa sen quan 7 gia sao",
+  "expected_skus": [
+   "CH-OT-Q7"
+  ],
+  "expected_status": "matched",
+  "category": "no_accent",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "dạ nhà phố gò vấp 4 tầng còn hàng không",
+  "expected_skus": [
+   "NP-GV-4T"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "ừm nhà phố gò vấp bồn tầng hẻm ô tô ạ",
+  "expected_skus": [
+   "NP-GV-4T"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "cho mình hỏi nhà mặt phố bình thạnh buôn bán không",
+  "expected_skus": [
+   "NP-BT-3T"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "dạ vâng nhà mặt tiển bình thạnh ba tầng ạ",
+  "expected_skus": [
+   "NP-BT-3T"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "dạ cho em hỏi nhà phố thủ đức 5 tầng còn hàng không",
+  "expected_skus": [
+   "NP-TD-5T"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "nha pho thu duc 5 tang gia sao",
+  "expected_skus": [
+   "NP-TD-5T"
+  ],
+  "expected_status": "matched",
+  "category": "no_accent",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "shop có bán nhà bình chánh dưới 4 tỷ không",
+  "expected_skus": [
+   "NP-BC-2T"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "à nhà phố bình chành mổt trệt một lẩu ạ",
+  "expected_skus": [
+   "NP-BC-2T"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "dạ cho em hỏi nhà hẻm quận 7 còn hàng không",
+  "expected_skus": [
+   "NP-Q7-HEM"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "à nhà hẽm quận bãy ba tẩng ạ",
+  "expected_skus": [
+   "NP-Q7-HEM"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "bên mình có phú lộc song lập không",
+  "expected_skus": [
+   "BT-PL-SL"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "biet thu song lap phu loc gia sao",
+  "expected_skus": [
+   "BT-PL-SL"
+  ],
+  "expected_status": "matched",
+  "category": "no_accent",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "ừm biệt thự đơn lập phú lộc còn hàng không",
+  "expected_skus": [
+   "BT-PL-DL"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "ờ biệt thự đơn lập phủ lộc vi la ạ",
+  "expected_skus": [
+   "BT-PL-DL"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "shop có bán villa ven sông nhà bè không",
+  "expected_skus": [
+   "BT-NB-VEN"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "ừm biệt thử ven sông nhá bè có bến thuyền ạ",
+  "expected_skus": [
+   "BT-NB-VEN"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "chị ơi shophouse ngọc lan quận 7 còn hàng không",
+  "expected_skus": [
+   "SH-NL-01"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "shophouse ngoc lan gia sao",
+  "expected_skus": [
+   "SH-NL-01"
+  ],
+  "expected_status": "matched",
+  "category": "no_accent",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "shop có bán nhà phố thương mại bình chánh không",
+  "expected_skus": [
+   "SH-TP-02"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "dạ sóp hao thịnh phát bình chánh ạ",
+  "expected_skus": [
+   "SH-TP-02"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "chị ơi đất nền thịnh phát 100 mét còn hàng không",
+  "expected_skus": [
+   "DN-TP-100"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "chị ơi đầt nền thịnh phát một trăm mét vuông ạ",
+  "expected_skus": [
+   "DN-TP-100"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "shop có bán lô góc hai mặt tiền bình chánh không",
+  "expected_skus": [
+   "DN-TP-120G"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "dat nen goc thinh phat gia sao",
+  "expected_skus": [
+   "DN-TP-120G"
+  ],
+  "expected_status": "matched",
+  "category": "no_accent",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "ờ đất nền nhà bè 80 mét còn hàng không",
+  "expected_skus": [
+   "DN-NB-80"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "dạ vâng đất nển nhà bè tám mươi mét ạ",
+  "expected_skus": [
+   "DN-NB-80"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "cho mình hỏi thuê hoa sen 2pn full nội thất không",
+  "expected_skus": [
+   "TH-HS-2PN"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "ờ thuê căn hộ hai phòng ngủ hoa sen rê si đần ạ",
+  "expected_skus": [
+   "TH-HS-2PN"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "ừm thuê căn hộ 1 phòng ngủ sông xanh còn hàng không",
+  "expected_skus": [
+   "TH-SX-1PN"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "thue can ho 1pn song xanh gia sao",
+  "expected_skus": [
+   "TH-SX-1PN"
+  ],
+  "expected_status": "matched",
+  "category": "no_accent",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "bên mình có thuê căn nhỏ gần làng đại học không",
+  "expected_skus": [
+   "TH-BM-ST"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "à thuê xở tu đi ô bình minh ạ",
+  "expected_skus": [
+   "TH-BM-ST"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "alo thuê nhà nguyên căn bình thạnh còn hàng không",
+  "expected_skus": [
+   "TH-NP-BT"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "dạ vâng thuê nhà nguyên căn bình thảnh ba tầng ạ",
+  "expected_skus": [
+   "TH-NP-BT"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "shop có bán mặt bằng mở quán cà phê quận 7 không",
+  "expected_skus": [
+   "TH-MB-Q7"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "thue mat bang quan 7 gia sao",
+  "expected_skus": [
+   "TH-MB-Q7"
+  ],
+  "expected_status": "matched",
+  "category": "no_accent",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "căn hộ dưới 2 tỷ",
+  "expected_skus": [
+   "CH-BM-ST",
+   "CH-OT-Q7"
+  ],
+  "expected_status": "ambiguous",
+  "category": "price",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "nhà phố tầm 8 tỷ",
+  "expected_skus": [
+   "NP-GV-4T",
+   "NP-BT-3T"
+  ],
+  "expected_status": "ambiguous",
+  "category": "price",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "biệt thự rẻ nhất",
+  "expected_skus": [
+   "BT-NB-VEN"
+  ],
+  "expected_status": "matched",
+  "category": "price",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "thuê căn hộ dưới 10 triệu",
+  "expected_skus": [
+   "TH-BM-ST"
+  ],
+  "expected_status": "matched",
+  "category": "price",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "đất nền từ 2 đến 3 tỷ",
+  "expected_skus": [
+   "DN-TP-100",
+   "DN-NB-80"
+  ],
+  "expected_status": "ambiguous",
+  "category": "price",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "can ho tam 3 ty ruoi",
+  "expected_skus": [
+   "CH-HS-2PN",
+   "CH-SX-2PN",
+   "CH-BM-2PN"
+  ],
+  "expected_status": "ambiguous",
+  "category": "price",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "căn hộ 3 phòng ngủ",
+  "expected_skus": [
+   "CH-HS-3PN",
+   "CH-SX-3PN"
+  ],
+  "expected_status": "ambiguous",
+  "category": "numeric_attr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "nhà 5 tầng",
+  "expected_skus": [
+   "NP-TD-5T",
+   "SH-NL-01"
+  ],
+  "expected_status": "ambiguous",
+  "category": "numeric_attr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "căn hộ trên 100 mét vuông",
+  "expected_skus": [
+   "CH-SX-3PN",
+   "CH-SX-PH"
+  ],
+  "expected_status": "ambiguous",
+  "category": "numeric_attr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "đất 80 mét vuông",
+  "expected_skus": [
+   "DN-NB-80"
+  ],
+  "expected_status": "matched",
+  "category": "numeric_attr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "căn hộ quận 7 hai phòng ngủ",
+  "expected_skus": [
+   "CH-HS-2PN"
+  ],
+  "expected_status": "matched",
+  "category": "numeric_attr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "căn hộ có sổ hồng ở thủ đức",
+  "expected_skus": [],
+  "expected_status": "no_match",
+  "category": "numeric_attr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "nhà bàn giao thô ở thủ đức",
+  "expected_skus": [
+   "CH-BM-2PN",
+   "BT-PL-SL",
+   "BT-PL-DL"
+  ],
+  "expected_status": "ambiguous",
+  "category": "numeric_attr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "căn hộ hướng nam bình thạnh",
+  "expected_skus": [
+   "CH-SX-PH"
+  ],
+  "expected_status": "matched",
+  "category": "numeric_attr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "vợ chồng mới cưới vốn khoảng 1 tỷ rưỡi muốn mua chỗ ở",
+  "expected_skus": [
+   "CH-BM-ST"
+  ],
+  "expected_status": "matched",
+  "category": "use_case",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "tôi muốn mở quán cà phê cần thuê mặt bằng",
+  "expected_skus": [
+   "TH-MB-Q7"
+  ],
+  "expected_status": "matched",
+  "category": "use_case",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "mua nhà vừa ở vừa buôn bán mặt tiền",
+  "expected_skus": [
+   "NP-BT-3T",
+   "NP-TD-5T",
+   "SH-NL-01",
+   "SH-TP-02"
+  ],
+  "expected_status": "ambiguous",
+  "category": "use_case",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "cuối tuần muốn có chỗ nghỉ dưỡng yên tĩnh ven sông",
+  "expected_skus": [
+   "BT-NB-VEN"
+  ],
+  "expected_status": "matched",
+  "category": "use_case",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "công ty nhỏ cần thuê nguyên căn làm văn phòng",
+  "expected_skus": [
+   "TH-NP-BT"
+  ],
+  "expected_status": "matched",
+  "category": "use_case",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "sinh viên thuê phòng gần làng đại học",
+  "expected_skus": [
+   "TH-BM-ST"
+  ],
+  "expected_status": "matched",
+  "category": "use_case",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "đầu tư căn hộ dịch vụ cho thuê",
+  "expected_skus": [
+   "NP-TD-5T"
+  ],
+  "expected_status": "matched",
+  "category": "use_case",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "muốn mua đất tự xây nhà sổ đỏ",
+  "expected_skus": [
+   "DN-TP-100",
+   "DN-TP-120G",
+   "DN-NB-80"
+  ],
+  "expected_status": "ambiguous",
+  "category": "use_case",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "gia đình có ô tô cần nhà hẻm xe hơi gò vấp",
+  "expected_skus": [
+   "NP-GV-4T"
+  ],
+  "expected_status": "matched",
+  "category": "use_case",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "căn có phòng làm việc riêng gần metro",
+  "expected_skus": [
+   "CH-BM-1PN"
+  ],
+  "expected_status": "matched",
+  "category": "use_case",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "chuyên gia nước ngoài thuê căn hộ quận 7 đầy đủ nội thất",
+  "expected_skus": [
+   "TH-HS-2PN"
+  ],
+  "expected_status": "matched",
+  "category": "use_case",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "căn hộ có hồ bơi riêng sân vườn trên cao",
+  "expected_skus": [
+   "CH-SX-PH"
+  ],
+  "expected_status": "matched",
+  "category": "use_case",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "căn vừa ở vừa đăng ký kinh doanh được",
+  "expected_skus": [
+   "CH-OT-Q7"
+  ],
+  "expected_status": "matched",
+  "category": "use_case",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "căn hộ hoa sen residence",
+  "expected_skus": [
+   "CH-HS-1PN",
+   "CH-HS-2PN",
+   "CH-HS-3PN"
+  ],
+  "expected_status": "ambiguous",
+  "category": "ambiguous",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "biệt thự phú lộc",
+  "expected_skus": [
+   "BT-PL-SL",
+   "BT-PL-DL"
+  ],
+  "expected_status": "ambiguous",
+  "category": "ambiguous",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "căn hộ sông xanh",
+  "expected_skus": [
+   "CH-SX-2PN",
+   "CH-SX-3PN"
+  ],
+  "expected_status": "ambiguous",
+  "category": "ambiguous",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "shophouse",
+  "expected_skus": [
+   "SH-NL-01",
+   "SH-TP-02"
+  ],
+  "expected_status": "ambiguous",
+  "category": "ambiguous",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "đất nền thịnh phát",
+  "expected_skus": [
+   "DN-TP-100",
+   "DN-TP-120G"
+  ],
+  "expected_status": "ambiguous",
+  "category": "ambiguous",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "căn hộ bình minh garden 2 phòng",
+  "expected_skus": [
+   "CH-BM-2PN",
+   "CH-BM-1PN"
+  ],
+  "expected_status": "ambiguous",
+  "category": "ambiguous",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "so sánh căn 2 phòng ngủ hoa sen với sông xanh",
+  "expected_skus": [
+   "CH-HS-2PN",
+   "CH-SX-2PN"
+  ],
+  "expected_status": "ambiguous",
+  "category": "compare",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "có căn 3 phòng ngủ không",
+  "expected_skus": [
+   "CH-HS-3PN"
+  ],
+  "expected_status": "matched",
+  "category": "multi_turn",
+  "context": {
+   "previous_text": "căn hộ 2 phòng ngủ hoa sen residence",
+   "previous_skus": [
+    "CH-HS-2PN"
+   ]
+  },
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "loại cho thuê thì sao",
+  "expected_skus": [
+   "TH-HS-2PN"
+  ],
+  "expected_status": "matched",
+  "category": "multi_turn",
+  "context": {
+   "previous_text": "căn hộ 2 phòng ngủ hoa sen residence",
+   "previous_skus": [
+    "CH-HS-2PN"
+   ]
+  },
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "căn đó hướng gì",
+  "expected_skus": [
+   "CH-SX-2PN"
+  ],
+  "expected_status": "matched",
+  "category": "multi_turn",
+  "context": {
+   "previous_text": "căn hộ 2 phòng ngủ sông xanh view sông",
+   "previous_skus": [
+    "CH-SX-2PN"
+   ]
+  },
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "có căn đơn lập không",
+  "expected_skus": [
+   "BT-PL-DL"
+  ],
+  "expected_status": "matched",
+  "category": "multi_turn",
+  "context": {
+   "previous_text": "biệt thự song lập phú lộc",
+   "previous_skus": [
+    "BT-PL-SL"
+   ]
+  },
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "lô góc giá bao nhiêu",
+  "expected_skus": [
+   "DN-TP-120G"
+  ],
+  "expected_status": "matched",
+  "category": "multi_turn",
+  "context": {
+   "previous_text": "đất nền thịnh phát 100 mét",
+   "previous_skus": [
+    "DN-TP-100"
+   ]
+  },
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "rộng hơn chút được không",
+  "expected_skus": [
+   "NP-GV-4T",
+   "NP-BT-3T",
+   "NP-TD-5T",
+   "NP-BC-2T"
+  ],
+  "expected_status": "ambiguous",
+  "category": "multi_turn",
+  "context": {
+   "previous_text": "nhà hẻm quận 7",
+   "previous_skus": [
+    "NP-Q7-HEM"
+   ]
+  },
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "nhà đó có sổ chưa",
+  "expected_skus": [
+   "CH-BM-2PN"
+  ],
+  "expected_status": "matched",
+  "category": "multi_turn",
+  "context": {
+   "previous_text": "căn hộ 2 phòng ngủ bình minh garden",
+   "previous_skus": [
+    "CH-BM-2PN"
+   ]
+  },
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "lãi suất vay mua nhà ngân hàng nào thấp nhất",
+  "expected_skus": [],
+  "expected_status": "out_of_scope",
+  "category": "out_of_scope",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "thủ tục sang tên sổ đỏ mất bao lâu",
+  "expected_skus": [],
+  "expected_status": "out_of_scope",
+  "category": "out_of_scope",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "cho tôi số điện thoại giám đốc",
+  "expected_skus": [],
+  "expected_status": "out_of_scope",
+  "category": "out_of_scope",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "dự báo giá nhà đất năm sau tăng không",
+  "expected_skus": [],
+  "expected_status": "out_of_scope",
+  "category": "out_of_scope",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "hôm nay kẹt xe đường nào",
+  "expected_skus": [],
+  "expected_status": "out_of_scope",
+  "category": "out_of_scope",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "chào em anh hỏi thăm thôi",
+  "expected_skus": [],
+  "expected_status": "out_of_scope",
+  "category": "out_of_scope",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "căn hộ ở hà nội cầu giấy",
+  "expected_skus": [],
+  "expected_status": "no_match",
+  "category": "no_match",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "đất nông nghiệp long an",
+  "expected_skus": [],
+  "expected_status": "no_match",
+  "category": "no_match",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "biệt thự đà lạt",
+  "expected_skus": [],
+  "expected_status": "no_match",
+  "category": "no_match",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "căn hộ quận 1 dưới 2 tỷ",
+  "expected_skus": [],
+  "expected_status": "no_match",
+  "category": "no_match",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "condotel nha trang",
+  "expected_skus": [],
+  "expected_status": "no_match",
+  "category": "no_match",
+  "split": "dev",
+  "source": "manual"
+ }
+]

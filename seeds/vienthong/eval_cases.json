@@ -1,0 +1,1294 @@
+[
+ {
+  "query": "dạ vâng gói d10 còn hàng không",
+  "expected_skus": [
+   "D10"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "dạ gói đê mưởi ạ",
+  "expected_skus": [
+   "D10"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "cho mình hỏi gói ngày 3 gb 15 nghìn không",
+  "expected_skus": [
+   "D15"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "dạ gói đê mười lăm ạ",
+  "expected_skus": [
+   "D15"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "à gói w50 còn hàng không",
+  "expected_skus": [
+   "W50"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "goi w50 tuan gia sao",
+  "expected_skus": [
+   "W50"
+  ],
+  "expected_status": "matched",
+  "category": "no_accent",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "cho mình hỏi gói lướt tiktok facebook miễn phí không",
+  "expected_skus": [
+   "MXH70"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "ừm gói mờ xờ hở bãy mươi ạ",
+  "expected_skus": [
+   "MXH70"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "à gói sv50 còn hàng không",
+  "expected_skus": [
+   "SV50"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "à gói ét vê năm mươi ạ",
+  "expected_skus": [
+   "SV50"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "shop có bán gói tháng 1 gb rưỡi mỗi ngày không",
+  "expected_skus": [
+   "D90"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "goi d90 thang gia sao",
+  "expected_skus": [
+   "D90"
+  ],
+  "expected_status": "matched",
+  "category": "no_accent",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "dạ cho em hỏi gói d120 còn hàng không",
+  "expected_skus": [
+   "D120"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "à gói đê mổt trăm hai mươi ạ",
+  "expected_skus": [
+   "D120"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "bên mình có gói 4 gb một ngày giá 150 không",
+  "expected_skus": [
+   "D150"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "dạ cho em hỏi gỏi đê một trăm năm mươi ạ",
+  "expected_skus": [
+   "D150"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "dạ cho em hỏi gói max200 còn hàng không",
+  "expected_skus": [
+   "MAX200"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "goi max200 netflix gia sao",
+  "expected_skus": [
+   "MAX200"
+  ],
+  "expected_status": "matched",
+  "category": "no_accent",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "bên mình có gói 90 đóng nửa năm không",
+  "expected_skus": [
+   "D90-6T"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "dạ cho em hỏi gói đê chín mươi sáu tháng ạ",
+  "expected_skus": [
+   "D90-6T"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "à gói d120 12 tháng còn hàng không",
+  "expected_skus": [
+   "D120-12T"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "alo gỏi đê một trăm hai mươi mười hai tháng ạ",
+  "expected_skus": [
+   "D120-12T"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "cho mình hỏi gói 30 gb cả tháng không chia ngày không",
+  "expected_skus": [
+   "TH30"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "goi th30 30gb gia sao",
+  "expected_skus": [
+   "TH30"
+  ],
+  "expected_status": "matched",
+  "category": "no_accent",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "dạ gói tt5 còn hàng không",
+  "expected_skus": [
+   "TT5"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "em hỏi chút gỏi tê tê năm ạ",
+  "expected_skus": [
+   "TT5"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "cho mình hỏi gói 90 nghìn có gọi nội mạng không",
+  "expected_skus": [
+   "C90"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "ừm gói xê chín mươi ạ",
+  "expected_skus": [
+   "C90"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "chị ơi gói combo v120 còn hàng không",
+  "expected_skus": [
+   "V120"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "goi v120 gia sao",
+  "expected_skus": [
+   "V120"
+  ],
+  "expected_status": "matched",
+  "category": "no_accent",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "cho mình hỏi combo 4 gb ngày 100 phút ngoại mạng không",
+  "expected_skus": [
+   "V160"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "chị ơi gói vê mổt trăm sáu mươi ạ",
+  "expected_skus": [
+   "V160"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "dạ gói combo v200 còn hàng không",
+  "expected_skus": [
+   "V200"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "ừm gói vê hai trăm ạ",
+  "expected_skus": [
+   "V200"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "cho mình hỏi gói cho cả nhà 4 sim không",
+  "expected_skus": [
+   "GD300"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "goi gia dinh gd300 gia sao",
+  "expected_skus": [
+   "GD300"
+  ],
+  "expected_status": "matched",
+  "category": "no_accent",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "ờ gói doanh nghiệp dn250 còn hàng không",
+  "expected_skus": [
+   "DN250"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "dạ cho em hỏi gỏi đê en hai trăm năm mươi ạ",
+  "expected_skus": [
+   "DN250"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "shop có bán internet 150 mb không",
+  "expected_skus": [
+   "NET150"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "ờ cáp quang một trăm năm mươi mê ga ạ",
+  "expected_skus": [
+   "NET150"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "dạ cáp quang 300 mega còn hàng không",
+  "expected_skus": [
+   "NET300"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "cap quang 300 gia sao",
+  "expected_skus": [
+   "NET300"
+  ],
+  "expected_status": "matched",
+  "category": "no_accent",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "bên mình có internet 500 có mesh không",
+  "expected_skus": [
+   "NET500M"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "ờ cáp quang mẻt năm trăm mê ga ạ",
+  "expected_skus": [
+   "NET500M"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "dạ cáp quang 1 giga còn hàng không",
+  "expected_skus": [
+   "NET1G"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "ừm cáp quang mổt gi ga ạ",
+  "expected_skus": [
+   "NET1G"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "shop có bán mạng cho phòng trọ sinh viên không",
+  "expected_skus": [
+   "NETSV"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "internet sinh vien 100mb gia sao",
+  "expected_skus": [
+   "NETSV"
+  ],
+  "expected_status": "matched",
+  "category": "no_accent",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "ừm internet doanh nghiệp ip tĩnh còn hàng không",
+  "expected_skus": [
+   "NETDN"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "dạ vâng in tơ nét doanh nghiệp ai pi tĩnh ạ",
+  "expected_skus": [
+   "NETDN"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "bên mình có gói tivi 150 kênh không",
+  "expected_skus": [
+   "TVBASIC"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "dạ vâng truyền hình cơ bản một trăm năm mươi kênh ạ",
+  "expected_skus": [
+   "TVBASIC"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "dạ vâng truyền hình premium k+ còn hàng không",
+  "expected_skus": [
+   "TVPREMIUM"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "truyen hinh premium gia sao",
+  "expected_skus": [
+   "TVPREMIUM"
+  ],
+  "expected_status": "matched",
+  "category": "no_accent",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "cho mình hỏi lắp cả mạng lẫn tivi gói 300 không",
+  "expected_skus": [
+   "COMBO-NT1"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "em hỏi chút com bô in tơ nét ba trăm truyền hình ạ",
+  "expected_skus": [
+   "COMBO-NT1"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "ờ combo internet 500 mesh với truyền hình k+ còn hàng không",
+  "expected_skus": [
+   "COMBO-NT2"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "dạ cho em hỏi com bô năm trăm mét ca cộng ạ",
+  "expected_skus": [
+   "COMBO-NT2"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "bên mình có data đi du lịch thái lan singapore không",
+  "expected_skus": [
+   "RM-ASIA"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "goi roaming chau a gia sao",
+  "expected_skus": [
+   "RM-ASIA"
+  ],
+  "expected_status": "matched",
+  "category": "no_accent",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "ừm gói chuyển vùng nhật hàn còn hàng không",
+  "expected_skus": [
+   "RM-JPKR"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "dạ gói rô minh nhật hán ạ",
+  "expected_skus": [
+   "RM-JPKR"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "bên mình có data đi mỹ châu âu không",
+  "expected_skus": [
+   "RM-GLOBAL"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "dạ cho em hỏi gói rô minh toàn cầu ạ",
+  "expected_skus": [
+   "RM-GLOBAL"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "gói data dưới 50 nghìn một tháng",
+  "expected_skus": [
+   "SV50",
+   "TT5"
+  ],
+  "expected_status": "ambiguous",
+  "category": "price",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "gói tháng tầm 100 nghìn",
+  "expected_skus": [
+   "D90",
+   "D120",
+   "TH30"
+  ],
+  "expected_status": "ambiguous",
+  "category": "price",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "internet rẻ nhất",
+  "expected_skus": [
+   "NETSV"
+  ],
+  "expected_status": "matched",
+  "category": "price",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "cáp quang dưới 200 nghìn",
+  "expected_skus": [
+   "NET150",
+   "NETSV"
+  ],
+  "expected_status": "ambiguous",
+  "category": "price",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "gói combo trên 150 nghìn",
+  "expected_skus": [
+   "V160",
+   "V200",
+   "GD300",
+   "DN250"
+  ],
+  "expected_status": "ambiguous",
+  "category": "price",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "goi data gia re nhat",
+  "expected_skus": [
+   "D10"
+  ],
+  "expected_status": "matched",
+  "category": "price",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "gói 4 gb một ngày",
+  "expected_skus": [
+   "D150",
+   "V160"
+  ],
+  "expected_status": "ambiguous",
+  "category": "numeric_attr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "gói 6 gb mỗi ngày",
+  "expected_skus": [
+   "MAX200",
+   "V200"
+  ],
+  "expected_status": "ambiguous",
+  "category": "numeric_attr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "mạng 500 mega",
+  "expected_skus": [
+   "NET500M",
+   "COMBO-NT2"
+  ],
+  "expected_status": "ambiguous",
+  "category": "numeric_attr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "cáp quang 1000 mbps",
+  "expected_skus": [
+   "NET1G"
+  ],
+  "expected_status": "matched",
+  "category": "numeric_attr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "gói có 200 phút ngoại mạng",
+  "expected_skus": [
+   "V200"
+  ],
+  "expected_status": "matched",
+  "category": "numeric_attr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "gói 30 gb cả tháng",
+  "expected_skus": [
+   "TH30"
+  ],
+  "expected_status": "matched",
+  "category": "numeric_attr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "truyền hình 200 kênh",
+  "expected_skus": [
+   "TVPREMIUM",
+   "COMBO-NT2"
+  ],
+  "expected_status": "ambiguous",
+  "category": "numeric_attr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "gói miễn phí data tiktok",
+  "expected_skus": [
+   "MXH70"
+  ],
+  "expected_status": "matched",
+  "category": "numeric_attr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "internet có wifi mesh",
+  "expected_skus": [
+   "NET500M",
+   "NET1G",
+   "NETDN"
+  ],
+  "expected_status": "ambiguous",
+  "category": "numeric_attr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "gói đóng 1 năm",
+  "expected_skus": [
+   "D120-12T"
+  ],
+  "expected_status": "matched",
+  "category": "numeric_attr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "con chỉ dùng zalo gọi video cho con cháu thôi gói nào rẻ",
+  "expected_skus": [
+   "TT5"
+  ],
+  "expected_status": "matched",
+  "category": "use_case",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "nhà em 3 tầng wifi tầng trên yếu lắm",
+  "expected_skus": [
+   "NET500M",
+   "NET1G",
+   "COMBO-NT2"
+  ],
+  "expected_status": "ambiguous",
+  "category": "use_case",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "cuối tuần này đi đà lạt 7 ngày đăng ký gói gì",
+  "expected_skus": [
+   "W50"
+  ],
+  "expected_status": "matched",
+  "category": "use_case",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "tháng sau đi hàn quốc du lịch cần data",
+  "expected_skus": [
+   "RM-JPKR",
+   "RM-ASIA"
+  ],
+  "expected_status": "ambiguous",
+  "category": "use_case",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "đi công tác bên đức 2 tuần",
+  "expected_skus": [
+   "RM-GLOBAL"
+  ],
+  "expected_status": "matched",
+  "category": "use_case",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "mình làm sale gọi điện cho khách suốt ngày",
+  "expected_skus": [
+   "V200",
+   "V160"
+  ],
+  "expected_status": "ambiguous",
+  "category": "use_case",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "công ty cần lắp mạng có ip tĩnh để chạy camera",
+  "expected_skus": [
+   "NETDN"
+  ],
+  "expected_status": "matched",
+  "category": "use_case",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "cả nhà 4 người muốn dùng chung một gói",
+  "expected_skus": [
+   "GD300"
+  ],
+  "expected_status": "matched",
+  "category": "use_case",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "mê xem ngoại hạng anh trên tivi",
+  "expected_skus": [
+   "TVPREMIUM",
+   "COMBO-NT2"
+  ],
+  "expected_status": "ambiguous",
+  "category": "use_case",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "em là sinh viên cần lắp mạng ở trọ",
+  "expected_skus": [
+   "NETSV"
+  ],
+  "expected_status": "matched",
+  "category": "use_case",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "hay xem netflix trên điện thoại",
+  "expected_skus": [
+   "MAX200"
+  ],
+  "expected_status": "matched",
+  "category": "use_case",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "dùng data lúc nhiều lúc ít không muốn bị giới hạn theo ngày",
+  "expected_skus": [
+   "TH30"
+  ],
+  "expected_status": "matched",
+  "category": "use_case",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "chỉ cần mạng dùng trong hôm nay thôi",
+  "expected_skus": [
+   "D10",
+   "D15"
+  ],
+  "expected_status": "ambiguous",
+  "category": "use_case",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "công ty cấp sim cho nhân viên cần hóa đơn đỏ",
+  "expected_skus": [
+   "DN250"
+  ],
+  "expected_status": "matched",
+  "category": "use_case",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "gói d90",
+  "expected_skus": [
+   "D90",
+   "D90-6T"
+  ],
+  "expected_status": "ambiguous",
+  "category": "ambiguous",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "gói d120",
+  "expected_skus": [
+   "D120",
+   "D120-12T"
+  ],
+  "expected_status": "ambiguous",
+  "category": "ambiguous",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "gói 120 nghìn",
+  "expected_skus": [
+   "D120",
+   "V120"
+  ],
+  "expected_status": "ambiguous",
+  "category": "ambiguous",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "gói combo",
+  "expected_skus": [
+   "C90",
+   "V120",
+   "V160",
+   "V200"
+  ],
+  "expected_status": "ambiguous",
+  "category": "ambiguous",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "lắp cáp quang",
+  "expected_skus": [
+   "NET150",
+   "NET300",
+   "NET500M",
+   "NET1G",
+   "NETSV"
+  ],
+  "expected_status": "ambiguous",
+  "category": "ambiguous",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "gói chuyển vùng quốc tế",
+  "expected_skus": [
+   "RM-ASIA",
+   "RM-JPKR",
+   "RM-GLOBAL"
+  ],
+  "expected_status": "ambiguous",
+  "category": "ambiguous",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "gói sinh viên",
+  "expected_skus": [
+   "SV50",
+   "NETSV"
+  ],
+  "expected_status": "ambiguous",
+  "category": "ambiguous",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "v120 với d120 khác nhau chỗ nào",
+  "expected_skus": [
+   "V120",
+   "D120"
+  ],
+  "expected_status": "ambiguous",
+  "category": "compare",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "so sánh cáp quang 300 với 500 mesh",
+  "expected_skus": [
+   "NET300",
+   "NET500M"
+  ],
+  "expected_status": "ambiguous",
+  "category": "compare",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "có bản đóng 6 tháng không",
+  "expected_skus": [
+   "D90-6T"
+  ],
+  "expected_status": "matched",
+  "category": "multi_turn",
+  "context": {
+   "previous_text": "gói d90",
+   "previous_skus": [
+    "D90"
+   ]
+  },
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "loại nhiều data hơn thì sao",
+  "expected_skus": [
+   "D150",
+   "MAX200"
+  ],
+  "expected_status": "ambiguous",
+  "category": "multi_turn",
+  "context": {
+   "previous_text": "gói d120",
+   "previous_skus": [
+    "D120"
+   ]
+  },
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "vậy có kèm mesh không",
+  "expected_skus": [
+   "NET500M"
+  ],
+  "expected_status": "matched",
+  "category": "multi_turn",
+  "context": {
+   "previous_text": "cáp quang 300 mega",
+   "previous_skus": [
+    "NET300"
+   ]
+  },
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "gói đó gọi ngoại mạng được bao nhiêu phút",
+  "expected_skus": [
+   "V160"
+  ],
+  "expected_status": "matched",
+  "category": "multi_turn",
+  "context": {
+   "previous_text": "gói combo v160",
+   "previous_skus": [
+    "V160"
+   ]
+  },
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "thế còn nhật bản",
+  "expected_skus": [
+   "RM-JPKR",
+   "RM-ASIA"
+  ],
+  "expected_status": "ambiguous",
+  "category": "multi_turn",
+  "context": {
+   "previous_text": "gói chuyển vùng châu á",
+   "previous_skus": [
+    "RM-ASIA"
+   ]
+  },
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "có gói nào kèm truyền hình không",
+  "expected_skus": [
+   "COMBO-NT2"
+  ],
+  "expected_status": "matched",
+  "category": "multi_turn",
+  "context": {
+   "previous_text": "cáp quang mesh 500 mega",
+   "previous_skus": [
+    "NET500M"
+   ]
+  },
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "rẻ hơn chút được không",
+  "expected_skus": [
+   "D150",
+   "V160",
+   "D120"
+  ],
+  "expected_status": "ambiguous",
+  "category": "multi_turn",
+  "context": {
+   "previous_text": "gói max200",
+   "previous_skus": [
+    "MAX200"
+   ]
+  },
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "gói này có miễn phí tiktok không",
+  "expected_skus": [
+   "MXH70"
+  ],
+  "expected_status": "matched",
+  "category": "multi_turn",
+  "context": {
+   "previous_text": "gói mxh70",
+   "previous_skus": [
+    "MXH70"
+   ]
+  },
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "mật khẩu wifi nhà tôi là gì",
+  "expected_skus": [],
+  "expected_status": "out_of_scope",
+  "category": "out_of_scope",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "sao hôm nay mạng chậm thế",
+  "expected_skus": [],
+  "expected_status": "out_of_scope",
+  "category": "out_of_scope",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "chuyển cho tôi gặp nhân viên kỹ thuật",
+  "expected_skus": [],
+  "expected_status": "out_of_scope",
+  "category": "out_of_scope",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "kiểm tra giúp tôi cước tháng này bao nhiêu",
+  "expected_skus": [],
+  "expected_status": "out_of_scope",
+  "category": "out_of_scope",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "cho hỏi giá xăng hôm nay",
+  "expected_skus": [],
+  "expected_status": "out_of_scope",
+  "category": "out_of_scope",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "bạn tên là gì",
+  "expected_skus": [],
+  "expected_status": "out_of_scope",
+  "category": "out_of_scope",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "tôi muốn khiếu nại bị trừ tiền oan",
+  "expected_skus": [],
+  "expected_status": "out_of_scope",
+  "category": "out_of_scope",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "gói esim cho đồng hồ apple watch",
+  "expected_skus": [],
+  "expected_status": "no_match",
+  "category": "no_match",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "gói 5g không giới hạn dung lượng",
+  "expected_skus": [],
+  "expected_status": "no_match",
+  "category": "no_match",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "truyền hình vệ tinh k+ lắp chảo",
+  "expected_skus": [],
+  "expected_status": "no_match",
+  "category": "no_match",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "gói chuyển vùng châu phi",
+  "expected_skus": [],
+  "expected_status": "no_match",
+  "category": "no_match",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "sim số đẹp tứ quý 8",
+  "expected_skus": [],
+  "expected_status": "no_match",
+  "category": "no_match",
+  "split": "dev",
+  "source": "manual"
+ }
+]

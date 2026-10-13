@@ -1,0 +1,1834 @@
+{
+ "demo": {
+  "slug": "dienmay",
+  "name": "Điện Máy Demo",
+  "industry": "bán lẻ điện máy, điện thoại"
+ },
+ "definitions": [
+  {
+   "key": "loai_tu",
+   "label": "Kiểu tủ",
+   "type": "enum",
+   "filterable": true,
+   "weight": 0.6,
+   "enum_values": [
+    {
+     "value": "Ngăn đá trên",
+     "aliases": [
+      "ngăn đông trên",
+      "ngăn đá ở trên"
+     ]
+    },
+    {
+     "value": "Ngăn đá dưới",
+     "aliases": [
+      "ngăn đông dưới",
+      "ngăn đá ở dưới"
+     ]
+    },
+    {
+     "value": "Side by side",
+     "aliases": [
+      "side by side",
+      "hai cánh dọc",
+      "2 cánh dọc",
+      "sai bai sai"
+     ]
+    },
+    {
+     "value": "Multi door",
+     "aliases": [
+      "multi door",
+      "nhiều cửa",
+      "4 cánh",
+      "bốn cánh"
+     ]
+    },
+    {
+     "value": "Mini",
+     "aliases": [
+      "tủ mini",
+      "tủ nhỏ",
+      "1 cánh"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "dung_tich",
+   "label": "Dung tích",
+   "type": "number",
+   "unit": "lít",
+   "unit_aliases": [
+    "l",
+    "lit"
+   ],
+   "filterable": true,
+   "weight": 0.6
+  },
+  {
+   "key": "so_cua",
+   "label": "Số cửa",
+   "type": "number",
+   "unit": "cửa",
+   "unit_aliases": [
+    "cánh",
+    "canh",
+    "cua"
+   ],
+   "filterable": true,
+   "weight": 0.7
+  },
+  {
+   "key": "inverter",
+   "label": "Inverter",
+   "type": "bool",
+   "label_aliases": [
+    "tiết kiệm điện",
+    "biến tần"
+   ],
+   "filterable": false,
+   "weight": 0.4
+  },
+  {
+   "key": "khoi_luong_giat",
+   "label": "Khối lượng giặt",
+   "type": "number",
+   "unit": "kg",
+   "unit_aliases": [
+    "ký",
+    "kí",
+    "ki lô",
+    "cân",
+    "kilogam"
+   ],
+   "filterable": true,
+   "weight": 0.7
+  },
+  {
+   "key": "loai_may_giat",
+   "label": "Kiểu máy giặt",
+   "type": "enum",
+   "filterable": true,
+   "weight": 0.7,
+   "enum_values": [
+    {
+     "value": "Cửa trước",
+     "aliases": [
+      "lồng ngang",
+      "cửa ngang",
+      "cửa trước"
+     ]
+    },
+    {
+     "value": "Cửa trên",
+     "aliases": [
+      "lồng đứng",
+      "cửa đứng",
+      "cửa trên"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "say_kho",
+   "label": "Sấy khô",
+   "type": "bool",
+   "label_aliases": [
+    "có sấy",
+    "giặt sấy",
+    "sấy quần áo"
+   ],
+   "filterable": true,
+   "weight": 0.6
+  },
+  {
+   "key": "man_hinh",
+   "label": "Kích thước màn hình",
+   "type": "number",
+   "unit": "inch",
+   "unit_aliases": [
+    "in",
+    "inh",
+    "ins",
+    "icnh",
+    "inches"
+   ],
+   "label_aliases": [
+    "màn",
+    "màn hình"
+   ],
+   "filterable": true,
+   "weight": 0.8
+  },
+  {
+   "key": "do_phan_giai",
+   "label": "Độ phân giải",
+   "type": "enum",
+   "filterable": true,
+   "weight": 0.5,
+   "enum_values": [
+    {
+     "value": "4K",
+     "aliases": [
+      "4 k",
+      "bốn k",
+      "uhd",
+      "ultra hd"
+     ]
+    },
+    {
+     "value": "Full HD",
+     "aliases": [
+      "fhd",
+      "full hd",
+      "phun hd"
+     ]
+    },
+    {
+     "value": "HD",
+     "aliases": [
+      "hd thường"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "cong_nghe_man_hinh",
+   "label": "Công nghệ màn hình",
+   "type": "enum",
+   "filterable": true,
+   "weight": 0.5,
+   "enum_values": [
+    {
+     "value": "LED",
+     "aliases": [
+      "led thường"
+     ]
+    },
+    {
+     "value": "QLED",
+     "aliases": [
+      "qled",
+      "kiu led"
+     ]
+    },
+    {
+     "value": "OLED",
+     "aliases": [
+      "oled",
+      "ô lét"
+     ]
+    },
+    {
+     "value": "Mini LED",
+     "aliases": [
+      "mini led"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "cong_suat_hp",
+   "label": "Công suất",
+   "type": "number",
+   "unit": "HP",
+   "unit_aliases": [
+    "ngựa",
+    "hp",
+    "hờ pê",
+    "mã lực",
+    "sức ngựa"
+   ],
+   "filterable": true,
+   "weight": 0.8
+  },
+  {
+   "key": "btu",
+   "label": "Công suất làm lạnh",
+   "type": "number",
+   "unit": "BTU",
+   "unit_aliases": [
+    "btu"
+   ],
+   "filterable": true,
+   "weight": 0.5
+  },
+  {
+   "key": "so_chieu",
+   "label": "Số chiều",
+   "type": "enum",
+   "filterable": true,
+   "weight": 0.7,
+   "enum_values": [
+    {
+     "value": "1 chiều",
+     "aliases": [
+      "một chiều",
+      "chỉ làm lạnh"
+     ]
+    },
+    {
+     "value": "2 chiều",
+     "aliases": [
+      "hai chiều",
+      "nóng lạnh",
+      "có sưởi",
+      "sưởi ấm"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "bo_nho",
+   "label": "Bộ nhớ trong",
+   "type": "number",
+   "unit": "GB",
+   "unit_aliases": [
+    "gb",
+    "gigabyte",
+    "gi ga"
+   ],
+   "label_aliases": [
+    "dung lượng",
+    "bộ nhớ"
+   ],
+   "filterable": true,
+   "weight": 0.6
+  },
+  {
+   "key": "ram",
+   "label": "RAM",
+   "type": "number",
+   "unit": "GB RAM",
+   "filterable": false,
+   "weight": 0.3
+  }
+ ],
+ "products": [
+  {
+   "sku": "TL-SS-236",
+   "name": "Tủ lạnh Samsung Inverter 236 lít RT22M4032BY",
+   "category": "Tủ lạnh",
+   "brand": "Samsung",
+   "price": 6290000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Tủ lạnh 2 cửa ngăn đá trên, làm lạnh vòm, tiết kiệm điện",
+   "attributes": {
+    "loai_tu": "Ngăn đá trên",
+    "dung_tich": 236,
+    "so_cua": 2,
+    "inverter": true
+   },
+   "aliases": [
+    "tủ lạnh samsung 236 lít",
+    "tu lanh samsung 236 lit",
+    "RT22M4032BY",
+    "tủ samsung 236"
+   ],
+   "use_cases": [
+    "gia đình 2-3 người",
+    "căn hộ nhỏ",
+    "tiết kiệm điện"
+   ],
+   "sample_questions": [
+    "Tủ lạnh Samsung Inverter 236 lít RT22M4032BY giá bao nhiêu",
+    "Samsung tủ lạnh 236 lít còn hàng không",
+    "tư vấn giúp mình tủ lạnh samsung 236 lít",
+    "tủ lạnh nào phù hợp gia đình 2-3 người",
+    "mình muốn mua tủ lạnh samsung 236 lít, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "TL-SS-305",
+   "name": "Tủ lạnh Samsung Inverter 305 lít RT29K5532BY",
+   "category": "Tủ lạnh",
+   "brand": "Samsung",
+   "price": 8490000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Tủ lạnh 2 cửa có ngăn đông mềm, khử mùi than hoạt tính",
+   "attributes": {
+    "loai_tu": "Ngăn đá trên",
+    "dung_tich": 305,
+    "so_cua": 2,
+    "inverter": true
+   },
+   "aliases": [
+    "tủ lạnh samsung 305 lít",
+    "tu lanh samsung 305 lit",
+    "RT29K5532BY"
+   ],
+   "use_cases": [
+    "gia đình 3-4 người",
+    "trữ đồ ăn cả tuần"
+   ],
+   "sample_questions": [
+    "Tủ lạnh Samsung Inverter 305 lít RT29K5532BY giá bao nhiêu",
+    "Samsung tủ lạnh 305 lít còn hàng không",
+    "tư vấn giúp mình tủ lạnh samsung 305 lít",
+    "tủ lạnh nào phù hợp gia đình 3-4 người",
+    "mình muốn mua tủ lạnh samsung 305 lít, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "TL-SS-655",
+   "name": "Tủ lạnh Samsung Inverter 655 lít Side by side RS62R5001M9",
+   "category": "Tủ lạnh",
+   "brand": "Samsung",
+   "price": 17990000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Tủ lạnh 2 cánh dọc side by side dung tích lớn, ngăn đông rộng",
+   "attributes": {
+    "loai_tu": "Side by side",
+    "dung_tich": 655,
+    "so_cua": 2,
+    "inverter": true
+   },
+   "aliases": [
+    "tủ lạnh samsung side by side 655 lít",
+    "tu lanh samsung side by side 655 lit",
+    "RS62R5001M9",
+    "samsung side by side"
+   ],
+   "use_cases": [
+    "gia đình đông người 5-7 người",
+    "nhà bếp rộng, sang trọng"
+   ],
+   "sample_questions": [
+    "Tủ lạnh Samsung Inverter 655 lít Side by side RS62R5001M9 giá bao nhiêu",
+    "Samsung tủ lạnh 655 lít còn hàng không",
+    "tư vấn giúp mình tủ lạnh samsung side by side 655 lít",
+    "tủ lạnh nào phù hợp gia đình đông người 5-7 người",
+    "mình muốn mua tủ lạnh samsung side by side 655 lít, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "TL-SS-488",
+   "name": "Tủ lạnh Samsung Inverter 488 lít Multi door RF48A4000B4",
+   "category": "Tủ lạnh",
+   "brand": "Samsung",
+   "price": 19490000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Tủ lạnh 4 cánh multi door, ngăn chuyển đổi nhiệt độ linh hoạt",
+   "attributes": {
+    "loai_tu": "Multi door",
+    "dung_tich": 488,
+    "so_cua": 4,
+    "inverter": true
+   },
+   "aliases": [
+    "tủ lạnh samsung 4 cánh 488 lít",
+    "tu lanh samsung 4 canh 488 lit",
+    "RF48A4000B4",
+    "samsung 4 cánh"
+   ],
+   "use_cases": [
+    "gia đình 4-6 người",
+    "bếp hiện đại, thích nhiều ngăn chia"
+   ],
+   "sample_questions": [
+    "Tủ lạnh Samsung Inverter 488 lít Multi door RF48A4000B4 giá bao nhiêu",
+    "Samsung tủ lạnh 488 lít còn hàng không",
+    "tư vấn giúp mình tủ lạnh samsung 4 cánh 488 lít",
+    "tủ lạnh nào phù hợp gia đình 4-6 người",
+    "mình muốn mua tủ lạnh samsung 4 cánh 488 lít, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "TL-LG-335",
+   "name": "Tủ lạnh LG Inverter 335 lít GN-D332BL",
+   "category": "Tủ lạnh",
+   "brand": "LG",
+   "price": 9190000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Tủ lạnh 2 cửa máy nén Smart Inverter, làm lạnh đa chiều",
+   "attributes": {
+    "loai_tu": "Ngăn đá trên",
+    "dung_tich": 335,
+    "so_cua": 2,
+    "inverter": true
+   },
+   "aliases": [
+    "tủ lạnh lg 335 lít",
+    "tu lanh lg 335 lit",
+    "GN-D332BL",
+    "tủ lg 335"
+   ],
+   "use_cases": [
+    "gia đình 3-4 người"
+   ],
+   "sample_questions": [
+    "Tủ lạnh LG Inverter 335 lít GN-D332BL giá bao nhiêu",
+    "LG tủ lạnh 335 lít còn hàng không",
+    "tư vấn giúp mình tủ lạnh lg 335 lít",
+    "tủ lạnh nào phù hợp gia đình 3-4 người",
+    "mình muốn mua tủ lạnh lg 335 lít, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "TL-LG-635",
+   "name": "Tủ lạnh LG Inverter 635 lít Side by side GR-B257JDS",
+   "category": "Tủ lạnh",
+   "brand": "LG",
+   "price": 16490000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Tủ lạnh side by side lấy nước ngoài, làm đá tự động",
+   "attributes": {
+    "loai_tu": "Side by side",
+    "dung_tich": 635,
+    "so_cua": 2,
+    "inverter": true
+   },
+   "aliases": [
+    "tủ lạnh lg side by side 635 lít",
+    "tu lanh lg side by side 635 lit",
+    "GR-B257JDS",
+    "lg side by side"
+   ],
+   "use_cases": [
+    "gia đình đông người",
+    "cần lấy nước lạnh ngoài tủ"
+   ],
+   "sample_questions": [
+    "Tủ lạnh LG Inverter 635 lít Side by side GR-B257JDS giá bao nhiêu",
+    "LG tủ lạnh 635 lít còn hàng không",
+    "tư vấn giúp mình tủ lạnh lg side by side 635 lít",
+    "tủ lạnh nào phù hợp gia đình đông người",
+    "mình muốn mua tủ lạnh lg side by side 635 lít, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "TL-PA-322",
+   "name": "Tủ lạnh Panasonic Inverter 322 lít NR-BC360QKVN",
+   "category": "Tủ lạnh",
+   "brand": "Panasonic",
+   "price": 11990000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Tủ lạnh ngăn đá dưới, ngăn cấp đông mềm Prime Fresh, kháng khuẩn Ag",
+   "attributes": {
+    "loai_tu": "Ngăn đá dưới",
+    "dung_tich": 322,
+    "so_cua": 2,
+    "inverter": true
+   },
+   "aliases": [
+    "tủ lạnh panasonic ngăn đá dưới 322 lít",
+    "tu lanh panasonic ngan da duoi 322 lit",
+    "NR-BC360QKVN",
+    "pana ngăn đá dưới"
+   ],
+   "use_cases": [
+    "gia đình 3-4 người",
+    "người hay lấy đồ ngăn mát, đỡ phải cúi"
+   ],
+   "sample_questions": [
+    "Tủ lạnh Panasonic Inverter 322 lít NR-BC360QKVN giá bao nhiêu",
+    "Panasonic tủ lạnh 322 lít còn hàng không",
+    "tư vấn giúp mình tủ lạnh panasonic ngăn đá dưới 322 lít",
+    "tủ lạnh nào phù hợp gia đình 3-4 người",
+    "mình muốn mua tủ lạnh panasonic ngăn đá dưới 322 lít, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "TL-PA-255",
+   "name": "Tủ lạnh Panasonic Inverter 255 lít NR-TV261APSV",
+   "category": "Tủ lạnh",
+   "brand": "Panasonic",
+   "price": 8790000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Tủ lạnh 2 cửa ngăn đá trên, công nghệ Blue Ag+ kháng khuẩn",
+   "attributes": {
+    "loai_tu": "Ngăn đá trên",
+    "dung_tich": 255,
+    "so_cua": 2,
+    "inverter": true
+   },
+   "aliases": [
+    "tủ lạnh panasonic 255 lít",
+    "tu lanh panasonic 255 lit",
+    "NR-TV261APSV"
+   ],
+   "use_cases": [
+    "gia đình 2-3 người"
+   ],
+   "sample_questions": [
+    "Tủ lạnh Panasonic Inverter 255 lít NR-TV261APSV giá bao nhiêu",
+    "Panasonic tủ lạnh 255 lít còn hàng không",
+    "tư vấn giúp mình tủ lạnh panasonic 255 lít",
+    "tủ lạnh nào phù hợp gia đình 2-3 người",
+    "mình muốn mua tủ lạnh panasonic 255 lít, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "TL-TO-180",
+   "name": "Tủ lạnh Toshiba Inverter 180 lít GR-B22VU",
+   "category": "Tủ lạnh",
+   "brand": "Toshiba",
+   "price": 5190000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Tủ lạnh 2 cửa nhỏ gọn, giá rẻ, tiết kiệm điện",
+   "attributes": {
+    "loai_tu": "Ngăn đá trên",
+    "dung_tich": 180,
+    "so_cua": 2,
+    "inverter": true
+   },
+   "aliases": [
+    "tủ lạnh toshiba 180 lít",
+    "tu lanh toshiba 180 lit",
+    "GR-B22VU"
+   ],
+   "use_cases": [
+    "vợ chồng trẻ 2 người",
+    "phòng trọ, căn hộ nhỏ"
+   ],
+   "sample_questions": [
+    "Tủ lạnh Toshiba Inverter 180 lít GR-B22VU giá bao nhiêu",
+    "Toshiba tủ lạnh 180 lít còn hàng không",
+    "tư vấn giúp mình tủ lạnh toshiba 180 lít",
+    "tủ lạnh nào phù hợp vợ chồng trẻ 2 người",
+    "mình muốn mua tủ lạnh toshiba 180 lít, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "TL-AQ-90",
+   "name": "Tủ lạnh mini Aqua 90 lít AQR-D99FA",
+   "category": "Tủ lạnh",
+   "brand": "Aqua",
+   "price": 2890000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Tủ lạnh mini 1 cửa nhỏ gọn, đặt phòng ngủ, phòng trọ",
+   "attributes": {
+    "loai_tu": "Mini",
+    "dung_tich": 90,
+    "so_cua": 1,
+    "inverter": false
+   },
+   "aliases": [
+    "tủ lạnh mini aqua 90 lít",
+    "tu lanh mini aqua 90 lit",
+    "AQR-D99FA",
+    "tủ lạnh mini",
+    "tủ lạnh 1 cửa"
+   ],
+   "use_cases": [
+    "sinh viên ở trọ",
+    "phòng ngủ, văn phòng",
+    "người ở một mình"
+   ],
+   "sample_questions": [
+    "Tủ lạnh mini Aqua 90 lít AQR-D99FA giá bao nhiêu",
+    "Aqua tủ lạnh 90 lít còn hàng không",
+    "tư vấn giúp mình tủ lạnh mini aqua 90 lít",
+    "tủ lạnh nào phù hợp sinh viên ở trọ",
+    "mình muốn mua tủ lạnh mini aqua 90 lít, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "TL-HI-569",
+   "name": "Tủ lạnh Hitachi Inverter 569 lít Multi door R-FW690PGV7",
+   "category": "Tủ lạnh",
+   "brand": "Hitachi",
+   "price": 27990000,
+   "price_unit": "VND",
+   "in_stock": false,
+   "short_description": "Tủ lạnh 4 cánh cao cấp mặt kính, cảm biến thông minh",
+   "attributes": {
+    "loai_tu": "Multi door",
+    "dung_tich": 569,
+    "so_cua": 4,
+    "inverter": true
+   },
+   "aliases": [
+    "tủ lạnh hitachi 569 lít",
+    "tu lanh hitachi 569 lit",
+    "R-FW690PGV7"
+   ],
+   "use_cases": [
+    "gia đình lớn, thích hàng Nhật cao cấp"
+   ],
+   "sample_questions": [
+    "Tủ lạnh Hitachi Inverter 569 lít Multi door R-FW690PGV7 giá bao nhiêu",
+    "Hitachi tủ lạnh 569 lít còn hàng không",
+    "tư vấn giúp mình tủ lạnh hitachi 569 lít",
+    "tủ lạnh nào phù hợp gia đình lớn, thích hàng Nhật cao cấp",
+    "mình muốn mua tủ lạnh hitachi 569 lít, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "TL-CA-218",
+   "name": "Tủ lạnh Casper Inverter 218 lít RT-230PB",
+   "category": "Tủ lạnh",
+   "brand": "Casper",
+   "price": 4690000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Tủ lạnh 2 cửa giá rẻ, inverter tiết kiệm điện",
+   "attributes": {
+    "loai_tu": "Ngăn đá trên",
+    "dung_tich": 218,
+    "so_cua": 2,
+    "inverter": true
+   },
+   "aliases": [
+    "tủ lạnh casper 218 lít",
+    "tu lanh casper 218 lit",
+    "RT-230PB"
+   ],
+   "use_cases": [
+    "gia đình 2-3 người",
+    "ngân sách thấp"
+   ],
+   "sample_questions": [
+    "Tủ lạnh Casper Inverter 218 lít RT-230PB giá bao nhiêu",
+    "Casper tủ lạnh 218 lít còn hàng không",
+    "tư vấn giúp mình tủ lạnh casper 218 lít",
+    "tủ lạnh nào phù hợp gia đình 2-3 người",
+    "mình muốn mua tủ lạnh casper 218 lít, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "MG-SS-9",
+   "name": "Máy giặt Samsung Inverter 9 kg WW90T3040WW",
+   "category": "Máy giặt",
+   "brand": "Samsung",
+   "price": 7990000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Máy giặt cửa trước giặt hơi nước diệt khuẩn",
+   "attributes": {
+    "khoi_luong_giat": 9,
+    "loai_may_giat": "Cửa trước",
+    "inverter": true,
+    "say_kho": false
+   },
+   "aliases": [
+    "máy giặt samsung 9 ký cửa trước",
+    "may giat samsung 9 ky cua truoc",
+    "WW90T3040WW"
+   ],
+   "use_cases": [
+    "gia đình 4-5 người"
+   ],
+   "sample_questions": [
+    "Máy giặt Samsung Inverter 9 kg WW90T3040WW giá bao nhiêu",
+    "Samsung máy giặt 9 kg còn hàng không",
+    "tư vấn giúp mình máy giặt samsung 9 ký cửa trước",
+    "máy giặt nào phù hợp gia đình 4-5 người",
+    "mình muốn mua máy giặt samsung 9 ký cửa trước, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "MG-SS-10S",
+   "name": "Máy giặt sấy Samsung Inverter 10 kg WD10T634DBN",
+   "category": "Máy giặt",
+   "brand": "Samsung",
+   "price": 14490000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Máy giặt sấy 2 trong 1, giặt 10 kg sấy 6 kg, AI Control",
+   "attributes": {
+    "khoi_luong_giat": 10,
+    "loai_may_giat": "Cửa trước",
+    "inverter": true,
+    "say_kho": true
+   },
+   "aliases": [
+    "máy giặt sấy samsung 10 ký",
+    "may giat say samsung 10 ky",
+    "WD10T634DBN",
+    "samsung giặt sấy"
+   ],
+   "use_cases": [
+    "chung cư không có chỗ phơi",
+    "mùa nồm ẩm miền Bắc"
+   ],
+   "sample_questions": [
+    "Máy giặt sấy Samsung Inverter 10 kg WD10T634DBN giá bao nhiêu",
+    "Samsung máy giặt 10 kg còn hàng không",
+    "tư vấn giúp mình máy giặt sấy samsung 10 ký",
+    "máy giặt nào phù hợp chung cư không có chỗ phơi",
+    "mình muốn mua máy giặt sấy samsung 10 ký, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "MG-LG-9",
+   "name": "Máy giặt LG Inverter 9 kg FV1409S4W",
+   "category": "Máy giặt",
+   "brand": "LG",
+   "price": 8290000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Máy giặt cửa trước AI DD, giặt hơi nước",
+   "attributes": {
+    "khoi_luong_giat": 9,
+    "loai_may_giat": "Cửa trước",
+    "inverter": true,
+    "say_kho": false
+   },
+   "aliases": [
+    "máy giặt lg 9 ký",
+    "may giat lg 9 ky",
+    "FV1409S4W"
+   ],
+   "use_cases": [
+    "gia đình 4-5 người"
+   ],
+   "sample_questions": [
+    "Máy giặt LG Inverter 9 kg FV1409S4W giá bao nhiêu",
+    "LG máy giặt 9 kg còn hàng không",
+    "tư vấn giúp mình máy giặt lg 9 ký",
+    "máy giặt nào phù hợp gia đình 4-5 người",
+    "mình muốn mua máy giặt lg 9 ký, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "MG-LG-11S",
+   "name": "Máy giặt sấy LG Inverter 11 kg FV1411H3BA",
+   "category": "Máy giặt",
+   "brand": "LG",
+   "price": 16990000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Máy giặt sấy 11 kg giặt 7 kg sấy, AI DD, hơi nước",
+   "attributes": {
+    "khoi_luong_giat": 11,
+    "loai_may_giat": "Cửa trước",
+    "inverter": true,
+    "say_kho": true
+   },
+   "aliases": [
+    "máy giặt sấy lg 11 ký",
+    "may giat say lg 11 ky",
+    "FV1411H3BA",
+    "lg giặt sấy"
+   ],
+   "use_cases": [
+    "gia đình đông người, cần sấy khô",
+    "chung cư không có ban công phơi đồ"
+   ],
+   "sample_questions": [
+    "Máy giặt sấy LG Inverter 11 kg FV1411H3BA giá bao nhiêu",
+    "LG máy giặt 11 kg còn hàng không",
+    "tư vấn giúp mình máy giặt sấy lg 11 ký",
+    "máy giặt nào phù hợp gia đình đông người, cần sấy khô",
+    "mình muốn mua máy giặt sấy lg 11 ký, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "MG-TO-10",
+   "name": "Máy giặt Toshiba Inverter 10 kg AW-DUK1150HV",
+   "category": "Máy giặt",
+   "brand": "Toshiba",
+   "price": 6990000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Máy giặt lồng đứng 10 kg, động cơ DD inverter",
+   "attributes": {
+    "khoi_luong_giat": 10,
+    "loai_may_giat": "Cửa trên",
+    "inverter": true,
+    "say_kho": false
+   },
+   "aliases": [
+    "máy giặt toshiba 10 ký lồng đứng",
+    "may giat toshiba 10 ky long dung",
+    "AW-DUK1150HV"
+   ],
+   "use_cases": [
+    "gia đình 5-6 người",
+    "thích máy cửa trên dễ cho đồ"
+   ],
+   "sample_questions": [
+    "Máy giặt Toshiba Inverter 10 kg AW-DUK1150HV giá bao nhiêu",
+    "Toshiba máy giặt 10 kg còn hàng không",
+    "tư vấn giúp mình máy giặt toshiba 10 ký lồng đứng",
+    "máy giặt nào phù hợp gia đình 5-6 người",
+    "mình muốn mua máy giặt toshiba 10 ký lồng đứng, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "MG-AQ-8",
+   "name": "Máy giặt Aqua 8 kg AQW-S80CT",
+   "category": "Máy giặt",
+   "brand": "Aqua",
+   "price": 3890000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Máy giặt lồng đứng giá rẻ, vận hành đơn giản",
+   "attributes": {
+    "khoi_luong_giat": 8,
+    "loai_may_giat": "Cửa trên",
+    "inverter": false,
+    "say_kho": false
+   },
+   "aliases": [
+    "máy giặt aqua 8 ký",
+    "may giat aqua 8 ky",
+    "AQW-S80CT"
+   ],
+   "use_cases": [
+    "gia đình 3-4 người",
+    "phòng trọ, ngân sách thấp"
+   ],
+   "sample_questions": [
+    "Máy giặt Aqua 8 kg AQW-S80CT giá bao nhiêu",
+    "Aqua máy giặt 8 kg còn hàng không",
+    "tư vấn giúp mình máy giặt aqua 8 ký",
+    "máy giặt nào phù hợp gia đình 3-4 người",
+    "mình muốn mua máy giặt aqua 8 ký, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "MG-PA-9",
+   "name": "Máy giặt Panasonic Inverter 9 kg NA-V90FC1LVT",
+   "category": "Máy giặt",
+   "brand": "Panasonic",
+   "price": 9490000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Máy giặt cửa trước, giặt nước nóng diệt khuẩn",
+   "attributes": {
+    "khoi_luong_giat": 9,
+    "loai_may_giat": "Cửa trước",
+    "inverter": true,
+    "say_kho": false
+   },
+   "aliases": [
+    "máy giặt panasonic 9 ký",
+    "may giat panasonic 9 ky",
+    "NA-V90FC1LVT"
+   ],
+   "use_cases": [
+    "gia đình có trẻ nhỏ cần giặt diệt khuẩn"
+   ],
+   "sample_questions": [
+    "Máy giặt Panasonic Inverter 9 kg NA-V90FC1LVT giá bao nhiêu",
+    "Panasonic máy giặt 9 kg còn hàng không",
+    "tư vấn giúp mình máy giặt panasonic 9 ký",
+    "máy giặt nào phù hợp gia đình có trẻ nhỏ cần giặt diệt khuẩn",
+    "mình muốn mua máy giặt panasonic 9 ký, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "MG-EL-10",
+   "name": "Máy giặt Electrolux Inverter 10 kg EWF1024P5WB",
+   "category": "Máy giặt",
+   "brand": "Electrolux",
+   "price": 9990000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Máy giặt cửa trước UltraMix hoà tan bột giặt, hơi nước",
+   "attributes": {
+    "khoi_luong_giat": 10,
+    "loai_may_giat": "Cửa trước",
+    "inverter": true,
+    "say_kho": false
+   },
+   "aliases": [
+    "máy giặt electrolux 10 ký",
+    "may giat electrolux 10 ky",
+    "EWF1024P5WB"
+   ],
+   "use_cases": [
+    "gia đình 5-6 người"
+   ],
+   "sample_questions": [
+    "Máy giặt Electrolux Inverter 10 kg EWF1024P5WB giá bao nhiêu",
+    "Electrolux máy giặt 10 kg còn hàng không",
+    "tư vấn giúp mình máy giặt electrolux 10 ký",
+    "máy giặt nào phù hợp gia đình 5-6 người",
+    "mình muốn mua máy giặt electrolux 10 ký, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "MG-SH-12",
+   "name": "Máy giặt Sharp 12 kg ES-Y120HV",
+   "category": "Máy giặt",
+   "brand": "Sharp",
+   "price": 5290000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Máy giặt lồng đứng 12 kg, giặt chăn mền",
+   "attributes": {
+    "khoi_luong_giat": 12,
+    "loai_may_giat": "Cửa trên",
+    "inverter": false,
+    "say_kho": false
+   },
+   "aliases": [
+    "máy giặt sharp 12 ký",
+    "may giat sharp 12 ky",
+    "ES-Y120HV"
+   ],
+   "use_cases": [
+    "gia đình đông người",
+    "giặt chăn mền, rèm cửa"
+   ],
+   "sample_questions": [
+    "Máy giặt Sharp 12 kg ES-Y120HV giá bao nhiêu",
+    "Sharp máy giặt 12 kg còn hàng không",
+    "tư vấn giúp mình máy giặt sharp 12 ký",
+    "máy giặt nào phù hợp gia đình đông người",
+    "mình muốn mua máy giặt sharp 12 ký, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "MG-CA-75",
+   "name": "Máy giặt Casper 7.5 kg WT-75NG1",
+   "category": "Máy giặt",
+   "brand": "Casper",
+   "price": 3290000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Máy giặt lồng đứng nhỏ gọn giá rẻ nhất",
+   "attributes": {
+    "khoi_luong_giat": 7.5,
+    "loai_may_giat": "Cửa trên",
+    "inverter": false,
+    "say_kho": false
+   },
+   "aliases": [
+    "máy giặt casper 7 ký rưỡi",
+    "may giat casper 7 ky ruoi",
+    "WT-75NG1"
+   ],
+   "use_cases": [
+    "sinh viên, người ở một mình",
+    "phòng trọ"
+   ],
+   "sample_questions": [
+    "Máy giặt Casper 7.5 kg WT-75NG1 giá bao nhiêu",
+    "Casper máy giặt 7.5 kg còn hàng không",
+    "tư vấn giúp mình máy giặt casper 7 ký rưỡi",
+    "máy giặt nào phù hợp sinh viên, người ở một mình",
+    "mình muốn mua máy giặt casper 7 ký rưỡi, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "TV-SS-55Q",
+   "name": "Smart Tivi QLED Samsung 4K 55 inch QA55Q60D",
+   "category": "Tivi",
+   "brand": "Samsung",
+   "price": 13990000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Tivi QLED chấm lượng tử, màu sắc rực rỡ, Tizen OS",
+   "attributes": {
+    "man_hinh": 55,
+    "do_phan_giai": "4K",
+    "cong_nghe_man_hinh": "QLED"
+   },
+   "aliases": [
+    "tivi samsung qled 55 inch",
+    "QA55Q60D",
+    "qled 55"
+   ],
+   "use_cases": [
+    "phòng khách vừa",
+    "xem bóng đá, phim màu sắc đẹp"
+   ],
+   "sample_questions": [
+    "Smart Tivi QLED Samsung 4K 55 inch QA55Q60D giá bao nhiêu",
+    "Samsung tivi 55 inch còn hàng không",
+    "tư vấn giúp mình tivi samsung qled 55 inch",
+    "tivi nào phù hợp phòng khách vừa",
+    "mình muốn mua tivi samsung qled 55 inch, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "TV-SS-43",
+   "name": "Smart Tivi Samsung 4K 43 inch UA43DU7000",
+   "category": "Tivi",
+   "brand": "Samsung",
+   "price": 7490000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Tivi 4K 43 inch phổ thông, Tizen OS",
+   "attributes": {
+    "man_hinh": 43,
+    "do_phan_giai": "4K",
+    "cong_nghe_man_hinh": "LED"
+   },
+   "aliases": [
+    "tivi samsung 43 inch",
+    "UA43DU7000"
+   ],
+   "use_cases": [
+    "phòng ngủ",
+    "phòng khách nhỏ"
+   ],
+   "sample_questions": [
+    "Smart Tivi Samsung 4K 43 inch UA43DU7000 giá bao nhiêu",
+    "Samsung tivi 43 inch còn hàng không",
+    "tư vấn giúp mình tivi samsung 43 inch",
+    "tivi nào phù hợp phòng ngủ",
+    "mình muốn mua tivi samsung 43 inch, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "TV-SS-65",
+   "name": "Smart Tivi Samsung 4K 65 inch UA65DU8000",
+   "category": "Tivi",
+   "brand": "Samsung",
+   "price": 15990000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Tivi 4K 65 inch màn lớn, Crystal UHD",
+   "attributes": {
+    "man_hinh": 65,
+    "do_phan_giai": "4K",
+    "cong_nghe_man_hinh": "LED"
+   },
+   "aliases": [
+    "tivi samsung 65 inch",
+    "UA65DU8000"
+   ],
+   "use_cases": [
+    "phòng khách rộng"
+   ],
+   "sample_questions": [
+    "Smart Tivi Samsung 4K 65 inch UA65DU8000 giá bao nhiêu",
+    "Samsung tivi 65 inch còn hàng không",
+    "tư vấn giúp mình tivi samsung 65 inch",
+    "tivi nào phù hợp phòng khách rộng",
+    "mình muốn mua tivi samsung 65 inch, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "TV-LG-55O",
+   "name": "Smart Tivi OLED LG 4K 55 inch OLED55B4PSA",
+   "category": "Tivi",
+   "brand": "LG",
+   "price": 29990000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Tivi OLED tự phát sáng, màu đen sâu, 120Hz chơi game",
+   "attributes": {
+    "man_hinh": 55,
+    "do_phan_giai": "4K",
+    "cong_nghe_man_hinh": "OLED"
+   },
+   "aliases": [
+    "tivi lg oled 55 inch",
+    "OLED55B4PSA",
+    "oled lg"
+   ],
+   "use_cases": [
+    "xem phim chất lượng cao",
+    "chơi game console"
+   ],
+   "sample_questions": [
+    "Smart Tivi OLED LG 4K 55 inch OLED55B4PSA giá bao nhiêu",
+    "LG tivi 55 inch còn hàng không",
+    "tư vấn giúp mình tivi lg oled 55 inch",
+    "tivi nào phù hợp xem phim chất lượng cao",
+    "mình muốn mua tivi lg oled 55 inch, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "TV-LG-50",
+   "name": "Smart Tivi LG 4K 50 inch 50UR7550PSC",
+   "category": "Tivi",
+   "brand": "LG",
+   "price": 8990000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Tivi 4K 50 inch webOS, điều khiển giọng nói",
+   "attributes": {
+    "man_hinh": 50,
+    "do_phan_giai": "4K",
+    "cong_nghe_man_hinh": "LED"
+   },
+   "aliases": [
+    "tivi lg 50 inch",
+    "50UR7550PSC"
+   ],
+   "use_cases": [
+    "phòng khách vừa"
+   ],
+   "sample_questions": [
+    "Smart Tivi LG 4K 50 inch 50UR7550PSC giá bao nhiêu",
+    "LG tivi 50 inch còn hàng không",
+    "tư vấn giúp mình tivi lg 50 inch",
+    "tivi nào phù hợp phòng khách vừa",
+    "mình muốn mua tivi lg 50 inch, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "TV-SO-55",
+   "name": "Google Tivi Sony 4K 55 inch KD-55X80L",
+   "category": "Tivi",
+   "brand": "Sony",
+   "price": 16490000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Google TV Sony 4K, chip X1, âm thanh tốt",
+   "attributes": {
+    "man_hinh": 55,
+    "do_phan_giai": "4K",
+    "cong_nghe_man_hinh": "LED"
+   },
+   "aliases": [
+    "tivi sony 55 inch",
+    "KD-55X80L"
+   ],
+   "use_cases": [
+    "phòng khách vừa",
+    "thích hệ điều hành Google TV"
+   ],
+   "sample_questions": [
+    "Google Tivi Sony 4K 55 inch KD-55X80L giá bao nhiêu",
+    "Sony tivi 55 inch còn hàng không",
+    "tư vấn giúp mình tivi sony 55 inch",
+    "tivi nào phù hợp phòng khách vừa",
+    "mình muốn mua tivi sony 55 inch, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "TV-SO-65M",
+   "name": "Google Tivi Mini LED Sony 4K 65 inch K-65XR70",
+   "category": "Tivi",
+   "brand": "Sony",
+   "price": 34990000,
+   "price_unit": "VND",
+   "in_stock": false,
+   "short_description": "Tivi Mini LED cao cấp, độ sáng cao, Bravia 7",
+   "attributes": {
+    "man_hinh": 65,
+    "do_phan_giai": "4K",
+    "cong_nghe_man_hinh": "Mini LED"
+   },
+   "aliases": [
+    "tivi sony mini led 65 inch",
+    "K-65XR70",
+    "bravia 7"
+   ],
+   "use_cases": [
+    "phòng khách rộng, thích hàng cao cấp"
+   ],
+   "sample_questions": [
+    "Google Tivi Mini LED Sony 4K 65 inch K-65XR70 giá bao nhiêu",
+    "Sony tivi 65 inch còn hàng không",
+    "tư vấn giúp mình tivi sony mini led 65 inch",
+    "tivi nào phù hợp phòng khách rộng, thích hàng cao cấp",
+    "mình muốn mua tivi sony mini led 65 inch, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "TV-TC-43F",
+   "name": "Google Tivi TCL Full HD 43 inch 43S5400",
+   "category": "Tivi",
+   "brand": "TCL",
+   "price": 4990000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Google TV giá rẻ Full HD",
+   "attributes": {
+    "man_hinh": 43,
+    "do_phan_giai": "Full HD",
+    "cong_nghe_man_hinh": "LED"
+   },
+   "aliases": [
+    "tivi tcl 43 inch",
+    "43S5400"
+   ],
+   "use_cases": [
+    "phòng ngủ",
+    "ngân sách thấp"
+   ],
+   "sample_questions": [
+    "Google Tivi TCL Full HD 43 inch 43S5400 giá bao nhiêu",
+    "TCL tivi 43 inch còn hàng không",
+    "tư vấn giúp mình tivi tcl 43 inch",
+    "tivi nào phù hợp phòng ngủ",
+    "mình muốn mua tivi tcl 43 inch, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "TV-XI-32",
+   "name": "Tivi Xiaomi A Pro HD 32 inch",
+   "category": "Tivi",
+   "brand": "Xiaomi",
+   "price": 3990000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Tivi nhỏ 32 inch Google TV giá rẻ",
+   "attributes": {
+    "man_hinh": 32,
+    "do_phan_giai": "HD",
+    "cong_nghe_man_hinh": "LED"
+   },
+   "aliases": [
+    "tivi xiaomi 32 inch",
+    "xiaomi a pro 32"
+   ],
+   "use_cases": [
+    "phòng ngủ nhỏ, phòng trọ",
+    "bếp, phòng ông bà"
+   ],
+   "sample_questions": [
+    "Tivi Xiaomi A Pro HD 32 inch giá bao nhiêu",
+    "Xiaomi tivi 32 inch còn hàng không",
+    "tư vấn giúp mình tivi xiaomi 32 inch",
+    "tivi nào phù hợp phòng ngủ nhỏ, phòng trọ",
+    "mình muốn mua tivi xiaomi 32 inch, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "TV-CA-75",
+   "name": "Smart Tivi Casper 4K 75 inch 75UGS610",
+   "category": "Tivi",
+   "brand": "Casper",
+   "price": 14990000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Tivi màn hình rất lớn 75 inch giá mềm",
+   "attributes": {
+    "man_hinh": 75,
+    "do_phan_giai": "4K",
+    "cong_nghe_man_hinh": "LED"
+   },
+   "aliases": [
+    "tivi casper 75 inch",
+    "75UGS610"
+   ],
+   "use_cases": [
+    "phòng khách rất rộng, hội trường nhỏ",
+    "muốn màn to giá rẻ"
+   ],
+   "sample_questions": [
+    "Smart Tivi Casper 4K 75 inch 75UGS610 giá bao nhiêu",
+    "Casper tivi 75 inch còn hàng không",
+    "tư vấn giúp mình tivi casper 75 inch",
+    "tivi nào phù hợp phòng khách rất rộng, hội trường nhỏ",
+    "mình muốn mua tivi casper 75 inch, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "DH-DA-1",
+   "name": "Điều hòa Daikin Inverter 1 HP FTKB25XVMV",
+   "category": "Điều hòa",
+   "brand": "Daikin",
+   "price": 10490000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Điều hoà 1 chiều 9000 BTU, bền bỉ, tiết kiệm điện",
+   "attributes": {
+    "cong_suat_hp": 1,
+    "btu": 9000,
+    "so_chieu": "1 chiều",
+    "inverter": true
+   },
+   "aliases": [
+    "điều hòa daikin 1 ngựa",
+    "dieu hoa daikin 1 ngua",
+    "FTKB25XVMV",
+    "máy lạnh daikin 1hp"
+   ],
+   "use_cases": [
+    "phòng dưới 15 m2",
+    "phòng ngủ nhỏ"
+   ],
+   "sample_questions": [
+    "Điều hòa Daikin Inverter 1 HP FTKB25XVMV giá bao nhiêu",
+    "Daikin điều hòa 1 HP còn hàng không",
+    "tư vấn giúp mình điều hòa daikin 1 ngựa",
+    "điều hòa nào phù hợp phòng dưới 15 m2",
+    "mình muốn mua điều hòa daikin 1 ngựa, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "DH-DA-15-2C",
+   "name": "Điều hòa 2 chiều Daikin Inverter 1.5 HP FTHF35XVMV",
+   "category": "Điều hòa",
+   "brand": "Daikin",
+   "price": 15990000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Điều hoà 2 chiều làm lạnh và sưởi ấm, 12000 BTU",
+   "attributes": {
+    "cong_suat_hp": 1.5,
+    "btu": 12000,
+    "so_chieu": "2 chiều",
+    "inverter": true
+   },
+   "aliases": [
+    "điều hòa daikin 2 chiều 1.5 ngựa",
+    "dieu hoa daikin 2 chieu 1.5 ngua",
+    "FTHF35XVMV",
+    "daikin 2 chiều"
+   ],
+   "use_cases": [
+    "phòng 15-20 m2",
+    "miền Bắc cần sưởi mùa đông"
+   ],
+   "sample_questions": [
+    "Điều hòa 2 chiều Daikin Inverter 1.5 HP FTHF35XVMV giá bao nhiêu",
+    "Daikin điều hòa 1.5 HP còn hàng không",
+    "tư vấn giúp mình điều hòa daikin 2 chiều 1.5 ngựa",
+    "điều hòa nào phù hợp phòng 15-20 m2",
+    "mình muốn mua điều hòa daikin 2 chiều 1.5 ngựa, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "DH-PA-1",
+   "name": "Điều hòa Panasonic Inverter 1 HP CU/CS-XU9ZKH-8",
+   "category": "Điều hòa",
+   "brand": "Panasonic",
+   "price": 12990000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Điều hoà cao cấp lọc không khí nanoe X",
+   "attributes": {
+    "cong_suat_hp": 1,
+    "btu": 9000,
+    "so_chieu": "1 chiều",
+    "inverter": true
+   },
+   "aliases": [
+    "điều hòa panasonic 1 ngựa",
+    "dieu hoa panasonic 1 ngua",
+    "CU/CS-XU9ZKH-8",
+    "pana nanoe"
+   ],
+   "use_cases": [
+    "phòng ngủ có trẻ nhỏ, cần lọc không khí"
+   ],
+   "sample_questions": [
+    "Điều hòa Panasonic Inverter 1 HP CU/CS-XU9ZKH-8 giá bao nhiêu",
+    "Panasonic điều hòa 1 HP còn hàng không",
+    "tư vấn giúp mình điều hòa panasonic 1 ngựa",
+    "điều hòa nào phù hợp phòng ngủ có trẻ nhỏ, cần lọc không khí",
+    "mình muốn mua điều hòa panasonic 1 ngựa, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "DH-PA-2",
+   "name": "Điều hòa Panasonic Inverter 2 HP CU/CS-U18ZKH-8",
+   "category": "Điều hòa",
+   "brand": "Panasonic",
+   "price": 19490000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Điều hoà 18000 BTU cho phòng lớn",
+   "attributes": {
+    "cong_suat_hp": 2,
+    "btu": 18000,
+    "so_chieu": "1 chiều",
+    "inverter": true
+   },
+   "aliases": [
+    "điều hòa panasonic 2 ngựa",
+    "dieu hoa panasonic 2 ngua",
+    "CU/CS-U18ZKH-8"
+   ],
+   "use_cases": [
+    "phòng khách 20-30 m2"
+   ],
+   "sample_questions": [
+    "Điều hòa Panasonic Inverter 2 HP CU/CS-U18ZKH-8 giá bao nhiêu",
+    "Panasonic điều hòa 2 HP còn hàng không",
+    "tư vấn giúp mình điều hòa panasonic 2 ngựa",
+    "điều hòa nào phù hợp phòng khách 20-30 m2",
+    "mình muốn mua điều hòa panasonic 2 ngựa, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "DH-LG-15",
+   "name": "Điều hòa LG Inverter 1.5 HP V13WIN1",
+   "category": "Điều hòa",
+   "brand": "LG",
+   "price": 9990000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Điều hoà 12000 BTU dual inverter làm lạnh nhanh",
+   "attributes": {
+    "cong_suat_hp": 1.5,
+    "btu": 12000,
+    "so_chieu": "1 chiều",
+    "inverter": true
+   },
+   "aliases": [
+    "điều hòa lg 1.5 ngựa",
+    "dieu hoa lg 1.5 ngua",
+    "V13WIN1"
+   ],
+   "use_cases": [
+    "phòng 15-20 m2"
+   ],
+   "sample_questions": [
+    "Điều hòa LG Inverter 1.5 HP V13WIN1 giá bao nhiêu",
+    "LG điều hòa 1.5 HP còn hàng không",
+    "tư vấn giúp mình điều hòa lg 1.5 ngựa",
+    "điều hòa nào phù hợp phòng 15-20 m2",
+    "mình muốn mua điều hòa lg 1.5 ngựa, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "DH-CA-1",
+   "name": "Điều hòa Casper 1 HP KC-09FC32",
+   "category": "Điều hòa",
+   "brand": "Casper",
+   "price": 5490000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Điều hoà 1 chiều giá rẻ, không inverter",
+   "attributes": {
+    "cong_suat_hp": 1,
+    "btu": 9000,
+    "so_chieu": "1 chiều",
+    "inverter": false
+   },
+   "aliases": [
+    "điều hòa casper 1 ngựa",
+    "dieu hoa casper 1 ngua",
+    "KC-09FC32"
+   ],
+   "use_cases": [
+    "phòng trọ, ngân sách thấp",
+    "phòng dưới 15 m2"
+   ],
+   "sample_questions": [
+    "Điều hòa Casper 1 HP KC-09FC32 giá bao nhiêu",
+    "Casper điều hòa 1 HP còn hàng không",
+    "tư vấn giúp mình điều hòa casper 1 ngựa",
+    "điều hòa nào phù hợp phòng trọ, ngân sách thấp",
+    "mình muốn mua điều hòa casper 1 ngựa, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "DH-TO-1",
+   "name": "Điều hòa Toshiba Inverter 1 HP RAS-H10C4KCVG-V",
+   "category": "Điều hòa",
+   "brand": "Toshiba",
+   "price": 9490000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Điều hoà inverter 1 HP vận hành êm",
+   "attributes": {
+    "cong_suat_hp": 1,
+    "btu": 9000,
+    "so_chieu": "1 chiều",
+    "inverter": true
+   },
+   "aliases": [
+    "điều hòa toshiba 1 ngựa",
+    "dieu hoa toshiba 1 ngua",
+    "RAS-H10C4KCVG-V"
+   ],
+   "use_cases": [
+    "phòng ngủ dưới 15 m2"
+   ],
+   "sample_questions": [
+    "Điều hòa Toshiba Inverter 1 HP RAS-H10C4KCVG-V giá bao nhiêu",
+    "Toshiba điều hòa 1 HP còn hàng không",
+    "tư vấn giúp mình điều hòa toshiba 1 ngựa",
+    "điều hòa nào phù hợp phòng ngủ dưới 15 m2",
+    "mình muốn mua điều hòa toshiba 1 ngựa, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "DH-SS-2",
+   "name": "Điều hòa Samsung Inverter 2 HP AR18DYHZAWKNSV",
+   "category": "Điều hòa",
+   "brand": "Samsung",
+   "price": 16490000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Điều hoà WindFree 2 HP không gió buốt",
+   "attributes": {
+    "cong_suat_hp": 2,
+    "btu": 18000,
+    "so_chieu": "1 chiều",
+    "inverter": true
+   },
+   "aliases": [
+    "điều hòa samsung 2 ngựa",
+    "dieu hoa samsung 2 ngua",
+    "AR18DYHZAWKNSV",
+    "samsung windfree"
+   ],
+   "use_cases": [
+    "phòng khách 20-30 m2",
+    "người không thích gió thổi trực tiếp"
+   ],
+   "sample_questions": [
+    "Điều hòa Samsung Inverter 2 HP AR18DYHZAWKNSV giá bao nhiêu",
+    "Samsung điều hòa 2 HP còn hàng không",
+    "tư vấn giúp mình điều hòa samsung 2 ngựa",
+    "điều hòa nào phù hợp phòng khách 20-30 m2",
+    "mình muốn mua điều hòa samsung 2 ngựa, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "DT-IP15PM",
+   "name": "iPhone 15 Pro Max 256GB",
+   "category": "Điện thoại",
+   "brand": "Apple",
+   "price": 28990000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "iPhone khung titan, camera zoom 5x, chip A17 Pro",
+   "attributes": {
+    "bo_nho": 256,
+    "ram": 8
+   },
+   "aliases": [
+    "iphone 15 pro max 256gb",
+    "ip 15 pro max",
+    "15 promax",
+    "táo 15 pro max"
+   ],
+   "use_cases": [
+    "chụp ảnh quay phim chuyên nghiệp",
+    "doanh nhân"
+   ],
+   "sample_questions": [
+    "iPhone 15 Pro Max 256GB giá bao nhiêu",
+    "Apple điện thoại 256 GB còn hàng không",
+    "tư vấn giúp mình iphone 15 pro max 256gb",
+    "điện thoại nào phù hợp chụp ảnh quay phim chuyên nghiệp",
+    "mình muốn mua iphone 15 pro max 256gb, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "DT-IP15",
+   "name": "iPhone 15 128GB",
+   "category": "Điện thoại",
+   "brand": "Apple",
+   "price": 19490000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "iPhone 15 bản thường, Dynamic Island, cổng USB-C",
+   "attributes": {
+    "bo_nho": 128,
+    "ram": 6
+   },
+   "aliases": [
+    "iphone 15 thường 128gb",
+    "iphone 15 thuong 128gb",
+    "ip 15",
+    "iphone 15 thường"
+   ],
+   "use_cases": [
+    "người mới chuyển sang iPhone",
+    "dùng cơ bản, bền"
+   ],
+   "sample_questions": [
+    "iPhone 15 128GB giá bao nhiêu",
+    "Apple điện thoại 128 GB còn hàng không",
+    "tư vấn giúp mình iphone 15 thường 128gb",
+    "điện thoại nào phù hợp người mới chuyển sang iPhone",
+    "mình muốn mua iphone 15 thường 128gb, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "DT-IP16PM",
+   "name": "iPhone 16 Pro Max 256GB",
+   "category": "Điện thoại",
+   "brand": "Apple",
+   "price": 33990000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "iPhone mới nhất, nút Camera Control, màn 6.9 inch",
+   "attributes": {
+    "bo_nho": 256,
+    "ram": 8
+   },
+   "aliases": [
+    "iphone 16 pro max",
+    "ip 16 pro max",
+    "táo 16 pro max"
+   ],
+   "use_cases": [
+    "người thích đời mới nhất",
+    "quay video 4K 120fps"
+   ],
+   "sample_questions": [
+    "iPhone 16 Pro Max 256GB giá bao nhiêu",
+    "Apple điện thoại 256 GB còn hàng không",
+    "tư vấn giúp mình iphone 16 pro max",
+    "điện thoại nào phù hợp người thích đời mới nhất",
+    "mình muốn mua iphone 16 pro max, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "DT-SS-A55",
+   "name": "Samsung Galaxy A55 5G 8GB/128GB",
+   "category": "Điện thoại",
+   "brand": "Samsung",
+   "price": 9490000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Điện thoại tầm trung khung kim loại, chống nước IP67",
+   "attributes": {
+    "bo_nho": 128,
+    "ram": 8
+   },
+   "aliases": [
+    "samsung galaxy a55",
+    "a55",
+    "ss a55"
+   ],
+   "use_cases": [
+    "học sinh sinh viên",
+    "tầm trung pin trâu"
+   ],
+   "sample_questions": [
+    "Samsung Galaxy A55 5G 8GB/128GB giá bao nhiêu",
+    "Samsung điện thoại 128 GB còn hàng không",
+    "tư vấn giúp mình samsung galaxy a55",
+    "điện thoại nào phù hợp học sinh sinh viên",
+    "mình muốn mua samsung galaxy a55, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "DT-SS-S24U",
+   "name": "Samsung Galaxy S24 Ultra 12GB/256GB",
+   "category": "Điện thoại",
+   "brand": "Samsung",
+   "price": 26990000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Flagship có bút S Pen, zoom 100x, Galaxy AI",
+   "attributes": {
+    "bo_nho": 256,
+    "ram": 12
+   },
+   "aliases": [
+    "samsung s24 ultra",
+    "s24u",
+    "ss s24 ultra"
+   ],
+   "use_cases": [
+    "doanh nhân cần bút ghi chú",
+    "chụp ảnh zoom xa"
+   ],
+   "sample_questions": [
+    "Samsung Galaxy S24 Ultra 12GB/256GB giá bao nhiêu",
+    "Samsung điện thoại 256 GB còn hàng không",
+    "tư vấn giúp mình samsung s24 ultra",
+    "điện thoại nào phù hợp doanh nhân cần bút ghi chú",
+    "mình muốn mua samsung s24 ultra, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "DT-XI-RN13",
+   "name": "Xiaomi Redmi Note 13 8GB/128GB",
+   "category": "Điện thoại",
+   "brand": "Xiaomi",
+   "price": 4890000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Điện thoại giá rẻ màn AMOLED 120Hz, pin 5000mAh",
+   "attributes": {
+    "bo_nho": 128,
+    "ram": 8
+   },
+   "aliases": [
+    "xiaomi redmi note 13",
+    "note 13",
+    "xiaomi note 13"
+   ],
+   "use_cases": [
+    "học sinh, người lớn tuổi",
+    "ngân sách dưới 5 triệu"
+   ],
+   "sample_questions": [
+    "Xiaomi Redmi Note 13 8GB/128GB giá bao nhiêu",
+    "Xiaomi điện thoại 128 GB còn hàng không",
+    "tư vấn giúp mình xiaomi redmi note 13",
+    "điện thoại nào phù hợp học sinh, người lớn tuổi",
+    "mình muốn mua xiaomi redmi note 13, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "DT-OP-R12F",
+   "name": "OPPO Reno12 F 5G 8GB/256GB",
+   "category": "Điện thoại",
+   "brand": "OPPO",
+   "price": 8990000,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Điện thoại chụp chân dung đẹp, sạc nhanh 45W",
+   "attributes": {
+    "bo_nho": 256,
+    "ram": 8
+   },
+   "aliases": [
+    "oppo reno12 f",
+    "reno12f",
+    "oppo reno 12"
+   ],
+   "use_cases": [
+    "bạn nữ thích chụp ảnh selfie",
+    "sinh viên"
+   ],
+   "sample_questions": [
+    "OPPO Reno12 F 5G 8GB/256GB giá bao nhiêu",
+    "OPPO điện thoại 256 GB còn hàng không",
+    "tư vấn giúp mình oppo reno12 f",
+    "điện thoại nào phù hợp bạn nữ thích chụp ảnh selfie",
+    "mình muốn mua oppo reno12 f, có trả góp không"
+   ],
+   "enrichment_status": "reviewed"
+  }
+ ]
+}

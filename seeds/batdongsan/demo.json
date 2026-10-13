@@ -1,0 +1,1457 @@
+{
+ "demo": {
+  "slug": "batdongsan",
+  "name": "Nhà Đẹp Sài Gòn Demo",
+  "industry": "môi giới bất động sản TP.HCM"
+ },
+ "definitions": [
+  {
+   "key": "giao_dich",
+   "label": "Hình thức",
+   "type": "enum",
+   "filterable": true,
+   "weight": 0.95,
+   "enum_values": [
+    {
+     "value": "Bán",
+     "aliases": [
+      "mua",
+      "bán",
+      "sang nhượng",
+      "cần mua"
+     ]
+    },
+    {
+     "value": "Cho thuê",
+     "aliases": [
+      "thuê",
+      "cho thuê",
+      "mướn",
+      "cần thuê"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "khu_vuc",
+   "label": "Khu vực",
+   "type": "enum",
+   "filterable": true,
+   "weight": 0.85,
+   "enum_values": [
+    {
+     "value": "Quận 7",
+     "aliases": [
+      "q7",
+      "quận bảy",
+      "phú mỹ hưng"
+     ]
+    },
+    {
+     "value": "Thủ Đức",
+     "aliases": [
+      "tp thủ đức",
+      "quận 9",
+      "quận 2",
+      "thủ thiêm"
+     ]
+    },
+    {
+     "value": "Bình Thạnh",
+     "aliases": [
+      "bình thạnh",
+      "q bình thạnh"
+     ]
+    },
+    {
+     "value": "Gò Vấp",
+     "aliases": [
+      "gò vấp",
+      "gv"
+     ]
+    },
+    {
+     "value": "Nhà Bè",
+     "aliases": [
+      "nhà bè"
+     ]
+    },
+    {
+     "value": "Bình Chánh",
+     "aliases": [
+      "bình chánh"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "dien_tich",
+   "label": "Diện tích",
+   "type": "number",
+   "unit": "m2",
+   "unit_aliases": [
+    "m²",
+    "mét vuông",
+    "mét",
+    "m vuông",
+    "met vuong",
+    "mv"
+   ],
+   "filterable": true,
+   "weight": 0.6
+  },
+  {
+   "key": "so_phong_ngu",
+   "label": "Số phòng ngủ",
+   "type": "number",
+   "unit": "phòng ngủ",
+   "unit_aliases": [
+    "pn",
+    "phòng",
+    "phòng ngủ",
+    "phong ngu"
+   ],
+   "filterable": true,
+   "weight": 0.8
+  },
+  {
+   "key": "so_wc",
+   "label": "Số WC",
+   "type": "number",
+   "unit": "WC",
+   "unit_aliases": [
+    "toilet",
+    "nhà vệ sinh",
+    "vệ sinh",
+    "wc"
+   ],
+   "filterable": false,
+   "weight": 0.3
+  },
+  {
+   "key": "so_tang",
+   "label": "Số tầng",
+   "type": "number",
+   "unit": "tầng",
+   "unit_aliases": [
+    "lầu",
+    "tầng"
+   ],
+   "filterable": true,
+   "weight": 0.5
+  },
+  {
+   "key": "huong",
+   "label": "Hướng",
+   "type": "enum",
+   "filterable": true,
+   "weight": 0.4,
+   "enum_values": [
+    {
+     "value": "Đông",
+     "aliases": [
+      "hướng đông"
+     ]
+    },
+    {
+     "value": "Tây",
+     "aliases": [
+      "hướng tây"
+     ]
+    },
+    {
+     "value": "Nam",
+     "aliases": [
+      "hướng nam"
+     ]
+    },
+    {
+     "value": "Bắc",
+     "aliases": [
+      "hướng bắc"
+     ]
+    },
+    {
+     "value": "Đông Nam",
+     "aliases": [
+      "hướng đông nam"
+     ]
+    },
+    {
+     "value": "Đông Bắc",
+     "aliases": [
+      "hướng đông bắc"
+     ]
+    },
+    {
+     "value": "Tây Nam",
+     "aliases": [
+      "hướng tây nam"
+     ]
+    },
+    {
+     "value": "Tây Bắc",
+     "aliases": [
+      "hướng tây bắc"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "phap_ly",
+   "label": "Pháp lý",
+   "type": "enum",
+   "filterable": true,
+   "weight": 0.5,
+   "enum_values": [
+    {
+     "value": "Sổ hồng",
+     "aliases": [
+      "có sổ",
+      "sổ hồng riêng",
+      "sổ riêng",
+      "sổ đỏ"
+     ]
+    },
+    {
+     "value": "Hợp đồng mua bán",
+     "aliases": [
+      "hđmb",
+      "chưa có sổ",
+      "hợp đồng"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "noi_that",
+   "label": "Nội thất",
+   "type": "enum",
+   "filterable": true,
+   "weight": 0.4,
+   "enum_values": [
+    {
+     "value": "Đầy đủ",
+     "aliases": [
+      "full nội thất",
+      "nội thất đầy đủ",
+      "xách vali vào ở",
+      "phun nội thất"
+     ]
+    },
+    {
+     "value": "Cơ bản",
+     "aliases": [
+      "nội thất cơ bản"
+     ]
+    },
+    {
+     "value": "Bàn giao thô",
+     "aliases": [
+      "nhà thô",
+      "thô",
+      "chưa nội thất"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "tien_ich",
+   "label": "Đặc điểm nổi bật",
+   "type": "multi_enum",
+   "filterable": false,
+   "weight": 0.4,
+   "enum_values": [
+    {
+     "value": "View sông",
+     "aliases": [
+      "view sông",
+      "nhìn ra sông",
+      "ven sông"
+     ]
+    },
+    {
+     "value": "Hồ bơi",
+     "aliases": [
+      "bể bơi",
+      "hồ bơi"
+     ]
+    },
+    {
+     "value": "Mặt tiền",
+     "aliases": [
+      "mặt đường",
+      "mặt phố",
+      "mặt tiền"
+     ]
+    },
+    {
+     "value": "Hẻm xe hơi",
+     "aliases": [
+      "hẻm ô tô",
+      "hẻm xe hơi",
+      "ô tô vào nhà"
+     ]
+    },
+    {
+     "value": "Gần trường học",
+     "aliases": [
+      "gần trường"
+     ]
+    },
+    {
+     "value": "Kinh doanh được",
+     "aliases": [
+      "buôn bán",
+      "kinh doanh"
+     ]
+    },
+    {
+     "value": "Căn góc",
+     "aliases": [
+      "góc",
+      "căn góc",
+      "hai mặt tiền"
+     ]
+    }
+   ]
+  }
+ ],
+ "products": [
+  {
+   "sku": "CH-HS-1PN",
+   "name": "Căn hộ 1PN Hoa Sen Residence 50m2",
+   "category": "Căn hộ",
+   "brand": null,
+   "price": 2400000000.0,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Căn 1 phòng ngủ tầng trung, hồ bơi nội khu",
+   "attributes": {
+    "giao_dich": "Bán",
+    "khu_vuc": "Quận 7",
+    "dien_tich": 50,
+    "so_phong_ngu": 1,
+    "so_wc": 1,
+    "huong": "Đông Nam",
+    "phap_ly": "Sổ hồng",
+    "noi_that": "Cơ bản",
+    "tien_ich": [
+     "Hồ bơi"
+    ]
+   },
+   "aliases": [
+    "căn hộ 1 phòng ngủ hoa sen residence",
+    "can ho 1 phong ngu hoa sen residence",
+    "hoa sen 1pn"
+   ],
+   "use_cases": [
+    "người độc thân, vợ chồng trẻ",
+    "đầu tư cho thuê"
+   ],
+   "sample_questions": [
+    "Căn hộ 1PN Hoa Sen Residence 50m2 giá bao nhiêu",
+    "căn hộ 1 phòng ngủ hoa sen residence còn không anh",
+    "xem nhà căn hộ 1 phòng ngủ hoa sen residence được không",
+    "tôi cần người độc thân, vợ chồng trẻ"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "CH-HS-2PN",
+   "name": "Căn hộ 2PN Hoa Sen Residence 72m2",
+   "category": "Căn hộ",
+   "brand": null,
+   "price": 3600000000.0,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Căn 2 phòng ngủ 2 WC, gần trường quốc tế",
+   "attributes": {
+    "giao_dich": "Bán",
+    "khu_vuc": "Quận 7",
+    "dien_tich": 72,
+    "so_phong_ngu": 2,
+    "so_wc": 2,
+    "huong": "Đông",
+    "phap_ly": "Sổ hồng",
+    "noi_that": "Cơ bản",
+    "tien_ich": [
+     "Hồ bơi",
+     "Gần trường học"
+    ]
+   },
+   "aliases": [
+    "căn hộ 2 phòng ngủ hoa sen residence",
+    "can ho 2 phong ngu hoa sen residence",
+    "hoa sen 2pn"
+   ],
+   "use_cases": [
+    "gia đình trẻ có 1-2 con nhỏ"
+   ],
+   "sample_questions": [
+    "Căn hộ 2PN Hoa Sen Residence 72m2 giá bao nhiêu",
+    "căn hộ 2 phòng ngủ hoa sen residence còn không anh",
+    "xem nhà căn hộ 2 phòng ngủ hoa sen residence được không",
+    "tôi cần gia đình trẻ có 1-2 con nhỏ"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "CH-HS-3PN",
+   "name": "Căn hộ 3PN Hoa Sen Residence 98m2",
+   "category": "Căn hộ",
+   "brand": null,
+   "price": 5200000000.0,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Căn góc 3 phòng ngủ thoáng 2 mặt",
+   "attributes": {
+    "giao_dich": "Bán",
+    "khu_vuc": "Quận 7",
+    "dien_tich": 98,
+    "so_phong_ngu": 3,
+    "so_wc": 2,
+    "huong": "Nam",
+    "phap_ly": "Sổ hồng",
+    "noi_that": "Cơ bản",
+    "tien_ich": [
+     "Hồ bơi",
+     "Căn góc"
+    ]
+   },
+   "aliases": [
+    "căn hộ 3 phòng ngủ hoa sen residence",
+    "can ho 3 phong ngu hoa sen residence",
+    "hoa sen 3pn"
+   ],
+   "use_cases": [
+    "gia đình 3 thế hệ",
+    "gia đình đông con"
+   ],
+   "sample_questions": [
+    "Căn hộ 3PN Hoa Sen Residence 98m2 giá bao nhiêu",
+    "căn hộ 3 phòng ngủ hoa sen residence còn không anh",
+    "xem nhà căn hộ 3 phòng ngủ hoa sen residence được không",
+    "tôi cần gia đình 3 thế hệ"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "CH-SX-2PN",
+   "name": "Căn hộ 2PN Sông Xanh Tower 68m2 view sông",
+   "category": "Căn hộ",
+   "brand": null,
+   "price": 4099999999.9999995,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Căn 2PN view sông Sài Gòn, full nội thất",
+   "attributes": {
+    "giao_dich": "Bán",
+    "khu_vuc": "Bình Thạnh",
+    "dien_tich": 68,
+    "so_phong_ngu": 2,
+    "so_wc": 2,
+    "huong": "Tây Bắc",
+    "phap_ly": "Sổ hồng",
+    "noi_that": "Đầy đủ",
+    "tien_ich": [
+     "View sông",
+     "Hồ bơi"
+    ]
+   },
+   "aliases": [
+    "căn hộ 2 phòng ngủ sông xanh tower",
+    "can ho 2 phong ngu song xanh tower",
+    "sông xanh 2pn"
+   ],
+   "use_cases": [
+    "thích view sông, gần trung tâm"
+   ],
+   "sample_questions": [
+    "Căn hộ 2PN Sông Xanh Tower 68m2 view sông giá bao nhiêu",
+    "căn hộ 2 phòng ngủ sông xanh tower còn không anh",
+    "xem nhà căn hộ 2 phòng ngủ sông xanh tower được không",
+    "tôi cần thích view sông, gần trung tâm"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "CH-SX-3PN",
+   "name": "Căn hộ 3PN Sông Xanh Tower 105m2",
+   "category": "Căn hộ",
+   "brand": null,
+   "price": 6800000000.0,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Căn 3PN rộng, view sông và Landmark",
+   "attributes": {
+    "giao_dich": "Bán",
+    "khu_vuc": "Bình Thạnh",
+    "dien_tich": 105,
+    "so_phong_ngu": 3,
+    "so_wc": 2,
+    "huong": "Đông Bắc",
+    "phap_ly": "Sổ hồng",
+    "noi_that": "Đầy đủ",
+    "tien_ich": [
+     "View sông",
+     "Hồ bơi"
+    ]
+   },
+   "aliases": [
+    "căn hộ 3 phòng ngủ sông xanh tower",
+    "can ho 3 phong ngu song xanh tower",
+    "sông xanh 3pn"
+   ],
+   "use_cases": [
+    "gia đình đông người cần gần trung tâm"
+   ],
+   "sample_questions": [
+    "Căn hộ 3PN Sông Xanh Tower 105m2 giá bao nhiêu",
+    "căn hộ 3 phòng ngủ sông xanh tower còn không anh",
+    "xem nhà căn hộ 3 phòng ngủ sông xanh tower được không",
+    "tôi cần gia đình đông người cần gần trung tâm"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "CH-SX-PH",
+   "name": "Penthouse Sông Xanh Tower 180m2 4PN",
+   "category": "Căn hộ",
+   "brand": null,
+   "price": 14500000000.0,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Penthouse tầng thượng, sân vườn riêng, hồ bơi riêng",
+   "attributes": {
+    "giao_dich": "Bán",
+    "khu_vuc": "Bình Thạnh",
+    "dien_tich": 180,
+    "so_phong_ngu": 4,
+    "so_wc": 4,
+    "huong": "Nam",
+    "phap_ly": "Sổ hồng",
+    "noi_that": "Đầy đủ",
+    "tien_ich": [
+     "View sông",
+     "Hồ bơi"
+    ]
+   },
+   "aliases": [
+    "penthouse sông xanh",
+    "penthouse song xanh",
+    "penthouse",
+    "căn áp mái"
+   ],
+   "use_cases": [
+    "người thu nhập cao, thích không gian riêng"
+   ],
+   "sample_questions": [
+    "Penthouse Sông Xanh Tower 180m2 4PN giá bao nhiêu",
+    "penthouse sông xanh còn không anh",
+    "xem nhà penthouse sông xanh được không",
+    "tôi cần người thu nhập cao, thích không gian riêng"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "CH-BM-1PN",
+   "name": "Căn hộ 1PN+1 Bình Minh Garden 55m2",
+   "category": "Căn hộ",
+   "brand": null,
+   "price": 2100000000.0,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Căn 1PN+1 có phòng làm việc nhỏ, gần metro",
+   "attributes": {
+    "giao_dich": "Bán",
+    "khu_vuc": "Thủ Đức",
+    "dien_tich": 55,
+    "so_phong_ngu": 1,
+    "so_wc": 1,
+    "huong": "Tây",
+    "phap_ly": "Hợp đồng mua bán",
+    "noi_that": "Cơ bản",
+    "tien_ich": [
+     "Hồ bơi"
+    ]
+   },
+   "aliases": [
+    "căn hộ 1 phòng ngủ cộng bình minh garden",
+    "can ho 1 phong ngu cong binh minh garden",
+    "bình minh 1pn+1"
+   ],
+   "use_cases": [
+    "người làm việc tại nhà",
+    "gần metro đi làm"
+   ],
+   "sample_questions": [
+    "Căn hộ 1PN+1 Bình Minh Garden 55m2 giá bao nhiêu",
+    "căn hộ 1 phòng ngủ cộng bình minh garden còn không anh",
+    "xem nhà căn hộ 1 phòng ngủ cộng bình minh garden được không",
+    "tôi cần người làm việc tại nhà"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "CH-BM-2PN",
+   "name": "Căn hộ 2PN Bình Minh Garden 70m2",
+   "category": "Căn hộ",
+   "brand": null,
+   "price": 2900000000.0,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Căn 2PN bàn giao thô, giá tốt khu Thủ Đức",
+   "attributes": {
+    "giao_dich": "Bán",
+    "khu_vuc": "Thủ Đức",
+    "dien_tich": 70,
+    "so_phong_ngu": 2,
+    "so_wc": 2,
+    "huong": "Đông",
+    "phap_ly": "Hợp đồng mua bán",
+    "noi_that": "Bàn giao thô",
+    "tien_ich": [
+     "Hồ bơi",
+     "Gần trường học"
+    ]
+   },
+   "aliases": [
+    "căn hộ 2 phòng ngủ bình minh garden",
+    "can ho 2 phong ngu binh minh garden",
+    "bình minh 2pn"
+   ],
+   "use_cases": [
+    "gia đình trẻ muốn tự làm nội thất"
+   ],
+   "sample_questions": [
+    "Căn hộ 2PN Bình Minh Garden 70m2 giá bao nhiêu",
+    "căn hộ 2 phòng ngủ bình minh garden còn không anh",
+    "xem nhà căn hộ 2 phòng ngủ bình minh garden được không",
+    "tôi cần gia đình trẻ muốn tự làm nội thất"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "CH-BM-ST",
+   "name": "Căn hộ Studio Bình Minh Garden 35m2",
+   "category": "Căn hộ",
+   "brand": null,
+   "price": 1450000000.0,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Studio nhỏ gọn giá dưới 1,5 tỷ",
+   "attributes": {
+    "giao_dich": "Bán",
+    "khu_vuc": "Thủ Đức",
+    "dien_tich": 35,
+    "so_phong_ngu": 1,
+    "so_wc": 1,
+    "huong": "Bắc",
+    "phap_ly": "Hợp đồng mua bán",
+    "noi_that": "Cơ bản"
+   },
+   "aliases": [
+    "căn studio bình minh garden",
+    "can studio binh minh garden",
+    "studio bình minh"
+   ],
+   "use_cases": [
+    "sinh viên, người đi làm độc thân",
+    "vốn ít muốn đầu tư"
+   ],
+   "sample_questions": [
+    "Căn hộ Studio Bình Minh Garden 35m2 giá bao nhiêu",
+    "căn studio bình minh garden còn không anh",
+    "xem nhà căn studio bình minh garden được không",
+    "tôi cần sinh viên, người đi làm độc thân"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "CH-GV-2PN",
+   "name": "Căn hộ 2PN Lan Anh Apartment Gò Vấp 65m2",
+   "category": "Căn hộ",
+   "brand": null,
+   "price": 2600000000.0,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Căn hộ đã có sổ hồng, gần sân bay",
+   "attributes": {
+    "giao_dich": "Bán",
+    "khu_vuc": "Gò Vấp",
+    "dien_tich": 65,
+    "so_phong_ngu": 2,
+    "so_wc": 2,
+    "huong": "Đông Nam",
+    "phap_ly": "Sổ hồng",
+    "noi_that": "Cơ bản",
+    "tien_ich": [
+     "Gần trường học"
+    ]
+   },
+   "aliases": [
+    "căn hộ lan anh gò vấp",
+    "can ho lan anh go vap",
+    "lan anh apartment"
+   ],
+   "use_cases": [
+    "làm việc gần sân bay Tân Sơn Nhất"
+   ],
+   "sample_questions": [
+    "Căn hộ 2PN Lan Anh Apartment Gò Vấp 65m2 giá bao nhiêu",
+    "căn hộ lan anh gò vấp còn không anh",
+    "xem nhà căn hộ lan anh gò vấp được không",
+    "tôi cần làm việc gần sân bay Tân Sơn Nhất"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "CH-NB-2PN",
+   "name": "Căn hộ 2PN Cảng Xanh Riverside Nhà Bè 75m2",
+   "category": "Căn hộ",
+   "brand": null,
+   "price": 2300000000.0,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Căn hộ ven sông giá mềm khu Nhà Bè",
+   "attributes": {
+    "giao_dich": "Bán",
+    "khu_vuc": "Nhà Bè",
+    "dien_tich": 75,
+    "so_phong_ngu": 2,
+    "so_wc": 2,
+    "huong": "Nam",
+    "phap_ly": "Sổ hồng",
+    "noi_that": "Cơ bản",
+    "tien_ich": [
+     "View sông",
+     "Hồ bơi"
+    ]
+   },
+   "aliases": [
+    "căn hộ cảng xanh riverside",
+    "can ho cang xanh riverside",
+    "cảng xanh"
+   ],
+   "use_cases": [
+    "muốn view sông nhưng ngân sách vừa"
+   ],
+   "sample_questions": [
+    "Căn hộ 2PN Cảng Xanh Riverside Nhà Bè 75m2 giá bao nhiêu",
+    "căn hộ cảng xanh riverside còn không anh",
+    "xem nhà căn hộ cảng xanh riverside được không",
+    "tôi cần muốn view sông nhưng ngân sách vừa"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "CH-OT-Q7",
+   "name": "Officetel Hoa Sen 40m2",
+   "category": "Căn hộ",
+   "brand": null,
+   "price": 1800000000.0,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Officetel vừa ở vừa đăng ký kinh doanh",
+   "attributes": {
+    "giao_dich": "Bán",
+    "khu_vuc": "Quận 7",
+    "dien_tich": 40,
+    "so_phong_ngu": 1,
+    "so_wc": 1,
+    "huong": "Tây",
+    "phap_ly": "Hợp đồng mua bán",
+    "noi_that": "Cơ bản",
+    "tien_ich": [
+     "Kinh doanh được"
+    ]
+   },
+   "aliases": [
+    "officetel hoa sen",
+    "officetel"
+   ],
+   "use_cases": [
+    "mở văn phòng nhỏ, startup"
+   ],
+   "sample_questions": [
+    "Officetel Hoa Sen 40m2 giá bao nhiêu",
+    "officetel hoa sen còn không anh",
+    "xem nhà officetel hoa sen được không",
+    "tôi cần mở văn phòng nhỏ, startup"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "NP-GV-4T",
+   "name": "Nhà phố Gò Vấp 4x15m 4 tầng hẻm xe hơi",
+   "category": "Nhà phố",
+   "brand": null,
+   "price": 7900000000.0,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Nhà 4 tầng hẻm 6m xe hơi vào nhà",
+   "attributes": {
+    "giao_dich": "Bán",
+    "khu_vuc": "Gò Vấp",
+    "dien_tich": 60,
+    "so_phong_ngu": 4,
+    "so_wc": 4,
+    "so_tang": 4,
+    "huong": "Tây Nam",
+    "phap_ly": "Sổ hồng",
+    "noi_that": "Cơ bản",
+    "tien_ich": [
+     "Hẻm xe hơi"
+    ]
+   },
+   "aliases": [
+    "nhà phố gò vấp 4 tầng",
+    "nha pho go vap 4 tang",
+    "nhà gò vấp 4 tầng"
+   ],
+   "use_cases": [
+    "gia đình đông người cần đậu ô tô"
+   ],
+   "sample_questions": [
+    "Nhà phố Gò Vấp 4x15m 4 tầng hẻm xe hơi giá bao nhiêu",
+    "nhà phố gò vấp 4 tầng còn không anh",
+    "xem nhà nhà phố gò vấp 4 tầng được không",
+    "tôi cần gia đình đông người cần đậu ô tô"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "NP-BT-3T",
+   "name": "Nhà mặt tiền Bình Thạnh 4x12m 3 tầng",
+   "category": "Nhà phố",
+   "brand": null,
+   "price": 9500000000.0,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Nhà mặt tiền đường lớn, tiện buôn bán",
+   "attributes": {
+    "giao_dich": "Bán",
+    "khu_vuc": "Bình Thạnh",
+    "dien_tich": 48,
+    "so_phong_ngu": 3,
+    "so_wc": 3,
+    "so_tang": 3,
+    "huong": "Đông",
+    "phap_ly": "Sổ hồng",
+    "noi_that": "Cơ bản",
+    "tien_ich": [
+     "Mặt tiền",
+     "Kinh doanh được"
+    ]
+   },
+   "aliases": [
+    "nhà mặt tiền bình thạnh",
+    "nha mat tien binh thanh",
+    "mặt tiền bình thạnh"
+   ],
+   "use_cases": [
+    "vừa ở vừa kinh doanh"
+   ],
+   "sample_questions": [
+    "Nhà mặt tiền Bình Thạnh 4x12m 3 tầng giá bao nhiêu",
+    "nhà mặt tiền bình thạnh còn không anh",
+    "xem nhà nhà mặt tiền bình thạnh được không",
+    "tôi cần vừa ở vừa kinh doanh"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "NP-TD-5T",
+   "name": "Nhà phố Thủ Đức 5x20m 5 tầng",
+   "category": "Nhà phố",
+   "brand": null,
+   "price": 12800000000.0,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Nhà 5 tầng có thang máy, phù hợp căn hộ dịch vụ",
+   "attributes": {
+    "giao_dich": "Bán",
+    "khu_vuc": "Thủ Đức",
+    "dien_tich": 100,
+    "so_phong_ngu": 6,
+    "so_wc": 6,
+    "so_tang": 5,
+    "huong": "Nam",
+    "phap_ly": "Sổ hồng",
+    "noi_that": "Đầy đủ",
+    "tien_ich": [
+     "Mặt tiền",
+     "Kinh doanh được"
+    ]
+   },
+   "aliases": [
+    "nhà phố thủ đức 5 tầng",
+    "nha pho thu duc 5 tang",
+    "nhà 5 tầng thủ đức"
+   ],
+   "use_cases": [
+    "đầu tư căn hộ dịch vụ cho thuê"
+   ],
+   "sample_questions": [
+    "Nhà phố Thủ Đức 5x20m 5 tầng giá bao nhiêu",
+    "nhà phố thủ đức 5 tầng còn không anh",
+    "xem nhà nhà phố thủ đức 5 tầng được không",
+    "tôi cần đầu tư căn hộ dịch vụ cho thuê"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "NP-BC-2T",
+   "name": "Nhà phố Bình Chánh 4x16m 2 tầng",
+   "category": "Nhà phố",
+   "brand": null,
+   "price": 3900000000.0,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Nhà 1 trệt 1 lầu giá dưới 4 tỷ",
+   "attributes": {
+    "giao_dich": "Bán",
+    "khu_vuc": "Bình Chánh",
+    "dien_tich": 64,
+    "so_phong_ngu": 3,
+    "so_wc": 2,
+    "so_tang": 2,
+    "huong": "Bắc",
+    "phap_ly": "Sổ hồng",
+    "noi_that": "Cơ bản",
+    "tien_ich": [
+     "Hẻm xe hơi"
+    ]
+   },
+   "aliases": [
+    "nhà phố bình chánh 2 tầng",
+    "nha pho binh chanh 2 tang",
+    "nhà bình chánh"
+   ],
+   "use_cases": [
+    "gia đình trẻ vốn vừa phải muốn ở nhà đất"
+   ],
+   "sample_questions": [
+    "Nhà phố Bình Chánh 4x16m 2 tầng giá bao nhiêu",
+    "nhà phố bình chánh 2 tầng còn không anh",
+    "xem nhà nhà phố bình chánh 2 tầng được không",
+    "tôi cần gia đình trẻ vốn vừa phải muốn ở nhà đất"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "NP-Q7-HEM",
+   "name": "Nhà hẻm Quận 7 3.5x10m 3 tầng",
+   "category": "Nhà phố",
+   "brand": null,
+   "price": 4600000000.0,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Nhà hẻm 3m nhỏ xinh, gần Phú Mỹ Hưng",
+   "attributes": {
+    "giao_dich": "Bán",
+    "khu_vuc": "Quận 7",
+    "dien_tich": 35,
+    "so_phong_ngu": 2,
+    "so_wc": 3,
+    "so_tang": 3,
+    "huong": "Đông Bắc",
+    "phap_ly": "Sổ hồng",
+    "noi_that": "Đầy đủ"
+   },
+   "aliases": [
+    "nhà hẻm quận 7",
+    "nha hem quan 7",
+    "nhà hẻm q7"
+   ],
+   "use_cases": [
+    "vợ chồng trẻ làm việc ở Quận 7"
+   ],
+   "sample_questions": [
+    "Nhà hẻm Quận 7 3.5x10m 3 tầng giá bao nhiêu",
+    "nhà hẻm quận 7 còn không anh",
+    "xem nhà nhà hẻm quận 7 được không",
+    "tôi cần vợ chồng trẻ làm việc ở Quận 7"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "BT-PL-SL",
+   "name": "Biệt thự song lập Phú Lộc Villas 200m2",
+   "category": "Biệt thự",
+   "brand": null,
+   "price": 28000000000.0,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Biệt thự song lập khu compound an ninh",
+   "attributes": {
+    "giao_dich": "Bán",
+    "khu_vuc": "Thủ Đức",
+    "dien_tich": 200,
+    "so_phong_ngu": 4,
+    "so_wc": 5,
+    "so_tang": 3,
+    "huong": "Đông Nam",
+    "phap_ly": "Sổ hồng",
+    "noi_that": "Bàn giao thô",
+    "tien_ich": [
+     "Hồ bơi"
+    ]
+   },
+   "aliases": [
+    "biệt thự song lập phú lộc",
+    "biet thu song lap phu loc",
+    "phú lộc song lập"
+   ],
+   "use_cases": [
+    "gia đình khá giả cần an ninh"
+   ],
+   "sample_questions": [
+    "Biệt thự song lập Phú Lộc Villas 200m2 giá bao nhiêu",
+    "biệt thự song lập phú lộc còn không anh",
+    "xem nhà biệt thự song lập phú lộc được không",
+    "tôi cần gia đình khá giả cần an ninh"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "BT-PL-DL",
+   "name": "Biệt thự đơn lập Phú Lộc Villas 350m2",
+   "category": "Biệt thự",
+   "brand": null,
+   "price": 45000000000.0,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Biệt thự đơn lập sân vườn, hồ bơi riêng",
+   "attributes": {
+    "giao_dich": "Bán",
+    "khu_vuc": "Thủ Đức",
+    "dien_tich": 350,
+    "so_phong_ngu": 5,
+    "so_wc": 6,
+    "so_tang": 3,
+    "huong": "Nam",
+    "phap_ly": "Sổ hồng",
+    "noi_that": "Bàn giao thô",
+    "tien_ich": [
+     "Hồ bơi",
+     "Căn góc"
+    ]
+   },
+   "aliases": [
+    "biệt thự đơn lập phú lộc",
+    "biet thu don lap phu loc",
+    "phú lộc đơn lập"
+   ],
+   "use_cases": [
+    "doanh nhân, gia đình nhiều thế hệ"
+   ],
+   "sample_questions": [
+    "Biệt thự đơn lập Phú Lộc Villas 350m2 giá bao nhiêu",
+    "biệt thự đơn lập phú lộc còn không anh",
+    "xem nhà biệt thự đơn lập phú lộc được không",
+    "tôi cần doanh nhân, gia đình nhiều thế hệ"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "BT-NB-VEN",
+   "name": "Biệt thự ven sông Nhà Bè 300m2",
+   "category": "Biệt thự",
+   "brand": null,
+   "price": 22000000000.0,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Biệt thự nghỉ dưỡng ven sông, có bến thuyền",
+   "attributes": {
+    "giao_dich": "Bán",
+    "khu_vuc": "Nhà Bè",
+    "dien_tich": 300,
+    "so_phong_ngu": 4,
+    "so_wc": 5,
+    "so_tang": 2,
+    "huong": "Tây",
+    "phap_ly": "Sổ hồng",
+    "noi_that": "Đầy đủ",
+    "tien_ich": [
+     "View sông"
+    ]
+   },
+   "aliases": [
+    "biệt thự ven sông nhà bè",
+    "biet thu ven song nha be",
+    "villa nhà bè"
+   ],
+   "use_cases": [
+    "nghỉ dưỡng cuối tuần, yên tĩnh"
+   ],
+   "sample_questions": [
+    "Biệt thự ven sông Nhà Bè 300m2 giá bao nhiêu",
+    "biệt thự ven sông nhà bè còn không anh",
+    "xem nhà biệt thự ven sông nhà bè được không",
+    "tôi cần nghỉ dưỡng cuối tuần, yên tĩnh"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "SH-NL-01",
+   "name": "Shophouse Ngọc Lan Quận 7 100m2 5 tầng",
+   "category": "Shophouse",
+   "brand": null,
+   "price": 18000000000.0,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Shophouse mặt tiền đại lộ, tầng trệt kinh doanh",
+   "attributes": {
+    "giao_dich": "Bán",
+    "khu_vuc": "Quận 7",
+    "dien_tich": 100,
+    "so_phong_ngu": 3,
+    "so_wc": 5,
+    "so_tang": 5,
+    "huong": "Đông",
+    "phap_ly": "Sổ hồng",
+    "noi_that": "Bàn giao thô",
+    "tien_ich": [
+     "Mặt tiền",
+     "Kinh doanh được"
+    ]
+   },
+   "aliases": [
+    "shophouse ngọc lan quận 7",
+    "shophouse ngoc lan quan 7",
+    "ngọc lan shophouse"
+   ],
+   "use_cases": [
+    "mở showroom, nhà hàng"
+   ],
+   "sample_questions": [
+    "Shophouse Ngọc Lan Quận 7 100m2 5 tầng giá bao nhiêu",
+    "shophouse ngọc lan quận 7 còn không anh",
+    "xem nhà shophouse ngọc lan quận 7 được không",
+    "tôi cần mở showroom, nhà hàng"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "SH-TP-02",
+   "name": "Shophouse Thịnh Phát Bình Chánh 90m2 4 tầng",
+   "category": "Shophouse",
+   "brand": null,
+   "price": 9800000000.0,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Shophouse khu đô thị mới giá dưới 10 tỷ",
+   "attributes": {
+    "giao_dich": "Bán",
+    "khu_vuc": "Bình Chánh",
+    "dien_tich": 90,
+    "so_phong_ngu": 3,
+    "so_wc": 4,
+    "so_tang": 4,
+    "huong": "Nam",
+    "phap_ly": "Sổ hồng",
+    "noi_that": "Bàn giao thô",
+    "tien_ich": [
+     "Mặt tiền",
+     "Kinh doanh được"
+    ]
+   },
+   "aliases": [
+    "shophouse thịnh phát",
+    "shophouse thinh phat",
+    "thịnh phát shophouse"
+   ],
+   "use_cases": [
+    "kinh doanh khu dân cư mới"
+   ],
+   "sample_questions": [
+    "Shophouse Thịnh Phát Bình Chánh 90m2 4 tầng giá bao nhiêu",
+    "shophouse thịnh phát còn không anh",
+    "xem nhà shophouse thịnh phát được không",
+    "tôi cần kinh doanh khu dân cư mới"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "DN-TP-100",
+   "name": "Đất nền Thịnh Phát 100m2",
+   "category": "Đất nền",
+   "brand": null,
+   "price": 2800000000.0,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Đất nền sổ đỏ từng nền, đường 12m",
+   "attributes": {
+    "giao_dich": "Bán",
+    "khu_vuc": "Bình Chánh",
+    "dien_tich": 100,
+    "huong": "Đông",
+    "phap_ly": "Sổ hồng"
+   },
+   "aliases": [
+    "đất nền thịnh phát 100 mét",
+    "dat nen thinh phat 100 met",
+    "đất thịnh phát"
+   ],
+   "use_cases": [
+    "mua đất tự xây nhà",
+    "đầu tư dài hạn"
+   ],
+   "sample_questions": [
+    "Đất nền Thịnh Phát 100m2 giá bao nhiêu",
+    "đất nền thịnh phát 100 mét còn không anh",
+    "xem nhà đất nền thịnh phát 100 mét được không",
+    "tôi cần mua đất tự xây nhà"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "DN-TP-120G",
+   "name": "Đất nền góc Thịnh Phát 120m2",
+   "category": "Đất nền",
+   "brand": null,
+   "price": 3900000000.0,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Lô góc 2 mặt tiền, thích hợp kinh doanh",
+   "attributes": {
+    "giao_dich": "Bán",
+    "khu_vuc": "Bình Chánh",
+    "dien_tich": 120,
+    "huong": "Đông Nam",
+    "phap_ly": "Sổ hồng",
+    "tien_ich": [
+     "Căn góc",
+     "Mặt tiền"
+    ]
+   },
+   "aliases": [
+    "đất nền góc thịnh phát",
+    "dat nen goc thinh phat",
+    "lô góc thịnh phát"
+   ],
+   "use_cases": [
+    "xây nhà kết hợp kinh doanh"
+   ],
+   "sample_questions": [
+    "Đất nền góc Thịnh Phát 120m2 giá bao nhiêu",
+    "đất nền góc thịnh phát còn không anh",
+    "xem nhà đất nền góc thịnh phát được không",
+    "tôi cần xây nhà kết hợp kinh doanh"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "DN-NB-80",
+   "name": "Đất nền Nhà Bè 80m2",
+   "category": "Đất nền",
+   "brand": null,
+   "price": 2200000000.0,
+   "price_unit": "VND",
+   "in_stock": true,
+   "short_description": "Đất thổ cư 80m2 hẻm xe hơi",
+   "attributes": {
+    "giao_dich": "Bán",
+    "khu_vuc": "Nhà Bè",
+    "dien_tich": 80,
+    "huong": "Tây Bắc",
+    "phap_ly": "Sổ hồng"
+   },
+   "aliases": [
+    "đất nền nhà bè 80 mét",
+    "dat nen nha be 80 met",
+    "đất nhà bè"
+   ],
+   "use_cases": [
+    "vốn ít muốn có đất"
+   ],
+   "sample_questions": [
+    "Đất nền Nhà Bè 80m2 giá bao nhiêu",
+    "đất nền nhà bè 80 mét còn không anh",
+    "xem nhà đất nền nhà bè 80 mét được không",
+    "tôi cần vốn ít muốn có đất"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "TH-HS-2PN",
+   "name": "Cho thuê căn hộ 2PN Hoa Sen Residence full nội thất",
+   "category": "Căn hộ",
+   "brand": null,
+   "price": 15000000.0,
+   "price_unit": "VND/tháng",
+   "in_stock": true,
+   "short_description": "Cho thuê dài hạn, xách vali vào ở",
+   "attributes": {
+    "giao_dich": "Cho thuê",
+    "khu_vuc": "Quận 7",
+    "dien_tich": 72,
+    "so_phong_ngu": 2,
+    "so_wc": 2,
+    "noi_that": "Đầy đủ",
+    "tien_ich": [
+     "Hồ bơi"
+    ]
+   },
+   "aliases": [
+    "thuê căn hộ 2 phòng ngủ hoa sen",
+    "thue can ho 2 phong ngu hoa sen",
+    "thuê hoa sen 2pn"
+   ],
+   "use_cases": [
+    "chuyên gia nước ngoài, gia đình nhỏ thuê dài hạn"
+   ],
+   "sample_questions": [
+    "Cho thuê căn hộ 2PN Hoa Sen Residence full nội thất giá bao nhiêu",
+    "thuê căn hộ 2 phòng ngủ hoa sen còn không anh",
+    "xem nhà thuê căn hộ 2 phòng ngủ hoa sen được không",
+    "tôi cần chuyên gia nước ngoài, gia đình nhỏ thuê dài hạn"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "TH-SX-1PN",
+   "name": "Cho thuê căn hộ 1PN Sông Xanh Tower",
+   "category": "Căn hộ",
+   "brand": null,
+   "price": 12000000.0,
+   "price_unit": "VND/tháng",
+   "in_stock": true,
+   "short_description": "Căn 1PN view sông cho thuê",
+   "attributes": {
+    "giao_dich": "Cho thuê",
+    "khu_vuc": "Bình Thạnh",
+    "dien_tich": 50,
+    "so_phong_ngu": 1,
+    "so_wc": 1,
+    "noi_that": "Đầy đủ",
+    "tien_ich": [
+     "View sông"
+    ]
+   },
+   "aliases": [
+    "thuê căn hộ 1 phòng ngủ sông xanh",
+    "thue can ho 1 phong ngu song xanh",
+    "thuê sông xanh 1pn"
+   ],
+   "use_cases": [
+    "người đi làm trung tâm"
+   ],
+   "sample_questions": [
+    "Cho thuê căn hộ 1PN Sông Xanh Tower giá bao nhiêu",
+    "thuê căn hộ 1 phòng ngủ sông xanh còn không anh",
+    "xem nhà thuê căn hộ 1 phòng ngủ sông xanh được không",
+    "tôi cần người đi làm trung tâm"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "TH-BM-ST",
+   "name": "Cho thuê studio Bình Minh Garden",
+   "category": "Căn hộ",
+   "brand": null,
+   "price": 6500000.0,
+   "price_unit": "VND/tháng",
+   "in_stock": true,
+   "short_description": "Studio cho thuê giá rẻ gần làng đại học",
+   "attributes": {
+    "giao_dich": "Cho thuê",
+    "khu_vuc": "Thủ Đức",
+    "dien_tich": 35,
+    "so_phong_ngu": 1,
+    "so_wc": 1,
+    "noi_that": "Cơ bản"
+   },
+   "aliases": [
+    "thuê studio bình minh",
+    "thue studio binh minh",
+    "thuê studio"
+   ],
+   "use_cases": [
+    "sinh viên, người mới đi làm"
+   ],
+   "sample_questions": [
+    "Cho thuê studio Bình Minh Garden giá bao nhiêu",
+    "thuê studio bình minh còn không anh",
+    "xem nhà thuê studio bình minh được không",
+    "tôi cần sinh viên, người mới đi làm"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "TH-NP-BT",
+   "name": "Cho thuê nhà nguyên căn Bình Thạnh 3 tầng",
+   "category": "Nhà phố",
+   "brand": null,
+   "price": 25000000.0,
+   "price_unit": "VND/tháng",
+   "in_stock": true,
+   "short_description": "Nhà nguyên căn hẻm xe hơi, làm văn phòng hoặc ở",
+   "attributes": {
+    "giao_dich": "Cho thuê",
+    "khu_vuc": "Bình Thạnh",
+    "dien_tich": 60,
+    "so_phong_ngu": 4,
+    "so_wc": 3,
+    "so_tang": 3,
+    "noi_that": "Cơ bản",
+    "tien_ich": [
+     "Hẻm xe hơi"
+    ]
+   },
+   "aliases": [
+    "thuê nhà nguyên căn bình thạnh",
+    "thue nha nguyen can binh thanh",
+    "thuê nguyên căn"
+   ],
+   "use_cases": [
+    "làm văn phòng công ty nhỏ",
+    "gia đình đông người thuê"
+   ],
+   "sample_questions": [
+    "Cho thuê nhà nguyên căn Bình Thạnh 3 tầng giá bao nhiêu",
+    "thuê nhà nguyên căn bình thạnh còn không anh",
+    "xem nhà thuê nhà nguyên căn bình thạnh được không",
+    "tôi cần làm văn phòng công ty nhỏ"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "TH-MB-Q7",
+   "name": "Cho thuê mặt bằng kinh doanh Quận 7 80m2",
+   "category": "Shophouse",
+   "brand": null,
+   "price": 40000000.0,
+   "price_unit": "VND/tháng",
+   "in_stock": true,
+   "short_description": "Mặt bằng tầng trệt mặt tiền, phù hợp cafe, showroom",
+   "attributes": {
+    "giao_dich": "Cho thuê",
+    "khu_vuc": "Quận 7",
+    "dien_tich": 80,
+    "noi_that": "Bàn giao thô",
+    "tien_ich": [
+     "Mặt tiền",
+     "Kinh doanh được"
+    ]
+   },
+   "aliases": [
+    "thuê mặt bằng quận 7",
+    "thue mat bang quan 7",
+    "mặt bằng q7"
+   ],
+   "use_cases": [
+    "mở quán cà phê, cửa hàng"
+   ],
+   "sample_questions": [
+    "Cho thuê mặt bằng kinh doanh Quận 7 80m2 giá bao nhiêu",
+    "thuê mặt bằng quận 7 còn không anh",
+    "xem nhà thuê mặt bằng quận 7 được không",
+    "tôi cần mở quán cà phê, cửa hàng"
+   ],
+   "enrichment_status": "reviewed"
+  }
+ ]
+}

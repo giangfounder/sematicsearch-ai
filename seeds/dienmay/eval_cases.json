@@ -1,0 +1,1680 @@
+[
+ {
+  "query": "ờ tủ lạnh samsung 236 lít còn hàng không",
+  "expected_skus": [
+   "TL-SS-236"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "alo tủ lạnh xam sung hai trăm ba sàu lít ạ",
+  "expected_skus": [
+   "TL-SS-236"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "shop có bán samsung 305 không",
+  "expected_skus": [
+   "TL-SS-305"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "ừm tủ lạnh sam xung ba trăm linh năm lít ạ",
+  "expected_skus": [
+   "TL-SS-305"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "alo tủ lạnh samsung side by side 655 lít còn hàng không",
+  "expected_skus": [
+   "TL-SS-655"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "samsung side by side 655 gia sao",
+  "expected_skus": [
+   "TL-SS-655"
+  ],
+  "expected_status": "matched",
+  "category": "no_accent",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "bên mình có samsung multi door 488 lít không",
+  "expected_skus": [
+   "TL-SS-488"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "dạ cho em hỏi tũ lạnh sam sung bốn cánh bốn trăm tám tám lít ạ",
+  "expected_skus": [
+   "TL-SS-488"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "à tủ lạnh lg 335 lít còn hàng không",
+  "expected_skus": [
+   "TL-LG-335"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "chị ơi tủ lạnh eo gi ba trăm ba lăm lít ạ",
+  "expected_skus": [
+   "TL-LG-335"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "shop có bán lg 2 cánh dọc có lấy nước ngoài không",
+  "expected_skus": [
+   "TL-LG-635"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "lg side by side 635 gia sao",
+  "expected_skus": [
+   "TL-LG-635"
+  ],
+  "expected_status": "matched",
+  "category": "no_accent",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "chị ơi tủ lạnh panasonic ngăn đá dưới 322 lít còn hàng không",
+  "expected_skus": [
+   "TL-PA-322"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "dạ tủ lạnh pa na sô níc ba trăm hai hai lít ngăn đá dưới ạ",
+  "expected_skus": [
+   "TL-PA-322"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "bên mình có pana 255 lít không",
+  "expected_skus": [
+   "TL-PA-255"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "chị ơi tủ lạnh pa na sô níc hai trăm năm lăm lít ạ",
+  "expected_skus": [
+   "TL-PA-255"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "ờ tủ lạnh toshiba 180 lít còn hàng không",
+  "expected_skus": [
+   "TL-TO-180"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "tu lanh toshiba 180 gia sao",
+  "expected_skus": [
+   "TL-TO-180"
+  ],
+  "expected_status": "matched",
+  "category": "no_accent",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "shop có bán tủ mini aqua không",
+  "expected_skus": [
+   "TL-AQ-90"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "chị ơi tủ lảnh mi ni a qua chín mươi lít ạ",
+  "expected_skus": [
+   "TL-AQ-90"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "ờ tủ lạnh hitachi 569 lít còn hàng không",
+  "expected_skus": [
+   "TL-HI-569"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "dạ cho em hỏi tũ lảnh hi ta chi năm trăm sáu chín lít ạ",
+  "expected_skus": [
+   "TL-HI-569"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "shop có bán casper 218 lít không",
+  "expected_skus": [
+   "TL-CA-218"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "tu lanh casper 218 gia sao",
+  "expected_skus": [
+   "TL-CA-218"
+  ],
+  "expected_status": "matched",
+  "category": "no_accent",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "dạ vâng máy giặt samsung 9 ký cửa trước còn hàng không",
+  "expected_skus": [
+   "MG-SS-9"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "alo máy giẳt sam sung chín ký lổng ngang ạ",
+  "expected_skus": [
+   "MG-SS-9"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "bên mình có samsung giặt sấy 10kg không",
+  "expected_skus": [
+   "MG-SS-10S"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "alo mày giặt sầy sam sung mười ký ạ",
+  "expected_skus": [
+   "MG-SS-10S"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "em hỏi chút máy giặt lg 9 ký còn hàng không",
+  "expected_skus": [
+   "MG-LG-9"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "may giat lg 9kg gia sao",
+  "expected_skus": [
+   "MG-LG-9"
+  ],
+  "expected_status": "matched",
+  "category": "no_accent",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "shop có bán lg giặt sấy 11kg không",
+  "expected_skus": [
+   "MG-LG-11S"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "alo máy giặt sấy lờ gờ mưởi một ký ạ",
+  "expected_skus": [
+   "MG-LG-11S"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "dạ vâng máy giặt toshiba 10 ký lồng đứng còn hàng không",
+  "expected_skus": [
+   "MG-TO-10"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "dạ máy giẳt tô si ba mười ký cửa trên ạ",
+  "expected_skus": [
+   "MG-TO-10"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "shop có bán aqua 8kg lồng đứng không",
+  "expected_skus": [
+   "MG-AQ-8"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "may giat aqua 8kg gia sao",
+  "expected_skus": [
+   "MG-AQ-8"
+  ],
+  "expected_status": "matched",
+  "category": "no_accent",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "em hỏi chút máy giặt panasonic 9 ký còn hàng không",
+  "expected_skus": [
+   "MG-PA-9"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "dạ máy giặt pa na sô níc chín ký ạ",
+  "expected_skus": [
+   "MG-PA-9"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "cho mình hỏi electrolux 10kg không",
+  "expected_skus": [
+   "MG-EL-10"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "chị ơi máy giặt e léc trô lúc mười ký ạ",
+  "expected_skus": [
+   "MG-EL-10"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "à máy giặt sharp 12 ký còn hàng không",
+  "expected_skus": [
+   "MG-SH-12"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "may giat sharp 12kg gia sao",
+  "expected_skus": [
+   "MG-SH-12"
+  ],
+  "expected_status": "matched",
+  "category": "no_accent",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "bên mình có casper 7.5kg không",
+  "expected_skus": [
+   "MG-CA-75"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "chị ơi máy giặt cát pơ bảy ký rưỡi ạ",
+  "expected_skus": [
+   "MG-CA-75"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "dạ vâng tivi samsung qled 55 inch còn hàng không",
+  "expected_skus": [
+   "TV-SS-55Q"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "em hỏi chút ti vi sam sung kiu led năm lăm in ạ",
+  "expected_skus": [
+   "TV-SS-55Q"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "cho mình hỏi samsung 43 inch không",
+  "expected_skus": [
+   "TV-SS-43"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "tivi samsung 43 gia sao",
+  "expected_skus": [
+   "TV-SS-43"
+  ],
+  "expected_status": "matched",
+  "category": "no_accent",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "dạ tivi samsung 65 inch còn hàng không",
+  "expected_skus": [
+   "TV-SS-65"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "dạ vâng ti vi sam sung sáu lăm in ạ",
+  "expected_skus": [
+   "TV-SS-65"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "bên mình có lg oled 55 không",
+  "expected_skus": [
+   "TV-LG-55O"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "dạ cho em hỏi ti vi lờ gở ô lẻt năm lăm in ạ",
+  "expected_skus": [
+   "TV-LG-55O"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "dạ cho em hỏi tivi lg 50 inch còn hàng không",
+  "expected_skus": [
+   "TV-LG-50"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "tivi lg 50 gia sao",
+  "expected_skus": [
+   "TV-LG-50"
+  ],
+  "expected_status": "matched",
+  "category": "no_accent",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "bên mình có sony 55 inch không",
+  "expected_skus": [
+   "TV-SO-55"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "em hỏi chút ti vi sô ni năm lăm in ạ",
+  "expected_skus": [
+   "TV-SO-55"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "ờ tivi sony mini led 65 inch còn hàng không",
+  "expected_skus": [
+   "TV-SO-65M"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "alo ti vi xô ni mi ni led sáu lăm in ạ",
+  "expected_skus": [
+   "TV-SO-65M"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "cho mình hỏi tcl 43 inch full hd không",
+  "expected_skus": [
+   "TV-TC-43F"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "tivi tcl 43 gia sao",
+  "expected_skus": [
+   "TV-TC-43F"
+  ],
+  "expected_status": "matched",
+  "category": "no_accent",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "à tivi xiaomi 32 inch còn hàng không",
+  "expected_skus": [
+   "TV-XI-32"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "ừm ti vi xao mi ba hai in ạ",
+  "expected_skus": [
+   "TV-XI-32"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "cho mình hỏi casper 75 inch không",
+  "expected_skus": [
+   "TV-CA-75"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "dạ vâng ti vi cát pơ bảy lăm in ạ",
+  "expected_skus": [
+   "TV-CA-75"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "ờ điều hòa daikin 1 ngựa còn hàng không",
+  "expected_skus": [
+   "DH-DA-1"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "dieu hoa daikin 1hp gia sao",
+  "expected_skus": [
+   "DH-DA-1"
+  ],
+  "expected_status": "matched",
+  "category": "no_accent",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "cho mình hỏi daikin nóng lạnh 12000 btu không",
+  "expected_skus": [
+   "DH-DA-15-2C"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "ờ điều hoà đai kin hai chiều một ngựa rưỡi ạ",
+  "expected_skus": [
+   "DH-DA-15-2C"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "dạ vâng điều hòa panasonic 1 ngựa còn hàng không",
+  "expected_skus": [
+   "DH-PA-1"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "à điều hoá pa na sô níc mổt ngửa ạ",
+  "expected_skus": [
+   "DH-PA-1"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "shop có bán pana 18000 btu không",
+  "expected_skus": [
+   "DH-PA-2"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "dieu hoa panasonic 2hp gia sao",
+  "expected_skus": [
+   "DH-PA-2"
+  ],
+  "expected_status": "matched",
+  "category": "no_accent",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "em hỏi chút điều hòa lg 1.5 ngựa còn hàng không",
+  "expected_skus": [
+   "DH-LG-15"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "ờ điều hoá lờ gở một ngựa rưỡi ạ",
+  "expected_skus": [
+   "DH-LG-15"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "shop có bán máy lạnh casper rẻ không",
+  "expected_skus": [
+   "DH-CA-1"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "alo điều hoà cát pơ một ngửa ạ",
+  "expected_skus": [
+   "DH-CA-1"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "ờ điều hòa toshiba 1 ngựa còn hàng không",
+  "expected_skus": [
+   "DH-TO-1"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "dieu hoa toshiba 1hp gia sao",
+  "expected_skus": [
+   "DH-TO-1"
+  ],
+  "expected_status": "matched",
+  "category": "no_accent",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "cho mình hỏi samsung windfree 18000 không",
+  "expected_skus": [
+   "DH-SS-2"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "alo điều hoà sam sung hai ngựa ạ",
+  "expected_skus": [
+   "DH-SS-2"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "dạ iphone 15 pro max 256gb còn hàng không",
+  "expected_skus": [
+   "DT-IP15PM"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "à ai phôn mười lăm pờ rô mác ạ",
+  "expected_skus": [
+   "DT-IP15PM"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "shop có bán ip 15 thường không",
+  "expected_skus": [
+   "DT-IP15"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "iphone 15 128 gia sao",
+  "expected_skus": [
+   "DT-IP15"
+  ],
+  "expected_status": "matched",
+  "category": "no_accent",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "dạ vâng iphone 16 pro max còn hàng không",
+  "expected_skus": [
+   "DT-IP16PM"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "dạ ai phôn mưởi sáu pro màc ạ",
+  "expected_skus": [
+   "DT-IP16PM"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "cho mình hỏi galaxy a55 không",
+  "expected_skus": [
+   "DT-SS-A55"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "alo sam sung ga la xi a năm lăm ạ",
+  "expected_skus": [
+   "DT-SS-A55"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "à samsung s24 ultra còn hàng không",
+  "expected_skus": [
+   "DT-SS-S24U"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "s24 ultra gia sao",
+  "expected_skus": [
+   "DT-SS-S24U"
+  ],
+  "expected_status": "matched",
+  "category": "no_accent",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "bên mình có redmi note 13 8gb không",
+  "expected_skus": [
+   "DT-XI-RN13"
+  ],
+  "expected_status": "matched",
+  "category": "alias",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "ừm xao mi rét mi nốt mưởi ba ạ",
+  "expected_skus": [
+   "DT-XI-RN13"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "à oppo reno12 f còn hàng không",
+  "expected_skus": [
+   "DT-OP-R12F"
+  ],
+  "expected_status": "matched",
+  "category": "name",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "alo óp pô rê nô mười hai ép ạ",
+  "expected_skus": [
+   "DT-OP-R12F"
+  ],
+  "expected_status": "matched",
+  "category": "asr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "tủ lạnh dưới 5 triệu",
+  "expected_skus": [
+   "TL-AQ-90",
+   "TL-CA-218"
+  ],
+  "expected_status": "ambiguous",
+  "category": "price",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "cho em xem tủ lạnh tầm 9 triệu",
+  "expected_skus": [
+   "TL-SS-305",
+   "TL-LG-335",
+   "TL-PA-255"
+  ],
+  "expected_status": "ambiguous",
+  "category": "price",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "máy giặt rẻ nhất bên mình",
+  "expected_skus": [
+   "MG-CA-75"
+  ],
+  "expected_status": "matched",
+  "category": "price",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "máy giặt từ 8 đến 10 triệu",
+  "expected_skus": [
+   "MG-LG-9",
+   "MG-PA-9",
+   "MG-EL-10"
+  ],
+  "expected_status": "ambiguous",
+  "category": "price",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "tivi khoảng mười lăm củ",
+  "expected_skus": [
+   "TV-SS-55Q",
+   "TV-SS-65",
+   "TV-SO-55",
+   "TV-CA-75"
+  ],
+  "expected_status": "ambiguous",
+  "category": "price",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "ti vi dưới bốn triệu",
+  "expected_skus": [
+   "TV-XI-32"
+  ],
+  "expected_status": "matched",
+  "category": "price",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "điều hòa dưới 6 triệu",
+  "expected_skus": [
+   "DH-CA-1"
+  ],
+  "expected_status": "matched",
+  "category": "price",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "điện thoại tầm năm triệu",
+  "expected_skus": [
+   "DT-XI-RN13"
+  ],
+  "expected_status": "matched",
+  "category": "price",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "điện thoại đắt nhất shop",
+  "expected_skus": [
+   "DT-IP16PM"
+  ],
+  "expected_status": "matched",
+  "category": "price",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "may giat duoi 4 trieu",
+  "expected_skus": [
+   "MG-AQ-8",
+   "MG-CA-75"
+  ],
+  "expected_status": "ambiguous",
+  "category": "price",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "tủ lạnh trên 15 triệu còn hàng",
+  "expected_skus": [
+   "TL-SS-655",
+   "TL-SS-488",
+   "TL-LG-635"
+  ],
+  "expected_status": "ambiguous",
+  "category": "price",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "tivi 65 inch",
+  "expected_skus": [
+   "TV-SS-65",
+   "TV-SO-65M"
+  ],
+  "expected_status": "ambiguous",
+  "category": "numeric_attr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "tivi bảy lăm in",
+  "expected_skus": [
+   "TV-CA-75"
+  ],
+  "expected_status": "matched",
+  "category": "numeric_attr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "máy giặt 12 ký",
+  "expected_skus": [
+   "MG-SH-12"
+  ],
+  "expected_status": "matched",
+  "category": "numeric_attr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "máy giặt có sấy khô",
+  "expected_skus": [
+   "MG-SS-10S",
+   "MG-LG-11S"
+  ],
+  "expected_status": "ambiguous",
+  "category": "numeric_attr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "điều hòa hai ngựa",
+  "expected_skus": [
+   "DH-PA-2",
+   "DH-SS-2"
+  ],
+  "expected_status": "ambiguous",
+  "category": "numeric_attr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "điều hòa hai chiều",
+  "expected_skus": [
+   "DH-DA-15-2C"
+  ],
+  "expected_status": "matched",
+  "category": "numeric_attr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "tủ lạnh side by side",
+  "expected_skus": [
+   "TL-SS-655",
+   "TL-LG-635"
+  ],
+  "expected_status": "ambiguous",
+  "category": "numeric_attr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "tủ lạnh trên 500 lít",
+  "expected_skus": [
+   "TL-SS-655",
+   "TL-LG-635",
+   "TL-HI-569"
+  ],
+  "expected_status": "ambiguous",
+  "category": "numeric_attr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "tủ lạnh ngăn đá dưới",
+  "expected_skus": [
+   "TL-PA-322"
+  ],
+  "expected_status": "matched",
+  "category": "numeric_attr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "tivi oled",
+  "expected_skus": [
+   "TV-LG-55O"
+  ],
+  "expected_status": "matched",
+  "category": "numeric_attr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "máy giặt lồng đứng 10 ký",
+  "expected_skus": [
+   "MG-TO-10"
+  ],
+  "expected_status": "matched",
+  "category": "numeric_attr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "tivi full hd 43 inch",
+  "expected_skus": [
+   "TV-TC-43F"
+  ],
+  "expected_status": "matched",
+  "category": "numeric_attr",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "dien thoai 256gb duoi 10 trieu",
+  "expected_skus": [
+   "DT-OP-R12F"
+  ],
+  "expected_status": "matched",
+  "category": "numeric_attr",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "em ở trọ một mình muốn mua cái tủ lạnh nhỏ thôi",
+  "expected_skus": [
+   "TL-AQ-90"
+  ],
+  "expected_status": "matched",
+  "category": "use_case",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "nhà chung cư không có chỗ phơi đồ thì nên mua máy nào",
+  "expected_skus": [
+   "MG-SS-10S",
+   "MG-LG-11S"
+  ],
+  "expected_status": "ambiguous",
+  "category": "use_case",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "phòng ngủ khoảng 12 mét vuông lắp điều hòa loại nào rẻ mà tiết kiệm điện",
+  "expected_skus": [
+   "DH-TO-1",
+   "DH-DA-1",
+   "DH-PA-1"
+  ],
+  "expected_status": "ambiguous",
+  "category": "use_case",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "nhà ngoài bắc mùa đông lạnh cần máy lạnh có sưởi",
+  "expected_skus": [
+   "DH-DA-15-2C"
+  ],
+  "expected_status": "matched",
+  "category": "use_case",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "tivi để chơi ps5 màu đen sâu",
+  "expected_skus": [
+   "TV-LG-55O"
+  ],
+  "expected_status": "matched",
+  "category": "use_case",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "máy giặt giặt được chăn mền to",
+  "expected_skus": [
+   "MG-SH-12"
+  ],
+  "expected_status": "matched",
+  "category": "use_case",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "tủ lạnh lấy nước lạnh bên ngoài không cần mở cửa",
+  "expected_skus": [
+   "TL-LG-635"
+  ],
+  "expected_status": "matched",
+  "category": "use_case",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "điện thoại có bút để ghi chú",
+  "expected_skus": [
+   "DT-SS-S24U"
+  ],
+  "expected_status": "matched",
+  "category": "use_case",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "điện thoại cho bố mẹ dùng giá rẻ pin trâu",
+  "expected_skus": [
+   "DT-XI-RN13"
+  ],
+  "expected_status": "matched",
+  "category": "use_case",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "máy lạnh không thổi gió buốt vào người",
+  "expected_skus": [
+   "DH-SS-2"
+  ],
+  "expected_status": "matched",
+  "category": "use_case",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "điều hòa có lọc bụi mịn cho em bé",
+  "expected_skus": [
+   "DH-PA-1"
+  ],
+  "expected_status": "matched",
+  "category": "use_case",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "tủ lạnh cho nhà 6 7 người ăn",
+  "expected_skus": [
+   "TL-SS-655",
+   "TL-LG-635",
+   "TL-SS-488",
+   "TL-HI-569"
+  ],
+  "expected_status": "ambiguous",
+  "category": "use_case",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "máy giặt cho người ở một mình giá rẻ",
+  "expected_skus": [
+   "MG-CA-75"
+  ],
+  "expected_status": "matched",
+  "category": "use_case",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "điện thoại selfie đẹp cho con gái",
+  "expected_skus": [
+   "DT-OP-R12F"
+  ],
+  "expected_status": "matched",
+  "category": "use_case",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "tủ lạnh samsung",
+  "expected_skus": [
+   "TL-SS-236",
+   "TL-SS-305",
+   "TL-SS-655",
+   "TL-SS-488"
+  ],
+  "expected_status": "ambiguous",
+  "category": "ambiguous",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "máy giặt lg",
+  "expected_skus": [
+   "MG-LG-9",
+   "MG-LG-11S"
+  ],
+  "expected_status": "ambiguous",
+  "category": "ambiguous",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "tivi sony",
+  "expected_skus": [
+   "TV-SO-55",
+   "TV-SO-65M"
+  ],
+  "expected_status": "ambiguous",
+  "category": "ambiguous",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "điều hòa daikin",
+  "expected_skus": [
+   "DH-DA-1",
+   "DH-DA-15-2C"
+  ],
+  "expected_status": "ambiguous",
+  "category": "ambiguous",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "iphone pro max",
+  "expected_skus": [
+   "DT-IP15PM",
+   "DT-IP16PM"
+  ],
+  "expected_status": "ambiguous",
+  "category": "ambiguous",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "tivi 55 inch",
+  "expected_skus": [
+   "TV-SS-55Q",
+   "TV-LG-55O",
+   "TV-SO-55"
+  ],
+  "expected_status": "ambiguous",
+  "category": "ambiguous",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "điều hòa 1 ngựa inverter",
+  "expected_skus": [
+   "DH-DA-1",
+   "DH-PA-1",
+   "DH-TO-1"
+  ],
+  "expected_status": "ambiguous",
+  "category": "ambiguous",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "so sánh giúp em iphone 15 pro max với s24 ultra",
+  "expected_skus": [
+   "DT-IP15PM",
+   "DT-SS-S24U"
+  ],
+  "expected_status": "ambiguous",
+  "category": "compare",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "tủ lạnh lg 335 với panasonic 322 cái nào tốt hơn",
+  "expected_skus": [
+   "TL-LG-335",
+   "TL-PA-322"
+  ],
+  "expected_status": "ambiguous",
+  "category": "compare",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "loại 2 chiều thì sao",
+  "expected_skus": [
+   "DH-DA-15-2C"
+  ],
+  "expected_status": "matched",
+  "category": "multi_turn",
+  "context": {
+   "previous_text": "điều hòa daikin 1 ngựa",
+   "previous_skus": [
+    "DH-DA-1"
+   ]
+  },
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "có bản sấy không em",
+  "expected_skus": [
+   "MG-LG-11S"
+  ],
+  "expected_status": "matched",
+  "category": "multi_turn",
+  "context": {
+   "previous_text": "máy giặt lg 9 ký",
+   "previous_skus": [
+    "MG-LG-9"
+   ]
+  },
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "cái đó giá bao nhiêu",
+  "expected_skus": [
+   "TV-LG-55O"
+  ],
+  "expected_status": "matched",
+  "category": "multi_turn",
+  "context": {
+   "previous_text": "tivi lg oled 55 inch",
+   "previous_skus": [
+    "TV-LG-55O"
+   ]
+  },
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "còn loại 65 inch không",
+  "expected_skus": [
+   "TV-SS-65"
+  ],
+  "expected_status": "matched",
+  "category": "multi_turn",
+  "context": {
+   "previous_text": "tivi samsung 43 inch",
+   "previous_skus": [
+    "TV-SS-43"
+   ]
+  },
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "bản pro max đời mới hơn có không",
+  "expected_skus": [
+   "DT-IP16PM"
+  ],
+  "expected_status": "matched",
+  "category": "multi_turn",
+  "context": {
+   "previous_text": "iphone 15 pro max",
+   "previous_skus": [
+    "DT-IP15PM"
+   ]
+  },
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "loại rẻ hơn chút",
+  "expected_skus": [
+   "TL-SS-236"
+  ],
+  "expected_status": "matched",
+  "category": "multi_turn",
+  "context": {
+   "previous_text": "tủ lạnh samsung 305 lít",
+   "previous_skus": [
+    "TL-SS-305"
+   ]
+  },
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "thế còn 4 cánh",
+  "expected_skus": [
+   "TL-SS-488"
+  ],
+  "expected_status": "matched",
+  "category": "multi_turn",
+  "context": {
+   "previous_text": "tủ lạnh samsung side by side",
+   "previous_skus": [
+    "TL-SS-655"
+   ]
+  },
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "bảo hành bao lâu",
+  "expected_skus": [
+   "MG-TO-10"
+  ],
+  "expected_status": "matched",
+  "category": "multi_turn",
+  "context": {
+   "previous_text": "máy giặt toshiba 10 ký lồng đứng",
+   "previous_skus": [
+    "MG-TO-10"
+   ]
+  },
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "hôm nay trời có mưa không em",
+  "expected_skus": [],
+  "expected_status": "out_of_scope",
+  "category": "out_of_scope",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "cho chị đặt bàn ăn tối nay",
+  "expected_skus": [],
+  "expected_status": "out_of_scope",
+  "category": "out_of_scope",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "giá vàng hôm nay bao nhiêu",
+  "expected_skus": [],
+  "expected_status": "out_of_scope",
+  "category": "out_of_scope",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "em ơi kể chuyện cười đi",
+  "expected_skus": [],
+  "expected_status": "out_of_scope",
+  "category": "out_of_scope",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "số tổng đài khiếu nại điện lực là gì",
+  "expected_skus": [],
+  "expected_status": "out_of_scope",
+  "category": "out_of_scope",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "cảm ơn em nhé chào em",
+  "expected_skus": [],
+  "expected_status": "out_of_scope",
+  "category": "out_of_scope",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "tuyển dụng nhân viên bán hàng không",
+  "expected_skus": [],
+  "expected_status": "out_of_scope",
+  "category": "out_of_scope",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "máy rửa bát bosch",
+  "expected_skus": [],
+  "expected_status": "no_match",
+  "category": "no_match",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "nồi chiên không dầu philips",
+  "expected_skus": [],
+  "expected_status": "no_match",
+  "category": "no_match",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "laptop dell xps 13",
+  "expected_skus": [],
+  "expected_status": "no_match",
+  "category": "no_match",
+  "split": "test",
+  "source": "manual"
+ },
+ {
+  "query": "xe máy honda vision",
+  "expected_skus": [],
+  "expected_status": "no_match",
+  "category": "no_match",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "tủ lạnh electrolux 400 lít",
+  "expected_skus": [],
+  "expected_status": "no_match",
+  "category": "no_match",
+  "split": "dev",
+  "source": "manual"
+ },
+ {
+  "query": "máy hút bụi dyson",
+  "expected_skus": [],
+  "expected_status": "no_match",
+  "category": "no_match",
+  "split": "test",
+  "source": "manual"
+ }
+]

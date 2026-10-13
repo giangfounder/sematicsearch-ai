@@ -1,0 +1,1417 @@
+{
+ "demo": {
+  "slug": "vienthong",
+  "name": "VNet Viễn Thông Demo",
+  "industry": "viễn thông di động, internet, truyền hình",
+  "settings": {
+   "fillers": [
+    "tổng đài ơi",
+    "cho mình đăng ký",
+    "em muốn đăng ký"
+   ]
+  }
+ },
+ "definitions": [
+  {
+   "key": "data_ngay",
+   "label": "Data mỗi ngày",
+   "type": "number",
+   "unit": "GB/ngày",
+   "unit_aliases": [
+    "gb một ngày",
+    "gb mỗi ngày",
+    "gb 1 ngày",
+    "gb ngày",
+    "gb/ngày",
+    "gi ga một ngày",
+    "gigabyte một ngày"
+   ],
+   "filterable": true,
+   "weight": 0.8
+  },
+  {
+   "key": "data_thang",
+   "label": "Data cả tháng",
+   "type": "number",
+   "unit": "GB/tháng",
+   "unit_aliases": [
+    "gb một tháng",
+    "gb cả tháng",
+    "gb tháng",
+    "gb/tháng"
+   ],
+   "filterable": true,
+   "weight": 0.6
+  },
+  {
+   "key": "chu_ky",
+   "label": "Chu kỳ",
+   "type": "enum",
+   "filterable": true,
+   "weight": 0.6,
+   "enum_values": [
+    {
+     "value": "1 ngày",
+     "aliases": [
+      "theo ngày",
+      "gói ngày",
+      "một ngày"
+     ]
+    },
+    {
+     "value": "7 ngày",
+     "aliases": [
+      "theo tuần",
+      "gói tuần",
+      "một tuần",
+      "bảy ngày"
+     ]
+    },
+    {
+     "value": "30 ngày",
+     "aliases": [
+      "theo tháng",
+      "gói tháng",
+      "một tháng"
+     ]
+    },
+    {
+     "value": "6 tháng",
+     "aliases": [
+      "nửa năm",
+      "sáu tháng",
+      "gói dài kỳ 6 tháng"
+     ]
+    },
+    {
+     "value": "12 tháng",
+     "aliases": [
+      "một năm",
+      "cả năm",
+      "mười hai tháng",
+      "gói năm"
+     ]
+    },
+    {
+     "value": "15 ngày",
+     "aliases": [
+      "mười lăm ngày",
+      "nửa tháng"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "mien_phi_noi_mang",
+   "label": "Miễn phí gọi nội mạng",
+   "type": "bool",
+   "label_aliases": [
+    "free nội mạng",
+    "gọi nội mạng miễn phí",
+    "nội mạng thả ga",
+    "gọi nội mạng"
+   ],
+   "filterable": true,
+   "weight": 0.6
+  },
+  {
+   "key": "phut_ngoai_mang",
+   "label": "Phút gọi ngoại mạng",
+   "type": "number",
+   "unit": "phút ngoại mạng",
+   "unit_aliases": [
+    "phút gọi ngoại mạng",
+    "phút liên mạng"
+   ],
+   "filterable": true,
+   "weight": 0.5
+  },
+  {
+   "key": "toc_do",
+   "label": "Tốc độ",
+   "type": "number",
+   "unit": "Mbps",
+   "unit_aliases": [
+    "mb",
+    "mega",
+    "mbps",
+    "mê ga",
+    "mờ bê"
+   ],
+   "filterable": true,
+   "weight": 0.8
+  },
+  {
+   "key": "wifi_mesh",
+   "label": "Wifi Mesh",
+   "type": "bool",
+   "label_aliases": [
+    "mesh",
+    "kích sóng",
+    "phủ sóng nhiều tầng",
+    "wifi mét"
+   ],
+   "filterable": true,
+   "weight": 0.5
+  },
+  {
+   "key": "so_kenh",
+   "label": "Số kênh truyền hình",
+   "type": "number",
+   "unit": "kênh",
+   "filterable": true,
+   "weight": 0.5
+  },
+  {
+   "key": "doi_tuong",
+   "label": "Đối tượng",
+   "type": "enum",
+   "filterable": true,
+   "weight": 0.6,
+   "enum_values": [
+    {
+     "value": "Cá nhân",
+     "aliases": []
+    },
+    {
+     "value": "Gia đình",
+     "aliases": [
+      "cả nhà",
+      "nhóm gia đình"
+     ]
+    },
+    {
+     "value": "Sinh viên",
+     "aliases": [
+      "học sinh",
+      "sinh viên",
+      "sv"
+     ]
+    },
+    {
+     "value": "Doanh nghiệp",
+     "aliases": [
+      "công ty",
+      "văn phòng",
+      "doanh nghiệp"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "ung_dung_mien_phi",
+   "label": "Ứng dụng miễn phí data",
+   "type": "multi_enum",
+   "filterable": true,
+   "weight": 0.6,
+   "enum_values": [
+    {
+     "value": "TikTok",
+     "aliases": [
+      "tik tok",
+      "tóp tóp"
+     ]
+    },
+    {
+     "value": "YouTube",
+     "aliases": [
+      "du túp",
+      "yu túp"
+     ]
+    },
+    {
+     "value": "Facebook",
+     "aliases": [
+      "phây búc",
+      "phở bò",
+      "fb"
+     ]
+    },
+    {
+     "value": "Zalo",
+     "aliases": [
+      "da lô"
+     ]
+    },
+    {
+     "value": "Netflix",
+     "aliases": [
+      "nét phlích",
+      "nét flix"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "quoc_gia",
+   "label": "Quốc gia chuyển vùng",
+   "type": "multi_enum",
+   "filterable": true,
+   "weight": 0.8,
+   "enum_values": [
+    {
+     "value": "Hàn Quốc",
+     "aliases": [
+      "hàn",
+      "korea"
+     ]
+    },
+    {
+     "value": "Nhật Bản",
+     "aliases": [
+      "nhật",
+      "japan"
+     ]
+    },
+    {
+     "value": "Thái Lan",
+     "aliases": [
+      "thái"
+     ]
+    },
+    {
+     "value": "Singapore",
+     "aliases": [
+      "sing",
+      "xinh ga po"
+     ]
+    },
+    {
+     "value": "Trung Quốc",
+     "aliases": [
+      "trung",
+      "tàu"
+     ]
+    },
+    {
+     "value": "Mỹ",
+     "aliases": [
+      "hoa kỳ",
+      "usa"
+     ]
+    },
+    {
+     "value": "Châu Âu",
+     "aliases": [
+      "châu âu",
+      "pháp",
+      "đức",
+      "ý"
+     ]
+    },
+    {
+     "value": "Úc",
+     "aliases": [
+      "australia",
+      "ốt trây li a"
+     ]
+    }
+   ]
+  }
+ ],
+ "products": [
+  {
+   "sku": "D10",
+   "name": "Gói ngày D10",
+   "category": "Gói data",
+   "brand": "VNet",
+   "price": 10000,
+   "price_unit": "VND/ngày",
+   "in_stock": true,
+   "short_description": "2GB tốc độ cao dùng trong 24 giờ",
+   "attributes": {
+    "data_ngay": 2,
+    "chu_ky": "1 ngày",
+    "doi_tuong": "Cá nhân"
+   },
+   "aliases": [
+    "gói d10",
+    "goi d10",
+    "d10",
+    "đê 10",
+    "d mười"
+   ],
+   "use_cases": [
+    "dùng gấp trong ngày",
+    "đi công tác ngắn"
+   ],
+   "sample_questions": [
+    "đăng ký gói d10 như thế nào",
+    "Gói ngày D10 được bao nhiêu data",
+    "gói d10 giá bao nhiêu tiền",
+    "gói nào dùng gấp trong ngày",
+    "hủy gói d10 được không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "D15",
+   "name": "Gói ngày D15",
+   "category": "Gói data",
+   "brand": "VNet",
+   "price": 15000,
+   "price_unit": "VND/ngày",
+   "in_stock": true,
+   "short_description": "3GB tốc độ cao dùng trong 24 giờ",
+   "attributes": {
+    "data_ngay": 3,
+    "chu_ky": "1 ngày",
+    "doi_tuong": "Cá nhân"
+   },
+   "aliases": [
+    "gói d15",
+    "goi d15",
+    "d15",
+    "đê 15"
+   ],
+   "use_cases": [
+    "xem phim một buổi",
+    "cần nhiều data trong ngày"
+   ],
+   "sample_questions": [
+    "đăng ký gói d15 như thế nào",
+    "Gói ngày D15 được bao nhiêu data",
+    "gói d15 giá bao nhiêu tiền",
+    "gói nào xem phim một buổi",
+    "hủy gói d15 được không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "W50",
+   "name": "Gói tuần W50",
+   "category": "Gói data",
+   "brand": "VNet",
+   "price": 50000,
+   "price_unit": "VND/7 ngày",
+   "in_stock": true,
+   "short_description": "2GB/ngày dùng 7 ngày",
+   "attributes": {
+    "data_ngay": 2,
+    "chu_ky": "7 ngày",
+    "doi_tuong": "Cá nhân"
+   },
+   "aliases": [
+    "gói w50",
+    "goi w50",
+    "w50",
+    "vê kép 50",
+    "đúp bờ liu 50",
+    "gói tuần"
+   ],
+   "use_cases": [
+    "đi du lịch trong nước 1 tuần"
+   ],
+   "sample_questions": [
+    "đăng ký gói w50 như thế nào",
+    "Gói tuần W50 được bao nhiêu data",
+    "gói w50 giá bao nhiêu tiền",
+    "gói nào đi du lịch trong nước 1 tuần",
+    "hủy gói w50 được không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "MXH70",
+   "name": "Gói MXH70 mạng xã hội",
+   "category": "Gói data",
+   "brand": "VNet",
+   "price": 70000,
+   "price_unit": "VND/tháng",
+   "in_stock": true,
+   "short_description": "1GB/ngày + miễn phí data TikTok, Facebook, YouTube",
+   "attributes": {
+    "data_ngay": 1,
+    "chu_ky": "30 ngày",
+    "ung_dung_mien_phi": [
+     "TikTok",
+     "Facebook",
+     "YouTube"
+    ],
+    "doi_tuong": "Cá nhân"
+   },
+   "aliases": [
+    "gói mxh70",
+    "goi mxh70",
+    "mxh70",
+    "mxh 70",
+    "gói mạng xã hội"
+   ],
+   "use_cases": [
+    "người hay lướt TikTok, Facebook",
+    "giới trẻ"
+   ],
+   "sample_questions": [
+    "đăng ký gói mxh70 như thế nào",
+    "Gói MXH70 mạng xã hội được bao nhiêu data",
+    "gói mxh70 giá bao nhiêu tiền",
+    "gói nào người hay lướt TikTok, Facebook",
+    "hủy gói mxh70 được không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "SV50",
+   "name": "Gói sinh viên SV50",
+   "category": "Gói data",
+   "brand": "VNet",
+   "price": 50000,
+   "price_unit": "VND/tháng",
+   "in_stock": true,
+   "short_description": "Gói ưu đãi sinh viên 1GB/ngày",
+   "attributes": {
+    "data_ngay": 1,
+    "chu_ky": "30 ngày",
+    "doi_tuong": "Sinh viên"
+   },
+   "aliases": [
+    "gói sv50",
+    "goi sv50",
+    "sv50",
+    "sv 50",
+    "gói sinh viên"
+   ],
+   "use_cases": [
+    "học sinh sinh viên",
+    "ngân sách thấp"
+   ],
+   "sample_questions": [
+    "đăng ký gói sv50 như thế nào",
+    "Gói sinh viên SV50 được bao nhiêu data",
+    "gói sv50 giá bao nhiêu tiền",
+    "gói nào học sinh sinh viên",
+    "hủy gói sv50 được không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "D90",
+   "name": "Gói tháng D90",
+   "category": "Gói data",
+   "brand": "VNet",
+   "price": 90000,
+   "price_unit": "VND/tháng",
+   "in_stock": true,
+   "short_description": "1.5GB/ngày dùng 30 ngày",
+   "attributes": {
+    "data_ngay": 1.5,
+    "chu_ky": "30 ngày",
+    "doi_tuong": "Cá nhân"
+   },
+   "aliases": [
+    "gói d90",
+    "goi d90",
+    "d90",
+    "đê 90",
+    "d chín mươi"
+   ],
+   "use_cases": [
+    "dùng data cơ bản hằng ngày"
+   ],
+   "sample_questions": [
+    "đăng ký gói d90 như thế nào",
+    "Gói tháng D90 được bao nhiêu data",
+    "gói d90 giá bao nhiêu tiền",
+    "gói nào dùng data cơ bản hằng ngày",
+    "hủy gói d90 được không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "D120",
+   "name": "Gói tháng D120",
+   "category": "Gói data",
+   "brand": "VNet",
+   "price": 120000,
+   "price_unit": "VND/tháng",
+   "in_stock": true,
+   "short_description": "2GB/ngày dùng 30 ngày",
+   "attributes": {
+    "data_ngay": 2,
+    "chu_ky": "30 ngày",
+    "doi_tuong": "Cá nhân"
+   },
+   "aliases": [
+    "gói d120",
+    "goi d120",
+    "d120",
+    "đê 120",
+    "d một hai mươi"
+   ],
+   "use_cases": [
+    "xem video, làm việc online"
+   ],
+   "sample_questions": [
+    "đăng ký gói d120 như thế nào",
+    "Gói tháng D120 được bao nhiêu data",
+    "gói d120 giá bao nhiêu tiền",
+    "gói nào xem video, làm việc online",
+    "hủy gói d120 được không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "D150",
+   "name": "Gói tháng D150",
+   "category": "Gói data",
+   "brand": "VNet",
+   "price": 150000,
+   "price_unit": "VND/tháng",
+   "in_stock": true,
+   "short_description": "4GB/ngày dùng 30 ngày",
+   "attributes": {
+    "data_ngay": 4,
+    "chu_ky": "30 ngày",
+    "doi_tuong": "Cá nhân"
+   },
+   "aliases": [
+    "gói d150",
+    "goi d150",
+    "d150",
+    "đê 150"
+   ],
+   "use_cases": [
+    "xem phim, livestream nhiều"
+   ],
+   "sample_questions": [
+    "đăng ký gói d150 như thế nào",
+    "Gói tháng D150 được bao nhiêu data",
+    "gói d150 giá bao nhiêu tiền",
+    "gói nào xem phim, livestream nhiều",
+    "hủy gói d150 được không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "MAX200",
+   "name": "Gói MAX200",
+   "category": "Gói data",
+   "brand": "VNet",
+   "price": 200000,
+   "price_unit": "VND/tháng",
+   "in_stock": true,
+   "short_description": "6GB/ngày + tài khoản Netflix",
+   "attributes": {
+    "data_ngay": 6,
+    "chu_ky": "30 ngày",
+    "ung_dung_mien_phi": [
+     "Netflix"
+    ],
+    "doi_tuong": "Cá nhân"
+   },
+   "aliases": [
+    "gói max200",
+    "goi max200",
+    "max200",
+    "max 200",
+    "mắc 200"
+   ],
+   "use_cases": [
+    "dùng data rất nhiều",
+    "thích xem Netflix trên điện thoại"
+   ],
+   "sample_questions": [
+    "đăng ký gói max200 như thế nào",
+    "Gói MAX200 được bao nhiêu data",
+    "gói max200 giá bao nhiêu tiền",
+    "gói nào dùng data rất nhiều",
+    "hủy gói max200 được không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "D90-6T",
+   "name": "Gói D90 chu kỳ 6 tháng",
+   "category": "Gói data",
+   "brand": "VNet",
+   "price": 450000,
+   "price_unit": "VND/6 tháng",
+   "in_stock": true,
+   "short_description": "1.5GB/ngày, đóng 6 tháng tặng 1 tháng",
+   "attributes": {
+    "data_ngay": 1.5,
+    "chu_ky": "6 tháng",
+    "doi_tuong": "Cá nhân"
+   },
+   "aliases": [
+    "gói d90 6 tháng",
+    "goi d90 6 thang",
+    "d90-6t",
+    "6d90",
+    "d90 dài kỳ"
+   ],
+   "use_cases": [
+    "muốn đóng một lần dùng lâu, đỡ gia hạn"
+   ],
+   "sample_questions": [
+    "đăng ký gói d90 6 tháng như thế nào",
+    "Gói D90 chu kỳ 6 tháng được bao nhiêu data",
+    "gói d90 6 tháng giá bao nhiêu tiền",
+    "gói nào muốn đóng một lần dùng lâu, đỡ gia hạn",
+    "hủy gói d90 6 tháng được không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "D120-12T",
+   "name": "Gói D120 chu kỳ 12 tháng",
+   "category": "Gói data",
+   "brand": "VNet",
+   "price": 1200000,
+   "price_unit": "VND/12 tháng",
+   "in_stock": true,
+   "short_description": "2GB/ngày, đóng 12 tháng tặng 2 tháng",
+   "attributes": {
+    "data_ngay": 2,
+    "chu_ky": "12 tháng",
+    "doi_tuong": "Cá nhân"
+   },
+   "aliases": [
+    "gói d120 12 tháng",
+    "goi d120 12 thang",
+    "d120-12t",
+    "12d120",
+    "d120 năm"
+   ],
+   "use_cases": [
+    "đóng một lần cả năm tiết kiệm nhất"
+   ],
+   "sample_questions": [
+    "đăng ký gói d120 12 tháng như thế nào",
+    "Gói D120 chu kỳ 12 tháng được bao nhiêu data",
+    "gói d120 12 tháng giá bao nhiêu tiền",
+    "gói nào đóng một lần cả năm tiết kiệm nhất",
+    "hủy gói d120 12 tháng được không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "TH30",
+   "name": "Gói tháng TH30 30GB",
+   "category": "Gói data",
+   "brand": "VNet",
+   "price": 100000,
+   "price_unit": "VND/tháng",
+   "in_stock": true,
+   "short_description": "30GB dùng thoải mái trong tháng, không giới hạn theo ngày",
+   "attributes": {
+    "data_thang": 30,
+    "chu_ky": "30 ngày",
+    "doi_tuong": "Cá nhân"
+   },
+   "aliases": [
+    "gói th30",
+    "goi th30",
+    "th30",
+    "tê hát 30",
+    "th 30"
+   ],
+   "use_cases": [
+    "người dùng không đều, có ngày nhiều ngày ít"
+   ],
+   "sample_questions": [
+    "đăng ký gói th30 như thế nào",
+    "Gói tháng TH30 30GB được bao nhiêu data",
+    "gói th30 giá bao nhiêu tiền",
+    "gói nào người dùng không đều, có ngày nhiều ngày ít",
+    "hủy gói th30 được không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "TT5",
+   "name": "Gói tiết kiệm TT5",
+   "category": "Gói data",
+   "brand": "VNet",
+   "price": 30000,
+   "price_unit": "VND/tháng",
+   "in_stock": true,
+   "short_description": "5GB/tháng giá rẻ cho người dùng ít",
+   "attributes": {
+    "data_thang": 5,
+    "chu_ky": "30 ngày",
+    "doi_tuong": "Cá nhân"
+   },
+   "aliases": [
+    "gói tt5",
+    "goi tt5",
+    "tt5",
+    "tê tê 5"
+   ],
+   "use_cases": [
+    "người lớn tuổi chỉ dùng Zalo",
+    "dùng data rất ít"
+   ],
+   "sample_questions": [
+    "đăng ký gói tt5 như thế nào",
+    "Gói tiết kiệm TT5 được bao nhiêu data",
+    "gói tt5 giá bao nhiêu tiền",
+    "gói nào người lớn tuổi chỉ dùng Zalo",
+    "hủy gói tt5 được không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "C90",
+   "name": "Gói combo C90",
+   "category": "Gói combo",
+   "brand": "VNet",
+   "price": 90000,
+   "price_unit": "VND/tháng",
+   "in_stock": true,
+   "short_description": "1GB/ngày, miễn phí gọi nội mạng dưới 10 phút, 30 phút ngoại mạng",
+   "attributes": {
+    "data_ngay": 1,
+    "chu_ky": "30 ngày",
+    "mien_phi_noi_mang": true,
+    "phut_ngoai_mang": 30,
+    "doi_tuong": "Cá nhân"
+   },
+   "aliases": [
+    "gói combo c90",
+    "goi combo c90",
+    "c90",
+    "xê 90",
+    "c chín mươi"
+   ],
+   "use_cases": [
+    "vừa gọi vừa dùng data ít"
+   ],
+   "sample_questions": [
+    "đăng ký gói combo c90 như thế nào",
+    "Gói combo C90 được bao nhiêu data",
+    "gói combo c90 giá bao nhiêu tiền",
+    "gói nào vừa gọi vừa dùng data ít",
+    "hủy gói combo c90 được không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "V120",
+   "name": "Gói combo V120",
+   "category": "Gói combo",
+   "brand": "VNet",
+   "price": 120000,
+   "price_unit": "VND/tháng",
+   "in_stock": true,
+   "short_description": "1.5GB/ngày, miễn phí nội mạng, 50 phút ngoại mạng",
+   "attributes": {
+    "data_ngay": 1.5,
+    "chu_ky": "30 ngày",
+    "mien_phi_noi_mang": true,
+    "phut_ngoai_mang": 50,
+    "doi_tuong": "Cá nhân"
+   },
+   "aliases": [
+    "gói combo v120",
+    "goi combo v120",
+    "v120",
+    "vê 120",
+    "v một hai mươi"
+   ],
+   "use_cases": [
+    "người gọi điện nhiều"
+   ],
+   "sample_questions": [
+    "đăng ký gói combo v120 như thế nào",
+    "Gói combo V120 được bao nhiêu data",
+    "gói combo v120 giá bao nhiêu tiền",
+    "gói nào người gọi điện nhiều",
+    "hủy gói combo v120 được không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "V160",
+   "name": "Gói combo V160",
+   "category": "Gói combo",
+   "brand": "VNet",
+   "price": 160000,
+   "price_unit": "VND/tháng",
+   "in_stock": true,
+   "short_description": "4GB/ngày, miễn phí nội mạng, 100 phút ngoại mạng",
+   "attributes": {
+    "data_ngay": 4,
+    "chu_ky": "30 ngày",
+    "mien_phi_noi_mang": true,
+    "phut_ngoai_mang": 100,
+    "doi_tuong": "Cá nhân"
+   },
+   "aliases": [
+    "gói combo v160",
+    "goi combo v160",
+    "v160",
+    "vê 160"
+   ],
+   "use_cases": [
+    "vừa gọi nhiều vừa dùng data nhiều",
+    "nhân viên kinh doanh"
+   ],
+   "sample_questions": [
+    "đăng ký gói combo v160 như thế nào",
+    "Gói combo V160 được bao nhiêu data",
+    "gói combo v160 giá bao nhiêu tiền",
+    "gói nào vừa gọi nhiều vừa dùng data nhiều",
+    "hủy gói combo v160 được không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "V200",
+   "name": "Gói combo V200",
+   "category": "Gói combo",
+   "brand": "VNet",
+   "price": 200000,
+   "price_unit": "VND/tháng",
+   "in_stock": true,
+   "short_description": "6GB/ngày, miễn phí nội mạng, 200 phút ngoại mạng",
+   "attributes": {
+    "data_ngay": 6,
+    "chu_ky": "30 ngày",
+    "mien_phi_noi_mang": true,
+    "phut_ngoai_mang": 200,
+    "doi_tuong": "Cá nhân"
+   },
+   "aliases": [
+    "gói combo v200",
+    "goi combo v200",
+    "v200",
+    "vê 200"
+   ],
+   "use_cases": [
+    "gọi điện cực nhiều",
+    "chủ shop online"
+   ],
+   "sample_questions": [
+    "đăng ký gói combo v200 như thế nào",
+    "Gói combo V200 được bao nhiêu data",
+    "gói combo v200 giá bao nhiêu tiền",
+    "gói nào gọi điện cực nhiều",
+    "hủy gói combo v200 được không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "GD300",
+   "name": "Gói gia đình GD300",
+   "category": "Gói combo",
+   "brand": "VNet",
+   "price": 300000,
+   "price_unit": "VND/tháng",
+   "in_stock": true,
+   "short_description": "Chia sẻ 8GB/ngày cho tối đa 4 thuê bao, gọi nội nhóm miễn phí",
+   "attributes": {
+    "data_ngay": 8,
+    "chu_ky": "30 ngày",
+    "mien_phi_noi_mang": true,
+    "phut_ngoai_mang": 150,
+    "doi_tuong": "Gia đình"
+   },
+   "aliases": [
+    "gói gia đình gd300",
+    "goi gia dinh gd300",
+    "gd300",
+    "gia đình 300",
+    "gd 300"
+   ],
+   "use_cases": [
+    "gia đình 3-4 người dùng chung",
+    "bố mẹ và con cái"
+   ],
+   "sample_questions": [
+    "đăng ký gói gia đình gd300 như thế nào",
+    "Gói gia đình GD300 được bao nhiêu data",
+    "gói gia đình gd300 giá bao nhiêu tiền",
+    "gói nào gia đình 3-4 người dùng chung",
+    "hủy gói gia đình gd300 được không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "DN250",
+   "name": "Gói doanh nghiệp DN250",
+   "category": "Gói combo",
+   "brand": "VNet",
+   "price": 250000,
+   "price_unit": "VND/tháng",
+   "in_stock": true,
+   "short_description": "Gói cho nhân viên doanh nghiệp, 300 phút ngoại mạng, xuất hoá đơn VAT",
+   "attributes": {
+    "data_ngay": 5,
+    "chu_ky": "30 ngày",
+    "mien_phi_noi_mang": true,
+    "phut_ngoai_mang": 300,
+    "doi_tuong": "Doanh nghiệp"
+   },
+   "aliases": [
+    "gói doanh nghiệp dn250",
+    "goi doanh nghiep dn250",
+    "dn250",
+    "dn 250",
+    "gói công ty"
+   ],
+   "use_cases": [
+    "doanh nghiệp cấp sim cho nhân viên"
+   ],
+   "sample_questions": [
+    "đăng ký gói doanh nghiệp dn250 như thế nào",
+    "Gói doanh nghiệp DN250 được bao nhiêu data",
+    "gói doanh nghiệp dn250 giá bao nhiêu tiền",
+    "gói nào doanh nghiệp cấp sim cho nhân viên",
+    "hủy gói doanh nghiệp dn250 được không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "NET150",
+   "name": "Internet cáp quang Super 150Mbps",
+   "category": "Internet cáp quang",
+   "brand": "VNet",
+   "price": 180000,
+   "price_unit": "VND/tháng",
+   "in_stock": true,
+   "short_description": "Cáp quang 150Mbps kèm modem wifi 6",
+   "attributes": {
+    "toc_do": 150,
+    "wifi_mesh": false,
+    "doi_tuong": "Cá nhân"
+   },
+   "aliases": [
+    "cáp quang 150 mega",
+    "cap quang 150 mega",
+    "net150",
+    "super 150",
+    "net 150"
+   ],
+   "use_cases": [
+    "nhà nhỏ 1-2 người",
+    "phòng trọ, căn hộ studio"
+   ],
+   "sample_questions": [
+    "đăng ký cáp quang 150 mega như thế nào",
+    "Internet cáp quang Super 150Mbps được bao nhiêu data",
+    "cáp quang 150 mega giá bao nhiêu tiền",
+    "gói nào nhà nhỏ 1-2 người",
+    "hủy cáp quang 150 mega được không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "NET300",
+   "name": "Internet cáp quang Super 300Mbps",
+   "category": "Internet cáp quang",
+   "brand": "VNet",
+   "price": 230000,
+   "price_unit": "VND/tháng",
+   "in_stock": true,
+   "short_description": "Cáp quang 300Mbps cho gia đình",
+   "attributes": {
+    "toc_do": 300,
+    "wifi_mesh": false,
+    "doi_tuong": "Gia đình"
+   },
+   "aliases": [
+    "cáp quang 300 mega",
+    "cap quang 300 mega",
+    "net300",
+    "super 300",
+    "net 300"
+   ],
+   "use_cases": [
+    "gia đình 3-4 người",
+    "học online, làm việc tại nhà"
+   ],
+   "sample_questions": [
+    "đăng ký cáp quang 300 mega như thế nào",
+    "Internet cáp quang Super 300Mbps được bao nhiêu data",
+    "cáp quang 300 mega giá bao nhiêu tiền",
+    "gói nào gia đình 3-4 người",
+    "hủy cáp quang 300 mega được không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "NET500M",
+   "name": "Internet cáp quang Mesh 500Mbps",
+   "category": "Internet cáp quang",
+   "brand": "VNet",
+   "price": 290000,
+   "price_unit": "VND/tháng",
+   "in_stock": true,
+   "short_description": "Cáp quang 500Mbps kèm 1 thiết bị Wifi Mesh",
+   "attributes": {
+    "toc_do": 500,
+    "wifi_mesh": true,
+    "doi_tuong": "Gia đình"
+   },
+   "aliases": [
+    "cáp quang mesh 500 mega",
+    "cap quang mesh 500 mega",
+    "net500m",
+    "mesh 500",
+    "net 500"
+   ],
+   "use_cases": [
+    "nhà 2-3 tầng cần phủ sóng",
+    "gia đình đông người"
+   ],
+   "sample_questions": [
+    "đăng ký cáp quang mesh 500 mega như thế nào",
+    "Internet cáp quang Mesh 500Mbps được bao nhiêu data",
+    "cáp quang mesh 500 mega giá bao nhiêu tiền",
+    "gói nào nhà 2-3 tầng cần phủ sóng",
+    "hủy cáp quang mesh 500 mega được không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "NET1G",
+   "name": "Internet cáp quang Giga 1Gbps",
+   "category": "Internet cáp quang",
+   "brand": "VNet",
+   "price": 450000,
+   "price_unit": "VND/tháng",
+   "in_stock": true,
+   "short_description": "Cáp quang 1Gbps kèm 2 thiết bị Wifi Mesh",
+   "attributes": {
+    "toc_do": 1000,
+    "wifi_mesh": true,
+    "doi_tuong": "Gia đình"
+   },
+   "aliases": [
+    "cáp quang 1 giga",
+    "cap quang 1 giga",
+    "net1g",
+    "giga 1g",
+    "net 1g",
+    "1000 mbps"
+   ],
+   "use_cases": [
+    "nhà phố nhiều tầng",
+    "streamer, game thủ"
+   ],
+   "sample_questions": [
+    "đăng ký cáp quang 1 giga như thế nào",
+    "Internet cáp quang Giga 1Gbps được bao nhiêu data",
+    "cáp quang 1 giga giá bao nhiêu tiền",
+    "gói nào nhà phố nhiều tầng",
+    "hủy cáp quang 1 giga được không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "NETSV",
+   "name": "Internet sinh viên 100Mbps",
+   "category": "Internet cáp quang",
+   "brand": "VNet",
+   "price": 150000,
+   "price_unit": "VND/tháng",
+   "in_stock": true,
+   "short_description": "Cáp quang ưu đãi sinh viên, không cần đóng trước",
+   "attributes": {
+    "toc_do": 100,
+    "wifi_mesh": false,
+    "doi_tuong": "Sinh viên"
+   },
+   "aliases": [
+    "internet sinh viên",
+    "internet sinh vien",
+    "netsv",
+    "net sinh viên",
+    "cáp quang sinh viên"
+   ],
+   "use_cases": [
+    "sinh viên ở trọ",
+    "ngân sách thấp"
+   ],
+   "sample_questions": [
+    "đăng ký internet sinh viên như thế nào",
+    "Internet sinh viên 100Mbps được bao nhiêu data",
+    "internet sinh viên giá bao nhiêu tiền",
+    "gói nào sinh viên ở trọ",
+    "hủy internet sinh viên được không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "NETDN",
+   "name": "Internet doanh nghiệp 800Mbps IP tĩnh",
+   "category": "Internet cáp quang",
+   "brand": "VNet",
+   "price": 690000,
+   "price_unit": "VND/tháng",
+   "in_stock": true,
+   "short_description": "Cáp quang doanh nghiệp, IP tĩnh, cam kết băng thông quốc tế",
+   "attributes": {
+    "toc_do": 800,
+    "wifi_mesh": true,
+    "doi_tuong": "Doanh nghiệp"
+   },
+   "aliases": [
+    "internet doanh nghiệp ip tĩnh",
+    "internet doanh nghiep ip tinh",
+    "netdn",
+    "net doanh nghiệp",
+    "ip tĩnh"
+   ],
+   "use_cases": [
+    "văn phòng công ty",
+    "chạy camera, server"
+   ],
+   "sample_questions": [
+    "đăng ký internet doanh nghiệp ip tĩnh như thế nào",
+    "Internet doanh nghiệp 800Mbps IP tĩnh được bao nhiêu data",
+    "internet doanh nghiệp ip tĩnh giá bao nhiêu tiền",
+    "gói nào văn phòng công ty",
+    "hủy internet doanh nghiệp ip tĩnh được không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "TVBASIC",
+   "name": "Truyền hình cơ bản 150 kênh",
+   "category": "Truyền hình",
+   "brand": "VNet",
+   "price": 80000,
+   "price_unit": "VND/tháng",
+   "in_stock": true,
+   "short_description": "150 kênh trong nước và quốc tế, xem lại 7 ngày",
+   "attributes": {
+    "so_kenh": 150
+   },
+   "aliases": [
+    "truyền hình cơ bản",
+    "truyen hinh co ban",
+    "tvbasic",
+    "tv cơ bản"
+   ],
+   "use_cases": [
+    "xem thời sự, phim truyền hình"
+   ],
+   "sample_questions": [
+    "đăng ký truyền hình cơ bản như thế nào",
+    "Truyền hình cơ bản 150 kênh được bao nhiêu data",
+    "truyền hình cơ bản giá bao nhiêu tiền",
+    "gói nào xem thời sự, phim truyền hình",
+    "hủy truyền hình cơ bản được không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "TVPREMIUM",
+   "name": "Truyền hình Premium 200 kênh + K+",
+   "category": "Truyền hình",
+   "brand": "VNet",
+   "price": 160000,
+   "price_unit": "VND/tháng",
+   "in_stock": true,
+   "short_description": "200 kênh kèm gói K+ xem bóng đá Ngoại hạng Anh",
+   "attributes": {
+    "so_kenh": 200
+   },
+   "aliases": [
+    "truyền hình premium k+",
+    "truyen hinh premium k+",
+    "tvpremium",
+    "premium",
+    "gói k+"
+   ],
+   "use_cases": [
+    "fan bóng đá",
+    "xem thể thao trực tiếp"
+   ],
+   "sample_questions": [
+    "đăng ký truyền hình premium k+ như thế nào",
+    "Truyền hình Premium 200 kênh + K+ được bao nhiêu data",
+    "truyền hình premium k+ giá bao nhiêu tiền",
+    "gói nào fan bóng đá",
+    "hủy truyền hình premium k+ được không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "COMBO-NT1",
+   "name": "Combo Internet 300Mbps + Truyền hình 150 kênh",
+   "category": "Truyền hình",
+   "brand": "VNet",
+   "price": 260000,
+   "price_unit": "VND/tháng",
+   "in_stock": true,
+   "short_description": "Combo cáp quang 300Mbps và truyền hình cơ bản",
+   "attributes": {
+    "toc_do": 300,
+    "so_kenh": 150,
+    "wifi_mesh": false,
+    "doi_tuong": "Gia đình"
+   },
+   "aliases": [
+    "combo internet 300 với truyền hình",
+    "combo internet 300 voi truyen hinh",
+    "combo-nt1",
+    "combo nt1",
+    "combo mạng truyền hình"
+   ],
+   "use_cases": [
+    "gia đình muốn lắp cả mạng và truyền hình"
+   ],
+   "sample_questions": [
+    "đăng ký combo internet 300 với truyền hình như thế nào",
+    "Combo Internet 300Mbps + Truyền hình 150 kênh được bao nhiêu data",
+    "combo internet 300 với truyền hình giá bao nhiêu tiền",
+    "gói nào gia đình muốn lắp cả mạng và truyền hình",
+    "hủy combo internet 300 với truyền hình được không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "COMBO-NT2",
+   "name": "Combo Internet Mesh 500Mbps + Truyền hình 200 kênh K+",
+   "category": "Truyền hình",
+   "brand": "VNet",
+   "price": 360000,
+   "price_unit": "VND/tháng",
+   "in_stock": true,
+   "short_description": "Combo cáp quang 500Mbps Mesh và truyền hình Premium K+",
+   "attributes": {
+    "toc_do": 500,
+    "so_kenh": 200,
+    "wifi_mesh": true,
+    "doi_tuong": "Gia đình"
+   },
+   "aliases": [
+    "combo internet 500 mesh với truyền hình k+",
+    "combo internet 500 mesh voi truyen hinh k+",
+    "combo-nt2",
+    "combo nt2"
+   ],
+   "use_cases": [
+    "nhà nhiều tầng, mê bóng đá"
+   ],
+   "sample_questions": [
+    "đăng ký combo internet 500 mesh với truyền hình k+ như thế nào",
+    "Combo Internet Mesh 500Mbps + Truyền hình 200 kênh K+ được bao nhiêu data",
+    "combo internet 500 mesh với truyền hình k+ giá bao nhiêu tiền",
+    "gói nào nhà nhiều tầng, mê bóng đá",
+    "hủy combo internet 500 mesh với truyền hình k+ được không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "RM-ASIA",
+   "name": "Chuyển vùng Châu Á 7 ngày 5GB",
+   "category": "Chuyển vùng quốc tế",
+   "brand": "VNet",
+   "price": 199000,
+   "price_unit": "VND/7 ngày",
+   "in_stock": true,
+   "short_description": "5GB dùng tại 5 nước Châu Á trong 7 ngày",
+   "attributes": {
+    "data_thang": 5,
+    "chu_ky": "7 ngày",
+    "quoc_gia": [
+     "Hàn Quốc",
+     "Nhật Bản",
+     "Thái Lan",
+     "Singapore",
+     "Trung Quốc"
+    ]
+   },
+   "aliases": [
+    "gói chuyển vùng châu á",
+    "goi chuyen vung chau a",
+    "rm-asia",
+    "roaming châu á",
+    "rm asia"
+   ],
+   "use_cases": [
+    "du lịch Thái Lan, Singapore ngắn ngày"
+   ],
+   "sample_questions": [
+    "đăng ký gói chuyển vùng châu á như thế nào",
+    "Chuyển vùng Châu Á 7 ngày 5GB được bao nhiêu data",
+    "gói chuyển vùng châu á giá bao nhiêu tiền",
+    "gói nào du lịch Thái Lan, Singapore ngắn ngày",
+    "hủy gói chuyển vùng châu á được không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "RM-JPKR",
+   "name": "Chuyển vùng Nhật Hàn 7 ngày 6GB",
+   "category": "Chuyển vùng quốc tế",
+   "brand": "VNet",
+   "price": 249000,
+   "price_unit": "VND/7 ngày",
+   "in_stock": true,
+   "short_description": "6GB tốc độ cao tại Nhật Bản và Hàn Quốc",
+   "attributes": {
+    "data_thang": 6,
+    "chu_ky": "7 ngày",
+    "quoc_gia": [
+     "Nhật Bản",
+     "Hàn Quốc"
+    ]
+   },
+   "aliases": [
+    "gói chuyển vùng nhật hàn",
+    "goi chuyen vung nhat han",
+    "rm-jpkr",
+    "roaming nhật hàn"
+   ],
+   "use_cases": [
+    "du lịch, công tác Nhật Bản Hàn Quốc"
+   ],
+   "sample_questions": [
+    "đăng ký gói chuyển vùng nhật hàn như thế nào",
+    "Chuyển vùng Nhật Hàn 7 ngày 6GB được bao nhiêu data",
+    "gói chuyển vùng nhật hàn giá bao nhiêu tiền",
+    "gói nào du lịch, công tác Nhật Bản Hàn Quốc",
+    "hủy gói chuyển vùng nhật hàn được không"
+   ],
+   "enrichment_status": "reviewed"
+  },
+  {
+   "sku": "RM-GLOBAL",
+   "name": "Chuyển vùng toàn cầu 15 ngày 10GB",
+   "category": "Chuyển vùng quốc tế",
+   "brand": "VNet",
+   "price": 499000,
+   "price_unit": "VND/15 ngày",
+   "in_stock": true,
+   "short_description": "10GB dùng tại hơn 60 quốc gia trong 15 ngày",
+   "attributes": {
+    "data_thang": 10,
+    "chu_ky": "15 ngày",
+    "quoc_gia": [
+     "Hàn Quốc",
+     "Nhật Bản",
+     "Thái Lan",
+     "Singapore",
+     "Trung Quốc",
+     "Mỹ",
+     "Châu Âu",
+     "Úc"
+    ]
+   },
+   "aliases": [
+    "gói chuyển vùng toàn cầu",
+    "goi chuyen vung toan cau",
+    "rm-global",
+    "roaming toàn cầu",
+    "rm global"
+   ],
+   "use_cases": [
+    "đi Mỹ, Châu Âu, Úc",
+    "công tác nhiều nước"
+   ],
+   "sample_questions": [
+    "đăng ký gói chuyển vùng toàn cầu như thế nào",
+    "Chuyển vùng toàn cầu 15 ngày 10GB được bao nhiêu data",
+    "gói chuyển vùng toàn cầu giá bao nhiêu tiền",
+    "gói nào đi Mỹ, Châu Âu, Úc",
+    "hủy gói chuyển vùng toàn cầu được không"
+   ],
+   "enrichment_status": "reviewed"
+  }
+ ]
+}
