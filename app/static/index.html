@@ -133,7 +133,18 @@ details.debug{border-top:1px solid var(--line);margin-top:20px;padding-top:4px}d
 .acctcard .scroll{flex:1;min-height:0}
 .acctform{border-top:1px solid var(--line);margin-top:14px;padding-top:16px}
 .acctform h3{margin:0 0 10px;font-size:14px}
-.badge{display:inline-block;border-radius:999px;padding:1px 9px;font-size:12px;font-weight:500}.badge.ad{background:var(--brand-soft);color:var(--brand)}.badge.off{background:var(--bad-soft);color:var(--bad)}
+.badge{display:inline-block;border-radius:999px;padding:1px 9px;font-size:12px;font-weight:500}.badge.ad{background:var(--brand-soft);color:var(--brand)}.badge.off{background:var(--bad-soft);color:var(--bad)}.badge.ok{background:var(--ok-soft);color:var(--ok)}.badge.usr{background:var(--sunken);color:var(--ink-2)}.badge.g{background:var(--sunken);color:var(--ink-2)}
+.rail-add.on{border-color:var(--brand);background:var(--brand-soft);color:var(--brand)}
+.acct-list{display:flex;flex-direction:column;gap:10px}
+.acct-row{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.acct-row .acct-id{display:flex;align-items:center;gap:12px;min-width:min(240px,100%);flex:1}
+.acct-row .av{width:40px;height:40px;border-radius:50%;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center;font-weight:700;flex:none;object-fit:cover}
+.acct-main{min-width:0}.acct-main b{display:block;font-weight:600;line-height:1.3}
+.acct-email{display:block;color:var(--ink-2);font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.acct-tags{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:6px}
+.acct-meta{color:var(--ink-3);font-size:12px}
+.acct-actions{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end}
+.btn.ghost.sm.danger{color:var(--bad)}
 .acctchip .em{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.acctchip .em b{display:block;font-weight:600}
 /* --- bảng dữ liệu: gọn & dễ đọc (cắt ô dài, cố định cột đầu/cuối khi cuộn ngang) --- */
 .datagrid td,.datagrid th{max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -158,7 +169,8 @@ details.debug{border-top:1px solid var(--line);margin-top:20px;padding-top:4px}d
   <a class="logo" href="#/"><img class="logomark" src="/logo.png" alt="" width="34" height="34">semsearch</a>
   <div class="rail-label" data-i18n="workspace">Không gian làm việc</div>
   <nav class="tabs" id="sidenav" aria-label="Chức năng" data-i18n-al="func_aria"></nav>
-  <div class="rail-bottom"><a class="rail-add" href="#/new"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span data-i18n="new_table">Tạo bảng mới</span></a>
+  <div class="rail-bottom"><a class="rail-add railacct" id="railAccounts" href="#/accounts" hidden><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg><span data-i18n="manage_accounts">Quản lý tài khoản</span></a>
+  <a class="rail-add" href="#/new"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span data-i18n="new_table">Tạo bảng mới</span></a>
   <div class="rail-foot"><span data-i18n="semantic_search">Tìm kiếm ngữ nghĩa</span><span>1.0</span></div></div>
 </aside>
 <header class="appbar"><div class="appbar-in">
@@ -192,14 +204,6 @@ details.debug{border-top:1px solid var(--line);margin-top:20px;padding-top:4px}d
     <div id="gbtn" class="gbtn" hidden></div>
     <button type="button" class="langswitch" id="loginLang" data-i18n="switch_lang">English</button>
   </form>
-</div>
-<div class="authgate" id="acctmodal" role="dialog" aria-modal="true" aria-label="Quản lý tài khoản" data-i18n-al="manage_accounts">
-  <div class="acctcard">
-    <div class="mh"><h2 data-i18n="manage_accounts">Quản lý tài khoản</h2><button class="btn ghost sm" onclick="closeAccounts()" data-i18n="close">Đóng</button></div>
-    <div class="scroll" id="acctlist"></div>
-    <div class="acctform" id="acctcreate"></div>
-    <div id="acctmsg" class="msg" style="margin-top:8px"></div>
-  </div>
 </div>
 <script>
 const $ = s => document.querySelector(s);
@@ -261,7 +265,7 @@ const I18N = {
     select_table: "Chọn bảng", search_table_ph: "Tìm bảng…", search_table_al: "Tìm bảng", new_table_plus: "+ Tạo bảng mới",
     conn_key: "Khoá kết nối", connect: "Kết nối", search_key: "Khoá tìm kiếm", admin_key: "Khoá quản trị",
     login_aria: "Đăng nhập", email: "Email", password: "Mật khẩu", remember: "Ghi nhớ", sign_in: "Đăng nhập",
-    or: "hoặc", switch_lang: "English", manage_accounts: "Quản lý tài khoản", close: "Đóng",
+    or: "hoặc", switch_lang: "English", manage_accounts: "Quản lý tài khoản", accounts_sub: "Tạo, phân quyền và khoá tài khoản người dùng", close: "Đóng",
     // ----- khoá bí mật -----
     show: "Hiện", hide: "Ẩn", sl_search_key: "khoá tìm kiếm", sl_admin_key: "khoá quản trị", sl_password: "mật khẩu",
     sl_api_key: "khoá API", api_key_al: "Khoá API", copy: "Sao chép", autoclose_30s: "Tự đóng sau 30 giây.",
@@ -404,7 +408,7 @@ const I18N = {
     select_table: "Select table", search_table_ph: "Search tables…", search_table_al: "Search tables", new_table_plus: "+ New table",
     conn_key: "Connection keys", connect: "Connect", search_key: "Search key", admin_key: "Admin key",
     login_aria: "Sign in", email: "Email", password: "Password", remember: "Remember me", sign_in: "Sign in",
-    or: "or", switch_lang: "Tiếng Việt", manage_accounts: "Manage accounts", close: "Close",
+    or: "or", switch_lang: "Tiếng Việt", manage_accounts: "Manage accounts", accounts_sub: "Create, assign roles and disable user accounts", close: "Close",
     show: "Show", hide: "Hide", sl_search_key: "search key", sl_admin_key: "admin key", sl_password: "password",
     sl_api_key: "API key", api_key_al: "API key", copy: "Copy", autoclose_30s: "Closes automatically in 30 seconds.",
     copied: "Copied", err_short: "Error",
@@ -573,7 +577,12 @@ const S = { slug: null, tab: "try", last: null, ctx: null, rows: [], rowsOffset:
 const TABS = [["try",tr("tab_try")],["rows",tr("tab_rows")],["api",tr("tab_api")],["keys",tr("tab_keys")],["eval",tr("tab_eval")],["enrich",tr("tab_enrich")],["logs",tr("tab_logs")],["settings",tr("tab_settings")]];
 const ICONS = {try:'<circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/>',rows:'<rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 10h16M10 4v16M4 15h16"/>',api:'<path d="m8 6-6 6 6 6m8-12 6 6-6 6m-3-13-2 14"/>',keys:'<circle cx="8" cy="15" r="4"/><path d="m11 12 9-9m-3 3 3 3m-6 0 3 3"/>',eval:'<path d="M5 20V10m7 10V4m7 16v-7M3 20h18"/>',enrich:'<path d="m12 3 2.4 6.6L21 12l-6.6 2.4L12 21l-2.4-6.6L3 12l6.6-2.4Z"/>',logs:'<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/>',settings:'<path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="3" fill="var(--rail)"/><circle cx="15" cy="17" r="3" fill="var(--rail)"/>',arrow:'<path d="M5 12h14m-5-5 5 5-5 5"/>',check:'<path d="m5 12 4 4L19 6"/>'};
 const icon = name => `<svg class="ico" viewBox="0 0 24 24" aria-hidden="true">${ICONS[name] || ICONS.try}</svg>`;
-function renderNav(){ $('#sidenav').innerHTML = S.slug && S.slug !== '__new__' ? TABS.map(([k,lb],i) => `${i === 2 || i === 7 ? '<div class="nav-break" aria-hidden="true"></div>' : ''}<a href="#/t/${encodeURIComponent(S.slug)}/${k}" class="${k === S.tab ? 'on' : ''}" ${k === S.tab ? 'aria-current="page"' : ''}>${icon(k)}<span>${lb}</span></a>`).join('') : `<a href="#/">${icon('rows')}<span>${tr('nav_tables')}</span></a><a href="#/new" class="on" aria-current="page">${icon('enrich')}<span>${tr('new_table')}</span></a>`; $('.rail-add').classList.toggle('hidden', S.slug === '__new__'); syncNavScroll(); }
+function renderNav(){ $('#sidenav').innerHTML = S.slug && S.slug !== '__new__' ? TABS.map(([k,lb],i) => `${i === 2 || i === 7 ? '<div class="nav-break" aria-hidden="true"></div>' : ''}<a href="#/t/${encodeURIComponent(S.slug)}/${k}" class="${k === S.tab ? 'on' : ''}" ${k === S.tab ? 'aria-current="page"' : ''}>${icon(k)}<span>${lb}</span></a>`).join('') : `<a href="#/">${icon('rows')}<span>${tr('nav_tables')}</span></a><a href="#/new" class="on" aria-current="page">${icon('enrich')}<span>${tr('new_table')}</span></a>`; $('.rail-add:not(.railacct)').classList.toggle('hidden', S.slug === '__new__'); updateRail(); syncNavScroll(); }
+function updateRail(){
+  const el = $('#railAccounts'); if (!el) return;
+  el.hidden = !(AUTH.account && AUTH.account.is_admin);
+  el.classList.toggle('on', location.hash.replace(/^#\/?/, '').split('/')[0] === 'accounts');
+}
 function syncNavScroll(){ const nav = $('#sidenav'), active = nav.querySelector('.on'); if (active && matchMedia('(max-width:760px)').matches) nav.scrollLeft = active.offsetLeft - nav.offsetLeft - 12; }
 window.addEventListener('resize', syncNavScroll);
 function closePicker(){ $('#pickmenu').classList.remove('open'); $('#picker>button').setAttribute('aria-expanded','false'); }
@@ -618,6 +627,10 @@ async function route(){
   const nextSlug = parts[0] === 't' ? parts[1] : parts[0] === 'new' ? '__new__' : null;
   if (nextSlug && nextSlug !== S.slug) { S.ctx = null; S.last = null; }
   if (parts[0] === "new") { S.slug = "__new__"; await loadTables(); return renderNew(); }
+  if (parts[0] === "accounts") {
+    if (!(AUTH.account && AUTH.account.is_admin)) return go("#/");
+    await loadTables(); renderNav(); return viewAccounts();
+  }
   if (parts[0] === "t" && parts[1]) { S.slug = parts[1]; S.tab = TABS.some(([k]) => k === parts[2]) ? parts[2] : "try"; }
   else { const h0 = location.hash; await loadTables(); if (location.hash !== h0) return;
     if (TABLES.length) return go(`#/t/${encodeURIComponent(TABLES[0].slug)}`); S.slug = "__new__"; return renderNew(); }
@@ -1006,23 +1019,44 @@ function renderAccount(){
       ${AUTH.account.is_admin ? `<button class="btn ghost sm" style="width:100%;justify-content:flex-start" onclick="openAccounts()">${tr('manage_accounts')}</button>` : ""}
       <button class="btn ghost sm" style="width:100%;justify-content:flex-start" onclick="doLogout()">${tr('sign_out')}</button>`;
   } else box.innerHTML = "";
+  updateRail();
 }
-window.openAccounts = async () => { closeConnection(); $("#acctmodal").classList.add("show"); $("#acctmsg").textContent = ""; await loadAccounts(); };
-window.closeAccounts = () => $("#acctmodal").classList.remove("show");
+window.openAccounts = () => { closeConnection(); location.hash = "#/accounts"; };
+function viewAccounts(){
+  $("#main").innerHTML = `<div class="phead"><div class="page-heading"><h1>${tr('manage_accounts')}</h1><div class="table-meta"><span>${tr('accounts_sub')}</span></div></div></div>
+    <div id="acctmsg" class="msg" role="status" aria-live="polite" style="margin-bottom:14px"></div>
+    <section class="panel"><div id="acctlist" class="acct-list"></div></section>
+    <section class="panel"><div id="acctcreate"></div></section>`;
+  loadAccounts();
+}
 async function loadAccounts(){
   try {
     const list = await req("/v1/admin/accounts");
     const meId = AUTH.account && AUTH.account.id;
-    $("#acctlist").innerHTML = `<table class="data"><tr><th>${tr('ac_email')}</th><th>${tr('ac_name')}</th><th>${tr('ac_phone')}</th><th>${tr('ac_role')}</th><th>${tr('ac_status')}</th><th class="num">${tr('ac_tables')}</th><th></th></tr>` +
-      list.map(a => `<tr><td><b>${esc(a.email)}</b>${a.id === meId ? ` <span class="muted">${tr('ac_you')}</span>` : ""}</td><td>${esc(a.name || "–")}</td><td>${esc(a.phone || "–")}</td>
-        <td>${a.is_admin ? `<span class="badge ad">${tr('role_admin')}</span>` : `<span class="muted">${tr('role_user')}</span>`}</td>
-        <td>${a.active ? tr("status_active") : `<span class="badge off">${tr('status_disabled')}</span>`}</td><td class="num">${a.n_tables}</td>
-        <td style="white-space:nowrap">
+    $("#acctlist").innerHTML = list.map(a => {
+      const you = a.id === meId ? ` <span class="muted">${tr('ac_you')}</span>` : "";
+      const av = a.avatar_url
+        ? `<img class="av" src="${esc(a.avatar_url)}" alt="" width="40" height="40" referrerpolicy="no-referrer">`
+        : `<span class="av">${esc((a.name || a.email || "?").trim()[0].toUpperCase())}</span>`;
+      return `<div class="acct-row">
+        <div class="acct-id">${av}<div class="acct-main">
+          <b>${esc(a.name || a.email)}</b>
+          <span class="acct-email">${esc(a.email)}${you}</span>
+          <div class="acct-tags">
+            ${a.is_admin ? `<span class="badge ad">${tr('role_admin')}</span>` : `<span class="badge usr">${tr('role_user')}</span>`}
+            ${a.active ? `<span class="badge ok">${tr('status_active')}</span>` : `<span class="badge off">${tr('status_disabled')}</span>`}
+            ${a.via_google ? `<span class="badge g">Google</span>` : ""}
+            <span class="acct-meta">${a.phone ? esc(a.phone) + " · " : ""}${a.n_tables} ${tr('ac_tables').toLowerCase()}</span>
+          </div>
+        </div></div>
+        <div class="acct-actions">
           <button class="btn ghost sm" onclick='editAccount(${a.id})'>${tr('ac_edit')}</button>
           <button class="btn ghost sm" onclick='resetPass(${a.id},"${esc(a.email)}")'>${tr('ac_resetpw')}</button>
           ${a.id === meId ? "" : `<button class="btn ghost sm" onclick='toggleActive(${a.id},${!a.active})'>${a.active ? tr("ac_disable") : tr("ac_enable")}</button>
-          <button class="btn ghost sm" style="color:var(--bad)" onclick='delAccount(${a.id},"${esc(a.email)}")'>${tr('ac_delete')}</button>`}
-        </td></tr>`).join("") + `</table></div>`;
+          <button class="btn ghost sm danger" onclick='delAccount(${a.id},"${esc(a.email)}")'>${tr('ac_delete')}</button>`}
+        </div>
+      </div>`;
+    }).join("");
     $("#acctcreate").innerHTML = `<h3>${tr('add_account')}</h3>
       <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">
         <label class="field"><span>${tr('ac_email')}</span><input id="naEmail" type="email" placeholder="${tr('acc_email_ph')}"></label>
