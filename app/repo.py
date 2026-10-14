@@ -152,17 +152,26 @@ async def existing_hashes(db, demo_id: int) -> set[tuple[int, str, str]]:
 
 
 async def replace_vectors(conn, demo_id: int, keep: set[tuple[int, str, str]], new_rows: list[dict]) -> int:
-    """Xoá vector không còn trong `keep`, thêm vector mới."""
+    """Xoá vector không còn trong `keep`, thêm vector mới.
+
+    Embed chạy lâu (rate-limit) nên sản phẩm có thể bị nhập lại/xoá trong lúc chờ. Bỏ qua vector
+    của sản phẩm đã biến mất (tránh vi phạm khoá ngoại) và không xoá vector của sản phẩm mới thêm
+    sau khi embed bắt đầu (id mới không nằm trong `keep`).
+    """
     cur = await existing_hashes(conn, demo_id)
-    stale = [c for c in cur if c not in keep]
+    snapshot_pids = {pid for pid, _, _ in keep}
+    stale = [c for c in cur if c not in keep and c[0] in snapshot_pids]
     for pid, kind, h in stale:
         await conn.execute("DELETE FROM product_vectors WHERE product_id=$1 AND kind=$2 AND text_hash=$3", pid, kind, h)
     if new_rows:
-        await conn.executemany(
-            """INSERT INTO product_vectors(product_id, kind, source_text, text_hash, embed_model, vec_int8, scale, vec_f32)
-               VALUES($1,$2,$3,$4,$5,$6,$7,$8) ON CONFLICT (product_id, kind, text_hash) DO NOTHING""",
-            [(r["product_id"], r["kind"], r["source_text"], r["text_hash"], r["embed_model"], r["vec_int8"],
-              r["scale"], r["vec_f32"]) for r in new_rows])
+        live = {r["id"] for r in await conn.fetch("SELECT id FROM products WHERE demo_id=$1", demo_id)}
+        rows = [(r["product_id"], r["kind"], r["source_text"], r["text_hash"], r["embed_model"], r["vec_int8"],
+                 r["scale"], r["vec_f32"]) for r in new_rows if r["product_id"] in live]
+        if rows:
+            await conn.executemany(
+                """INSERT INTO product_vectors(product_id, kind, source_text, text_hash, embed_model, vec_int8, scale, vec_f32)
+                   VALUES($1,$2,$3,$4,$5,$6,$7,$8) ON CONFLICT (product_id, kind, text_hash) DO NOTHING""",
+                rows)
     return len(stale)
 
 
