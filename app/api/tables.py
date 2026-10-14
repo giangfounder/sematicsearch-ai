@@ -1,6 +1,6 @@
 """API "bảng dữ liệu" đơn giản cho tích hợp nhanh:
 - tạo bảng từ Excel/CSV (xem trước -> tạo + embed),
-- hỏi bằng câu tự nhiên -> trả về 1 row đúng tên cột gốc,
+- hỏi bằng câu tự nhiên -> trả về tối đa 5 dòng đúng tên cột gốc,
 - thêm/cập nhật/xoá dòng theo đúng định dạng cột của file import đầu tiên.
 Mỗi "bảng" là 1 demo; dùng chung pipeline search."""
 from __future__ import annotations
@@ -10,19 +10,20 @@ import re
 
 from fastapi import APIRouter, Depends, File, Form, HTTPException, Query, Request, UploadFile
 from pydantic import BaseModel, Field
+from fastapi.responses import JSONResponse
 
 from fastapi import Header
 
 from app import repo
-from app.api.admin import after_write, demo_or_404, st, submit_embed
+from app.api.admin import after_write, demo_or_404, my_account_id, st, submit_embed
 from app.db import bump_version
 from app.ingest.importer import apply_import, plan_import, rows_from_records, slug_key
-from app.keys import SCOPES
+from app.keys import SCOPES, KeyDecryptError, KeyNotSavedError
 from app.search.pipeline import NotFound
-from app.security import _match, require_admin
+from app.security import _match, require_principal
 
 public = APIRouter()
-admin = APIRouter(dependencies=[Depends(require_admin)])
+admin = APIRouter(dependencies=[Depends(require_principal)])
 
 
 def authorize(request: Request, slug: str, scope: str) -> None:
@@ -32,6 +33,11 @@ def authorize(request: Request, slug: str, scope: str) -> None:
     ak = request.headers.get("x-api-key")
     adm = request.headers.get("x-admin-key")
     if _match(adm, s.admin_key_set):
+        return
+    # phiên đăng nhập (chủ bảng thao tác từ portal) hoặc super-admin
+    from app.security import resolve_principal
+
+    if resolve_principal(request) is not None:
         return
     if scope == "read" and _match(ak, s.api_key_set):
         return
@@ -46,6 +52,7 @@ def authorize(request: Request, slug: str, scope: str) -> None:
 
 class AskBody(BaseModel):
     text: str = Field(min_length=1, max_length=1000)
+    top_k: int = Field(default=1, ge=1, le=5)
     mode: str = Field(default="auto", pattern="^(fast|auto|accurate)$")
 
 
@@ -93,20 +100,25 @@ def row_of(p: dict, columns: list[str] | None = None) -> dict:
     return out
 
 
-async def _ask(request: Request, slug: str, text: str, mode: str) -> dict:
+async def _ask(request: Request, slug: str, text: str, mode: str, top_k: int = 1) -> dict:
     svc = st(request).search
     try:
-        r = await svc.search(slug, {"text": text, "top_k": 3, "mode": mode})
+        # Giữ 3 ứng viên ở mặc định để alternatives và quyết định không đổi.
+        r = await svc.search(slug, {"text": text, "top_k": max(3, top_k), "mode": mode})
     except NotFound:
         raise HTTPException(404, f"bảng '{slug}' không tồn tại") from None
     idx = st(request).indexes.get(slug)
     by_id = {p["id"]: p for p in idx.products} if idx else {}
     cols = (((idx.demo.get("settings") or {}).get("import") or {}).get("columns") if idx else None) or []
     top = r["products"][0] if r["products"] else None
+    rows = [row_of(by_id[p["product_id"]], cols) for p in r["products"][:top_k]
+            if p["product_id"] in by_id]
     return {
         "found": r["status"] == "matched",
         "status": r["status"],
         "row": row_of(by_id[top["product_id"]], cols) if top and top["product_id"] in by_id else None,
+        "rows": rows,
+        "count": len(rows),
         "score": top["score"] if top else 0.0,
         "row_key": top["sku"] if top else None,
         "clarify_question": r["clarify_question"],
@@ -119,13 +131,15 @@ async def _ask(request: Request, slug: str, text: str, mode: str) -> dict:
 @public.post("/v1/tables/{slug}/ask")
 async def ask(slug: str, body: AskBody, request: Request) -> dict:
     authorize(request, slug, "read")
-    return await _ask(request, slug, body.text, body.mode)
+    return await _ask(request, slug, body.text, body.mode, body.top_k)
 
 
 @public.get("/v1/tables/{slug}/ask")
-async def ask_get(slug: str, request: Request, text: str = Query(min_length=1, max_length=1000), mode: str = "auto") -> dict:
+async def ask_get(slug: str, request: Request, text: str = Query(min_length=1, max_length=1000),
+                  mode: str = Query(default="auto", pattern="^(fast|auto|accurate)$"),
+                  top_k: int = Query(default=1, ge=1, le=5)) -> dict:
     authorize(request, slug, "read")
-    return await _ask(request, slug, text, mode)
+    return await _ask(request, slug, text, mode, top_k)
 
 
 @public.put("/v1/tables/{slug}/rows")
@@ -161,7 +175,7 @@ async def delete_rows(slug: str, body: DeleteRowsBody, request: Request) -> dict
 @admin.get("/v1/tables")
 async def list_tables(request: Request) -> list[dict]:
     out = []
-    for d in await repo.list_demos(st(request).pool):
+    for d in await repo.list_demos(st(request).pool, account_id=my_account_id(request)):
         idx = st(request).indexes.get(d["slug"])
         cfg = (d.get("settings") or {}).get("import") or {}
         out.append({"slug": d["slug"], "name": d["name"], "rows": d["n_products"], "eval_cases": d["n_eval"],
@@ -226,7 +240,8 @@ async def create_table(request: Request, file: UploadFile = File(...), name: str
     if not plan["rows"]:
         raise HTTPException(422, {"message": "không có dòng hợp lệ (cần cột tên)", "warnings": plan["warnings"]})
     d = await repo.create_demo(s.pool, {"slug": slug, "name": name, "industry": industry,
-                                        "embed_model": s.settings.gemini_embed_model, "embed_dim": s.settings.embed_dim})
+                                        "embed_model": s.settings.gemini_embed_model, "embed_dim": s.settings.embed_dim,
+                                        "account_id": my_account_id(request)})
     res = await apply_import(s.pool, d["id"], plan, mode="replace")
     await after_write(request, slug)
     job = await submit_embed(request, d["id"])
@@ -237,7 +252,8 @@ async def create_table(request: Request, file: UploadFile = File(...), name: str
 def _key_out(k: dict) -> dict:
     return {"id": k["id"], "name": k["name"], "prefix": k["prefix"], "scopes": list(k["scopes"]),
             "active": k["active"], "expires_at": k["expires_at"], "created_at": k["created_at"],
-            "last_used_at": k["last_used_at"], "use_count": k["use_count"]}
+            "last_used_at": k["last_used_at"], "use_count": k["use_count"],
+            "can_reveal": k.get("can_reveal", False)}
 
 
 @admin.get("/v1/tables/{slug}/keys")
@@ -247,11 +263,31 @@ async def list_keys(slug: str, request: Request) -> list[dict]:
 
 
 @admin.post("/v1/tables/{slug}/keys", status_code=201)
-async def create_key(slug: str, body: KeyCreate, request: Request) -> dict:
+async def create_key(slug: str, body: KeyCreate, request: Request) -> JSONResponse:
     d = await demo_or_404(request, slug)
     raw, row = await st(request).keys.create(d["id"], body.name, _clean_scopes(body.scopes), body.expires_days)
-    # key chỉ trả nguyên văn đúng lần này
-    return {"key": raw, **_key_out(row)}
+    # Danh sách khóa luôn chỉ có metadata; khóa đầy đủ chỉ xuất ở create/reveal.
+    from fastapi.encoders import jsonable_encoder
+
+    return JSONResponse(jsonable_encoder({"key": raw, **_key_out(row)}), status_code=201,
+                        headers={"Cache-Control": "no-store", "Pragma": "no-cache"})
+
+
+@admin.post("/v1/tables/{slug}/keys/{key_id}/reveal")
+async def reveal_key(slug: str, key_id: int, request: Request) -> JSONResponse:
+    d = await demo_or_404(request, slug)
+    try:
+        raw = await st(request).keys.reveal(d["id"], key_id)
+    except KeyNotSavedError:
+        return JSONResponse({"detail": "Không có bản lưu để xem lại. Khóa cũ vẫn dùng được; hãy tạo khóa mới nếu cần."},
+                            status_code=409, headers={"Cache-Control": "no-store", "Pragma": "no-cache"})
+    except KeyDecryptError:
+        return JSONResponse({"detail": "Không thể giải mã khóa. Kiểm tra cấu hình mã hóa của máy chủ."},
+                            status_code=503, headers={"Cache-Control": "no-store", "Pragma": "no-cache"})
+    if raw is None:
+        raise HTTPException(404, "không tìm thấy khóa")
+    return JSONResponse({"id": key_id, "key": raw},
+                        headers={"Cache-Control": "no-store", "Pragma": "no-cache"})
 
 
 @admin.patch("/v1/tables/{slug}/keys/{key_id}")

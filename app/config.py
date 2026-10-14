@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from functools import lru_cache
 
+from pydantic import SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -23,6 +24,13 @@ class Settings(BaseSettings):
     rerank_timeout_ms: int = 2500
     # >0: không chờ understand quá mốc này (ms) khi không có ngữ cảnh; 0 = luôn chờ tới timeout
     understand_soft_deadline_ms: int = 0
+    # Hạn chót tổng cho 1 truy vấn (ms). 0 = tắt. Bảo đảm kết quả luôn trả trong ngân sách này
+    # (hết giờ thì dùng rule + embedding + thứ tự chưa rerank). Chừa phần cho mạng về client.
+    search_deadline_ms: int = 1800
+    # không khởi động rerank nối tiếp nếu ngân sách còn lại dưới mức này
+    rerank_min_budget_ms: int = 900
+    # ước lượng thời gian 1 lần rerank; không khởi động rerank nếu ngân sách còn lại nhỏ hơn mức này
+    rerank_expected_ms: int = 1400
     offline_timeout_ms: int = 60000
     key_cooldown_s: float = 30.0
     breaker_failures: int = 5
@@ -40,6 +48,13 @@ class Settings(BaseSettings):
     # Auth
     api_keys: str = ""
     admin_keys: str = ""
+    # Fernet: lưu bản mã của khóa bảng để chủ bảng xem lại; trống = chỉ lưu hash như trước.
+    table_key_encryption_key: SecretStr = SecretStr("")
+    # Tài khoản tạo sẵn khi khởi động (để trống email = không seed, giữ chế độ dev-mở cho test)
+    seed_account_email: str = ""
+    seed_account_password: str = ""
+    seed_account_name: str = ""
+    seed_account_phone: str = ""
 
     # Cache
     response_cache_ttl: int = 600
@@ -83,7 +98,7 @@ DEFAULT_SCORING: dict = {
     # approx (tầm/khoảng) -> dải cứng ±
     "approx_band": 0.20,
     # rerank
-    "rerank_top": 10,
+    "rerank_top": 6,
     "rerank_beta": 0.6,
     "rerank_violate_penalty": 0.6,
     "rerank_missing_relevance": 0.3,

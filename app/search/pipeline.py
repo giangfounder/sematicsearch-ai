@@ -18,7 +18,7 @@ from app.search.rerank import build_request, parse_rerank, rerank
 from app.search.rules import parse_rules
 from app.search.scoring import (apply_rerank, clarify_question, composite, confidence, decide, need_rerank,
                                 template_reason)
-from app.search.understand import build_llm_request, merge_filters, validate_llm
+from app.search.understand import build_llm_request, merge_filters, resolve_mentioned, validate_llm
 from app.text.normalize import normalize_query, norm_text, strip_accents
 from app.text.vn_numbers import spoken_to_digits
 
@@ -26,12 +26,12 @@ DEFAULT_FLAGS = {
     "understand": True, "rules": True, "multi_vector": True, "bm25": True, "entity": True,
     "entity_in_prompt": True, "soft_filter": True, "relax": True, "float_rescore": True,
     "composite": True, "context": True, "rerank": True, "baseline": False,
-    "embed_rewritten": None, "persistent_cache": None, "soft_deadline_ms": None,
+    "embed_rewritten": None, "persistent_cache": None, "soft_deadline_ms": None, "concurrent_rerank": True, "entity_fastpath": True,
 }
 
 BASELINE_FLAGS = {**DEFAULT_FLAGS, "rules": False, "multi_vector": False, "bm25": False, "entity": False,
                   "entity_in_prompt": False, "soft_filter": False, "relax": False, "float_rescore": False,
-                  "composite": False, "context": False, "rerank": False, "baseline": True}
+                  "composite": False, "context": False, "rerank": False, "baseline": True, "concurrent_rerank": False, "entity_fastpath": False}
 
 DATA_HIDE = {"id", "demo_id", "sku", "name", "price", "price_unit", "in_stock", "attributes", "updated_at",
              "sample_questions", "enrichment_status"}
@@ -214,31 +214,66 @@ class SearchService:
             order += [int(i) for i in np.argsort(-bm, kind="stable")[:20] if bm[i] > 0]
             cand_names = [idx.products[i]["name"] for i in dict.fromkeys(order)][:20]
 
+        # Đường tắt: khách gọi đúng tên/mã 1 sản phẩm (entity khớp chính xác, không phải lượt tiếp nối) ->
+        # bỏ qua gọi LLM hiểu câu VÀ rerank, trả bằng rule + embedding (~600ms). Entity exact có độ chính xác cao.
+        fast_entity = (fl.get("entity_fastpath", True) and fl["understand"] and fl["entity"] and not ctx
+                       and ent is not None and ent.exact_unique is not None and not fl["baseline"])
+
         # (a) + (b) song song
         t_par = time.perf_counter()
         und_task = (asyncio.create_task(self._timed(self._understand(idx, text, ctx, cand_names, persist)))
-                    if fl["understand"] else None)
+                    if fl["understand"] and not fast_entity else None)
         qvec, err, lat["embed"] = await self._timed(self._embed(idx, text_norm, persist))
         if err:
             fallback.append(f"embed_{err}")
+        # Rerank song song với hiểu câu: entity linking + rule đã chạy cục bộ nên có thể truy xuất suy đoán
+        # và khởi động rerank ngay khi có embedding, thay vì chờ hiểu câu xong mới rerank (tiết kiệm ~1,3s).
+        ent_brands = ent.brands if ent else []
+        ent_cats = ent.categories if ent else []
+        rr_task = None
+        # chỉ khởi động rerank nếu ngân sách còn đủ cho nó kịp (tránh tốn quota LLM cho call sẽ bị cắt,
+        # và tránh làm nặng rate-limit khiến hiểu câu chậm theo). deadline chặt -> auto chạy như fast.
+        dl = fl.get("deadline_ms", self.s.search_deadline_ms)
+        rerank_fits = (not dl) or (dl / 1000 - (time.perf_counter() - t_start) >= self.s.rerank_expected_ms / 1000)
+        if (fl.get("concurrent_rerank", True) and fl["rerank"] and mode != "fast" and und_task is not None
+                and not fl["baseline"] and qvec is not None and rerank_fits):
+            spec_filters = merge_filters(None, rules, ent_brands, ent_cats, idx)
+            spec_rt = R.retrieve(idx, qvec=qvec, texts=[digits_text], filters=spec_filters, intent="find_product",
+                                 ctx=ctx, ent_products=ent_products, flags=fl)
+            composite(idx, spec_rt.candidates, has_dense=True, flags=fl)
+            spec_exact = ent.exact_unique if (ent and fl["entity"]) else None
+            if need_rerank(idx, spec_rt.candidates, mode, spec_exact, fl)[0] and spec_rt.candidates:
+                rr_task = asyncio.create_task(self._timed(
+                    self._rerank(idx, text, spec_rt.constraints, spec_rt.candidates, persist)))
+
+        # Ngân sách thời gian còn lại tới hạn chót tổng (bảo đảm tổng < deadline_ms). None = không giới hạn.
+        deadline_ms = fl.get("deadline_ms", self.s.search_deadline_ms)
+
+        def budget_s(reserve_ms: float = 0.0):
+            if not deadline_ms:
+                return None
+            return deadline_ms / 1000 - (time.perf_counter() - t_start) - reserve_ms / 1000
+
         raw_llm = None
         if und_task is not None:
             soft = fl.get("soft_deadline_ms") or self.s.understand_soft_deadline_ms
-            und_res = None
+            # Ưu tiên hiểu câu (ảnh hưởng độ chính xác) hơn rerank: cho hiểu câu gần hết ngân sách.
+            # Rerank chỉ được áp nếu nó tình cờ xong song song trong phần còn lại (hiếm khi <2s).
+            wait = budget_s(20.0)
             if soft and not ctx:
-                # không chờ LLM quá soft deadline: đi tiếp bằng rule + embedding; LLM chạy nền để ghi cache
-                remaining = soft / 1000 - (time.perf_counter() - t_par)
-                done, _ = await asyncio.wait({und_task}, timeout=max(0.0, remaining))
-                if done:
-                    und_res = und_task.result()
-                else:
-                    fallback.append("understand_deferred")
-                    lat["understand"] = float(soft)
-                    self._bg.add(und_task)
-                    und_task.add_done_callback(self._bg.discard)
-            else:
+                wait = soft / 1000 if wait is None else min(wait, soft / 1000)
+            und_res = None
+            if wait is None:
                 und_res = await und_task
-            if und_res is not None:
+            else:
+                done, _ = await asyncio.wait({und_task}, timeout=max(0.0, wait))
+                und_res = und_task.result() if done else None
+            if und_res is None:
+                fallback.append("understand_deferred")
+                lat["understand"] = round((time.perf_counter() - t_par) * 1000, 1)
+                self._bg.add(und_task)
+                und_task.add_done_callback(self._bg.discard)
+            else:
                 raw_llm, err, lat["understand"] = und_res
                 if err:
                     fallback.append(f"understand_{err}")
@@ -254,8 +289,6 @@ class SearchService:
         if llm is None and ctx and ctx.get("previous_product_ids") and not ent_products:
             intent = "refine_previous"
 
-        ent_brands = ent.brands if ent else []
-        ent_cats = ent.categories if ent else []
         if fl["baseline"]:
             filters = merge_filters(llm, {"price": None, "attributes": []}, [], [], idx)
             # baseline giống bản cũ: hãng/category LLM nói ra là lọc cứng
@@ -266,6 +299,14 @@ class SearchService:
         if intent == "refine_previous" and ctx and ctx.get("previous_filters"):
             filters = merge_previous(ctx["previous_filters"], filters)
 
+        # boost sản phẩm khách gọi đích danh (LLM trích mentioned_products) nếu khớp chắc chắn và chưa có entity
+        mentioned = (llm or {}).get("mentioned_products") or []
+        if mentioned and fl["entity"] and not fl["baseline"]:
+            for pid, sc in resolve_mentioned(mentioned, idx).items():
+                cur = ent_products.get(pid)
+                if cur is None or cur["score"] < sc:
+                    ent_products[pid] = {"score": sc, "match": "mentioned", "surface": ""}
+
         understanding = {
             "intent": intent, "rewritten_query": rewritten or None, "filters": public_filters(filters),
             "entities": ent.to_dict() if ent else None,
@@ -273,6 +314,8 @@ class SearchService:
         }
         if llm and llm.get("dropped"):
             understanding["dropped"] = llm["dropped"]
+        if fast_entity:
+            understanding["fastpath"] = "entity_exact"
 
         if intent in ("out_of_scope", "chitchat"):
             # lưới an toàn: LLM có thể từ chối nhầm câu hỏi theo nhu cầu ("đi hàn quốc dùng gói nào").
@@ -286,6 +329,8 @@ class SearchService:
                 understanding["intent_llm"] = intent
                 intent = understanding["intent"] = "find_product"
             else:
+                if rr_task is not None:
+                    rr_task.cancel()
                 return self._finish(idx, request_id, "out_of_scope", None, [], understanding, [], False, fallback,
                                     lat, t_start, debug, [], top_k, filters)
 
@@ -318,14 +363,48 @@ class SearchService:
             exact_unique = cands[0]["product_id"]
         do_rr, _why = need_rerank(idx, cands, mode, exact_unique, fl)
         reranked = False
-        if do_rr:
-            results, err, lat["rerank"] = await self._timed(
-                self._rerank(idx, rewritten or text, rt.constraints, cands, persist))
-            if err:
+        if rr_task is not None:
+            # rerank đã chạy song song với hiểu câu: chỉ chờ trong phần ngân sách còn lại; hết giờ thì dùng
+            # thứ tự composite (bảo đảm không vượt deadline).
+            if rr_task.done():
+                results, err, lat["rerank"] = rr_task.result()
+            else:
+                wait = budget_s(10.0)
+                if wait is not None and wait <= 0:
+                    results, err = None, "deadline"
+                else:
+                    done, _ = await asyncio.wait({rr_task}, timeout=wait)
+                    if done:
+                        results, err, lat["rerank"] = rr_task.result()
+                    else:
+                        results, err = None, "deadline"
+            if err == "deadline":
+                rr_task.cancel()
+                fallback.append("rerank_deadline")
+            elif err:
                 fallback.append(f"rerank_{err}")
-            elif results:
+            elif results and (do_rr or exact_unique is None):
                 apply_rerank(idx, cands, results)
                 reranked = True
+        elif do_rr and (budget_s() is None or budget_s() > self.s.rerank_min_budget_ms / 1000):
+            task = asyncio.create_task(self._timed(self._rerank(idx, rewritten or text, rt.constraints, cands, persist)))
+            wait = budget_s(10.0)
+            done = True
+            if wait is not None:
+                finished, _ = await asyncio.wait({task}, timeout=wait)
+                done = bool(finished)
+            if done:
+                results, err, lat["rerank"] = await task
+                if err:
+                    fallback.append(f"rerank_{err}")
+                elif results:
+                    apply_rerank(idx, cands, results)
+                    reranked = True
+            else:
+                task.cancel()
+                fallback.append("rerank_deadline")
+        elif do_rr:
+            fallback.append("rerank_deadline")
 
         # Bước 5: quyết định
         status, close = decide(idx, cands, exact_unique)

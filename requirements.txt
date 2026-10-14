@@ -12,3 +12,4 @@ rapidfuzz>=3.9
 cachetools>=5.3
 python-multipart>=0.0.9
 orjson>=3.10
+cryptography>=43.0

@@ -21,7 +21,16 @@ async def _init_conn(conn: asyncpg.Connection) -> None:
 
 
 async def create_pool(dsn: str, min_size: int = 1, max_size: int = 10) -> asyncpg.Pool:
-    return await asyncpg.create_pool(dsn, min_size=min_size, max_size=max_size, init=_init_conn)
+    kw: dict = {}
+    low = dsn.lower()
+    # Neon/Supabase yêu cầu SSL; endpoint pooled (PgBouncer) không hỗ trợ prepared statement -> tắt cache.
+    if "neon.tech" in low or "supabase" in low or "sslmode=require" in low or "pooler" in low:
+        kw["statement_cache_size"] = 0
+        if "sslmode=require" in low and "ssl=" not in low:
+            import ssl as _ssl
+
+            kw["ssl"] = _ssl.create_default_context()
+    return await asyncpg.create_pool(dsn, min_size=min_size, max_size=max_size, init=_init_conn, **kw)
 
 
 async def migrate(pool: asyncpg.Pool) -> list[str]:

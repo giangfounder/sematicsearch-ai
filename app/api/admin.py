@@ -18,19 +18,30 @@ from app.ingest.template_xlsx import build_template
 from app.ingest.vectors import embed_demo
 from app.schemas import (AttributeDef, DemoCreate, DemoPatch, EnrichApply, EnrichRequest, EvalCaseIn,
                          EvaluateRequest, GenerateEvalRequest, ProductIn, ProductPatch)
-from app.security import require_admin
+from app.security import require_principal, resolve_principal
 
-router = APIRouter(dependencies=[Depends(require_admin)])
+router = APIRouter(dependencies=[Depends(require_principal)])
 
 
 def st(request: Request):
     return request.app.state
 
 
+def my_account_id(request: Request) -> int | None:
+    """account_id của người gọi, hoặc None nếu là super-admin/dev/khoá-bảng (không giới hạn theo chủ)."""
+    p = resolve_principal(request)
+    return None if p is None or p.get("super") else p.get("account_id")
+
+
 async def demo_or_404(request: Request, slug: str) -> dict:
     d = await repo.get_demo(st(request).pool, slug)
     if d is None:
-        raise HTTPException(404, f"demo '{slug}' không tồn tại")
+        raise HTTPException(404, f"bảng '{slug}' không tồn tại")
+    # tài khoản thường chỉ thao tác bảng của mình (hoặc bảng chưa có chủ); super-admin/dev không giới hạn.
+    # Trả 404 (không phải 403) để không lộ sự tồn tại của bảng người khác.
+    acc = my_account_id(request)
+    if acc is not None and d.get("account_id") is not None and d["account_id"] != acc:
+        raise HTTPException(404, f"bảng '{slug}' không tồn tại")
     return d
 
 
@@ -52,7 +63,7 @@ async def after_write(request: Request, slug: str) -> None:
 # ---------------------------------------------------------------- demos
 @router.get("/v1/admin/demos")
 async def list_demos(request: Request):
-    return await repo.list_demos(st(request).pool)
+    return await repo.list_demos(st(request).pool, account_id=my_account_id(request))
 
 
 @router.post("/v1/admin/demos", status_code=201)
@@ -61,6 +72,7 @@ async def create_demo(body: DemoCreate, request: Request):
         raise HTTPException(409, "slug đã tồn tại")
     data = body.model_dump()
     data["embed_model"] = data.get("embed_model") or st(request).settings.gemini_embed_model
+    data["account_id"] = my_account_id(request)  # bảng thuộc về tài khoản đang đăng nhập
     d = await repo.create_demo(st(request).pool, data)
     await after_write(request, body.slug)
     return d

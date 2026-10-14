@@ -206,3 +206,24 @@ def build_llm_request(idx: DemoIndex, text: str, ctx: dict | None, candidate_nam
         if i is not None:
             prev_names.append(idx.products[i]["name"])
     return idx.understand_system, understand_contents(text, ctx, prev_names, candidate_names), idx.understand_schema
+
+
+def resolve_mentioned(mentions: list[str], idx: DemoIndex, threshold: int = 88) -> dict[int, float]:
+    """Khớp tên sản phẩm khách nhắc (LLM trích) với catalog bằng token_set_ratio -> {pid: score 0..1}.
+    Dùng để boost đúng sản phẩm được gọi tên khi dense/entity chưa đủ phân biệt (iPhone 15 vs 16)."""
+    from rapidfuzz import fuzz
+
+    out: dict[int, float] = {}
+    for m in mentions or []:
+        if not isinstance(m, str) or len(m.strip()) < 2:
+            continue
+        mn = strip_accents(norm_text(m))
+        best_pid, best = None, 0
+        for p in idx.products:
+            sc = max(fuzz.token_set_ratio(mn, strip_accents(norm_text(c)))
+                     for c in (p["name"], p["sku"], *(p.get("aliases") or [])))
+            if sc > best:
+                best, best_pid = sc, p["id"]
+        if best >= threshold and best_pid is not None:
+            out[best_pid] = max(out.get(best_pid, 0.0), best / 100.0)
+    return out

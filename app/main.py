@@ -9,7 +9,8 @@ from pathlib import Path
 from fastapi import FastAPI, Request
 from fastapi.responses import FileResponse, ORJSONResponse
 
-from app.api import admin, search, tables
+from app.accounts import AccountStore
+from app.api import accounts_api, admin, auth, search, tables
 from app.catalog.index import IndexManager
 from app.config import Settings, get_settings
 from app.db import VersionListener, create_pool, migrate
@@ -38,6 +39,18 @@ async def warmup(gem) -> None:
         log.warning("gemini warm-up failed: %s", e)
 
 
+async def seed_account(settings: Settings, accounts: AccountStore, pool) -> None:
+    """Tạo sẵn tài khoản từ cấu hình (SEED_ACCOUNT_EMAIL/PASSWORD) nếu chưa có, và gán các bảng chưa có
+    chủ cho tài khoản đầu tiên để tài khoản thấy ngay dữ liệu mẫu."""
+    email = settings.seed_account_email.strip()
+    if not email or not settings.seed_account_password:
+        return
+    acc = await accounts.ensure_account(email, settings.seed_account_password,
+                                        name=settings.seed_account_name or None,
+                                        phone=settings.seed_account_phone or None, is_admin=True)
+    await pool.execute("UPDATE demos SET account_id=$1 WHERE account_id IS NULL", acc["id"])
+
+
 def create_app(settings: Settings | None = None) -> FastAPI:
     settings = settings or get_settings()
 
@@ -55,8 +68,11 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         await logs.start()
         jobs = JobRunner(pool)
         await jobs.recover()
-        keys = KeyStore(pool)
+        keys = KeyStore(pool, settings.table_key_encryption_key.get_secret_value())
         await keys.start()
+        accounts = AccountStore(pool)
+        await accounts.start()
+        await seed_account(settings, accounts, pool)
         svc = SearchService(settings, gem, indexes, pool, log_sink=logs.put)
         if settings.load_on_startup:
             await indexes.load_all()
@@ -66,6 +82,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         app.state.settings, app.state.pool, app.state.gemini = settings, pool, gem
         app.state.indexes, app.state.search, app.state.logs, app.state.jobs = indexes, svc, logs, jobs
         app.state.keys = keys
+        app.state.accounts = accounts
         warm = asyncio.create_task(warmup(gem)) if gem.provider == "gemini" else None
         try:
             yield
@@ -74,6 +91,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                 warm.cancel()
             await jobs.cancel_all()
             await keys.stop()
+            await accounts.stop()
             await listener.stop()
             await logs.stop()
             await gem.close()
@@ -81,6 +99,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     app = FastAPI(title="Product Semantic Search", version="1.0.0", lifespan=lifespan,
                   default_response_class=ORJSONResponse)
+    app.include_router(auth.router)
+    app.include_router(accounts_api.router)
     app.include_router(search.router)
     app.include_router(admin.router)
     app.include_router(tables.public)
@@ -113,6 +133,10 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     @app.get("/", include_in_schema=False)
     async def ui():
         return FileResponse(STATIC / "index.html", headers={"Cache-Control": "no-cache"})
+
+    @app.get("/logo.png", include_in_schema=False)
+    async def logo():
+        return FileResponse(STATIC / "logo.png", media_type="image/png")
 
     return app
 

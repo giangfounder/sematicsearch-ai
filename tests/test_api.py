@@ -71,17 +71,61 @@ def test_out_of_scope_and_chitchat(client):
     assert r["status"] != "out_of_scope" and r["understanding"]["intent_llm"] == "out_of_scope"
 
 
-@pytest.mark.parametrize("fail,reason", [("understand", "understand_error"), ("embed_query", "embed_error")])
-def test_fallback_when_gemini_fails(client, fail, reason):
+# câu mô tả (không phải tên chính xác) để buộc gọi understand; "samsung + dưới 7 triệu" lọc còn mỗi TL1
+@pytest.mark.parametrize("fail,reason,query", [
+    ("understand", "understand_error", "tủ lạnh samsung dưới 7 triệu"),
+    ("embed_query", "embed_error", "sam sung 236 lít")])
+def test_fallback_when_gemini_fails(client, fail, reason, query):
     ids = seed_demo(client)
     gem = client.app.state.gemini
     gem.fail[fail] = "error"
-    r = search(client, "sam sung 236 lít", mode="fast")
+    r = search(client, query, mode="fast")
     assert reason in r["fallback_reason"]
     assert r["products"] and r["products"][0]["product_id"] == ids["TL1"]
     assert r["cache_hit"] is False
-    r2 = search(client, "sam sung 236 lít", mode="fast")
+    r2 = search(client, query, mode="fast")
     assert r2["cache_hit"] is False  # không cache kết quả fallback
+
+
+def test_hard_deadline_caps_latency(db_url):
+    """Hạn chót cứng: dù Gemini chậm, truy vấn vẫn trả trong ngân sách (dùng rule + composite)."""
+    from app.main import create_app
+
+    app = create_app(make_settings(db_url, search_deadline_ms=300))
+    with TestClient(app) as c:
+        ids = seed_demo(c)
+        gem = c.app.state.gemini
+        gem.delay_ms["understand"] = 800  # hiểu câu chậm hơn deadline
+        gem.delay_ms["rerank"] = 800
+        t0 = time.perf_counter()
+        r = search(c, "tủ lạnh dưới 3 triệu", mode="accurate")
+        took = (time.perf_counter() - t0) * 1000
+        assert took < 650, took  # trong ngân sách (+ dư cho máy test), không chờ hết 800ms
+        assert "understand_deferred" in r["fallback_reason"]
+        assert r["products"][0]["product_id"] == ids["TL4"]  # rule (giá <3tr) vẫn cho đúng
+
+
+def test_mentioned_product_boost(client):
+    """LLM trích tên sản phẩm khách gọi -> boost đúng sản phẩm dù dense chưa phân biệt được."""
+    ids = seed_demo(client)
+    gem = client.app.state.gemini
+    gem.handlers["understand"] = lambda **kw: {"intent": "find_product", "rewritten_query": "tivi sony 65 inch",
+                                               "mentioned_products": ["Tivi Sony 65 inch"], "filters": {"attributes": []}}
+    r = search(client, "cho xem cái tivi đó", mode="fast")
+    assert r["products"][0]["product_id"] == ids["TV2"]
+
+
+def test_entity_fastpath_skips_understand(client):
+    """Khách gọi đúng tên/mã -> bỏ qua LLM hiểu câu, trả nhanh bằng entity + embedding."""
+    ids = seed_demo(client)
+    gem = client.app.state.gemini
+    n = gem.calls.get("understand", 0)
+    r = search(client, "sam sung 236 lít", mode="auto")  # auto nhưng vẫn không gọi understand/rerank
+    assert r["understanding"].get("fastpath") == "entity_exact"
+    assert r["products"][0]["product_id"] == ids["TL1"] and r["status"] == "matched"
+    assert r["reranked"] is False
+    assert gem.calls.get("understand", 0) == n  # không gọi LLM hiểu câu
+    assert r["fallback_reason"] is None  # không coi là suy giảm, kết quả cache được
 
 
 def test_understand_timeout_fallback(db_url):

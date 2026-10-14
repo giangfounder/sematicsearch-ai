@@ -3,9 +3,12 @@ from __future__ import annotations
 
 import asyncio
 import hashlib
+import hmac
 import logging
 import secrets
 from datetime import datetime, timedelta, timezone
+
+from cryptography.fernet import Fernet, InvalidToken
 
 log = logging.getLogger("keys")
 SCOPES = ("read", "write")
@@ -19,15 +22,26 @@ def new_key() -> str:
     return "sk_tbl_" + secrets.token_urlsafe(30)
 
 
+class KeyNotSavedError(Exception):
+    """Khóa cũ chỉ lưu hash, hoặc cấu hình giải mã chưa có."""
+
+
+class KeyDecryptError(Exception):
+    """Bản mã không hợp lệ hoặc không thuộc về khóa được yêu cầu."""
+
+
 class KeyStore:
-    def __init__(self, pool):
+    def __init__(self, pool, encryption_key: str = ""):
         self.pool = pool
+        self.cipher = Fernet(encryption_key.strip().encode("ascii")) if encryption_key.strip() else None
         self.by_hash: dict[str, dict] = {}
         self.used: dict[int, int] = {}
         self.task: asyncio.Task | None = None
 
     async def load(self) -> None:
-        rows = await self.pool.fetch("""SELECT k.*, d.slug FROM table_keys k JOIN demos d ON d.id=k.demo_id""")
+        rows = await self.pool.fetch("""SELECT k.id, k.demo_id, k.key_hash, k.scopes, k.active,
+                                              k.expires_at, d.slug
+                                       FROM table_keys k JOIN demos d ON d.id=k.demo_id""")
         self.by_hash = {r["key_hash"]: dict(r) for r in rows}
 
     async def start(self, refresh_s: float = 30.0) -> None:
@@ -73,20 +87,45 @@ class KeyStore:
         return True
 
     # ---------- CRUD ----------
+    def _metadata(self, row) -> dict:
+        out = dict(row)
+        out["can_reveal"] = bool(self.cipher and out.get("can_reveal"))
+        return out
+
     async def list(self, demo_id: int) -> list[dict]:
-        rows = await self.pool.fetch("""SELECT id, name, prefix, scopes, active, expires_at, created_at, last_used_at, use_count
+        rows = await self.pool.fetch("""SELECT id, name, prefix, scopes, active, expires_at, created_at, last_used_at, use_count,
+                                              (key_encrypted IS NOT NULL) AS can_reveal
                                         FROM table_keys WHERE demo_id=$1 ORDER BY created_at DESC""", demo_id)
-        return [dict(r) for r in rows]
+        return [self._metadata(r) for r in rows]
 
     async def create(self, demo_id: int, name: str, scopes: list[str], expires_days: int | None) -> tuple[str, dict]:
         raw = new_key()
+        encrypted = self.cipher.encrypt(raw.encode("utf-8")) if self.cipher else None
         exp = datetime.now(timezone.utc) + timedelta(days=expires_days) if expires_days else None
         row = await self.pool.fetchrow(
-            """INSERT INTO table_keys(demo_id, name, prefix, key_hash, scopes, expires_at) VALUES($1,$2,$3,$4,$5,$6)
-               RETURNING id, name, prefix, scopes, active, expires_at, created_at, last_used_at, use_count""",
-            demo_id, name, raw[:12], hash_key(raw), scopes, exp)
+            """INSERT INTO table_keys(demo_id, name, prefix, key_hash, scopes, expires_at, key_encrypted)
+               VALUES($1,$2,$3,$4,$5,$6,$7)
+               RETURNING id, name, prefix, scopes, active, expires_at, created_at, last_used_at, use_count,
+                         (key_encrypted IS NOT NULL) AS can_reveal""",
+            demo_id, name, raw[:12], hash_key(raw), scopes, exp, encrypted)
         await self.load()
-        return raw, dict(row)
+        return raw, self._metadata(row)
+
+    async def reveal(self, demo_id: int, key_id: int) -> str | None:
+        row = await self.pool.fetchrow(
+            "SELECT key_hash, key_encrypted FROM table_keys WHERE demo_id=$1 AND id=$2", demo_id, key_id)
+        if row is None:
+            return None
+        if not row["key_encrypted"] or self.cipher is None:
+            raise KeyNotSavedError
+        try:
+            raw = self.cipher.decrypt(bytes(row["key_encrypted"])).decode("utf-8")
+        except (InvalidToken, UnicodeError):
+            raise KeyDecryptError from None
+        # Ràng buộc bản mã với chính khóa này, tránh hiển thị nhầm khi bản mã bị tráo.
+        if not hmac.compare_digest(hash_key(raw), row["key_hash"]):
+            raise KeyDecryptError
+        return raw
 
     async def update(self, demo_id: int, key_id: int, data: dict) -> dict | None:
         sets, args = [], [demo_id, key_id]
@@ -102,9 +141,10 @@ class KeyStore:
             return None
         row = await self.pool.fetchrow(
             f"""UPDATE table_keys SET {', '.join(sets)} WHERE demo_id=$1 AND id=$2
-                RETURNING id, name, prefix, scopes, active, expires_at, created_at, last_used_at, use_count""", *args)
+                RETURNING id, name, prefix, scopes, active, expires_at, created_at, last_used_at, use_count,
+                          (key_encrypted IS NOT NULL) AS can_reveal""", *args)
         await self.load()
-        return dict(row) if row else None
+        return self._metadata(row) if row else None
 
     async def delete(self, demo_id: int, key_id: int) -> bool:
         r = await self.pool.execute("DELETE FROM table_keys WHERE demo_id=$1 AND id=$2", demo_id, key_id)

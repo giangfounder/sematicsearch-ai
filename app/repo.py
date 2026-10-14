@@ -27,19 +27,21 @@ async def get_demo_by_id(db, demo_id: int) -> dict | None:
     return _d(await db.fetchrow("SELECT * FROM demos WHERE id=$1", demo_id))
 
 
-async def list_demos(db) -> list[dict]:
-    rows = await db.fetch("""SELECT d.*, (SELECT count(*) FROM products p WHERE p.demo_id=d.id) AS n_products,
+async def list_demos(db, account_id: int | None = None) -> list[dict]:
+    where = "" if account_id is None else "WHERE d.account_id=$1 OR d.account_id IS NULL"
+    args = [] if account_id is None else [account_id]
+    rows = await db.fetch(f"""SELECT d.*, (SELECT count(*) FROM products p WHERE p.demo_id=d.id) AS n_products,
                              (SELECT count(*) FROM eval_cases e WHERE e.demo_id=d.id AND e.active) AS n_eval
-                             FROM demos d ORDER BY d.id""")
+                             FROM demos d {where} ORDER BY d.id""", *args)
     return [dict(r) for r in rows]
 
 
 async def create_demo(db, data: dict) -> dict:
     return _d(await db.fetchrow(
-        """INSERT INTO demos(slug, name, industry, embed_model, embed_dim, thresholds, settings)
-           VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING *""",
+        """INSERT INTO demos(slug, name, industry, embed_model, embed_dim, thresholds, settings, account_id)
+           VALUES($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *""",
         data["slug"], data["name"], data.get("industry"), data.get("embed_model", "gemini-embedding-001"),
-        data.get("embed_dim", 768), data.get("thresholds") or {}, data.get("settings") or {}))
+        data.get("embed_dim", 768), data.get("thresholds") or {}, data.get("settings") or {}, data.get("account_id")))
 
 
 async def update_demo(pool: asyncpg.Pool, demo_id: int, data: dict) -> dict:

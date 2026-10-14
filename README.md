@@ -69,7 +69,9 @@ sku, name, price, price_unit, in_stock, score, confidence, reason, attributes[{k
 understanding{intent, rewritten_query, filters, entities}, relaxed, relaxed_keys, reranked, cache_hit,
 fallback_reason, latency_ms{total, understand, embed, retrieve, rerank}` (+ `data_version`, `debug` khi debug=true).
 
-- `mode`: `fast` (không rerank) | `auto` (gating) | `accurate` (luôn rerank).
+- `mode`: `fast` không xếp hạng lại bằng AI (vẫn dùng embedding); `auto` chỉ xếp hạng lại khi kết quả chưa rõ,
+  bỏ qua nếu khớp mạnh duy nhất hoặc chính xác; `accurate` yêu cầu xếp hạng lại khi có ứng viên.
+  Lỗi hoặc hết thời gian có thể khiến hệ thống dùng kết quả tìm kiếm sẵn.
 - `fallback_reason`: `understand_timeout|understand_error|understand_rate_limited|understand_deferred|embed_*|rerank_*`.
   Kết quả có fallback không được cache.
 - Bot nên truyền lại `understanding.filters` của lượt trước vào `context.previous_filters` để tinh chỉnh nhiều lượt.
@@ -80,6 +82,19 @@ Quản trị (`X-Admin-Key`): `/v1/admin/demos` (CRUD), `/definitions`, `/produc
 `/template.xlsx`, `/embed`, `/enrich` (+ `/enrich/{job}/apply`), `/eval_cases` (+ `/generate`), `/jobs/{id}`,
 `/logs`, `/v1/admin/usage`; `POST /v1/demos/{slug}/evaluate`, `POST /v1/demos/{slug}/calibrate`. `GET /health?full=true`.
 
+## Tài khoản & đăng nhập
+
+Portal có đăng nhập; mỗi tài khoản sở hữu bảng và khoá API riêng (chỉ thấy/sửa bảng của mình; bảng chưa có chủ
+là dùng chung). Mật khẩu băm PBKDF2-HMAC-SHA256 (không lưu thô), token phiên chỉ lưu bản băm SHA-256.
+
+- `POST /v1/auth/login {email, password, remember}` → `{token, account}`; gửi kèm `Authorization: Bearer <token>`.
+  `remember=true` lưu token vào `localStorage` (giữ qua lần mở lại), ngược lại `sessionStorage`.
+- `POST /v1/auth/logout`, `GET /v1/auth/me`.
+- **Tạo sẵn tài khoản** qua env: `SEED_ACCOUNT_EMAIL`, `SEED_ACCOUNT_PASSWORD`, `SEED_ACCOUNT_NAME`,
+  `SEED_ACCOUNT_PHONE` (chạy lúc khởi động; các bảng chưa có chủ được gán cho tài khoản này).
+- Khi **chưa có tài khoản nào** và không đặt `ADMIN_KEYS` → chế độ dev mở (không cần đăng nhập). Khi đã có tài
+  khoản → các endpoint quản trị bắt buộc đăng nhập (hoặc khoá admin toàn cục cho super-admin).
+
 ## Bảng dữ liệu (tích hợp nhanh từ Excel)
 
 Portal tab **"Bảng dữ liệu"**: tải Excel/CSV → xem trước, chọn cột tên / cột mã → "Tạo bảng + embedding" →
@@ -87,11 +102,16 @@ portal sinh sẵn cURL. Mỗi bảng là 1 demo (dùng chung pipeline search); h
 nên API thêm/sửa dùng đúng các cột đó và trả về **nguyên dòng gốc** (đúng tên + thứ tự cột).
 
 ```bash
-# hỏi bằng câu tự nhiên -> 1 row  (X-API-Key)
+# hỏi bằng câu tự nhiên -> tối đa 5 dòng  (X-API-Key)
 curl -X POST "$BASE/v1/tables/goi-cuoc/ask" -H 'Content-Type: application/json' -H "X-API-Key: $KEY" \
-  -d '{"text": "gói cho cả nhà dùng chung"}'
+  -d '{"text": "gói cho cả nhà dùng chung", "top_k": 5, "mode": "auto"}'
 # -> {"found":true,"status":"matched","row":{"Mã gói":"G4","Tên gói":"Gói Gia Đình 300",...},"score":0.88,
+#     "rows":[{"Mã gói":"G4","Tên gói":"Gói Gia Đình 300",...},...],"count":3,
 #     "row_key":"G4","clarify_question":null,"alternatives":[...],"latency_ms":...}
+
+# GET dùng cùng tham số
+curl -G "$BASE/v1/tables/goi-cuoc/ask" -H "X-API-Key: $KEY" \
+  --data-urlencode 'text=gói cho cả nhà dùng chung' --data-urlencode 'top_k=5' --data-urlencode 'mode=auto'
 
 # thêm mới / cập nhật (trùng mã = cập nhật), tự embed lại phần đổi  (X-Admin-Key)
 curl -X PUT "$BASE/v1/tables/goi-cuoc/rows" -H 'Content-Type: application/json' -H "X-Admin-Key: $ADMIN" \
@@ -102,18 +122,35 @@ curl -X DELETE "$BASE/v1/tables/goi-cuoc/rows" -H 'Content-Type: application/jso
   -d '{"keys":["G7"]}'
 ```
 
+`top_k` là số dòng tối đa: số nguyên từ **1 đến 5**, mặc định **1**. Có thể trả ít hơn khi không đủ kết quả.
+`rows` chứa các dòng gốc, `count` là số dòng thực trả; `row`, `score`, `row_key` vẫn giữ kết quả đầu tiên.
+Không tìm thấy thì `rows: []`, `count: 0`. Các trường phản hồi cũ, kể cả `alternatives`, được giữ nguyên.
+Trong tab **Tích hợp API**, chọn **Số dòng** và **Chế độ** để cập nhật ví dụ POST/GET.
+
 ### Khoá API riêng cho từng bảng
 
 Portal tab **"Khoá API"** (hoặc `/v1/tables/{slug}/keys`, cần khoá quản trị toàn cục): tạo khoá chỉ dùng được cho
 đúng bảng đó, quyền `read` (gọi `/ask`) hoặc `read,write` (gọi `/rows`). Khoá gửi qua header `X-API-Key` hoặc
-`X-Table-Key`. Server chỉ lưu `sha256(khoá)`; khoá gốc hiện **một lần** khi tạo. Bảng nào đã có khoá đang hoạt động
+`X-Table-Key`. Xác thực dùng `sha256(khoá)`. Nếu cấu hình `TABLE_KEY_ENCRYPTION_KEY`, khóa tạo mới có thêm
+bản mã để chủ bảng hoặc quản trị toàn cục xem lại qua nút **Xem khóa**. Danh sách chỉ trả metadata, không trả khóa.
+Bảng nào đã có khoá đang hoạt động
 thì mọi lời gọi tới bảng đó phải kèm khoá hợp lệ; khoá quản trị toàn cục vẫn gọi được mọi bảng. Khi bảng chưa có
 khoá riêng và server không đặt `API_KEYS`/`ADMIN_KEYS`, API mở (chế độ dev).
 
 ```
 GET/POST /v1/tables/{slug}/keys · PATCH/DELETE /v1/tables/{slug}/keys/{id}
-POST body: {"name","scopes":["read"|"write"],"expires_days"?}  → trả {"key": "sk_tbl_…", ...} đúng một lần
+POST body: {"name","scopes":["read"|"write"],"expires_days"?}  → trả {"key": "sk_tbl_…", "can_reveal": true|false, ...}
+POST /v1/tables/{slug}/keys/{id}/reveal → {"id", "key"} (cần quyền quản lý bảng)
 ```
+
+`TABLE_KEY_ENCRYPTION_KEY` là khóa Fernet, tạo bằng
+`python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"` rồi lưu vào `.env`.
+Giữ cùng giá trị trên các worker và sao lưu riêng với database. Để trống thì chỉ lưu hash, không xem lại được.
+Khóa cũ chỉ có hash vẫn hoạt động; muốn xem lại thì tạo khóa mới. Đổi khóa mã hóa sẽ không giải mã được bản lưu cũ.
+Giá trị xem lại trên giao diện tự đóng sau 30 giây hoặc khi đổi trang; không lưu vào trình duyệt.
+
+Mẫu cURL có các dòng chú thích `#` giải thích header và tham số. Chú thích nằm ngoài JSON nên có thể sao chép
+cả khối để chạy trong Bash. Nút mắt ở màn hình đăng nhập và mục **Kết nối** dùng để hiện/ẩn giá trị đang nhập.
 
 `found=false` khi chưa đủ chắc (`ambiguous`/`no_match`/`out_of_scope`) → bot đọc `clarify_question` hoặc câu fallback.
 Quản lý: `GET /v1/tables`, `POST /v1/tables/preview` (multipart), `POST /v1/tables` (multipart: file, name, slug,
@@ -179,9 +216,36 @@ pytest -q        # Postgres thật (pgserver tự khởi động) + Gemini giả
    hoặc dùng **Cloudflare Tunnel** (không cần mở cổng, có HTTPS + domain; có thể đặt Cloudflare Access trước admin).
 4. `docker compose exec app python -m scripts.smoke_gemini` để đo latency thật từ region của VM.
 
+## Bảo đảm độ trễ < 2 giây (ràng buộc cứng)
+
+Mục tiêu bắt buộc: mọi truy vấn trả trong **< 2s** cho bảng < 10.000 sản phẩm. Các cơ chế (đo từ máy dev,
+gemini-3.5-flash-lite; truy xuất cục bộ < 20ms kể cả ở 10k sản phẩm nên chỉ các lời gọi Gemini mới biến động):
+
+1. **Hạn chót tổng cứng** `SEARCH_DEADLINE_MS` (mặc định 1800ms, chừa ~200ms cho mạng về client). Khi gần hết
+   ngân sách, hệ thống trả kết quả tốt nhất đang có (rule + embedding + thứ tự composite đã hiệu chỉnh), không chờ
+   LLM → **tổng luôn ≤ deadline**. Cờ `fallback_reason`: `understand_deferred`, `rerank_deadline`.
+2. **Rerank chạy song song hiểu câu** (không nối tiếp): entity linking + rule chạy cục bộ trước nên truy xuất suy
+   đoán + rerank khởi động ngay khi có embedding. Ưu tiên hiểu câu (ảnh hưởng độ chính xác) hơn rerank; chỉ khởi
+   động rerank nếu ngân sách còn đủ (`RERANK_EXPECTED_MS`) để tránh tốn quota cho call sẽ bị cắt.
+3. **Đường tắt khi khách gọi đúng tên/mã** sản phẩm (entity khớp chính xác): bỏ qua cả hiểu câu lẫn rerank → ~600ms,
+   độ chính xác cao. Rất hay gặp ở callbot ("cho em gói D15", "điều hòa daikin 1 ngựa").
+4. **Boost sản phẩm được gọi đích danh**: dùng `mentioned_products` do hiểu câu trích để boost đúng sản phẩm khi
+   dense chưa phân biệt được (iPhone 15 vs 16) — phục hồi phần lớn lợi ích của rerank mà không tốn thêm latency.
+
+**Số đo (dienmay 47 dòng, nguội, deadline 1800):**
+
+| | trước tối ưu | sau tối ưu |
+|---|---|---|
+| fast (p50 / p95) | 1446 / 1589 ms | ~1500 / <1800 ms |
+| auto có rerank (p50 / p95) | 2967 / 3335 ms | **≤1800 ms (đảm bảo)** |
+| khách gọi đúng tên | — | **~500–700 ms** |
+
+Hệ quả: dưới deadline 1800ms, rerank (vốn ~1,4s, kết thúc ~1,9s) hầu như không kịp nên auto chạy như fast + boost
+tên gọi; chất lượng vẫn cao nhờ composite đã calibrate. Muốn dùng rerank cho độ chính xác tối đa (chấp nhận chậm
+hơn 2s), nâng `SEARCH_DEADLINE_MS` lên ~2600 hoặc gọi `mode=accurate` với deadline nới.
+
 ## Giới hạn đã biết
 
-- Latency LLM là nút cổ chai (đo từ máy dev: understand p50 ≈1,5s, rerank 1,2–2,4s với gemini-3.5-flash-lite) —
-  xem `reports/` và mục Latency trong báo cáo; `UNDERSTAND_SOFT_DEADLINE_MS` đánh đổi một phần độ chính xác lấy latency.
+- Latency phụ thuộc mạng tới Google; đo lại từ chính VM Oracle (region gần) để biết số thật.
 - Free tier: embedding 100 văn bản/phút; LLM bị 429 sau ~20 request/phút → cần paid tier cho môi trường thật.
 - Chạy 1 worker (cache response trong RAM dùng chung); nhiều worker vẫn đúng (mỗi worker LISTEN và nạp index riêng).

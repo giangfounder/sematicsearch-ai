@@ -125,9 +125,9 @@ RERANK_SYSTEM = (
     "Bạn chấm mức phù hợp giữa yêu cầu của khách và các sản phẩm ứng viên của cửa hàng.\n"
     "- relevance: 0 = không liên quan, 0.5 = liên quan một phần, 1 = đúng thứ khách cần.\n"
     "- satisfies_constraints: sản phẩm có thoả mọi ràng buộc \"nói rõ\" của khách không.\n"
-    "- reason: CHỈ viết cho 3 sản phẩm phù hợp nhất: 1 câu tiếng Việt ngắn, tự nhiên, để nhân viên đọc cho khách, "
-    "nêu điểm khớp chính (hãng, giá, thuộc tính); chỉ dùng thông tin có trong dữ liệu, không bịa. "
-    "Các sản phẩm còn lại để reason là chuỗi rỗng.\n"
+    "- reason: CHỈ viết cho ĐÚNG MỘT sản phẩm phù hợp nhất: một cụm tiếng Việt rất ngắn (tối đa 12 từ) nêu điểm "
+    "khớp chính (hãng/giá/thuộc tính), ví dụ \"Samsung, tiết kiệm điện, giá 9,8tr\". TẤT CẢ sản phẩm còn lại "
+    "để reason là chuỗi rỗng. Viết càng ngắn càng tốt.\n"
     "Chấm tất cả sản phẩm được gửi, chỉ dùng đúng product_id trong danh sách."
 )
 

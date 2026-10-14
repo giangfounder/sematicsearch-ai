@@ -1,8 +1,9 @@
-"""API bảng dữ liệu: tạo từ Excel -> embed -> ask trả 1 row gốc; thêm/sửa/xoá dòng; quản lý bảng."""
+"""API bảng dữ liệu: import, ask trả các dòng gốc, CRUD và quản lý bảng."""
 from __future__ import annotations
 
 import io
 
+import pytest
 from openpyxl import Workbook
 
 from tests.conftest import FAKE_SCORING, wait_job
@@ -65,9 +66,71 @@ def test_create_ask_returns_original_row(client):
     assert a["row"] == {"Mã": "TL01", "Tên sản phẩm": "Tủ lạnh Samsung 236 lít", "Hãng": "Samsung", "Giá": 6290000,
                         "Dung tích (lít)": 236, "Ghi chú": "bán chạy"}
     assert list(a["row"]) == DATA[0]  # giữ đúng thứ tự cột của file
+    assert a["rows"] == [a["row"]] and a["count"] == 1
     g = client.get("/v1/tables/sp/ask", params={"text": "máy giặt lồng đứng"}).json()
     assert g["row_key"] == "MG01"
     assert client.post("/v1/tables/khong-co/ask", json={"text": "x"}).status_code == 404
+
+
+def test_ask_top_k_returns_ranked_original_rows(client):
+    data = [DATA[0]] + [
+        [f"TL{i:02}", f"Tủ lạnh Samsung {200 + i * 20} lít", "Samsung", 6000000 + i * 100000,
+         200 + i * 20, f"Mẫu {i}"] for i in range(1, 7)
+    ]
+    created = client.post("/v1/tables", files=files(xlsx(data)), data={"name": "Nhiều dòng", "slug": "nhieu"})
+    assert created.status_code == 201, created.text
+    wait_job(client, created.json()["embed_job"])
+    # Đảm bảo các dòng cùng loại vượt ngưỡng, kiểm tra giới hạn thay vì độ chính xác embedding giả.
+    patched = client.patch("/v1/admin/demos/nhieu", json={
+        "settings": {**FAKE_SCORING, "import": _cfg(client, "nhieu")}, "thresholds": {"t_min": 0.0},
+    })
+    assert patched.status_code == 200, patched.text
+    replies = []
+    for top_k in (1, 3, 5):
+        response = client.post("/v1/tables/nhieu/ask", json={"text": "tủ lạnh", "top_k": top_k, "mode": "fast"})
+        assert response.status_code == 200, response.text
+        result = response.json()
+        assert result["count"] == len(result["rows"]) == top_k
+        assert result["row"] == result["rows"][0]
+        assert result["row_key"] == result["rows"][0]["Mã"]
+        assert all(list(row) == data[0] for row in result["rows"])
+        originals = {row[0]: dict(zip(data[0], row)) for row in data[1:]}
+        assert all(row == originals[row["Mã"]] for row in result["rows"])
+        replies.append(result)
+    assert replies[0]["rows"] == replies[2]["rows"][:1]
+    assert replies[1]["rows"] == replies[2]["rows"][:3]
+    assert len(replies[0]["alternatives"]) == 2  # không thay đổi mặc định của tích hợp cũ
+    get_response = client.get("/v1/tables/nhieu/ask", params={"text": "tủ lạnh", "top_k": 2, "mode": "fast"})
+    assert get_response.status_code == 200, get_response.text
+    assert get_response.json()["rows"] == replies[2]["rows"][:2]
+    assert get_response.json()["count"] == 2
+
+
+def test_ask_top_k_can_return_fewer_rows_and_no_results(client, monkeypatch):
+    make_table(client)
+    response = client.post("/v1/tables/sp/ask", json={"text": "tủ lạnh", "top_k": 5, "mode": "fast"})
+    assert response.status_code == 200, response.text
+    assert 0 < response.json()["count"] <= 3
+    assert response.json()["count"] == len(response.json()["rows"])
+
+    async def no_results(slug, body):
+        return {"products": [], "status": "no_match", "clarify_question": None,
+                "request_id": "no-results", "latency_ms": {"total": 1.0}}
+
+    monkeypatch.setattr(client.app.state.search, "search", no_results)
+    empty = client.post("/v1/tables/sp/ask", json={"text": "không có", "top_k": 5}).json()
+    assert empty["rows"] == [] and empty["count"] == 0
+    assert empty["row"] is None and empty["found"] is False
+
+
+@pytest.mark.parametrize("top_k", [0, -1, 6, 100, 1.5, "abc"])
+def test_ask_rejects_invalid_top_k(client, top_k):
+    assert client.post("/v1/tables/sp/ask", json={"text": "tủ lạnh", "top_k": top_k}).status_code == 422
+    assert client.get("/v1/tables/sp/ask", params={"text": "tủ lạnh", "top_k": top_k}).status_code == 422
+
+
+def test_ask_get_validates_mode(client):
+    assert client.get("/v1/tables/sp/ask", params={"text": "tủ lạnh", "mode": "invalid"}).status_code == 422
 
 
 def test_upsert_and_delete_rows_same_columns(client):
