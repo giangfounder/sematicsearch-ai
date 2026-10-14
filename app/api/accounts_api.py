@@ -32,7 +32,8 @@ def _store(request: Request):
 def _out(a: dict) -> dict:
     return {"id": a["id"], "email": a["email"], "name": a.get("name"), "phone": a.get("phone"),
             "is_admin": a["is_admin"], "active": a["active"], "created_at": a.get("created_at"),
-            "n_tables": a.get("n_tables", 0)}
+            "via_google": bool(a.get("via_google") or a.get("google_sub")),
+            "avatar_url": a.get("avatar_url"), "n_tables": a.get("n_tables", 0)}
 
 
 def _me_id(request: Request) -> int | None:

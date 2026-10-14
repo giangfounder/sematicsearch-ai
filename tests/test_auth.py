@@ -123,6 +123,70 @@ def test_account_management_by_admin(db_url):
         assert c.delete(f"/v1/admin/accounts/{me}", headers=ha).status_code == 400
 
 
+def _fake_verify(mapping):
+    async def verify(credential):
+        return mapping.get(credential)
+    return verify
+
+
+def test_google_login_signup_and_admin_manage(db_url):
+    """Đăng nhập Google: lần đầu tạo tài khoản mới (non-admin), admin thấy và quản lý được."""
+    app = create_app(make_settings(db_url, seed_account_email="a@x.com", seed_account_password="pw123456",
+                                   seed_account_name="Chủ A",
+                                   google_client_id="test-client.apps.googleusercontent.com"))
+    with TestClient(app) as c:
+        c.app.state.google_verify = _fake_verify({  # type: ignore[attr-defined]
+            "credential-newuser-001": {"sub": "g-1", "email": "newuser@gmail.com", "name": "New User", "picture": "http://p/a.png"}})
+        # config công khai lộ client id để frontend hiện nút
+        assert c.get("/v1/auth/config").json()["google_enabled"] is True
+        # token Google không hợp lệ -> 401
+        assert c.post("/v1/auth/google", json={"credential": "khong-biet"}).status_code == 401
+        # đăng nhập lần đầu = đăng ký
+        r = c.post("/v1/auth/google", json={"credential": "credential-newuser-001"})
+        assert r.status_code == 200, r.text
+        j = r.json()
+        assert j["account"]["email"] == "newuser@gmail.com" and j["account"]["is_admin"] is False
+        assert j["account"]["via_google"] is True and j["super"] is False
+        tok = j["token"]
+        assert c.get("/v1/auth/me", headers={"Authorization": f"Bearer {tok}"}).status_code == 200
+        # đăng nhập lại cùng Google -> cùng tài khoản, không tạo trùng
+        r2 = c.post("/v1/auth/google", json={"credential": "credential-newuser-001"})
+        assert r2.json()["account"]["id"] == j["account"]["id"]
+        # admin thấy tài khoản Google và quản lý được
+        ha = {"Authorization": f"Bearer {c.post('/v1/auth/login', json={'email': 'a@x.com', 'password': 'pw123456'}).json()['token']}"}
+        accs = {a["email"]: a for a in c.get("/v1/admin/accounts", headers=ha).json()}
+        assert "newuser@gmail.com" in accs and accs["newuser@gmail.com"]["via_google"] is True
+        uid = accs["newuser@gmail.com"]["id"]
+        # admin khoá tài khoản Google -> không đăng nhập Google được nữa
+        assert c.patch(f"/v1/admin/accounts/{uid}", json={"active": False}, headers=ha).status_code == 200
+        assert c.post("/v1/auth/google", json={"credential": "credential-newuser-001"}).status_code == 403
+
+
+def test_google_links_existing_email_account(db_url):
+    """Đăng nhập Google bằng email trùng tài khoản sẵn có -> liên kết, giữ nguyên quyền admin."""
+    app = create_app(make_settings(db_url, seed_account_email="a@x.com", seed_account_password="pw123456",
+                                   google_client_id="test-client.apps.googleusercontent.com"))
+    with TestClient(app) as c:
+        c.app.state.google_verify = _fake_verify({  # type: ignore[attr-defined]
+            "credential-aaccount-001": {"sub": "g-a", "email": "a@x.com", "name": "A G", "picture": None}})
+        r = c.post("/v1/auth/google", json={"credential": "credential-aaccount-001"})
+        assert r.status_code == 200
+        assert r.json()["account"]["is_admin"] is True and r.json()["super"] is True  # vẫn là admin seed
+        # mật khẩu cũ vẫn dùng được
+        assert c.post("/v1/auth/login", json={"email": "a@x.com", "password": "pw123456"}).status_code == 200
+
+
+def test_google_signup_disabled(db_url):
+    """Tắt google_allow_signup: email lạ không tạo được tài khoản."""
+    app = create_app(make_settings(db_url, seed_account_email="a@x.com", seed_account_password="pw123456",
+                                   google_client_id="test-client.apps.googleusercontent.com",
+                                   google_allow_signup=False))
+    with TestClient(app) as c:
+        c.app.state.google_verify = _fake_verify({  # type: ignore[attr-defined]
+            "credential-stranger-1": {"sub": "g-x", "email": "stranger@gmail.com", "name": "X", "picture": None}})
+        assert c.post("/v1/auth/google", json={"credential": "credential-stranger-1"}).status_code == 403
+
+
 def test_non_admin_cannot_manage_accounts(db_url):
     with TestClient(seeded(db_url)) as c:
         ha = {"Authorization": f"Bearer {c.post('/v1/auth/login', json={'email': 'a@x.com', 'password': 'pw123456'}).json()['token']}"}

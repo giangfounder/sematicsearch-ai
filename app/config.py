@@ -55,6 +55,10 @@ class Settings(BaseSettings):
     seed_account_password: str = ""
     seed_account_name: str = ""
     seed_account_phone: str = ""
+    # Đăng nhập Google (OAuth ID token). Trống = ẩn nút đăng nhập Google.
+    google_client_id: str = ""
+    # Cho phép tạo tài khoản mới khi đăng nhập Google lần đầu (False = chỉ tài khoản đã có mới vào được)
+    google_allow_signup: bool = True
 
     # Cache
     response_cache_ttl: int = 600

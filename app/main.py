@@ -11,6 +11,7 @@ from fastapi.responses import FileResponse, ORJSONResponse
 
 from app.accounts import AccountStore
 from app.api import accounts_api, admin, auth, search, tables
+from app.auth_google import make_google_verifier
 from app.catalog.index import IndexManager
 from app.config import Settings, get_settings
 from app.db import VersionListener, create_pool, migrate
@@ -83,6 +84,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         app.state.indexes, app.state.search, app.state.logs, app.state.jobs = indexes, svc, logs, jobs
         app.state.keys = keys
         app.state.accounts = accounts
+        app.state.google_verify = make_google_verifier(settings)
         warm = asyncio.create_task(warmup(gem)) if gem.provider == "gemini" else None
         try:
             yield

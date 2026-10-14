@@ -36,7 +36,8 @@ def norm_email(email: str) -> str:
 
 def _acc_public(a: dict) -> dict:
     return {"id": a["id"], "email": a["email"], "name": a.get("name"), "phone": a.get("phone"),
-            "is_admin": a["is_admin"], "created_at": a.get("created_at")}
+            "is_admin": a["is_admin"], "avatar_url": a.get("avatar_url"),
+            "via_google": bool(a.get("google_sub")), "created_at": a.get("created_at")}
 
 
 class AccountStore:
@@ -98,8 +99,13 @@ class AccountStore:
     # ---------- phiên ----------
     async def login(self, email: str, password: str, remember: bool) -> tuple[str, dict] | None:
         acc = await self.get_by_email(email)
-        if acc is None or not acc["active"] or not verify_password(password, acc["pass_salt"], acc["pass_hash"]):
+        if acc is None or not acc["active"] or not acc.get("pass_hash") or not acc.get("pass_salt"):
+            return None  # tài khoản chỉ đăng nhập bằng Google (không có mật khẩu)
+        if not verify_password(password, acc["pass_salt"], acc["pass_hash"]):
             return None
+        return await self._issue_session(acc, remember)
+
+    async def _issue_session(self, acc: dict, remember: bool) -> tuple[str, dict]:
         token = secrets.token_urlsafe(32)
         th = hash_token(token)
         exp = datetime.now(timezone.utc) + timedelta(days=SESSION_DAYS_REMEMBER if remember else SESSION_DAYS)
@@ -109,6 +115,36 @@ class AccountStore:
         self.sessions[th] = {"token_hash": th, "account_id": acc["id"], "email": acc["email"],
                              "name": acc["name"], "is_admin": acc["is_admin"], "expires_at": exp}
         return token, _acc_public(acc)
+
+    async def login_google(self, sub: str, email: str, name: str | None = None, picture: str | None = None,
+                           allow_signup: bool = True, remember: bool = True) -> tuple[str, dict] | None:
+        """Đăng nhập/đăng ký bằng Google. Khớp theo google_sub, nếu chưa có thì liên kết vào email sẵn có,
+        nếu vẫn chưa có thì tạo mới (khi allow_signup). Trả None nếu tài khoản bị khoá hoặc không được phép tạo."""
+        email = norm_email(email)
+        r = await self.pool.fetchrow("SELECT * FROM accounts WHERE google_sub=$1", sub)
+        acc = dict(r) if r else None
+        if acc is None:
+            existing = await self.get_by_email(email)
+            if existing:  # đã có tài khoản email này -> liên kết Google vào
+                r = await self.pool.fetchrow(
+                    """UPDATE accounts SET google_sub=$1, avatar_url=COALESCE($2, avatar_url),
+                       name=COALESCE(name, $3) WHERE id=$4 RETURNING *""", sub, picture, name, existing["id"])
+                acc = dict(r)
+            elif allow_signup:
+                r = await self.pool.fetchrow(
+                    """INSERT INTO accounts(email, name, google_sub, avatar_url, is_admin)
+                       VALUES($1,$2,$3,$4,false) RETURNING *""", email, name, sub, picture)
+                acc = dict(r)
+                self.has_accounts = True
+                log.info("created google account %s", email)
+            else:
+                return None
+        elif picture and acc.get("avatar_url") != picture:  # cập nhật avatar mới nhất
+            await self.pool.execute("UPDATE accounts SET avatar_url=$1 WHERE id=$2", picture, acc["id"])
+            acc["avatar_url"] = picture
+        if not acc["active"]:
+            return None
+        return await self._issue_session(acc, remember)
 
     def resolve(self, token: str | None) -> dict | None:
         """Trả thông tin tài khoản từ token phiên (RAM), None nếu không hợp lệ/hết hạn."""
@@ -138,7 +174,8 @@ class AccountStore:
     # ---------- quản trị tài khoản ----------
     async def list_accounts(self) -> list[dict]:
         rows = await self.pool.fetch(
-            """SELECT a.id, a.email, a.name, a.phone, a.is_admin, a.active, a.created_at,
+            """SELECT a.id, a.email, a.name, a.phone, a.is_admin, a.active, a.created_at, a.avatar_url,
+                      (a.google_sub IS NOT NULL) AS via_google,
                       (SELECT count(*) FROM demos d WHERE d.account_id=a.id) AS n_tables
                FROM accounts a ORDER BY a.id""")
         return [dict(r) for r in rows]

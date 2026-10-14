@@ -18,6 +18,10 @@ services:
         value: Giang Nguyen
       - key: SEED_ACCOUNT_PHONE
         value: "0357778534"
+      - key: GOOGLE_CLIENT_ID        # OAuth Client ID (…apps.googleusercontent.com) để hiện nút đăng nhập Google; trống = ẩn nút
+        sync: false
+      - key: GOOGLE_ALLOW_SIGNUP     # true = ai đăng nhập Google lần đầu sẽ tự tạo tài khoản (non-admin)
+        value: "true"
       - key: GEMINI_LLM_MODEL
         value: gemini-3.5-flash-lite
       - key: GEMINI_RERANK_MODEL
