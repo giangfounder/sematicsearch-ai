@@ -94,7 +94,7 @@ input[type=file]{max-width:100%;font-size:13px;padding:8px;background:var(--sunk
 pre{background:var(--sunken);border:1px solid var(--line-2);border-radius:var(--r);padding:16px;margin:0;white-space:pre-wrap;word-break:break-word;max-height:420px;overflow:auto}
 table.data{width:100%;border-collapse:collapse;font-size:13px}table.data th{text-align:left;font-weight:500;color:var(--ink-2);padding:13px 12px;border-bottom:1px solid var(--line);white-space:nowrap;position:sticky;top:0;background:var(--sunken);z-index:1}table.data td{padding:13px 12px;border-bottom:1px solid var(--line-2);vertical-align:top}table.data tr:last-child td{border-bottom:0}table.data tr:hover td{background:var(--sunken)}.num{text-align:right!important;font-variant-numeric:tabular-nums}.scroll{overflow:auto;max-width:100%;overscroll-behavior-x:contain}.chip{display:inline-block;border:1px solid var(--line);border-radius:6px;padding:3px 9px;font-size:12px;margin:3px 5px 3px 0;color:var(--ink-2);background:var(--sunken)}
 .pill{display:inline-block;border-radius:5px;padding:3px 8px;font-size:11px;font-weight:500;white-space:nowrap}.pill.read{background:var(--brand-soft);color:var(--brand)}.pill.write{background:var(--warn-soft);color:var(--warn)}.pill.on{background:var(--ok-soft);color:var(--ok)}.pill.off{background:var(--bad-soft);color:var(--bad)}
-.empty{padding:36px 14px;text-align:center;color:var(--ink-3);font-size:13px}.empty b{display:block;color:var(--ink);font-size:15px;font-weight:500;margin-bottom:6px}.hidden{display:none!important}.banner{display:flex;gap:10px;align-items:flex-start;background:var(--ok-soft);border:1px solid var(--line);border-radius:var(--r);padding:14px;margin-bottom:20px}.banner .k{font-family:var(--mono);font-size:13px;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:8px 10px;flex:1;word-break:break-all}
+.empty{padding:36px 14px;text-align:center;color:var(--ink-3);font-size:13px}.empty b{display:block;color:var(--ink);font-size:15px;font-weight:500;margin-bottom:6px}[hidden]{display:none!important}.hidden{display:none!important}.banner{display:flex;gap:10px;align-items:flex-start;background:var(--ok-soft);border:1px solid var(--line);border-radius:var(--r);padding:14px;margin-bottom:20px}.banner .k{font-family:var(--mono);font-size:13px;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:8px 10px;flex:1;word-break:break-all}
 .search-panel{padding:28px;border-color:color-mix(in srgb,var(--brand) 32%,var(--line))}.search-title{display:flex;align-items:center;gap:9px;margin-bottom:18px;font-size:15px;font-weight:600}.search-title .ico{color:var(--brand)}
 .utter{display:flex;gap:10px}.utter input{font-size:16px;padding:15px 16px;min-height:58px;background:var(--canvas);flex:1}.utter .btn.primary{padding:0 22px;min-height:58px}.utter-opts{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;margin-top:16px;font-size:12px;color:var(--ink-2)}.utter-opts>label{display:flex;align-items:center;gap:8px}.utter-opts select{width:auto;font-size:12px;padding:6px 10px;min-height:38px}.shortcut{margin-left:auto;color:var(--ink-3);font-size:11px}kbd{font:11px var(--sans);border:1px solid var(--line);background:var(--sunken);padding:3px 6px;border-radius:4px}
 .ctx{margin-top:16px;padding:10px 12px;background:var(--sunken);border-radius:8px;font-size:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
@@ -104,7 +104,67 @@ table.data{width:100%;border-collapse:collapse;font-size:13px}table.data th{text
 .results{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:28px;align-items:start}.record h3{font-size:21px;line-height:1.4;margin:0 0 5px;font-weight:600;letter-spacing:-.5px}.record .sub{color:var(--ink-3);font-size:12px;margin-bottom:16px}.record .reason{background:var(--sunken);border-radius:8px;padding:12px 14px;margin:0 0 20px;font-size:13px}.record .reason b{color:var(--ink-3);font-weight:500}dl.kv{display:grid;grid-template-columns:minmax(90px,max-content) minmax(0,1fr);gap:10px 20px;margin:0;font-size:13px}dl.kv dt{color:var(--ink-3)}dl.kv dd{margin:0;overflow-wrap:anywhere}.conf{display:flex;align-items:center;gap:10px;margin-bottom:18px;font-size:12px;color:var(--ink-2)}.meter{flex:1;max-width:160px;height:5px;background:var(--line-2);border-radius:4px;overflow:hidden}.meter i{display:block;height:100%;background:var(--brand);border-radius:4px}.alternatives{border-left:1px solid var(--line);padding-left:24px}.alts{list-style:none;margin:0;padding:0}.alts li{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line-2);font-size:12px}.alts li:last-child{border-bottom:0}.alts .s{color:var(--ink-3);font-variant-numeric:tabular-nums}
 .fb{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:26px;padding-top:18px;border-top:1px solid var(--line);font-size:12px}.fb input{width:160px;font-size:12px}.feedback-extra{margin-top:12px}.feedback-extra>summary{font-size:12px;color:var(--ink-3);cursor:pointer}.feedback-extra .actions{margin-top:12px}.feedback-extra input:not([type=checkbox]){max-width:180px}input[type=checkbox]{width:16px;height:16px;accent-color:var(--brand);margin:0 6px 0 0;vertical-align:-3px}
 details.debug{border-top:1px solid var(--line);margin-top:20px;padding-top:4px}details.debug summary{cursor:pointer;color:var(--ink-2);font-size:12px;min-height:44px;padding:12px 0}details.debug[open]>summary{margin-bottom:14px}.understanding{margin:20px 0}.timeline{padding:4px 0 10px}.tl-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:20px}.tl-head .total{font-size:20px;font-weight:600;font-variant-numeric:tabular-nums}.tl-head .total small{font-size:12px;font-weight:400;color:var(--ink-3);margin-left:4px}.lane{display:grid;grid-template-columns:92px minmax(0,1fr);align-items:center;gap:10px;min-height:30px}.lane .lb{font-size:12px;color:var(--ink-2)}.track{position:relative;height:12px;background:var(--line-2);border-radius:4px}.seg{position:absolute;top:0;height:100%;border-radius:4px}.seg span{position:absolute;left:calc(100% + 6px);top:-4px;font-size:11px;color:var(--ink-2);white-space:nowrap;font-variant-numeric:tabular-nums}.seg.inside span{left:auto;right:6px;color:#fff}.budget{position:absolute;top:0;bottom:0;border-left:1px dashed var(--warn)}.budget i{position:absolute;top:-18px;left:4px;font-size:10px;color:var(--warn);font-style:normal;white-space:nowrap}.lanes{position:relative;padding-right:30px}
-.api-opts{margin:0 0 12px}.api-opts select{min-height:44px}.api-note{color:var(--ink-2);font-size:12px;max-width:72ch;margin:0 0 16px}.curl-h{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}.curl-h b{font-weight:500;font-size:13px}.curl{margin-bottom:24px}.curl:last-child{margin-bottom:0}.curl-h .small{display:block;margin-top:3px;font-size:11px}.key-grid{grid-template-columns:2fr 1fr 1fr auto}.new-header{margin-bottom:28px}.new-header h1{font-size:26px;letter-spacing:-.8px;margin:0 0 8px}.new-header p{color:var(--ink-3);font-size:13px;margin:0}.key-note{margin:16px 0 0;font-size:12px;color:var(--ink-3)}
+/* --- dropdown tuỳ biến (bọc select gốc) --- */
+.dd{position:relative;display:inline-block;min-width:0;vertical-align:middle}
+.dd.block{display:block;width:100%}
+.utter-opts>.dd-field,.actions>.dd-field{display:inline-flex;align-items:center;gap:8px;min-width:0}
+.dd-label{min-width:0}.dd-label:empty{display:none}
+.dd-btn{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;min-height:44px;padding:9px 10px 9px 13px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);font-size:13.5px;color:var(--ink);text-align:left;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.dd-btn:hover:not(:disabled){border-color:color-mix(in srgb,var(--brand) 40%,var(--line))}
+.dd.open .dd-btn,.dd-btn:focus-visible{border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-soft);outline:none}
+.dd-btn:disabled{opacity:.55;cursor:default}
+.dd-val{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dd-btn .caret{width:16px;height:16px;flex:none;color:var(--ink-3);fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .15s}
+.dd.open .dd-btn .caret{transform:rotate(180deg);color:var(--brand)}
+.dd-menu{position:fixed;z-index:300;min-width:170px;max-width:min(420px,calc(100vw - 16px));max-height:min(320px,60vh);overflow:auto;overscroll-behavior:contain;background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:0 16px 40px rgba(20,50,35,.16);padding:5px}
+.dd-group{padding:8px 11px 4px;font-size:12px;color:var(--ink-3);font-weight:500}
+.dd-opt{display:flex;align-items:center;justify-content:space-between;gap:14px;width:100%;min-height:44px;padding:8px 10px 8px 11px;border:0;border-radius:8px;background:none;font-size:13.5px;color:var(--ink);text-align:left;cursor:pointer;scroll-margin:5px}
+.dd-opt span{min-width:0;white-space:normal;overflow-wrap:anywhere;line-height:1.5}
+.dd-opt.hl{background:var(--sunken)}
+.dd-opt[aria-selected=true]{color:var(--brand);font-weight:600}
+.dd-opt:disabled{opacity:.45;cursor:default}
+.dd-opt .ck{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;opacity:0}
+.dd-opt[aria-selected=true] .ck{opacity:1}
+.utter-opts .dd-btn{min-height:44px;padding:6px 8px 6px 11px;font-size:12.5px;gap:8px}
+/* --- segmented + nhãn method --- */
+.api-segment{display:inline-flex;flex-wrap:wrap;gap:2px;padding:3px;background:var(--sunken);border:1px solid var(--line-2);border-radius:10px}
+.api-segment button{display:inline-flex;align-items:center;gap:8px;border:0;background:none;border-radius:8px;padding:7px 12px;min-height:36px;font-size:13px;font-weight:500;color:var(--ink-2);cursor:pointer;white-space:nowrap}
+.api-segment button:hover{color:var(--ink)}
+.api-segment button[aria-selected=true],.api-segment button[aria-pressed=true]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(20,50,35,.08),0 0 0 1px var(--line)}
+.api-segment.sm button{padding:5px 10px;min-height:32px;font-size:12.5px}
+.api-segment.num button{min-width:34px;justify-content:center;padding:5px 8px}
+.api-segment button:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.mth{font:600 10.5px/1 var(--mono);letter-spacing:.04em;padding:4px 6px;border-radius:5px;flex:none}
+.m-post{background:#e3f2e9;color:#1d6b43}.m-get{background:#e4eefb;color:#1f5fa8}.m-put{background:#fdf0dc;color:#94600a}.m-delete{background:#fce9e9;color:#b73535}
+/* --- tích hợp API --- */
+.api-ep{display:flex;align-items:center;gap:10px;padding:8px 8px 8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--canvas);margin:16px 0}
+.api-ep code{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px;color:var(--ink)}
+.api-params{display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;margin:0 0 16px}
+.api-params[hidden]{display:none}
+.api-query{display:block;margin:0 0 14px}.api-query .plabel{display:block;margin-bottom:6px}.api-query input{width:100%;min-height:42px;font-size:13px}
+.api-foot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:16px}
+.api-warning{font-size:12px;color:var(--warn);margin:0 0 14px}.api-warning[hidden]{display:none}
+.pgroup{display:flex;align-items:center;gap:10px}.plabel{font-size:12.5px;color:var(--ink-2)}
+.pgroup .dd-btn{min-height:38px;padding:6px 9px 6px 12px;font-size:13px}
+.switch{display:inline-flex;align-items:center;gap:10px;font-size:13px;color:var(--ink-2);cursor:pointer;user-select:none;position:relative}
+.switch input{position:absolute;opacity:0;width:1px;height:1px}
+.switch .track{width:34px;height:20px;border-radius:999px;background:var(--line);position:relative;transition:background .15s;flex:none}
+.switch .track::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.2);transition:transform .15s}
+.switch input:checked+.track{background:var(--brand)}
+.switch input:checked+.track::after{transform:translateX(14px)}
+.switch input:focus-visible+.track{outline:3px solid var(--brand);outline-offset:2px}
+.api-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:14px}
+@media(max-width:1180px){.api-grid{grid-template-columns:minmax(0,1fr)}}
+.codecard{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface);min-width:0;display:flex;flex-direction:column}
+.code-h{display:flex;align-items:center;gap:10px;padding:7px 8px 7px 12px;border-bottom:1px solid var(--line-2);min-height:50px;flex-wrap:wrap}
+.code-h b{font-size:13px;font-weight:600}.code-h .spacer{flex:1}
+.code-h .status{font-size:11.5px;color:var(--ink-3);background:var(--sunken);border-radius:999px;padding:2px 8px}
+.keytag{font-size:11.5px;border-radius:999px;padding:2px 9px;background:var(--sunken);color:var(--ink-2);border:1px solid var(--line);white-space:nowrap}
+.keytag.w{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+pre.code{border:0;border-radius:0;background:var(--canvas);margin:0;padding:16px 18px;font:12.5px/1.75 var(--mono);font-weight:500;color:#11231d;white-space:pre-wrap;word-break:break-word;max-height:460px;overflow:auto;flex:1}
+.tk-s{color:#0b5d2e}.tk-k{color:#134a86}.tk-n{color:#7a3d00}.tk-w{color:#5b21b6}.tk-f{color:#0a5568}.tk-c{color:#43554c;font-style:italic}
+@media(max-width:760px){.api-segment{max-width:100%}.api-segment button{min-height:40px}.api-ep{gap:6px;padding-left:9px}.api-ep code{font-size:11.5px}.api-params{gap:12px 16px}.api-foot{align-items:flex-start;flex-direction:column}.code-h{padding:7px}.code-h .keytag{margin-left:4px}pre.code{padding:14px;font-size:12px}}
+.key-grid{grid-template-columns:2fr 1fr 1fr auto}.new-header{margin-bottom:28px}.new-header h1{font-size:26px;letter-spacing:-.8px;margin:0 0 8px}.new-header p{color:var(--ink-3);font-size:13px;margin:0}.key-note{margin:16px 0 0;font-size:12px;color:var(--ink-3)}
 @media(min-width:1664px){.wrap{margin-right:auto}}
 @media(max-width:1100px){.sidebar{width:192px;padding-left:12px;padding-right:12px}.appbar,.wrap{margin-left:192px}.appbar-in{padding:14px 24px}.wrap{padding:28px 24px 48px}.crumb{display:none}.key-grid{grid-template-columns:2fr 1fr}.key-grid .btn{align-self:end}.stats .stat{padding:0 12px}.example-list{grid-template-columns:1fr}.example{min-height:58px}.results{grid-template-columns:1fr}.alternatives{border-left:0;border-top:1px solid var(--line);padding:20px 0 0}}
 @media(max-width:760px){.sidebar{position:static;width:auto;inset:auto;display:block;padding:14px 16px 8px;border-right:0;border-bottom:1px solid var(--line)}.logo{padding:0 0 14px;font-size:20px}.logo .mark{width:30px;height:30px}.rail-label,.rail-bottom,.nav-break{display:none}.tabs{flex-direction:row;overflow:auto;padding-bottom:6px;scrollbar-width:thin}.tabs a{flex:none;gap:7px;font-size:12px;min-height:44px;padding:8px 12px}.tabs a .ico{width:17px;height:17px}.appbar{margin-left:0;position:sticky;top:0}.appbar-in{padding:9px 16px;gap:10px;min-height:64px}.picker{min-width:0}.picker>button{max-width:220px}.connection>summary span{display:none}.connection>summary{width:44px;padding:0;justify-content:center}.keys{position:fixed;top:150px;right:16px;max-width:calc(100vw - 32px)}.wrap{margin-left:0;padding:24px 16px 40px}.phead{gap:20px;margin-bottom:24px}.phead h1{font-size:23px}.stats{width:100%;margin-left:0;gap:20px}.stat{padding:0;border:0}.stat b{font-size:18px}.panel{padding:20px}.search-panel{padding:20px}.utter{flex-direction:column;gap:10px}.utter input{font-size:14px;min-height:54px}.utter .btn.primary{min-height:46px}.shortcut{display:none}.utter-opts{gap:12px}.key-grid{grid-template-columns:1fr!important}.grid{grid-template-columns:1fr}.actions>.spacer{display:none}.actions input[type=search]{max-width:none!important}.actions select{max-width:100%}.results{gap:20px}.record h3{font-size:19px}.fb .spacer{display:none}.fb>.btn:last-child{flex-basis:100%}.verdict{gap:8px}.result-time{font-size:11px}dl.kv{grid-template-columns:minmax(70px,max-content) minmax(0,1fr);gap:8px 12px}.curl-h{align-items:start}.timeline .lanes{padding-right:45px}.seg.inside span{color:var(--ink);right:4px}.new-header h1{font-size:23px}}
@@ -161,6 +221,14 @@ details.debug{border-top:1px solid var(--line);margin-top:20px;padding-top:4px}d
 .datagrid td.act{background:var(--surface);z-index:2}
 .datagrid th.act{background:var(--sunken);z-index:3}
 .datagrid tr:hover td.act{background:var(--sunken)}
+/* Keep the table readable and selectors easy to tap on narrow screens. */
+@media(max-width:760px){
+  .picker>button{max-width:calc(100vw - 158px);min-height:44px}.picker .pcount{display:none!important}
+  .connection .keys{top:auto;margin-top:8px;max-height:calc(100dvh - 210px);overflow:auto}
+  .utter-opts .dd-btn,.pgroup .dd-btn{min-height:44px}
+  .datagrid th.fz2,.datagrid td.fz2,.datagrid th.fz3,.datagrid td.fz3{position:static;box-shadow:none}
+  .datagrid th.act,.datagrid td.act{position:static;box-shadow:none}
+}
 </style>
 </head>
 <body>
@@ -174,15 +242,15 @@ details.debug{border-top:1px solid var(--line);margin-top:20px;padding-top:4px}d
   <div class="rail-foot"><span data-i18n="semantic_search">Tìm kiếm ngữ nghĩa</span><span>1.0</span></div></div>
 </aside>
 <header class="appbar"><div class="appbar-in">
-  <div class="picker" id="picker"><button onclick="togglePicker()" aria-controls="pickmenu" aria-expanded="false" aria-haspopup="listbox" title="Chuyển bảng dữ liệu" data-i18n-title="switch_table">
+  <div class="picker" id="picker"><button onclick="togglePicker()" aria-controls="pickmenu" aria-expanded="false" aria-haspopup="dialog" title="Chuyển bảng dữ liệu" data-i18n-title="switch_table">
     <span class="pico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></svg></span>
     <b id="pickname" data-i18n="select_table">Chọn bảng</b>
     <span class="pcount" id="pickcount"></span>
     <svg class="caret" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="m6 9 6 6 6-6"/></svg>
   </button>
-  <div class="menu" id="pickmenu" role="listbox">
-    <div class="msearch"><div class="sbox"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg><input id="pickq" type="text" autocomplete="off" placeholder="Tìm bảng…" aria-label="Tìm bảng" data-i18n-ph="search_table_ph" data-i18n-al="search_table_al"></div></div>
-    <div class="mlist" id="pickitems"></div>
+  <div class="menu" id="pickmenu" role="dialog" aria-label="Chọn bảng" data-i18n-al="select_table">
+    <div class="msearch"><div class="sbox"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg><input id="pickq" type="text" role="combobox" aria-autocomplete="list" aria-controls="pickitems" aria-expanded="false" autocomplete="off" placeholder="Tìm bảng…" aria-label="Tìm bảng" data-i18n-ph="search_table_ph" data-i18n-al="search_table_al"></div></div>
+    <div class="mlist" id="pickitems" role="listbox" aria-label="Bảng dữ liệu" data-i18n-al="nav_tables"></div>
     <div class="sep"></div><a class="add" href="#/new" onclick="closePicker()" data-i18n="new_table_plus">+ Tạo bảng mới</a>
   </div></div>
   <div class="spacer"></div>
@@ -195,7 +263,7 @@ details.debug{border-top:1px solid var(--line);margin-top:20px;padding-top:4px}d
 <div class="authgate" id="authgate" role="dialog" aria-modal="true" aria-label="Đăng nhập" data-i18n-al="login_aria">
   <form class="authcard" id="authform" autocomplete="on">
     <div class="brand"><img class="logomark" src="/logo.png" alt="" width="40" height="40">Semsearch</div>
-    <input type="email" id="loginEmail" name="email" autocomplete="username" placeholder="Email" data-i18n-ph="email" required>
+    <input type="email" id="loginEmail" name="email" autocomplete="username" aria-label="Email" placeholder="Email" data-i18n-ph="email" required>
     <div class="secret-field"><input type="password" id="loginPass" name="password" aria-label="Mật khẩu" autocomplete="current-password" placeholder="Mật khẩu" data-i18n-al="password" data-i18n-ph="password" required><button type="button" class="secret-toggle" data-secret-for="loginPass" data-secret-label="sl_password" aria-controls="loginPass" aria-label="Hiện mật khẩu" aria-pressed="false" onclick="toggleSecret('loginPass')"></button></div>
     <label class="remember"><input type="checkbox" id="loginRemember" checked> <span data-i18n="remember">Ghi nhớ</span></label>
     <button class="btn primary" type="submit" id="loginBtn" data-i18n="sign_in">Đăng nhập</button>
@@ -208,6 +276,173 @@ details.debug{border-top:1px solid var(--line);margin-top:20px;padding-top:4px}d
 <script>
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+// ---------- dropdown tuỳ biến: bọc mọi <select>, select gốc vẫn giữ value/onchange ----------
+const DD_CARET = '<svg class="caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';
+const DD_CHECK = '<svg class="ck" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg>';
+const SEL_VALUE = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, "value");
+const SEL_INDEX = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, "selectedIndex");
+const DD_STATE = new WeakMap();
+let DD_OPEN = null, ddSeq = 0;
+function enhanceSelect(sel){
+  if (DD_STATE.has(sel) || sel.multiple || sel.size > 1) return;
+  const id = `dd-${++ddSeq}`, labels = [...(sel.labels || [])];
+  const namedBy = (sel.getAttribute("aria-labelledby") || "").trim().split(/\s+/).filter(Boolean);
+  const ownName = sel.getAttribute("aria-label");
+  // Replace implicit labels with a field container; a label must not contain both select and button.
+  for (const label of labels) {
+    if (label.contains(sel)) {
+      const field = document.createElement("div"), name = document.createElement("span");
+      for (const attr of label.attributes) if (attr.name !== "for") field.setAttribute(attr.name, attr.value);
+      field.classList.add("dd-field"); name.className = "dd-label"; name.id = `${id}-label`;
+      const nodes = [...label.childNodes];
+      for (const node of nodes) if (node !== sel && !node.contains(sel)) name.append(node);
+      label.replaceWith(field); field.append(name);
+      for (const node of nodes) if (node === sel || node.contains(sel)) field.append(node);
+      if (!ownName && !namedBy.length && name.textContent.trim()) namedBy.push(name.id);
+    } else {
+      if (!label.id) label.id = `${id}-label-${namedBy.length}`;
+      label.htmlFor = `${id}-button`;
+      if (!ownName && !sel.hasAttribute("aria-labelledby")) namedBy.push(label.id);
+    }
+  }
+  const wrap = document.createElement("div"); wrap.className = "dd";
+  if (sel.closest(".field") || (!sel.style.width && !sel.closest(".utter-opts, .pgroup, .actions"))) wrap.classList.add("block");
+  const btn = document.createElement("button"); btn.type = "button"; btn.className = "dd-btn";
+  btn.id = `${id}-button`; btn.tabIndex = sel.tabIndex;
+  btn.setAttribute("role", "combobox"); btn.setAttribute("aria-haspopup", "listbox");
+  btn.setAttribute("aria-expanded", "false"); btn.setAttribute("aria-controls", `${id}-menu`);
+  btn.innerHTML = `<span class="dd-val" id="${id}-value"></span>${DD_CARET}`;
+  if (namedBy.length) btn.setAttribute("aria-labelledby", [...namedBy, `${id}-value`].join(" "));
+  sel.parentNode.insertBefore(wrap, sel); wrap.append(btn, sel); sel.hidden = true; sel.tabIndex = -1;
+  sel.dataset.dd = "1";
+  const state = {id, sel, wrap, btn, namedBy, ownName, query: "", queryAt: 0}; DD_STATE.set(sel, state);
+  const sync = () => {
+    const text = sel.options[sel.selectedIndex]?.textContent || "";
+    if (btn.firstChild.textContent !== text) btn.firstChild.textContent = text;
+    const disabled = sel.matches(":disabled"); if (btn.disabled !== disabled) btn.disabled = disabled;
+    if (ownName || !namedBy.length) btn.setAttribute("aria-label", [ownName || sel.name || sel.id, text].filter(Boolean).join(": "));
+    for (const attr of ["aria-describedby", "aria-invalid"]) {
+      if (sel.hasAttribute(attr)) btn.setAttribute(attr, sel.getAttribute(attr)); else btn.removeAttribute(attr);
+    }
+    btn.setAttribute("aria-required", String(sel.required));
+    if (DD_OPEN?.sel === sel) {
+      if (disabled || !btn.isConnected) ddClose(); else { ddRender(); ddPlace(); }
+    }
+  };
+  Object.defineProperty(sel, "value", {configurable: true, get(){ return SEL_VALUE.get.call(this); }, set(v){ SEL_VALUE.set.call(this, v); sync(); }});
+  Object.defineProperty(sel, "selectedIndex", {configurable: true, get(){ return SEL_INDEX.get.call(this); }, set(v){ SEL_INDEX.set.call(this, v); sync(); }});
+  sel.addEventListener("change", sync); sel.addEventListener("input", sync); sel._ddSync = sync;
+  if (sel.form) sel.form.addEventListener("reset", () => setTimeout(sync, 0));
+  new MutationObserver(sync).observe(sel, {childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ["disabled", "selected", "label", "value", "required", "aria-invalid", "aria-describedby"]});
+  btn.addEventListener("click", () => { DD_OPEN?.sel === sel ? ddClose() : ddOpen(state); });
+  btn.addEventListener("keydown", e => {
+    if (DD_OPEN?.sel === sel) { ddKey(e); return; }
+    if (["ArrowDown", "ArrowUp", "Home", "End", "Enter", " "].includes(e.key)) {
+      e.preventDefault(); ddOpen(state);
+      if (e.key === "Home" || e.key === "End") ddKey(e);
+    } else if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) { ddOpen(state); ddKey(e); }
+  });
+  sync();
+}
+function ddDisabled(option){ return option.disabled || option.parentElement?.tagName === "OPTGROUP" && option.parentElement.disabled; }
+function ddOpen(state){
+  if (state.sel.matches(":disabled") || !state.btn.isConnected) return;
+  ddClose();
+  const {sel, wrap, btn, id, namedBy, ownName} = state;
+  const menu = document.createElement("div"); menu.id = `${id}-menu`; menu.className = "dd-menu";
+  menu.setAttribute("role", "listbox");
+  if (namedBy.length) menu.setAttribute("aria-labelledby", namedBy.join(" "));
+  else menu.setAttribute("aria-label", ownName || sel.name || sel.id || btn.firstChild.textContent);
+  document.body.append(menu);
+  DD_OPEN = {...state, menu}; state.query = ""; state.queryAt = 0;
+  wrap.classList.add("open"); btn.setAttribute("aria-expanded", "true");
+  ddRender(); ddPlace(); btn.focus({preventScroll: true});
+  menu.addEventListener("mousedown", e => e.preventDefault());
+  menu.addEventListener("click", e => { const b = e.target.closest(".dd-opt"); if (b && menu.contains(b) && !b.disabled) ddPick(+b.dataset.i); });
+  menu.addEventListener("pointermove", e => { const b = e.target.closest(".dd-opt"); if (b && !b.disabled && e.pointerType === "mouse") ddHl(b); });
+}
+function ddRender(){
+  if (!DD_OPEN) return; const {sel, menu, id} = DD_OPEN;
+  const active = menu.querySelector(".dd-opt.hl")?.dataset.i; let group = null;
+  menu.innerHTML = [...sel.options].map((o, i) => {
+    if (o.hidden || o.parentElement?.hidden) return "";
+    let heading = "";
+    if (o.parentElement.tagName === "OPTGROUP" && group !== o.parentElement) { group = o.parentElement; heading = `<div class="dd-group" role="presentation">${esc(group.label)}</div>`; }
+    return `${heading}<button type="button" tabindex="-1" role="option" id="${id}-option-${i}" class="dd-opt" data-i="${i}" aria-selected="${i === sel.selectedIndex}"${ddDisabled(o) ? ' disabled aria-disabled="true"' : ""}><span>${esc(o.label || o.textContent)}</span>${DD_CHECK}</button>`;
+  }).join("");
+  const cur = (active != null && menu.querySelector(`[data-i="${active}"]:not(:disabled)`)) || menu.querySelector('[aria-selected="true"]:not(:disabled)') || menu.querySelector(".dd-opt:not(:disabled)");
+  if (cur) ddHl(cur); else DD_OPEN.btn.removeAttribute("aria-activedescendant");
+}
+function ddPlace(){
+  if (!DD_OPEN) return; const {btn, menu} = DD_OPEN, r = btn.getBoundingClientRect(), v = window.visualViewport;
+  const left = (v?.offsetLeft || 0) + 8, top = (v?.offsetTop || 0) + 8;
+  const right = left + (v?.width || innerWidth) - 16, bottom = top + (v?.height || innerHeight) - 16;
+  if (!btn.isConnected || !btn.getClientRects().length || r.bottom < top || r.top > bottom) { ddClose(); return; }
+  const width = Math.max(0, right - left);
+  menu.style.maxWidth = `${Math.min(420, width)}px`; menu.style.minWidth = `${Math.min(Math.max(170, r.width), width)}px`;
+  const below = Math.max(0, bottom - r.bottom - 6), above = Math.max(0, r.top - top - 6);
+  const up = below < Math.min(160, menu.scrollHeight) && above > below;
+  menu.style.maxHeight = `${Math.min(320, up ? above : below)}px`;
+  menu.style.left = `${Math.max(left, Math.min(r.left, right - menu.offsetWidth))}px`;
+  menu.style.top = `${Math.max(top, Math.min(up ? r.top - menu.offsetHeight - 6 : r.bottom + 6, bottom - menu.offsetHeight))}px`;
+  const active = menu.querySelector(".dd-opt.hl"); if (active) ddHl(active);
+}
+function ddHl(b){
+  if (!DD_OPEN || b.disabled) return; const {menu, btn} = DD_OPEN;
+  menu.querySelectorAll(".dd-opt.hl").forEach(x => x.classList.remove("hl")); b.classList.add("hl");
+  btn.setAttribute("aria-activedescendant", b.id);
+  if (b.offsetTop < menu.scrollTop) menu.scrollTop = b.offsetTop;
+  else if (b.offsetTop + b.offsetHeight > menu.scrollTop + menu.clientHeight) menu.scrollTop = b.offsetTop + b.offsetHeight - menu.clientHeight;
+}
+function ddPick(i){
+  if (!DD_OPEN) return; const {sel, btn} = DD_OPEN, option = sel.options[i];
+  if (!option || ddDisabled(option) || sel.matches(":disabled")) return;
+  const changed = sel.selectedIndex !== i; ddClose(); sel.selectedIndex = i;
+  if (btn.isConnected) btn.focus({preventScroll: true});
+  if (changed) { sel.dispatchEvent(new Event("input", {bubbles: true})); sel.dispatchEvent(new Event("change", {bubbles: true})); }
+  else sel._ddSync();
+}
+function ddKey(e){
+  if (!DD_OPEN) return;
+  const opts = [...DD_OPEN.menu.querySelectorAll(".dd-opt:not(:disabled)")];
+  let i = opts.indexOf(DD_OPEN.menu.querySelector(".dd-opt.hl"));
+  if (e.key === "ArrowDown" || e.key === "ArrowUp") { e.preventDefault(); i = e.key === "ArrowDown" ? Math.min(opts.length - 1, i + 1) : Math.max(0, i - 1); }
+  else if (e.key === "Home" || e.key === "End") { e.preventDefault(); i = e.key === "Home" ? 0 : opts.length - 1; }
+  else if (e.key === "Enter" || e.key === " ") { e.preventDefault(); if (opts[i]) ddPick(+opts[i].dataset.i); return; }
+  else if (e.key === "Escape") { e.preventDefault(); e.stopPropagation(); const b = DD_OPEN.btn; ddClose(); b.focus({preventScroll: true}); return; }
+  else if (e.key === "Tab") { ddClose(); return; }
+  else if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+    e.preventDefault(); const state = DD_STATE.get(DD_OPEN.sel), now = performance.now();
+    const normalize = s => s.toLocaleLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "").replace(/đ/g, "d");
+    state.query = now - state.queryAt > 700 ? e.key : state.query + e.key; state.queryAt = now;
+    const chars = [...normalize(state.query)], q = chars.every(c => c === chars[0]) ? chars[0] : chars.join("");
+    const start = q.length === 1 ? i + 1 : Math.max(i, 0);
+    const order = [...opts.slice(start), ...opts.slice(0, start)];
+    const match = order.find(o => normalize(o.textContent.trim()).startsWith(q)); if (!match) return;
+    ddHl(match); return;
+  } else return;
+  if (opts[i]) ddHl(opts[i]);
+}
+function ddClose(){
+  if (!DD_OPEN) return; const {wrap, btn, menu} = DD_OPEN;
+  DD_OPEN = null; menu.remove(); wrap.classList.remove("open"); btn.setAttribute("aria-expanded", "false"); btn.removeAttribute("aria-activedescendant");
+}
+document.addEventListener("pointerdown", e => { if (DD_OPEN && !e.composedPath().includes(DD_OPEN.menu) && !e.composedPath().includes(DD_OPEN.wrap)) ddClose(); });
+document.addEventListener("focusin", e => { if (DD_OPEN && !DD_OPEN.wrap.contains(e.target) && !DD_OPEN.menu.contains(e.target)) ddClose(); });
+document.addEventListener("scroll", e => { if (DD_OPEN && !DD_OPEN.menu.contains(e.target)) ddClose(); }, true);
+window.addEventListener("resize", ddPlace); window.addEventListener("hashchange", ddClose);
+window.visualViewport?.addEventListener("resize", ddPlace); window.visualViewport?.addEventListener("scroll", ddPlace);
+new MutationObserver(muts => {
+  if (DD_OPEN && (!DD_OPEN.btn.isConnected || !DD_OPEN.sel.isConnected)) ddClose();
+  for (const m of muts) {
+    if (m.type === "attributes" && m.target.tagName === "FIELDSET") m.target.querySelectorAll("select").forEach(sel => sel._ddSync?.());
+    for (const n of m.addedNodes) {
+      if (n.nodeType !== 1) continue;
+      if (n.tagName === "SELECT") enhanceSelect(n); else n.querySelectorAll("select:not([data-dd])").forEach(enhanceSelect);
+    }
+  }
+}).observe(document.body, {childList: true, subtree: true, attributes: true, attributeFilter: ["disabled"]});
+document.querySelectorAll("select").forEach(enhanceSelect);
 // ---------- hiện / ẩn thông tin kết nối ----------
 const keySecretTimers = new Map();
 let keySecretEpoch = 0;
@@ -239,6 +474,10 @@ function clearKeySecrets(includeCreated = true){
   keySecretEpoch++;
   [...keySecretTimers.keys()].forEach(slot => { if (includeCreated || slot !== "created") clearKeyReveal(slot); });
 }
+function clearApiSecrets(){
+  const rk = $("#realkeys"); if (!rk || !rk.checked) return;
+  rk.checked = false; if ($("#api-code") && $("#api-ops")) renderApi();
+}
 function showKeySecret(slot, value, shown = false){
   slot = String(slot); clearKeyReveal(slot); const box = $(`#key-secret-${slot}`); if (!box) return;
   const id = `table-secret-${slot}`;
@@ -253,7 +492,7 @@ const AUTH = { token: "", account: null };
 function authStore(){ try { return localStorage.getItem("ss_remember") === "1" ? localStorage : sessionStorage; } catch { return null; } }
 function loadAuth(){ try { AUTH.token = localStorage.getItem("ss_token") || sessionStorage.getItem("ss_token") || ""; } catch { AUTH.token = ""; } }
 function saveAuth(token, remember){ try { (remember ? localStorage : sessionStorage).setItem("ss_token", token); localStorage.setItem("ss_remember", remember ? "1" : "0"); if (!remember) localStorage.removeItem("ss_token"); } catch {} AUTH.token = token; }
-function clearAuth(){ try { localStorage.removeItem("ss_token"); sessionStorage.removeItem("ss_token"); } catch {} AUTH.token = ""; AUTH.account = null; resetSecretMasks(); clearKeySecrets(); }
+function clearAuth(){ try { localStorage.removeItem("ss_token"); sessionStorage.removeItem("ss_token"); } catch {} AUTH.token = ""; AUTH.account = null; resetSecretMasks(); clearKeySecrets(); clearApiSecrets(); }
 loadAuth();
 const store = { get(k){ try { return localStorage.getItem(k) || ""; } catch { return ""; } }, set(k,v){ try { localStorage.setItem(k,v); } catch {} } };
 let LANG = (store.get("ss_lang") === "en") ? "en" : "vi";
@@ -265,6 +504,7 @@ const I18N = {
     select_table: "Chọn bảng", search_table_ph: "Tìm bảng…", search_table_al: "Tìm bảng", new_table_plus: "+ Tạo bảng mới",
     conn_key: "Khoá kết nối", connect: "Kết nối", search_key: "Khoá tìm kiếm", admin_key: "Khoá quản trị",
     login_aria: "Đăng nhập", email: "Email", password: "Mật khẩu", remember: "Ghi nhớ", sign_in: "Đăng nhập",
+    api_op_al: "Thao tác", api_op_ask: "Hỏi", api_op_ask_get: "Hỏi", api_op_upsert: "Ghi dữ liệu", api_op_delete: "Xoá dòng", api_lang_al: "Ngôn ngữ", api_response: "Phản hồi", api_write_mode: "Chế độ ghi", key_read_tag: "Khoá đọc", key_write_tag: "Khoá ghi",
     or: "hoặc", switch_lang: "English", manage_accounts: "Quản lý tài khoản", accounts_sub: "Tạo, phân quyền và khoá tài khoản người dùng", close: "Đóng",
     // ----- khoá bí mật -----
     show: "Hiện", hide: "Ẩn", sl_search_key: "khoá tìm kiếm", sl_admin_key: "khoá quản trị", sl_password: "mật khẩu",
@@ -286,8 +526,8 @@ const I18N = {
     table_info_aria: "Thông tin bảng", stat_rows: "Dòng dữ liệu", stat_vectors: "Vector", stat_version: "Phiên bản",
     // ----- thử câu nói -----
     try_title: "Bạn muốn tìm gì?", try_ph: "Nhập câu hỏi về {name}…", search_btn: "Tìm kiếm", mode_label: "Chế độ",
-    mode_auto: "Tự động", mode_fast: "Nhanh", mode_accurate: "Kỹ hơn", results_label: "Kết quả", shortcut_enter: "để tìm",
-    try_a_question: "Thử một câu hỏi", enter_question: "Nhập câu hỏi để tìm trong bảng", search_in_rows: "Tìm trong {n} dòng dữ liệu",
+    mode_auto: "Tự động", mode_fast: "Nhanh", mode_accurate: "Kỹ hơn", results_label: "Kết quả", 
+    try_a_question: "Thử một câu hỏi", 
     sample_dm1: "Tủ lạnh Samsung dưới 10 triệu", sample_dm2: "Máy giặt cho gia đình 4 người", sample_dm3: "Điều hòa tiết kiệm điện",
     sample_bds1: "Căn hộ 2 phòng ngủ", sample_bds2: "Nhà có chỗ đỗ ô tô", sample_bds3: "Căn hộ dưới 3 tỷ",
     sample_vt1: "Gói cước cho cả gia đình", sample_vt2: "Gói data dưới 100 nghìn", sample_vt3: "Gói internet tốc độ cao",
@@ -308,7 +548,7 @@ const I18N = {
     row_code: "Mã", row_name: "Tên", row_price: "Giá",
     flag_cache: "Từ bộ nhớ đệm", flag_reranked: "Đã xếp hạng lại", flag_relaxed: "Nới điều kiện: {keys}",
     match_score: "Điểm phù hợp", other_results: "Kết quả khác", no_other_results: "Không có kết quả khác.",
-    try_more_hint: "Thử thêm tên, mã hoặc đặc điểm sản phẩm.", fb_question: "Kết quả phù hợp?", fb_yes: "Đúng", fb_no: "Chưa đúng",
+    fb_question: "Kết quả phù hợp?", fb_yes: "Đúng", fb_no: "Chưa đúng",
     fb_followup: "Hỏi tiếp", fb_more: "Bổ sung phản hồi", fb_correct_id: "ID dòng đúng", optional: "Tuỳ chọn",
     fb_save_eval: "Lưu câu kiểm thử", proc_detail: "Chi tiết xử lý", intent: "Ý định", search_query: "Câu tìm kiếm",
     filters: "Bộ lọc", none: "Không có", candidate_scores: "Điểm ứng viên", response_json: "JSON phản hồi",
@@ -323,28 +563,21 @@ const I18N = {
     prev_page: "Trang trước", next_page: "Trang sau", rows_count: "{n} dòng · xem {a}–{b}", col_id: "ID", col_rowkey: "Mã dòng",
     edit: "Sửa", delete: "Xoá", no_rows_match: "Không dòng nào khớp.", no_rows_yet: "Bảng chưa có dòng nào.",
     try_other_keyword: "Thử từ khoá khác.", add_or_import: "Bấm “Thêm dòng” hoặc nạp file Excel.",
-    edit_add_row: "Thêm dòng", edit_edit_row: "Sửa dòng {key}", dup_updates: "Trùng mã sẽ cập nhật dòng đã có.",
+    edit_add_row: "Thêm dòng", edit_edit_row: "Sửa dòng {key}", 
     save_row: "Lưu dòng", cancel: "Huỷ", del_row_confirm: "Xoá dòng {key}? Bot sẽ không tìm thấy dòng này nữa.",
     replace_confirm: "Thay toàn bộ dữ liệu: dòng nào không có trong file sẽ bị xoá. Tiếp tục?", loading_file: "Đang nạp file…",
     imported_rows: "Đã nạp {n} dòng.",
     // ----- API -----
-    api_connect_bot: "Kết nối với bot", api_lede: "Gửi câu hỏi, nhận dòng phù hợp. Dùng khoá từ mục “Khoá API”.",
-    api_rows_count: "Số dòng", api_mode: "Chế độ", api_mode_auto: "Tự động (auto)", api_mode_fast: "Nhanh (fast)",
-    api_mode_accurate: "Kỹ hơn (accurate)", api_limit_note: "Tối đa 5 dòng; có thể ít hơn nếu không đủ kết quả.",
-    api_use_conn_keys: "Dùng khoá trong mục Kết nối", api_sample_response: "Phản hồi mẫu",
-    api_sample_lede: "<code>rows</code>: các dòng gốc. <code>count</code>: số dòng thực trả.",
+    api_rows_count: "Số dòng", api_mode: "Chế độ", api_mode_auto: "Tự động", api_mode_fast: "Nhanh",
+    api_mode_accurate: "Chính xác", 
+    api_use_conn_keys: "Dùng khoá thật (mục Kết nối)", 
     key_read_ph: "<KHOÁ_HỎI>", key_write_ph: "<KHOÁ_GHI>", curl_example_q: "dạ cho em hỏi ...",
-    curl_post_title: "Tìm kiếm qua POST", curl_get_title: "Tìm kiếm qua GET", curl_upsert_title: "Thêm hoặc cập nhật dòng",
-    curl_delete_title: "Xoá dòng", curl_max_rows: "Tối đa {n} dòng", curl_need_write: "Cần quyền ghi",
-    curl_post_comment: "# Content-Type: gửi JSON; X-API-Key: khoá có quyền hỏi.\n# text: câu hỏi; top_k: số dòng tối đa, từ 1 đến 5.\n# mode: auto = AI khi chưa rõ; fast = không xếp hạng lại; accurate = yêu cầu AI.",
-    curl_get_comment: "# X-API-Key: khoá có quyền hỏi; tham số gửi trên URL.\n# text: câu hỏi; top_k: số dòng tối đa, từ 1 đến 5.\n# mode: auto = AI khi chưa rõ; fast = không xếp hạng lại; accurate = yêu cầu AI.",
-    curl_upsert_comment: "# Content-Type: gửi JSON; X-API-Key: khoá có quyền ghi.\n# rows: danh sách dòng, dùng đúng tên cột của bảng.\n# mode: upsert = thêm/cập nhật theo mã; replace = thay toàn bộ, xoá dòng cũ.",
-    curl_delete_comment: "# Content-Type: gửi JSON; X-API-Key: khoá có quyền ghi.\n# keys: danh sách mã dòng cần xoá.",
-    note_auto: "auto: AI xếp hạng lại khi kết quả chưa rõ; bỏ qua nếu đã khớp rõ hoặc chính xác.",
-    note_fast: "fast: Không xếp hạng lại bằng AI; vẫn tìm kiếm bằng embedding.",
-    note_accurate: "accurate: Yêu cầu AI xếp hạng lại; có thể dùng kết quả sẵn khi lỗi hoặc quá hạn.",
+    
+    
+    
+    
     // ----- khoá API -----
-    keys_create_title: "Tạo khoá API", keys_create_lede: "Khoá riêng cho bảng này; cấp quyền hỏi hoặc ghi.",
+    keys_create_title: "Tạo khoá API", 
     key_name: "Tên khoá", key_name_ph: "Ví dụ: Callbot tổng đài", key_scope: "Quyền", scope_read: "Chỉ hỏi",
     scope_readwrite: "Hỏi + thêm, sửa, xoá", key_expiry: "Hết hạn (ngày)", key_expiry_ph: "không giới hạn",
     key_create_btn: "Tạo khoá", keys_list_title: "Danh sách khoá", pill_write: "Ghi", pill_read: "Hỏi",
@@ -356,7 +589,7 @@ const I18N = {
     can_reveal_later: "Có thể xem lại trong danh sách khoá.", copy_now_once: "Sao chép ngay. Khoá chỉ hiện một lần; không có bản lưu.",
     del_key_confirm: "Xoá khoá “{name}”? Bên đang dùng khoá này sẽ mất quyền gọi ngay.",
     // ----- đánh giá -----
-    eval_title: "Kiểm tra độ chính xác", eval_lede: "Dùng tập test để đánh giá, tập dev để hiệu chỉnh.", eval_split: "Tập",
+    eval_title: "Kiểm tra độ chính xác", eval_split: "Tập",
     split_all: "tất cả", eval_mode: "Chế độ", emode_auto: "tự động", emode_fast: "nhanh", emode_accurate: "Kỹ hơn",
     run_eval: "Chạy đánh giá", run_cal: "Hiệu chỉnh ngưỡng", st_hit1: "Đúng top 1", st_hit3: "Đúng top 3", st_mrr: "MRR",
     st_status_acc: "Đúng trạng thái", st_wrong: "Báo sai", st_reranked: "Xếp hạng lại", st_p95: "P95",
@@ -366,7 +599,7 @@ const I18N = {
     fl_category: "Loại", fl_expected: "Mong đợi", fl_got: "Nhận được", fl_top3: "Top 3",
     cal_saved: "Đã lưu ngưỡng mới", cal_error: "Hiệu chỉnh lỗi",
     // ----- làm giàu -----
-    enrich_title: "Bổ sung cách gọi và câu hỏi", enrich_lede: "Tạo đề xuất, duyệt rồi lưu vào bảng.", enrich_run: "Tạo đề xuất",
+    enrich_title: "Bổ sung cách gọi và câu hỏi", enrich_run: "Tạo đề xuất",
     enrich_overwrite: "Ghi đè nội dung đã có", FN_aliases: "Tên gọi khác", FN_use_cases: "Công dụng", FN_sample_questions: "Câu hỏi mẫu",
     enrich_props_count: "{n} dòng có đề xuất", mark_reviewed: "Đánh dấu đã duyệt", save_selected: "Lưu dòng đã chọn",
     no_new_props: "Không có đề xuất mới.", enable_overwrite: "Bật “Ghi đè” để tạo lại.", enrich_applied: "Đã ghi {n} dòng.",
@@ -376,7 +609,7 @@ const I18N = {
     lg_correct_is: ", đúng là ", no_logs_yet: "Chưa có câu nào.", logs_will_appear: "Các lượt tìm kiếm sẽ hiện ở đây.",
     // ----- cài đặt -----
     set_table_name: "Tên bảng", rename: "Đổi tên", slug_label: "Mã bảng: ", slug_immutable: " (không thể đổi).",
-    set_reembed_title: "Tạo lại vector", set_reembed_lede: "Chỉ cập nhật dòng đã thay đổi.", set_reembed_btn: "Tạo lại vector",
+    set_reembed_title: "Tạo lại vector", set_reembed_btn: "Tạo lại vector",
     set_columns_title: "Cấu trúc cột", name_col_label: "Cột tên: ", set_drop_title: "Xoá bảng",
     set_drop_lede: "Xoá vĩnh viễn dữ liệu, khoá và nhật ký. Bot sẽ mất kết nối với bảng.", set_drop_btn: "Xoá bảng {name}",
     drop_confirm_prompt: "Gõ mã bảng “{slug}” để xác nhận xoá",
@@ -387,10 +620,10 @@ const I18N = {
     choose_file: "Chọn Excel, CSV hoặc JSON", data_file_al: "File dữ liệu", table_name2: "Tên bảng",
     table_name_ph: "Ví dụ: Bảng giá gói cước", table_slug: "Mã bảng", table_slug_ph: "Tự tạo từ tên file", read_file: "Đọc file",
     choose_file_first: "Chọn file trước.", reading_file: "Đang đọc file…", opt_none: "không có", choose_cols: "Chọn cột dữ liệu",
-    choose_cols_lede: "Kiểm tra cột đã chọn trước khi tạo bảng.", search_attrs: "Thuộc tính tìm kiếm", type_number: "số",
+    search_attrs: "Thuộc tính tìm kiếm", type_number: "số",
     type_enum: "danh sách", type_multi_enum: "nhiều giá trị", type_bool: "có/không", type_text: "chữ", attr_none: "không có",
     warnings_count: "{n} cảnh báo khi đọc file", update_cols: "Cập nhật cột", valid_rows: "{n} dòng hợp lệ",
-    preview_first10: "Xem trước 10 dòng đầu.", create_table_btn: "Tạo bảng", creating_table: "Đang tạo bảng…",
+    create_table_btn: "Tạo bảng", creating_table: "Đang tạo bảng…",
     // ----- đăng nhập / tài khoản -----
     login_failed: "Đăng nhập thất bại", sign_out: "Đăng xuất", ac_email: "Email", ac_name: "Tên", ac_phone: "SĐT",
     ac_role: "Quyền", ac_status: "Trạng thái", ac_tables: "Bảng", ac_you: "(bạn)", role_admin: "Quản trị", role_user: "Thường",
@@ -408,6 +641,7 @@ const I18N = {
     select_table: "Select table", search_table_ph: "Search tables…", search_table_al: "Search tables", new_table_plus: "+ New table",
     conn_key: "Connection keys", connect: "Connect", search_key: "Search key", admin_key: "Admin key",
     login_aria: "Sign in", email: "Email", password: "Password", remember: "Remember me", sign_in: "Sign in",
+    api_op_al: "Operation", api_op_ask: "Ask", api_op_ask_get: "Ask", api_op_upsert: "Upsert rows", api_op_delete: "Delete rows", api_lang_al: "Language", api_response: "Response", api_write_mode: "Write mode", key_read_tag: "Read key", key_write_tag: "Write key",
     or: "or", switch_lang: "Tiếng Việt", manage_accounts: "Manage accounts", accounts_sub: "Create, assign roles and disable user accounts", close: "Close",
     show: "Show", hide: "Hide", sl_search_key: "search key", sl_admin_key: "admin key", sl_password: "password",
     sl_api_key: "API key", api_key_al: "API key", copy: "Copy", autoclose_30s: "Closes automatically in 30 seconds.",
@@ -422,8 +656,8 @@ const I18N = {
     table_not_found_b: "Table not found.", table_not_found_rest: "Pick another table from the list.",
     table_info_aria: "Table info", stat_rows: "Data rows", stat_vectors: "Vectors", stat_version: "Version",
     try_title: "What are you looking for?", try_ph: "Ask something about {name}…", search_btn: "Search", mode_label: "Mode",
-    mode_auto: "Auto", mode_fast: "Fast", mode_accurate: "Accurate", results_label: "Results", shortcut_enter: "to search",
-    try_a_question: "Try a question", enter_question: "Enter a question to search the table", search_in_rows: "Search {n} data rows",
+    mode_auto: "Auto", mode_fast: "Fast", mode_accurate: "Accurate", results_label: "Results", 
+    try_a_question: "Try a question", 
     sample_dm1: "Samsung fridge under 10 million", sample_dm2: "Washing machine for a family of 4", sample_dm3: "Energy-saving air conditioner",
     sample_bds1: "2-bedroom apartment", sample_bds2: "House with a parking spot", sample_bds3: "Apartment under 3 billion",
     sample_vt1: "Plan for the whole family", sample_vt2: "Data plan under 100k", sample_vt3: "High-speed internet plan",
@@ -441,7 +675,7 @@ const I18N = {
     row_code: "Code", row_name: "Name", row_price: "Price",
     flag_cache: "From cache", flag_reranked: "Reranked", flag_relaxed: "Relaxed filters: {keys}",
     match_score: "Match score", other_results: "Other results", no_other_results: "No other results.",
-    try_more_hint: "Try a name, code, or product attribute.", fb_question: "Was this helpful?", fb_yes: "Correct", fb_no: "Not quite",
+    fb_question: "Was this helpful?", fb_yes: "Correct", fb_no: "Not quite",
     fb_followup: "Follow up", fb_more: "Add feedback", fb_correct_id: "Correct row ID", optional: "Optional",
     fb_save_eval: "Save as test case", proc_detail: "Processing details", intent: "Intent", search_query: "Search query",
     filters: "Filters", none: "None", candidate_scores: "Candidate scores", response_json: "Response JSON",
@@ -455,26 +689,19 @@ const I18N = {
     prev_page: "Previous", next_page: "Next", rows_count: "{n} rows · showing {a}–{b}", col_id: "ID", col_rowkey: "Row key",
     edit: "Edit", delete: "Delete", no_rows_match: "No rows match.", no_rows_yet: "No rows yet.",
     try_other_keyword: "Try another keyword.", add_or_import: "Click “Add row” or import an Excel file.",
-    edit_add_row: "Add row", edit_edit_row: "Edit row {key}", dup_updates: "A duplicate key updates the existing row.",
+    edit_add_row: "Add row", edit_edit_row: "Edit row {key}", 
     save_row: "Save row", cancel: "Cancel", del_row_confirm: "Delete row {key}? The bot will no longer find it.",
     replace_confirm: "Replace all data: rows not in the file will be removed. Continue?", loading_file: "Importing file…",
     imported_rows: "Imported {n} rows.",
-    api_connect_bot: "Connect to your bot", api_lede: "Send a question, get matching rows. Use a key from the “API keys” tab.",
-    api_rows_count: "Rows", api_mode: "Mode", api_mode_auto: "Auto (auto)", api_mode_fast: "Fast (fast)",
-    api_mode_accurate: "Accurate (accurate)", api_limit_note: "Up to 5 rows; fewer if there aren’t enough results.",
-    api_use_conn_keys: "Use keys from Connection", api_sample_response: "Sample response",
-    api_sample_lede: "<code>rows</code>: the original rows. <code>count</code>: number of rows returned.",
+    api_rows_count: "Rows", api_mode: "Mode", api_mode_auto: "Auto", api_mode_fast: "Fast",
+    api_mode_accurate: "Accurate", 
+    api_use_conn_keys: "Use my real key (Connection)", 
     key_read_ph: "<READ_KEY>", key_write_ph: "<WRITE_KEY>", curl_example_q: "hi, could you help me ...",
-    curl_post_title: "Search via POST", curl_get_title: "Search via GET", curl_upsert_title: "Add or update rows",
-    curl_delete_title: "Delete rows", curl_max_rows: "Up to {n} rows", curl_need_write: "Requires write access",
-    curl_post_comment: "# Content-Type: send JSON; X-API-Key: a key with read access.\n# text: the question; top_k: max rows, from 1 to 5.\n# mode: auto = AI when unclear; fast = no reranking; accurate = force AI.",
-    curl_get_comment: "# X-API-Key: a key with read access; parameters go in the URL.\n# text: the question; top_k: max rows, from 1 to 5.\n# mode: auto = AI when unclear; fast = no reranking; accurate = force AI.",
-    curl_upsert_comment: "# Content-Type: send JSON; X-API-Key: a key with write access.\n# rows: a list of rows, using the table’s exact column names.\n# mode: upsert = add/update by key; replace = replace everything, removing old rows.",
-    curl_delete_comment: "# Content-Type: send JSON; X-API-Key: a key with write access.\n# keys: a list of row keys to delete.",
-    note_auto: "auto: AI reranks when results are unclear; skipped when the match is already clear or exact.",
-    note_fast: "fast: No AI reranking; still searches with embeddings.",
-    note_accurate: "accurate: Forces AI reranking; may fall back to existing results on error or timeout.",
-    keys_create_title: "Create API key", keys_create_lede: "Keys specific to this table; grant read or write access.",
+    
+    
+    
+    
+    keys_create_title: "Create API key", 
     key_name: "Key name", key_name_ph: "e.g. Call center bot", key_scope: "Access", scope_read: "Read only",
     scope_readwrite: "Read + add, edit, delete", key_expiry: "Expiry (days)", key_expiry_ph: "no limit",
     key_create_btn: "Create key", keys_list_title: "Keys", pill_write: "Write", pill_read: "Read",
@@ -485,7 +712,7 @@ const I18N = {
     opening: "Opening…", enter_key_name: "Enter a key name.", key_created: "Created “{name}”.",
     can_reveal_later: "You can reveal it later in the key list.", copy_now_once: "Copy it now. The key is shown once; no copy is stored.",
     del_key_confirm: "Delete key “{name}”? Anyone using it loses access immediately.",
-    eval_title: "Check accuracy", eval_lede: "Use the test split to evaluate, the dev split to calibrate.", eval_split: "Split",
+    eval_title: "Check accuracy", eval_split: "Split",
     split_all: "all", eval_mode: "Mode", emode_auto: "auto", emode_fast: "fast", emode_accurate: "accurate",
     run_eval: "Run evaluation", run_cal: "Calibrate thresholds", st_hit1: "Hit@1", st_hit3: "Hit@3", st_mrr: "MRR",
     st_status_acc: "Status accuracy", st_wrong: "Wrong match rate", st_reranked: "Rerank rate", st_p95: "P95",
@@ -494,7 +721,7 @@ const I18N = {
     suggestions_title: "Enrichment suggestions", missed_times: "missed {n} times", failures_title: "Failed queries ({n})", fl_query: "Query",
     fl_category: "Category", fl_expected: "Expected", fl_got: "Got", fl_top3: "Top 3",
     cal_saved: "New thresholds saved", cal_error: "Calibration error",
-    enrich_title: "Add aliases and questions", enrich_lede: "Generate suggestions, review, then save to the table.", enrich_run: "Generate suggestions",
+    enrich_title: "Add aliases and questions", enrich_run: "Generate suggestions",
     enrich_overwrite: "Overwrite existing content", FN_aliases: "Aliases", FN_use_cases: "Use cases", FN_sample_questions: "Sample questions",
     enrich_props_count: "{n} rows with suggestions", mark_reviewed: "Mark as reviewed", save_selected: "Save selected rows",
     no_new_props: "No new suggestions.", enable_overwrite: "Enable “Overwrite” to regenerate.", enrich_applied: "Saved {n} rows.",
@@ -502,7 +729,7 @@ const I18N = {
     lg_result: "Result", lg_rowid: "Row IDs", lg_ms: "ms", lg_feedback: "Feedback", lg_correct: "correct", lg_wrong: "wrong",
     lg_correct_is: ", correct is ", no_logs_yet: "No queries yet.", logs_will_appear: "Searches will appear here.",
     set_table_name: "Table name", rename: "Rename", slug_label: "Table ID: ", slug_immutable: " (cannot be changed).",
-    set_reembed_title: "Rebuild vectors", set_reembed_lede: "Only updates changed rows.", set_reembed_btn: "Rebuild vectors",
+    set_reembed_title: "Rebuild vectors", set_reembed_btn: "Rebuild vectors",
     set_columns_title: "Column structure", name_col_label: "Name column: ", set_drop_title: "Delete table",
     set_drop_lede: "Permanently deletes data, keys, and logs. The bot loses access to the table.", set_drop_btn: "Delete table {name}",
     drop_confirm_prompt: "Type the table ID “{slug}” to confirm deletion",
@@ -512,10 +739,10 @@ const I18N = {
     choose_file: "Choose Excel, CSV, or JSON", data_file_al: "Data file", table_name2: "Table name",
     table_name_ph: "e.g. Plan price list", table_slug: "Table ID", table_slug_ph: "Auto-generated from file name", read_file: "Read file",
     choose_file_first: "Choose a file first.", reading_file: "Reading file…", opt_none: "none", choose_cols: "Choose data columns",
-    choose_cols_lede: "Review the selected columns before creating the table.", search_attrs: "Search attributes", type_number: "number",
+    search_attrs: "Search attributes", type_number: "number",
     type_enum: "list", type_multi_enum: "multi-value", type_bool: "yes/no", type_text: "text", attr_none: "none",
     warnings_count: "{n} warnings while reading the file", update_cols: "Update columns", valid_rows: "{n} valid rows",
-    preview_first10: "Preview of the first 10 rows.", create_table_btn: "Create table", creating_table: "Creating table…",
+    create_table_btn: "Create table", creating_table: "Creating table…",
     login_failed: "Sign-in failed", sign_out: "Sign out", ac_email: "Email", ac_name: "Name", ac_phone: "Phone",
     ac_role: "Role", ac_status: "Status", ac_tables: "Tables", ac_you: "(you)", role_admin: "Admin", role_user: "User",
     status_active: "Active", status_disabled: "Disabled", ac_edit: "Edit", ac_resetpw: "Reset password", ac_disable: "Disable",
@@ -554,8 +781,8 @@ $("#langtog").onclick = toggleLang;
 if ($("#loginLang")) $("#loginLang").onclick = toggleLang;
 applyLang();
 $("#connection").addEventListener("toggle", () => { if (!$("#connection").open) closeConnection(); });
-document.addEventListener("visibilitychange", () => { if (document.hidden) { resetSecretMasks(); clearKeySecrets(); } });
-window.addEventListener("pagehide", () => { resetSecretMasks(); clearKeySecrets(); });
+document.addEventListener("visibilitychange", () => { if (document.hidden) { resetSecretMasks(); clearKeySecrets(); clearApiSecrets(); ddClose(); closePicker(); } });
+window.addEventListener("pagehide", () => { resetSecretMasks(); clearKeySecrets(); clearApiSecrets(); });
 function H(json = true){ const h = {}; if (json) h["Content-Type"] = "application/json";
   if (AUTH.token) h["Authorization"] = "Bearer " + AUTH.token;
   if ($("#apikey") && $("#apikey").value) h["X-API-Key"] = $("#apikey").value; if ($("#adminkey") && $("#adminkey").value) h["X-Admin-Key"] = $("#adminkey").value; return h; }
@@ -585,10 +812,12 @@ function updateRail(){
 }
 function syncNavScroll(){ const nav = $('#sidenav'), active = nav.querySelector('.on'); if (active && matchMedia('(max-width:760px)').matches) nav.scrollLeft = active.offsetLeft - nav.offsetLeft - 12; }
 window.addEventListener('resize', syncNavScroll);
-function closePicker(){ $('#pickmenu').classList.remove('open'); $('#picker>button').setAttribute('aria-expanded','false'); }
-function openPicker(){ $('#pickmenu').classList.add('open'); $('#picker>button').setAttribute('aria-expanded','true'); const q = $('#pickq'); q.value = ''; renderPickItems(''); setTimeout(() => q.focus(), 0); }
+function closePicker(){ $('#pickmenu').classList.remove('open'); $('#picker>button').setAttribute('aria-expanded','false'); $('#pickq').setAttribute('aria-expanded','false'); $('#pickq').removeAttribute('aria-activedescendant'); }
+function openPicker(){ ddClose(); closeConnection(); $('#pickmenu').classList.add('open'); $('#picker>button').setAttribute('aria-expanded','true'); const q = $('#pickq'); q.setAttribute('aria-expanded','true'); q.value = ''; renderPickItems(''); q.focus(); }
 window.togglePicker = () => { $('#pickmenu').classList.contains('open') ? closePicker() : openPicker(); };
-document.addEventListener('keydown', e => { if (e.key === 'Escape') { closePicker(); closeConnection(); clearKeySecrets(); } });
+$('#picker>button').addEventListener('keydown', e => { if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); openPicker(); } });
+$('#picker').addEventListener('focusout', e => { if (!$('#picker').contains(e.relatedTarget)) closePicker(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { ddClose(); closePicker(); closeConnection(); clearKeySecrets(); } });
 document.addEventListener("click", e => { const path = e.composedPath(); if (!path.includes($("#picker"))) closePicker(); if (!path.includes($("#connection"))) closeConnection(); });
 const T = () => TABLES.find(t => t.slug === S.slug);
 async function loadTables(){ try { TABLES = await req("/v1/tables"); } catch (e) { TABLES = []; } renderPicker(); }
@@ -602,27 +831,29 @@ function renderPicker(){
 function renderPickItems(q){
   const box = $("#pickitems"); if (!box) return;
   const nq = nrm(q), list = TABLES.filter(t => !nq || nrm(t.name).includes(nq) || nrm(t.slug).includes(nq));
-  box.innerHTML = list.length ? list.map(t => `<a href="#/t/${encodeURIComponent(t.slug)}" onclick="closePicker()" class="${t.slug === S.slug ? "cur" : ""}" role="option"${t.slug === S.slug ? ' aria-selected="true"' : ""}><span class="nm"><span class="dot"></span>${esc(t.name)}</span><span class="n">${fmtNum(t.rows)} ${tr("rows_unit")}</span></a>`).join("")
+  box.innerHTML = list.length ? list.map((t, i) => `<a id="pick-option-${i}" href="#/t/${encodeURIComponent(t.slug)}" onclick="closePicker();$('#picker>button').focus()" tabindex="-1" class="${t.slug === S.slug ? "cur" : ""}" role="option" aria-selected="${t.slug === S.slug}"><span class="nm"><span class="dot"></span>${esc(t.name)}</span><span class="n">${fmtNum(t.rows)} ${tr("rows_unit")}</span></a>`).join("")
     : `<div class="mempty">${TABLES.length ? tr("no_table_match").replace("{q}", esc(q)) : tr("no_tables_yet")}</div>`;
-  const hl = box.querySelector("a.cur") || box.querySelector("a"); if (hl) hl.classList.add("hl");
+  const hl = box.querySelector("a.cur") || box.querySelector("a"); if (hl) hl.classList.add("hl"); syncPickActive();
 }
+function syncPickActive(){ const hl = $('#pickitems a.hl'); if (hl && $('#pickmenu').classList.contains('open')) $('#pickq').setAttribute('aria-activedescendant', hl.id); else $('#pickq').removeAttribute('aria-activedescendant'); }
 function pickHl(dir){
   const items = [...$("#pickitems").querySelectorAll("a")]; if (!items.length) return;
   let i = items.findIndex(a => a.classList.contains("hl"));
   i = dir > 0 ? Math.min(items.length - 1, i < 0 ? 0 : i + 1) : Math.max(0, i < 0 ? 0 : i - 1);
-  items.forEach(a => a.classList.remove("hl")); items[i].classList.add("hl"); items[i].scrollIntoView({ block: "nearest" });
+  items.forEach(a => a.classList.remove("hl")); items[i].classList.add("hl"); items[i].scrollIntoView({ block: "nearest" }); syncPickActive();
 }
 $("#pickq").addEventListener("input", e => renderPickItems(e.target.value));
 $("#pickq").addEventListener("keydown", e => {
   if (e.key === "ArrowDown") { e.preventDefault(); pickHl(1); }
   else if (e.key === "ArrowUp") { e.preventDefault(); pickHl(-1); }
+  else if ((e.key === "Home" || e.key === "End") && e.ctrlKey) { e.preventDefault(); const items = [...$('#pickitems a')]; items.forEach(a => a.classList.remove('hl')); const a = e.key === 'Home' ? items[0] : items[items.length - 1]; if (a) { a.classList.add('hl'); a.scrollIntoView({block:'nearest'}); syncPickActive(); } }
   else if (e.key === "Enter") { e.preventDefault(); const a = $("#pickitems").querySelector("a.hl") || $("#pickitems").querySelector("a"); if (a) a.click(); }
   else if (e.key === "Escape") { e.preventDefault(); closePicker(); $("#picker>button").focus(); }
 });
 function go(h){ if (location.hash === h) route(); else location.hash = h; }
 window.addEventListener("hashchange", route);
 async function route(){
-  clearKeySecrets();
+  ddClose(); closePicker(); clearKeySecrets(); clearApiSecrets();
   const parts = location.hash.replace(/^#\/?/, "").split("/").map(decodeURIComponent);
   const nextSlug = parts[0] === 't' ? parts[1] : parts[0] === 'new' ? '__new__' : null;
   if (nextSlug && nextSlug !== S.slug) { S.ctx = null; S.last = null; }
@@ -661,9 +892,9 @@ async function watchJob(id){
 function viewTry(){
   $('#view').innerHTML = `<div class="panel search-panel"><label class="search-title" for="q">${icon('try')}${tr('try_title')}</label>
     <form class="utter" id="uform"><input id="q" placeholder="${esc(tr('try_ph').replace('{name}', T().name))}" autocomplete="off" required><button class="btn primary" type="submit">${icon('try')}${tr('search_btn')}</button></form>
-    <div class="utter-opts"><label>${tr('mode_label')} <select id="mode"><option value="auto">${tr('mode_auto')}</option><option value="fast">${tr('mode_fast')}</option><option value="accurate">${tr('mode_accurate')}</option></select></label><label>${tr('results_label')} <select id="topk"><option>3</option><option>1</option><option>5</option></select></label><span class="shortcut"><kbd>Enter</kbd> ${tr('shortcut_enter')}</span></div><div id="ctxbox"></div></div><div id="tryout" aria-live="polite" aria-busy="false"></div>`;
+    <div class="utter-opts"><label>${tr('mode_label')} <select id="mode"><option value="auto">${tr('mode_auto')}</option><option value="fast">${tr('mode_fast')}</option><option value="accurate">${tr('mode_accurate')}</option></select></label><label>${tr('results_label')} <select id="topk"><option>3</option><option>1</option><option>5</option></select></label></div><div id="ctxbox"></div></div><div id="tryout" aria-live="polite" aria-busy="false"></div>`;
   const samples = S.slug === 'dienmay' ? [tr('sample_dm1'), tr('sample_dm2'), tr('sample_dm3')] : S.slug === 'batdongsan' ? [tr('sample_bds1'), tr('sample_bds2'), tr('sample_bds3')] : S.slug === 'vienthong' || S.slug === 'goi-cuoc' ? [tr('sample_vt1'), tr('sample_vt2'), tr('sample_vt3')] : [];
-  $('#tryout').innerHTML = `<div class="query-start"><h2>${samples.length ? tr('try_a_question') : tr('enter_question')}</h2><div class="example-list">${samples.map(text => `<button class="example" data-query="${esc(text)}"><span>${esc(text)}</span>${icon('arrow')}</button>`).join('')}</div><div class="start-note">${icon('rows')}${tr('search_in_rows').replace('{n}', fmtNum(T().rows))}</div></div>`;
+  $('#tryout').innerHTML = samples.length ? `<div class="query-start"><h2>${tr('try_a_question')}</h2><div class="example-list">${samples.map(text => `<button class="example" data-query="${esc(text)}"><span>${esc(text)}</span>${icon('arrow')}</button>`).join('')}</div></div>` : '';
   document.querySelectorAll('.example').forEach(b => b.onclick = () => { $('#q').value = b.dataset.query; $('#q').focus(); });
   renderCtx(); $('#uform').onsubmit = e => { e.preventDefault(); doTry(); };
 }
@@ -715,7 +946,6 @@ function renderTry(r){
   if(r.fallback_reason) r.fallback_reason.split(',').forEach(f => flags.push(`<span class="flag bad">${esc(FALLBACK[f] || f)}</span>`));
   let h = `<div class="panel"><div class="verdict ${r.status}"><span class="dot"></span><span class="what">${VERDICT[r.status]}</span><span class="result-time">${fmtNum(Math.round(r.latency_ms.total))} ms</span>${r.clarify_question ? `<span class="ask">${esc(r.clarify_question)}</span>` : ''}</div>`;
   if(top){ h += `<div class="results"><div class="record"><h3>${esc(top.name)}</h3><div class="sub">${esc(top.sku)}</div><div class="conf"><span>${tr('match_score')} ${pct(top.score)}</span><div class="meter"><i style="width:${Math.max(0,Math.min(100,Math.round(top.score*100)))}%"></i></div></div>${top.reason ? `<p class="reason">${esc(top.reason)}</p>` : ''}${kv(rowOf(top),cols)}</div><div class="alternatives"><h2>${tr('other_results')}</h2>${r.products.length > 1 ? `<ul class="alts">${r.products.slice(1).map(p => `<li><span>${esc(p.name)}</span><span class="s">${pct(p.score)}</span></li>`).join('')}</ul>` : `<p class="muted small">${tr('no_other_results')}</p>`}</div></div>`; }
-  else if(r.status !== 'out_of_scope') h += `<p class="muted small">${tr('try_more_hint')}</p>`;
   if(r.fallback_reason || r.relaxed) h += `<div class="flags">${flags.filter(x=>!x.includes('flag info')).join('')}</div>`;
   h += `<div class="fb"><span>${tr('fb_question')}</span><button class="btn sm" onclick="feedback(true)">${icon('check')}${tr('fb_yes')}</button><button class="btn sm" onclick="feedback(false)">${tr('fb_no')}</button><span id="fbmsg" class="msg" role="status"></span><span class="spacer"></span>${top ? `<button class="btn sm" onclick="useAsCtx()">${tr('fb_followup')}</button>` : ''}</div><details class="feedback-extra"><summary>${tr('fb_more')}</summary><div class="actions"><label class="field"><span>${tr('fb_correct_id')}</span><input id="fbpid" type="number" min="1" placeholder="${tr('optional')}"></label><label class="small"><input type="checkbox" id="fbeval">${tr('fb_save_eval')}</label></div></details>`;
   h += `<details class="debug"><summary>${tr('proc_detail')}</summary>${timeline(r.latency_ms,r.reranked)}${flags.length ? `<div class="flags">${flags.join('')}</div>` : ''}<div class="understanding"><dl class="kv"><dt>${tr('intent')}</dt><dd>${esc(u.intent)}</dd><dt>${tr('search_query')}</dt><dd>${esc(u.rewritten_query || '–')}</dd><dt>${tr('filters')}</dt><dd>${esc(describeFilters(u.filters)) || tr('none')}</dd></dl></div>${r.debug ? `<details class="debug"><summary>${tr('candidate_scores')}</summary><div class="scroll">${debugTable(r.debug.candidates)}</div></details><details class="debug"><summary>${tr('response_json')}</summary><pre>${esc(JSON.stringify(r,null,2))}</pre></details>` : ''}</details>`;
@@ -774,7 +1004,6 @@ async function loadRows(){
 }
 window.editRow = i => { const cols = colsOf(); const row = i === null ? Object.fromEntries(cols.map(c => [c, ""])) : S.rows[i].row;
   $("#redit").innerHTML = `<div class="panel" style="background:var(--sunken);margin:14px 0 0;box-shadow:none"><h2>${i === null ? tr("edit_add_row") : tr("edit_edit_row").replace("{key}", esc(S.rows[i].row_key))}</h2>
-    <p class="lede">${tr('dup_updates')}</p>
     <div class="grid">${cols.map(c => `<label class="field"><span>${esc(c)}</span><input data-col="${esc(c)}" value="${esc(row[c] ?? "")}"></label>`).join("")}</div>
     <div class="actions" style="margin-top:14px"><button class="btn primary" onclick="saveRow()">${tr('save_row')}</button><button class="btn" onclick="$('#redit').innerHTML=''">${tr('cancel')}</button><span id="reditmsg" class="msg"></span></div></div>`;
   $("#redit input")?.focus(); };
@@ -793,42 +1022,107 @@ async function importMore(){ const f = $("#more").files[0]; if (!f) return; cons
 }
 
 // ---------- Tích hợp API ----------
+const API_OPS = [{k: "ask", m: "POST", p: "/ask", w: false}, {k: "ask_get", m: "GET", p: "/ask", w: false},
+                 {k: "upsert", m: "PUT", p: "/rows", w: true}, {k: "delete", m: "DELETE", p: "/rows", w: true}];
+const API_LANGS = [["curl", "cURL"], ["js", "JavaScript"], ["py", "Python"]];
+const API = {op: "ask", lang: store.get("api_lang") || "curl", top_k: 3, mode: "auto", wmode: "upsert"};
 function viewApi(){
-  const row = Object.fromEntries((T().columns.length ? T().columns : [tr("row_code"), tr("row_name")]).map(c => [c, "…"]));
-  $("#view").innerHTML = `<div class="panel"><h2>${tr('api_connect_bot')}</h2>
-    <p class="lede">${tr('api_lede')}</p>
-    <div class="utter-opts api-opts"><label for="api-topk">${tr('api_rows_count')} <select id="api-topk" aria-describedby="api-limit"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></label><label for="api-mode">${tr('api_mode')} <select id="api-mode" aria-describedby="api-mode-note"><option value="auto">${tr('api_mode_auto')}</option><option value="fast">${tr('api_mode_fast')}</option><option value="accurate">${tr('api_mode_accurate')}</option></select></label></div>
-    <p class="api-note" id="api-limit">${tr('api_limit_note')}</p><p class="api-note" id="api-mode-note"></p>
-    <label class="small"><input type="checkbox" id="realkeys"> ${tr('api_use_conn_keys')}</label><div id="curls" style="margin-top:16px"></div></div>
-    <div class="panel"><h2>${tr('api_sample_response')}</h2><p class="lede">${tr('api_sample_lede')}</p><pre>${esc(JSON.stringify({found: true, status: "matched", row, rows: [row], count: 1, score: 0.89, row_key: "…", clarify_question: null, alternatives: [{row_key: "…", name: "…", score: 0.53}], request_id: "…", latency_ms: 2988}, null, 2))}</pre></div>`;
-  $("#realkeys").onchange = renderCurls; $("#api-topk").onchange = renderCurls; $("#api-mode").onchange = renderCurls; renderCurls();
+  if (!API_LANGS.some(([k]) => k === API.lang)) API.lang = "curl";
+  $("#view").innerHTML = `<div class="panel api">
+    <div class="api-segment" role="tablist" aria-label="${tr('api_op_al')}" id="api-ops">${API_OPS.map(o => `<button type="button" role="tab" data-op="${o.k}"><span class="mth m-${o.m.toLowerCase()}">${o.m}</span>${tr('api_op_' + o.k)}</button>`).join("")}</div>
+    <div class="api-ep"><span class="mth" id="api-mth"></span><code id="api-url"></code><button type="button" class="btn ghost sm" id="api-copyurl">${tr('copy')}</button></div>
+    <div class="api-params" id="api-q">
+      <div class="pgroup"><span class="plabel" id="api-topk-l">${tr('api_rows_count')}</span><div class="api-segment sm num" id="api-topk" role="group" aria-labelledby="api-topk-l">${[1, 2, 3, 4, 5].map(n => `<button type="button" data-n="${n}">${n}</button>`).join("")}</div></div>
+      <div class="pgroup"><label class="plabel" for="api-mode">${tr('api_mode')}</label><select id="api-mode"><option value="auto">${tr('api_mode_auto')}</option><option value="fast">${tr('api_mode_fast')}</option><option value="accurate">${tr('api_mode_accurate')}</option></select></div>
+    </div>
+    <div class="api-params" id="api-w">
+      <div class="pgroup"><label class="plabel" for="api-wmode">${tr('api_write_mode')}</label><select id="api-wmode"><option value="upsert">${tr('import_upsert')}</option><option value="replace">${tr('import_replace')}</option></select></div>
+    </div>
+    <div class="api-grid">
+      <div class="codecard"><div class="code-h"><div class="api-segment sm" role="tablist" aria-label="${tr('api_lang_al')}" id="api-lang">${API_LANGS.map(([k, lb]) => `<button type="button" role="tab" data-lang="${k}">${lb}</button>`).join("")}</div><span class="spacer"></span><span class="keytag" id="api-key"></span><button type="button" class="btn sm" id="api-copy">${tr('copy')}</button></div><pre class="code" id="api-code"></pre></div>
+      <div class="codecard"><div class="code-h"><b>${tr('api_response')}</b><span class="status">200 OK</span></div><pre class="code" id="api-resp"></pre></div>
+    </div>
+    <label class="switch" style="margin-top:16px"><input type="checkbox" id="realkeys"><span class="track"></span>${tr('api_use_conn_keys')}</label>
+  </div>`;
+  $("#api-mode").value = API.mode; $("#api-wmode").value = API.wmode;
+  $("#api-ops").onclick = e => { const b = e.target.closest("[data-op]"); if (b) { API.op = b.dataset.op; renderApi(); } };
+  $("#api-lang").onclick = e => { const b = e.target.closest("[data-lang]"); if (b) { API.lang = b.dataset.lang; store.set("api_lang", API.lang); renderApi(); } };
+  $("#api-topk").onclick = e => { const b = e.target.closest("[data-n]"); if (b) { API.top_k = +b.dataset.n; renderApi(); } };
+  $("#api-mode").onchange = () => { API.mode = $("#api-mode").value; renderApi(); };
+  $("#api-wmode").onchange = () => { API.wmode = $("#api-wmode").value; renderApi(); };
+  $("#realkeys").onchange = renderApi;
+  $("#api-copy").onclick = e => copyText(apiCode(), e.currentTarget);
+  $("#api-copyurl").onclick = e => copyText($("#api-url").textContent, e.currentTarget);
+  [$("#api-ops"), $("#api-lang")].forEach(segKeys);
+  renderApi();
 }
-function curlList(){
-  const t = T(), base = location.origin, real = $("#realkeys")?.checked;
-  const top_k = +($("#api-topk")?.value || 1), mode = $("#api-mode")?.value || "auto";
-  const ak = real && $("#apikey").value ? $("#apikey").value : tr("key_read_ph"), adm = real && $("#apikey").value ? $("#apikey").value : tr("key_write_ph");
-  const sample = {}; (t.columns.length ? t.columns : [tr("row_code"), tr("row_name")]).slice(0, 4).forEach(c => sample[c] = "…"); const u = `${base}/v1/tables/${t.slug}`;
-  const maxRows = tr("curl_max_rows").replace("{n}", top_k), exq = tr("curl_example_q");
-  return [
-    [tr("curl_post_title"), maxRows, `${tr("curl_post_comment")}\ncurl -X POST '${u}/ask' \\\n  -H 'Content-Type: application/json' \\\n  -H 'X-API-Key: ${ak}' \\\n  -d '{"text": "${exq}", "top_k": ${top_k}, "mode": "${mode}"}'`],
-    [tr("curl_get_title"), maxRows, `${tr("curl_get_comment")}\ncurl -G '${u}/ask' \\\n  -H 'X-API-Key: ${ak}' \\\n  --data-urlencode 'text=${exq}' \\\n  --data-urlencode 'top_k=${top_k}' \\\n  --data-urlencode 'mode=${mode}'`],
-    [tr("curl_upsert_title"), tr("curl_need_write"), `${tr("curl_upsert_comment")}\ncurl -X PUT '${u}/rows' \\\n  -H 'Content-Type: application/json' \\\n  -H 'X-API-Key: ${adm}' \\\n  -d '${JSON.stringify({rows: [sample], mode: "upsert"})}'`],
-    [tr("curl_delete_title"), tr("curl_need_write"), `${tr("curl_delete_comment")}\ncurl -X DELETE '${u}/rows' \\\n  -H 'Content-Type: application/json' \\\n  -H 'X-API-Key: ${adm}' \\\n  -d '{"keys": ["MA_1", "MA_2"]}'`],
-  ];
+function segKeys(el){
+  el.addEventListener("keydown", e => {
+    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+    const bs = [...el.querySelectorAll("button")], i = bs.indexOf(document.activeElement); if (i < 0) return;
+    e.preventDefault(); const n = bs[(i + (e.key === "ArrowRight" ? 1 : bs.length - 1)) % bs.length]; n.click(); n.focus();
+  });
 }
-function renderCurls(){
-  const notes = {auto: tr("note_auto"), fast: tr("note_fast"), accurate: tr("note_accurate")};
-  $("#api-mode-note").textContent = notes[$("#api-mode").value];
-  $("#curls").innerHTML = curlList().map(([title, sub, c], i) => `<div class="curl"><div class="curl-h"><div><b>${title}</b> <span class="muted small">${sub}</span></div><button class="btn sm" onclick="copyText(curlList()[${i}][2], this)">${tr('copy')}</button></div><pre>${esc(c)}</pre></div>`).join("");
+function renderApi(){
+  const op = API_OPS.find(o => o.k === API.op);
+  $("#api-ops").querySelectorAll("[data-op]").forEach(b => { const on = b.dataset.op === API.op; b.setAttribute("aria-selected", on); b.tabIndex = on ? 0 : -1; });
+  $("#api-lang").querySelectorAll("[data-lang]").forEach(b => { const on = b.dataset.lang === API.lang; b.setAttribute("aria-selected", on); b.tabIndex = on ? 0 : -1; });
+  $("#api-topk").querySelectorAll("[data-n]").forEach(b => b.setAttribute("aria-pressed", +b.dataset.n === API.top_k));
+  $("#api-q").hidden = op.w; $("#api-w").hidden = op.k !== "upsert";
+  const mth = $("#api-mth"); mth.textContent = op.m; mth.className = "mth m-" + op.m.toLowerCase();
+  $("#api-url").textContent = `${location.origin}/v1/tables/${T().slug}${op.p}`;
+  const kt = $("#api-key"); kt.textContent = tr(op.w ? "key_write_tag" : "key_read_tag"); kt.className = "keytag" + (op.w ? " w" : "");
+  $("#api-code").innerHTML = hlCode(apiCode());
+  $("#api-resp").innerHTML = hlCode(JSON.stringify(apiResp(op.k), null, 2));
 }
-window.copyText = async (txt, b) => { try { await navigator.clipboard.writeText(txt); const o = b.textContent; b.textContent = tr("copied"); setTimeout(() => b.textContent = o, 1500); } catch { b.textContent = tr("err_short"); } };
-window.curlList = curlList;
+function apiCols(n){ const t = T(); return (t.columns.length ? t.columns : [tr("row_code"), tr("row_name")]).slice(0, n); }
+function apiCode(){
+  const op = API_OPS.find(o => o.k === API.op), u = `${location.origin}/v1/tables/${T().slug}${op.p}`;
+  const key = $("#realkeys")?.checked && $("#apikey").value ? $("#apikey").value : tr(op.w ? "key_write_ph" : "key_read_ph");
+  const q = tr("curl_example_q"), J = v => JSON.stringify(v), P = (v, ind, sp = 2) => JSON.stringify(v, null, sp).replace(/\n/g, "\n" + " ".repeat(ind));
+  const params = {text: q, top_k: String(API.top_k), mode: API.mode};
+  const body = op.k === "ask" ? {text: q, top_k: API.top_k, mode: API.mode}
+    : op.k === "upsert" ? {rows: [Object.fromEntries(apiCols(4).map(c => [c, "…"]))], mode: API.wmode}
+    : {keys: ["MA_1", "MA_2"]};
+  const get = op.m === "GET";
+  if (API.lang === "curl") return get
+    ? [`curl -G '${u}'`, `  -H 'X-API-Key: ${key}'`, ...Object.entries(params).map(([k, v]) => `  --data-urlencode '${k}=${v}'`)].join(" \\\n")
+    : [`curl -X ${op.m} '${u}'`, `  -H 'Content-Type: application/json'`, `  -H 'X-API-Key: ${key}'`, `  -d '${J(body)}'`].join(" \\\n");
+  if (API.lang === "js") return get
+    ? [`const params = new URLSearchParams(${P(params, 0)});`, ``, 'const res = await fetch(`' + u + '?${params}`, {', `  headers: { "X-API-Key": ${J(key)} },`, `});`, `const data = await res.json();`].join("\n")
+    : [`const res = await fetch(${J(u)}, {`, `  method: ${J(op.m)},`, `  headers: {`, `    "Content-Type": "application/json",`, `    "X-API-Key": ${J(key)},`, `  },`, `  body: JSON.stringify(${P(body, 2)}),`, `});`, `const data = await res.json();`].join("\n");
+  return [`import requests`, ``, `res = requests.${op.m.toLowerCase()}(`, `    ${J(u)},`, `    headers={"X-API-Key": ${J(key)}},`,
+    get ? `    params=${P(params, 4, 4)},` : `    json=${P(body, 4, 4)},`, `    timeout=10,`, `)`, `data = res.json()`].join("\n");
+}
+function apiResp(k){
+  const v = T().data_version + 1, row = Object.fromEntries(apiCols(6).map(c => [c, "…"]));
+  if (k === "upsert") return {upserted: 1, row_keys: ["MA_1"], data_version: v, embed_job: "…", warnings: []};
+  if (k === "delete") return {deleted: 2, data_version: v};
+  return {found: true, status: "matched", row, rows: [row], count: 1, score: 0.89, row_key: "…", clarify_question: null,
+          alternatives: [{row_key: "…", name: "…", score: 0.53}], request_id: "…", latency_ms: 640};
+}
+function hlCode(code){
+  const re = /("(?:[^"\\\n]|\\.)*"|'(?:[^'\\\n]|\\.)*'|`(?:[^`\\]|\\.)*`|\b(?:const|await|new|import|return|True|False|None|null|true|false)\b|(?<![\w-])-{1,2}[A-Za-z][\w-]*|\b\d+(?:\.\d+)?\b)/g;
+  let out = "", last = 0, m;
+  while ((m = re.exec(code))) {
+    const tok = m[0], c = tok[0];
+    const cls = `"'\``.includes(c) ? (/^\s*:/.test(code.slice(re.lastIndex)) ? "k" : "s") : c === "-" ? "f" : /\d/.test(c) ? "n" : "w";
+    out += esc(code.slice(last, m.index)) + `<span class="tk-${cls}">${esc(tok)}</span>`; last = re.lastIndex;
+  }
+  return out + esc(code.slice(last));
+}
+window.copyText = async (txt, b) => {
+  const original = b.dataset.copyLabel || b.textContent; b.dataset.copyLabel = original;
+  clearTimeout(b._copyTimer);
+  try { await navigator.clipboard.writeText(txt); b.textContent = tr("copied"); }
+  catch { b.textContent = tr("err_short"); }
+  b._copyTimer = setTimeout(() => { if (b.isConnected) b.textContent = original; }, 1500);
+};
 
 // ---------- Khoá API ----------
 function viewKeys(){
   clearKeySecrets();
   $("#view").innerHTML = `<div class="panel"><h2>${tr('keys_create_title')}</h2>
-      <p class="lede">${tr('keys_create_lede')}</p>
       <div id="newkey"></div>
       <div class="grid key-grid" style="align-items:end">
         <label class="field"><span>${tr('key_name')}</span><input id="kname" placeholder="${tr('key_name_ph')}"></label>
@@ -883,7 +1177,6 @@ window.delKey = async (id, name) => { if (!confirm(tr("del_key_confirm").replace
 // ---------- Đánh giá ----------
 function viewEval(){
   $("#view").innerHTML = `<div class="panel"><h2>${tr('eval_title')}</h2>
-    <p class="lede">${tr('eval_lede')}</p>
     <div class="actions"><label class="small">${tr('eval_split')} <select id="esplit" style="width:auto"><option value="test">test</option><option value="dev">dev</option><option value="all">${tr('split_all')}</option></select></label>
       <label class="small">${tr('eval_mode')} <select id="emode" style="width:auto"><option value="auto">${tr('emode_auto')}</option><option value="fast">${tr('emode_fast')}</option><option value="accurate">${tr('emode_accurate')}</option></select></label>
       <button class="btn primary" id="runeval">${tr('run_eval')}</button><button class="btn" id="runcal">${tr('run_cal')}</button></div></div><div id="evout"></div>`;
@@ -910,7 +1203,6 @@ async function runCal(){ try { const {job_id} = await req(`/v1/demos/${encodeURI
 // ---------- Làm giàu ----------
 function viewEnrich(){
   $("#view").innerHTML = `<div class="panel"><h2>${tr('enrich_title')}</h2>
-    <p class="lede">${tr('enrich_lede')}</p>
     <div class="actions"><button class="btn primary" id="runen">${tr('enrich_run')}</button><label class="small"><input type="checkbox" id="ovw"> ${tr('enrich_overwrite')}</label></div></div><div id="enout"></div>`;
   $("#runen").onclick = runEnrich;
 }
@@ -946,7 +1238,7 @@ function viewSettings(){
   const t = T();
   $("#view").innerHTML = `<div class="panel"><h2>${tr('set_table_name')}</h2><div class="actions" style="margin-top:10px"><input id="newname" aria-label="${tr('set_table_name')}" value="${esc(t.name)}" style="max-width:360px"><button class="btn primary" id="rename">${tr('rename')}</button><span id="rnmsg" class="msg"></span></div>
       <p class="small muted" style="margin:8px 0 0">${tr('slug_label')}<code>${esc(t.slug)}</code>${tr('slug_immutable')}</p></div>
-    <div class="panel"><h2>${tr('set_reembed_title')}</h2><p class="lede">${tr('set_reembed_lede')}</p><button class="btn" id="reemb">${tr('set_reembed_btn')}</button></div>
+    <div class="panel"><h2>${tr('set_reembed_title')}</h2><button class="btn" id="reemb">${tr('set_reembed_btn')}</button></div>
     <div class="panel"><h2>${tr('set_columns_title')}</h2><p class="lede">${tr('name_col_label')}<b>${esc(t.name_column || "–")}</b></p>${t.columns.map(c => `<span class="chip">${esc(c)}</span>`).join("")}</div>
     <div class="panel" style="border-color:color-mix(in srgb,var(--bad) 40%,var(--line))"><h2>${tr('set_drop_title')}</h2><p class="lede">${tr('set_drop_lede')}</p><button class="btn danger" id="drop">${tr("set_drop_btn").replace("{name}", esc(t.name))}</button></div>`;
   $("#rename").onclick = async () => { const name = $("#newname").value.trim(); if (!name) return;
@@ -975,12 +1267,12 @@ async function readPlan(withMap){ if (!FILE) { $("#nmsg").className = "msg err";
   try { PLAN = await req("/v1/tables/preview", {method: "POST", body: newForm(withMap)}); $("#nmsg").textContent = ""; renderPlan(); } catch (e) { $("#nmsg").className = "msg err"; $("#nmsg").textContent = e.message; } }
 function renderPlan(){ const p = PLAN, cols = p.columns; if (!$("#nslug").value) $("#nslug").placeholder = p.suggested_slug;
   const opt = sel => `<option value="">${tr('opt_none')}</option>` + cols.map(c => `<option ${c === sel ? "selected" : ""}>${esc(c)}</option>`).join("");
-  $("#nplan").innerHTML = `<div class="panel"><h2>${tr('choose_cols')}</h2><p class="lede">${tr('choose_cols_lede')}</p>
+  $("#nplan").innerHTML = `<div class="panel"><h2>${tr('choose_cols')}</h2>
       <div class="grid">${CORE.map(([k, lb, hint]) => `<label class="field"><span>${lb}${hint ? ` <span class="muted">(${hint})</span>` : ""}</span><select id="m_${k}">${opt(p.mapping[k])}</select></label>`).join("")}</div>
       <p class="small" style="margin:14px 0 4px">${tr('search_attrs')}</p>${p.proposed_definitions.map(d => `<span class="chip">${esc(d.label)}: ${({number: tr("type_number"), enum: tr("type_enum"), multi_enum: tr("type_multi_enum"), bool: tr("type_bool"), text: tr("type_text")})[d.type] || d.type}${d.unit ? ", " + esc(d.unit) : ""}</span>`).join("") || `<span class="muted small">${tr('attr_none')}</span>`}
       ${p.warnings.length ? `<details style="margin-top:10px"><summary class="small" style="color:var(--warn);cursor:pointer">${tr("warnings_count").replace("{n}", p.warnings.length)}</summary><pre>${esc(p.warnings.join("\n"))}</pre></details>` : ""}
       <div class="actions" style="margin-top:14px"><button class="btn" onclick="readPlan(true)">${tr('update_cols')}</button></div></div>
-    <div class="panel"><h2>${tr("valid_rows").replace("{n}", fmtNum(p.n_rows))}</h2><p class="lede">${tr('preview_first10')}</p>
+    <div class="panel"><h2>${tr("valid_rows").replace("{n}", fmtNum(p.n_rows))}</h2>
       <div class="scroll"><table class="data"><tr>${cols.map(c => `<th>${esc(c)}</th>`).join("")}</tr>${p.preview.map(r => `<tr>${cols.map(c => `<td>${esc(r[c])}</td>`).join("")}</tr>`).join("")}</table></div>
       <div class="actions" style="margin-top:16px"><button class="btn primary" id="ncreate" ${p.n_rows ? "" : "disabled"}>${tr('create_table_btn')}</button><span id="ncmsg" class="msg"></span></div></div>`;
   $("#ncreate").onclick = createTable;
