@@ -10,6 +10,8 @@ services:
         sync: false
       - key: DATABASE_URL           # chuỗi kết nối Neon, dạng ...neon.tech/db?sslmode=require (dùng endpoint TRỰC TIẾP, không phải -pooler)
         sync: false
+      - key: TABLE_KEY_ENCRYPTION_KEY  # Fernet key mã hoá bản lưu khoá API (bật nút "Xem khoá"); giữ cố định, đặt giá trị trong Render
+        sync: false
       - key: SEED_ACCOUNT_EMAIL
         value: giangnh@vihatgroup.com
       - key: SEED_ACCOUNT_PASSWORD  # đặt mật khẩu mạnh
