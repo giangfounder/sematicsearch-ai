@@ -363,5 +363,12 @@ def make_gemini(settings: Settings) -> BaseGemini:
     if settings.gemini_provider == "fake":
         from app.gemini.fake import FakeGemini
 
-        return FakeGemini(settings)
-    return GeminiPool(settings)
+        primary: BaseGemini = FakeGemini(settings)
+    else:
+        primary = GeminiPool(settings)
+    if settings.gpt_enabled:
+        from app.gemini.fallback import FallbackGemini
+        from app.gemini.openai_provider import OpenAICompatProvider
+
+        return FallbackGemini(primary, OpenAICompatProvider(settings))
+    return primary

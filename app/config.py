@@ -36,6 +36,17 @@ class Settings(BaseSettings):
     breaker_failures: int = 5
     breaker_open_s: float = 20.0
     gemini_max_concurrency: int = 16
+    # OpenAI-compatible (GPT) – dùng làm nguồn dự phòng khi Gemini hết quota.
+    # Trống key = tắt hoàn toàn, không thay đổi hành vi hiện tại.
+    openai_api_key: str = ""
+    openai_base_url: str = "https://api.openai.com/v1"
+    openai_llm_model: str = "gpt-4o-mini"
+    openai_embed_model: str = "text-embedding-3-small"
+    # giới hạn request embed GPT/phút (0 = không giới hạn, tự xoay key khi 429)
+    openai_embed_rpm: int = 0
+    # Tự động chuyển sang GPT khi provider chính hết quota / mở breaker.
+    gpt_fallback: bool = True
+
     # Free tier: 100 request/phút cho embed (mỗi văn bản trong batch tính 1). Paid tier: tăng lên 3000+
     embed_doc_rpm: int = 90
     embed_batch_size: int = 30
@@ -78,6 +89,14 @@ class Settings(BaseSettings):
     @property
     def gemini_keys(self) -> list[str]:
         return [k.strip() for k in self.gemini_api_key.split(",") if k.strip()]
+
+    @property
+    def openai_keys(self) -> list[str]:
+        return [k.strip() for k in self.openai_api_key.split(",") if k.strip()]
+
+    @property
+    def gpt_enabled(self) -> bool:
+        return bool(self.gpt_fallback) and bool(self.openai_keys)
 
     @property
     def api_key_set(self) -> set[str]:

@@ -85,6 +85,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         async def embed_job(ctx, demo_id, params):
             # A later import can invalidate an in-flight snapshot. Re-plan from
             # the committed checkpoints, with a bounded number of restarts.
+            switched = False
             for attempt in range(3):
                 try:
                     result = await embed_demo(pool, gem, demo_id, per_minute=settings.embed_doc_rpm,
@@ -96,6 +97,19 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                         await indexes.reload(demo["slug"])
                     return result
                 except GeminiError as exc:
+                    # Gemini hết quota / bị rate limit bền vững -> chuyển bảng sang
+                    # model GPT và embed lại từ đầu. Vector theo model cũ bị loại khỏi
+                    # index nên query và doc luôn cùng một không gian vector.
+                    if (exc.reason in ("quota_exhausted", "rate_limited", "breaker_open")
+                            and not switched and settings.gpt_enabled):
+                        demo = await repo.get_demo_by_id(pool, demo_id)
+                        if demo and demo["embed_model"] != settings.openai_embed_model:
+                            await repo.set_demo_embed_model(pool, demo_id, settings.openai_embed_model,
+                                                            demo["embed_dim"] or settings.embed_dim)
+                            switched = True
+                            log.warning("Gemini %s: chuyển bảng %s sang model GPT %s",
+                                        exc.reason, demo_id, settings.openai_embed_model)
+                            continue
                     if exc.reason != "catalog_changed" or attempt == 2:
                         raise
 
@@ -117,7 +131,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         app.state.accounts = accounts
         app.state.google_verify = make_google_verifier(settings)
         await jobs.recover()
-        warm = asyncio.create_task(warmup(gem)) if gem.provider == "gemini" else None
+        warm = asyncio.create_task(warmup(gem)) if gem.provider.startswith("gemini") else None
         try:
             yield
         finally:
@@ -166,7 +180,10 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                 return out
             out["gemini"] = st.gemini.health()
             out["models"] = {"llm": st.settings.gemini_llm_model, "rerank": st.settings.gemini_rerank_model,
-                             "embed": st.settings.gemini_embed_model, "dim": st.settings.embed_dim}
+                             "embed": st.settings.gemini_embed_model, "dim": st.settings.embed_dim,
+                             "fallback": {"enabled": st.settings.gpt_enabled,
+                                          "llm": st.settings.openai_llm_model,
+                                          "embed": st.settings.openai_embed_model}}
             svc = st.search
             out["cache"] = {"response": svc.resp_cache.stats(), "understand": svc.und_cache.stats(),
                             "embed": svc.emb_cache.stats()}

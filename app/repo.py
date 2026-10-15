@@ -66,6 +66,23 @@ async def delete_demo(db, demo_id: int) -> None:
     await db.execute("DELETE FROM demos WHERE id=$1", demo_id)
 
 
+async def set_demo_embed_model(db, demo_id: int, model: str, dim: int) -> bool:
+    """Đổi model embed của bảng (khi Gemini hết quota và phải chuyển sang GPT).
+
+    Vector theo model cũ vẫn nằm trong bảng nhưng bị index bỏ qua, nên query và doc
+    luôn dùng cùng một không gian vector. Trả về False nếu bảng không tồn tại hoặc
+    đã dùng đúng model đó (tránh lặp vô hạn).
+    """
+    async with db.acquire() as conn, conn.transaction():
+        await lock_demo(conn, demo_id)
+        cur = await conn.fetchval("SELECT embed_model FROM demos WHERE id=$1", demo_id)
+        if cur == model:
+            return False
+        await conn.execute("UPDATE demos SET embed_model=$2, embed_dim=$3 WHERE id=$1", demo_id, model, dim)
+        await bump_version(conn, demo_id)
+        return True
+
+
 # ---------------- definitions ----------------
 async def list_defs(db, demo_id: int) -> list[dict]:
     rows = await db.fetch("SELECT * FROM attribute_definitions WHERE demo_id=$1 ORDER BY display_order, id", demo_id)
