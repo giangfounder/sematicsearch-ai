@@ -3,6 +3,7 @@ calibrate, logs. Mọi thay đổi dữ liệu tăng data_version -> NOTIFY -> n
 from __future__ import annotations
 
 import json
+import logging
 
 from fastapi import APIRouter, Depends, File, Form, HTTPException, Request, UploadFile
 from fastapi.responses import Response
@@ -13,9 +14,8 @@ from app.evals.calibrate import calibrate
 from app.evals.evaluate import evaluate
 from app.evals.generate import generate_cases
 from app.ingest.enrich import apply_enrich, run_enrich
-from app.ingest.importer import apply_import, plan_import
+from app.ingest.importer import MAX_FILE_BYTES, apply_import, plan_import
 from app.ingest.template_xlsx import build_template
-from app.ingest.vectors import embed_demo
 from app.schemas import (AttributeDef, DemoCreate, DemoPatch, EnrichApply, EnrichRequest, EvalCaseIn,
                          EvaluateRequest, GenerateEvalRequest, ProductIn, ProductPatch)
 from app.security import require_principal, resolve_principal
@@ -47,17 +47,27 @@ async def demo_or_404(request: Request, slug: str) -> dict:
 
 async def submit_embed(request: Request, demo_id: int) -> str:
     s = st(request)
-
-    async def job(ctx):
-        return await embed_demo(s.pool, s.gemini, demo_id, per_minute=s.settings.embed_doc_rpm,
-                                timeout_ms=s.settings.offline_timeout_ms, progress=ctx.progress)
-
-    return await s.jobs.submit("embed", demo_id, {}, job)
+    demo = await repo.get_demo_by_id(s.pool, demo_id)
+    if demo is None:
+        raise HTTPException(404, "bảng dữ liệu đã bị xóa")
+    return await s.jobs.submit("embed", demo_id, {"requested_version": demo["data_version"]})
 
 
 async def after_write(request: Request, slug: str) -> None:
     """Nạp lại ngay trong process này (NOTIFY phục vụ các worker khác)."""
-    await st(request).indexes.reload(slug)
+    try:
+        await st(request).indexes.reload(slug)
+    except Exception:
+        # Data is already committed. Do not report the import as failed and
+        # prevent scheduling its embedding; LISTEN/poll retries the index load.
+        logging.getLogger("import").exception("index reload deferred for %s", slug)
+
+
+async def read_upload(file: UploadFile) -> bytes:
+    data = await file.read(MAX_FILE_BYTES + 1)
+    if len(data) > MAX_FILE_BYTES:
+        raise HTTPException(413, "file vượt quá giới hạn 20 MB")
+    return data
 
 
 # ---------------------------------------------------------------- demos
@@ -190,7 +200,7 @@ async def import_file(slug: str, request: Request, file: UploadFile = File(...),
     d = await demo_or_404(request, slug)
     if mode not in ("upsert", "replace"):
         raise HTTPException(422, "mode phải là upsert|replace")
-    data = await file.read()
+    data = await read_upload(file)
     try:
         plan = await plan_import(st(request).pool, d["id"], data, file.filename or "upload.csv",
                                  mapping=json.loads(mapping) if mapping else None,
@@ -357,7 +367,20 @@ async def job(job_id: str, request: Request):
     j = await repo.get_job(st(request).pool, job_id)
     if j is None:
         raise HTTPException(404, "không có job")
+    if j.get("demo_id"):
+        d = await repo.get_demo_by_id(st(request).pool, j["demo_id"])
+        if d is None:
+            raise HTTPException(404, "bảng dữ liệu đã bị xóa")
+        await demo_or_404(request, d["slug"])
     return j
+
+
+@router.post("/v1/admin/jobs/{job_id}/retry")
+async def retry_job(job_id: str, request: Request):
+    j = await job(job_id, request)
+    if j["kind"] != "embed" or j["status"] not in ("error", "cancelled"):
+        raise HTTPException(409, "chỉ thử lại job embedding đã lỗi hoặc bị hủy")
+    return {"job_id": await submit_embed(request, j["demo_id"])}
 
 
 @router.get("/v1/admin/demos/{slug}/logs")

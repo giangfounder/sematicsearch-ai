@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import json
 import re
+import asyncpg
 
 from fastapi import APIRouter, Depends, File, Form, HTTPException, Query, Request, UploadFile
 from pydantic import BaseModel, Field
@@ -15,7 +16,7 @@ from fastapi.responses import JSONResponse
 from fastapi import Header
 
 from app import repo
-from app.api.admin import after_write, demo_or_404, my_account_id, st, submit_embed
+from app.api.admin import after_write, demo_or_404, my_account_id, read_upload, st, submit_embed
 from app.db import bump_version
 from app.ingest.importer import apply_import, plan_import, rows_from_records, slug_key
 from app.keys import SCOPES, KeyDecryptError, KeyNotSavedError
@@ -166,6 +167,7 @@ async def delete_rows(slug: str, body: DeleteRowsBody, request: Request) -> dict
     authorize(request, slug, "write")
     d = await demo_or_404(request, slug)
     async with st(request).pool.acquire() as conn, conn.transaction():
+        await repo.lock_demo(conn, d["id"])
         r = await conn.execute("DELETE FROM products WHERE demo_id=$1 AND sku = ANY($2::text[])", d["id"], body.keys)
         v = await bump_version(conn, d["id"])
     await after_write(request, slug)
@@ -209,7 +211,7 @@ def _slug_from_name(name: str) -> str:
 
 @admin.post("/v1/tables/preview")
 async def preview_table(request: Request, file: UploadFile = File(...), mapping: str | None = Form(None)) -> dict:
-    data = await file.read()
+    data = await read_upload(file)
     try:
         plan = await plan_import(st(request).pool, None, data, file.filename or "upload.xlsx",
                                  mapping=json.loads(mapping) if mapping else None)
@@ -230,7 +232,7 @@ async def create_table(request: Request, file: UploadFile = File(...), name: str
         raise HTTPException(422, "slug chỉ gồm a-z, 0-9, -, _ (2-64 ký tự)")
     if await repo.get_demo(s.pool, slug):
         raise HTTPException(409, f"bảng '{slug}' đã tồn tại")
-    data = await file.read()
+    data = await read_upload(file)
     try:
         plan = await plan_import(s.pool, None, data, file.filename or "upload.xlsx",
                                  mapping=json.loads(mapping) if mapping else None,
@@ -239,10 +241,14 @@ async def create_table(request: Request, file: UploadFile = File(...), name: str
         raise HTTPException(422, f"không đọc được file: {e}") from None
     if not plan["rows"]:
         raise HTTPException(422, {"message": "không có dòng hợp lệ (cần cột tên)", "warnings": plan["warnings"]})
-    d = await repo.create_demo(s.pool, {"slug": slug, "name": name, "industry": industry,
-                                        "embed_model": s.settings.gemini_embed_model, "embed_dim": s.settings.embed_dim,
-                                        "account_id": my_account_id(request)})
-    res = await apply_import(s.pool, d["id"], plan, mode="replace")
+    try:
+        async with s.pool.acquire() as conn, conn.transaction():
+            d = await repo.create_demo(conn, {"slug": slug, "name": name, "industry": industry,
+                                            "embed_model": s.settings.gemini_embed_model, "embed_dim": s.settings.embed_dim,
+                                            "account_id": my_account_id(request)})
+            res = await apply_import(s.pool, d["id"], plan, mode="replace", connection=conn)
+    except asyncpg.UniqueViolationError:
+        raise HTTPException(409, f"bảng '{slug}' đã tồn tại") from None
     await after_write(request, slug)
     job = await submit_embed(request, d["id"])
     return {"slug": slug, "name": name, "rows": res["products"], "columns": plan["columns"],

@@ -3,15 +3,21 @@ dry_run trả schema đề xuất + preview + cảnh báo; apply ghi DB trong 1 
 from __future__ import annotations
 
 import io
+import asyncio
 import json
 import math
 import re
 import unicodedata
+from concurrent.futures import ThreadPoolExecutor
+from zipfile import ZipFile, BadZipFile
+from xml.etree.ElementTree import ParseError
 
 import pandas as pd
+from openpyxl.utils.exceptions import InvalidFileException
 
 from app import repo
 from app.db import bump_version
+from app.schemas import AttributeDef
 from app.text.normalize import norm_text, strip_accents
 
 CORE_ALIASES: dict[str, list[str]] = {
@@ -33,6 +39,10 @@ TRUE_WORDS = {"co", "yes", "true", "1", "x", "con", "con hang", "c", "y", "dung"
 FALSE_WORDS = {"khong", "no", "false", "0", "het", "het hang", "k", "n", "sai"}
 _UNIT_IN_HEADER = re.compile(r"^(.*?)\s*[\(\[]\s*([^\)\]]+?)\s*[\)\]]\s*$")
 _NUM_UNIT = re.compile(r"^\s*(-?\d+(?:[.,]\d+)?)\s*([^\d\s].{0,15})?\s*$")
+MAX_FILE_BYTES = 20 * 1024 * 1024
+MAX_ROWS = 10000
+MAX_COLUMNS = 256
+_PARSE_POOL = ThreadPoolExecutor(max_workers=2, thread_name_prefix="catalog-import")
 
 
 def _k(s: str) -> str:
@@ -45,29 +55,56 @@ def slug_key(label: str) -> str:
 
 
 def read_table(data: bytes, filename: str) -> pd.DataFrame:
+    if not data:
+        raise ValueError("file trống")
+    if len(data) > MAX_FILE_BYTES:
+        raise ValueError("file vượt quá giới hạn 20 MB")
+    try:
+        return _read_table(data, filename)
+    except (BadZipFile, KeyError, TypeError, OSError, ParseError, InvalidFileException) as exc:
+        raise ValueError("file hỏng hoặc không đúng định dạng đã chọn") from exc
+
+
+def _read_table(data: bytes, filename: str) -> pd.DataFrame:
     name = filename.lower()
     if name.endswith((".xlsx", ".xlsm")):
-        df = pd.read_excel(io.BytesIO(data), sheet_name=0, dtype=object, engine="openpyxl")
+        with ZipFile(io.BytesIO(data)) as archive:
+            if sum(f.file_size for f in archive.infolist()) > 100 * 1024 * 1024:
+                raise ValueError("file Excel sau giải nén vượt quá 100 MB")
+        df = pd.read_excel(io.BytesIO(data), sheet_name=0, dtype=object, engine="openpyxl", nrows=MAX_ROWS + 1)
     elif name.endswith(".xls"):
-        df = pd.read_excel(io.BytesIO(data), sheet_name=0, dtype=object, engine="xlrd")
+        import xlrd
+
+        try:
+            df = pd.read_excel(io.BytesIO(data), sheet_name=0, dtype=object, engine="xlrd", nrows=MAX_ROWS + 1)
+        except xlrd.XLRDError as exc:
+            raise ValueError("file XLS hỏng hoặc không đúng định dạng") from exc
     elif name.endswith(".jsonl"):
         df = pd.DataFrame([json.loads(line) for line in data.decode("utf-8-sig").splitlines() if line.strip()])
     elif name.endswith(".json"):
         obj = json.loads(data.decode("utf-8-sig"))
         df = pd.DataFrame(obj["products"] if isinstance(obj, dict) and "products" in obj else obj)
-    else:
+    elif name.endswith((".csv", ".tsv")):
         text = data.decode("utf-8-sig", errors="replace")
-        sep = ";" if text.split("\n", 1)[0].count(";") > text.split("\n", 1)[0].count(",") else ","
-        df = pd.read_csv(io.StringIO(text), dtype=object, sep=sep, keep_default_na=False)
+        sep = "\t" if name.endswith(".tsv") else (";" if text.split("\n", 1)[0].count(";") > text.split("\n", 1)[0].count(",") else ",")
+        df = pd.read_csv(io.StringIO(text), dtype=object, sep=sep, keep_default_na=False, nrows=MAX_ROWS + 1)
+    else:
+        raise ValueError("chỉ hỗ trợ XLSX, XLSM, XLS, CSV, TSV, JSON, JSONL")
     df.columns = [unicodedata.normalize("NFC", str(c)).strip() for c in df.columns]
     df = df.dropna(how="all")
+    if len(df) > MAX_ROWS or len(df.columns) > MAX_COLUMNS:
+        raise ValueError("file vượt quá giới hạn 10.000 dòng hoặc 256 cột")
+    if len(set(df.columns)) != len(df.columns):
+        raise ValueError("tên cột bị trùng sau khi chuẩn hóa; hãy đổi tên cột")
     return df
 
 
 def _empty(v) -> bool:
     if v is None:
         return True
-    if isinstance(v, float) and math.isnan(v):
+    if isinstance(v, float) and not math.isfinite(v):
+        return True
+    if v is pd.NA or v is pd.NaT:
         return True
     return isinstance(v, str) and not v.strip()
 
@@ -90,7 +127,8 @@ def parse_price(v) -> float | None:
     if digits.isdigit():
         return float(digits)
     try:
-        return float(s.replace(",", "."))
+        value = float(s.replace(",", "."))
+        return value if math.isfinite(value) else None
     except ValueError:
         return None
 
@@ -335,21 +373,43 @@ def rows_from_records(records: list[dict], cfg: dict, defs: list[dict]) -> tuple
 
 async def plan_import(pool, demo_id: int | None, data: bytes, filename: str, mapping: dict | None = None,
                       definitions: list[dict] | None = None, attr_columns: list[str] | None = None) -> dict:
+    existing = await repo.list_defs(pool, demo_id) if demo_id else []
+    loop = asyncio.get_running_loop()
+    return await loop.run_in_executor(_PARSE_POOL, _plan_import, data, filename, mapping, definitions, attr_columns, existing)
+
+
+def _plan_import(data, filename, mapping, definitions, attr_columns, existing):
+    if mapping is not None and (not isinstance(mapping, dict)
+            or any(k not in CORE_ALIASES or not isinstance(v, str) for k, v in mapping.items())):
+        raise ValueError("mapping phải là object tên trường -> tên cột")
+    if definitions is not None:
+        if not isinstance(definitions, list) or any(not isinstance(d, dict) for d in definitions):
+            raise ValueError("definitions phải là danh sách thuộc tính")
+        definitions = [{**AttributeDef.model_validate(d).model_dump(), **({"_column": d["_column"]} if "_column" in d else {})}
+                       for d in definitions]
+        if len({d["key"] for d in definitions}) != len(definitions):
+            raise ValueError("definitions có key trùng nhau")
     df = read_table(data, filename)
     cols = list(df.columns)
     mp = auto_mapping(cols)
     if mapping:
-        mp.update({k: v for k, v in mapping.items() if v in cols})
+        missing = set(mapping.values()) - set(cols)
+        if missing:
+            raise ValueError("mapping tham chiếu cột không tồn tại: " + ", ".join(sorted(missing)))
+        mp.update(mapping)
     warns: list[str] = []
     if "name" not in mp:
         warns.append("Không tìm thấy cột tên sản phẩm (name/tên). Truyền mapping={'name': '<cột>'}")
     attr_cols = attr_columns if attr_columns is not None else [c for c in cols if c not in mp.values()]
-    existing = await repo.list_defs(pool, demo_id) if demo_id else []
+    if any(col not in cols for col in attr_cols):
+        raise ValueError("thuộc tính tham chiếu cột không tồn tại")
     if definitions:
         defs = [dict(d) for d in definitions]
         for d in defs:
             d.setdefault("_column", next((c for c in attr_cols if slug_key(_UNIT_IN_HEADER.sub(r"\1", c)) == d["key"]
                                           or c == d.get("label")), None))
+            if d.get("_column") is not None and d["_column"] not in cols:
+                raise ValueError("thuộc tính tham chiếu cột không tồn tại")
     else:
         defs, w = infer_definitions(df, attr_cols, existing)
         warns += w
@@ -359,16 +419,23 @@ async def plan_import(pool, demo_id: int | None, data: bytes, filename: str, map
             "rows": rows, "warnings": warns, "n_rows": len(rows), "columns": cols}
 
 
-async def apply_import(pool, demo_id: int, plan: dict, mode: str = "upsert") -> dict:
+async def apply_import(pool, demo_id: int, plan: dict, mode: str = "upsert", *, connection=None) -> dict:
     defs = [{k: v for k, v in d.items() if not k.startswith("_")} for d in plan["proposed_definitions"]]
     cfg = {"mapping": plan["mapping"],
            "def_columns": {d["_column"]: d["key"] for d in plan["proposed_definitions"] if d.get("_column")},
            "columns": plan.get("columns") or []}
-    async with pool.acquire() as conn, conn.transaction():
+    async def write(conn):
+        await repo.lock_demo(conn, demo_id)
         # nhớ cách map cột để API thêm/cập nhật dòng dùng đúng định dạng file gốc
         await conn.execute("UPDATE demos SET settings = settings || jsonb_build_object('import', $2::jsonb) WHERE id=$1",
                            demo_id, cfg)
         await repo.upsert_defs(conn, demo_id, defs, replace=False)
         ids = await repo.upsert_products(conn, demo_id, plan["rows"], mode=mode)
         version = await bump_version(conn, demo_id)
+        return ids, version
+    if connection is not None:
+        ids, version = await write(connection)
+    else:
+        async with pool.acquire() as conn, conn.transaction():
+            ids, version = await write(conn)
     return {"products": len(ids), "definitions": len(defs), "data_version": version}

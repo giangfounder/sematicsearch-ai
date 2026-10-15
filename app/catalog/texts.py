@@ -85,7 +85,9 @@ def vector_texts(p: dict, defs: list[dict]) -> list[tuple[str, str]]:
     out = [("name", name_text(p)), ("profile", profile_text(p, defs))]
     out += [("use_case", u) for u in (p.get("use_cases") or []) if u and u.strip()]
     out += [("question", q) for q in (p.get("sample_questions") or []) if q and q.strip()]
-    return out
+    # Preserve non-empty documents byte-for-byte: changing chunking would change
+    # existing hashes and potentially change search ranking.
+    return [(kind, text) for kind, text in out if text and text.strip()]
 
 
 def text_hash(model: str, dim: int, task: str, text: str) -> str:

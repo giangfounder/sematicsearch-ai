@@ -292,7 +292,10 @@ def test_reembed_only_changed(client):
     r = client.patch(f"/v1/admin/demos/dm/products/{ids['TV1']}", json={"aliases": ["sony năm lăm"]})
     j = wait_job(client, r.json()["embed_job"])
     res = j["result"]
-    assert res["embedded"] == 1 and res["removed"] == 1 and res["reused"] > 10
+    # Recovery is append-only: old hashes remain in storage until an explicitly
+    # approved cleanup; the live index must still exclude the outdated vector.
+    assert res["embedded"] == 1 and res["removed"] == 0 and res["retained_obsolete"] == 1 and res["reused"] > 10
+    assert client.app.state.indexes.get("dm").n_vectors == res["total_vectors"]
 
 
 def test_feedback_creates_eval_case(client):

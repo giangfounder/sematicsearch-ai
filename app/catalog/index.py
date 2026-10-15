@@ -13,7 +13,7 @@ from app import repo
 from app.catalog.bm25 import BM25
 from app.catalog.entity import EntityDict
 from app.catalog.quant import dequantize
-from app.catalog.texts import fmt_price, name_text, product_attrs, profile_text
+from app.catalog.texts import fmt_price, name_text, product_attrs, profile_text, text_hash, vector_texts
 from app.config import DEFAULT_SCORING, DEFAULT_THRESHOLDS, merged
 from app.text.normalize import norm_text, strip_accents, tokens
 
@@ -147,12 +147,18 @@ def build_index(demo: dict, defs: list[dict], products: list[dict], vectors: lis
 
 
 async def load_index(db, slug: str) -> DemoIndex | None:
-    demo = await repo.get_demo(db, slug)
-    if demo is None:
-        return None
-    defs = await repo.list_defs(db, demo["id"])
-    products = await repo.list_products(db, demo["id"])
-    vectors = await repo.list_vectors(db, demo["id"])
+    async with db.acquire() as conn, conn.transaction(isolation="repeatable_read"):
+        demo = await repo.get_demo(conn, slug)
+        if demo is None:
+            return None
+        defs = await repo.list_defs(conn, demo["id"])
+        products = await repo.list_products(conn, demo["id"])
+        vectors = await repo.list_vectors(conn, demo["id"])
+    # During re-embedding, old vectors remain durable until final cleanup but
+    # must never be used to search the updated product contents.
+    valid = {(p["id"], kind, text_hash(demo["embed_model"], demo["embed_dim"], "RETRIEVAL_DOCUMENT", text))
+             for p in products for kind, text in vector_texts(p, defs)}
+    vectors = [v for v in vectors if (v["product_id"], v["kind"], v["text_hash"]) in valid]
     return await asyncio.to_thread(build_index, demo, defs, products, vectors)
 
 

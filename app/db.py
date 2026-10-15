@@ -30,7 +30,10 @@ async def create_pool(dsn: str, min_size: int = 1, max_size: int = 10) -> asyncp
             import ssl as _ssl
 
             kw["ssl"] = _ssl.create_default_context()
-    return await asyncpg.create_pool(dsn, min_size=min_size, max_size=max_size, init=_init_conn, **kw)
+    return await asyncpg.create_pool(dsn, min_size=min_size, max_size=max_size, init=_init_conn,
+                                     timeout=15, command_timeout=30,
+                                     server_settings={"lock_timeout": "10000", "idle_in_transaction_session_timeout": "60000"},
+                                     **kw)
 
 
 async def migrate(pool: asyncpg.Pool) -> list[str]:
@@ -90,7 +93,7 @@ class VersionListener:
             log.exception("reload %s failed", slug)
 
     async def _connect(self) -> None:
-        self.conn = await asyncpg.connect(self.dsn)
+        self.conn = await asyncpg.connect(self.dsn, timeout=15, command_timeout=30)
         await self.conn.add_listener(CHANNEL, self._cb)
 
     async def start(self) -> None:

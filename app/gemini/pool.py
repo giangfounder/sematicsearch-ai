@@ -7,10 +7,12 @@ import json
 import logging
 import re
 import time
+import random
 from collections import defaultdict, deque
 from dataclasses import dataclass, field
 
 import numpy as np
+import httpx
 
 from app.config import Settings
 
@@ -65,6 +67,10 @@ class Usage:
     pending: dict = field(default_factory=lambda: defaultdict(lambda: [0, 0, 0, 0]))
     totals: dict = field(default_factory=lambda: defaultdict(lambda: [0, 0, 0, 0]))
     latencies: dict = field(default_factory=lambda: defaultdict(lambda: deque(maxlen=500)))
+    error_codes: dict = field(default_factory=lambda: defaultdict(lambda: defaultdict(int)))
+
+    def error(self, call_type: str, code: str) -> None:
+        self.error_codes[call_type][code] += 1
 
     def add(self, demo_id: int, call_type: str, model: str, inp: int, out: int, err: bool, ms: float) -> None:
         for d in (self.pending, self.totals):
@@ -93,6 +99,9 @@ class Usage:
                 arr = np.array(lat)
                 by_type[ct]["p50_ms"] = round(float(np.percentile(arr, 50)), 1)
                 by_type[ct]["p95_ms"] = round(float(np.percentile(arr, 95)), 1)
+                by_type[ct]["mean_ms"] = round(float(np.mean(arr)), 1)
+        for ct, codes in self.error_codes.items():
+            by_type[ct]["error_codes"] = dict(codes)
         return dict(by_type)
 
 
@@ -117,6 +126,7 @@ class BaseGemini:
             for ct in ("understand", "embed_query", "rerank", "embed_doc", "enrich", "gen_eval")
         }
         self.sem = asyncio.Semaphore(settings.gemini_max_concurrency)
+        self.doc_sem = asyncio.Semaphore(max(1, settings.embed_concurrency))
         # giới hạn request LLM/phút (0 = tắt). Dùng khi chạy evaluate trên free tier để không dính 429
         self.llm_limiter = None
         if settings.llm_rpm_limit > 0:
@@ -200,9 +210,7 @@ class GeminiPool(BaseGemini):
             if i not in exclude and self.cooldown[i] <= now:
                 self._rr = (i + 1) % n
                 return i
-        # tất cả đang cooldown: lấy key hết cooldown sớm nhất
-        rest = [i for i in range(n) if i not in exclude]
-        return min(rest, key=lambda i: self.cooldown[i]) if rest else None
+        return None
 
     async def _call(self, call_type: str, demo_id: int, model: str, timeout_ms: int, fn, max_key_tries: int):
         from google.genai import errors
@@ -214,7 +222,15 @@ class GeminiPool(BaseGemini):
         for attempt in range(max_key_tries):
             idx = self._pick(set() if backoff else tried)
             if idx is None:
-                break
+                if not backoff or not self.cooldown:
+                    break
+                delay = max(0.0, min(self.cooldown) - time.monotonic())
+                if delay > 300:
+                    raise GeminiError("quota_exhausted", "tất cả API key đang hết quota; vector đã lưu được giữ lại")
+                await asyncio.sleep(delay)
+                idx = self._pick(set())
+                if idx is None:
+                    continue
             tried.add(idx)
             t0 = time.perf_counter()
             try:
@@ -224,12 +240,17 @@ class GeminiPool(BaseGemini):
                 b.ok()
                 return resp, ms
             except asyncio.TimeoutError:
+                self.usage.error(call_type, "timeout")
                 last_err = GeminiError("timeout", f"{call_type} > {timeout_ms}ms")
                 b.fail()
                 self.usage.add(demo_id, call_type, model, 0, 0, True, 0)
+                if backoff and attempt + 1 < max_key_tries:
+                    await asyncio.sleep(min(2 ** attempt, 16) + random.uniform(0, 0.5))
+                    continue
                 raise last_err from None
             except errors.APIError as e:  # noqa: PERF203
                 code = getattr(e, "code", None)
+                self.usage.error(call_type, str(code))
                 self.usage.add(demo_id, call_type, model, 0, 0, True, 0)
                 if code == 429:
                     m = _RETRY_RE.search(str(e))
@@ -240,18 +261,35 @@ class GeminiPool(BaseGemini):
                         if len(tried) >= len(self.clients):
                             raise last_err from None
                         continue
-                    self.cooldown[idx] = time.monotonic() + self.s.key_cooldown_s
-                    last_err = GeminiError("rate_limited", str(e))
+                    self.cooldown[idx] = time.monotonic() + max(delay, self.s.key_cooldown_s)
+                    last_err = GeminiError("rate_limited", "Gemini HTTP 429; chờ quota rồi thử lại")
                     if backoff:
                         log.info("%s 429, chờ %.0fs (lần %d)", call_type, delay, attempt + 1)
-                        await asyncio.sleep(min(delay, 65))
+                        await asyncio.sleep(delay)
                     continue
+                if code in (408, 500, 502, 503, 504) and backoff:
+                    b.fail()
+                    last_err = GeminiError("unavailable", f"Gemini HTTP {code}; các batch đã lưu vẫn an toàn")
+                    if attempt + 1 < max_key_tries:
+                        await asyncio.sleep(min(2 ** attempt, 16) + random.uniform(0, 0.5))
+                        continue
+                    raise last_err from None
                 b.fail()
-                raise GeminiError("error", f"{code} {e}") from None
+                reason = "invalid_input" if code == 400 else "error"
+                raise GeminiError(reason, f"Gemini HTTP {code}; request bị từ chối") from None
+            except (httpx.TransportError, OSError) as e:
+                self.usage.error(call_type, "transport")
+                b.fail()
+                self.usage.add(demo_id, call_type, model, 0, 0, True, 0)
+                last_err = GeminiError("unavailable", type(e).__name__)
+                if backoff and attempt + 1 < max_key_tries:
+                    await asyncio.sleep(min(2 ** attempt, 16) + random.uniform(0, 0.5))
+                    continue
+                raise last_err from None
             except Exception as e:  # noqa: BLE001
                 b.fail()
                 self.usage.add(demo_id, call_type, model, 0, 0, True, 0)
-                raise GeminiError("error", repr(e)) from None
+                raise GeminiError("error", type(e).__name__) from None
         b.fail()
         raise last_err or GeminiError("rate_limited", "no key available")
 
@@ -275,8 +313,12 @@ class GeminiPool(BaseGemini):
             resp, ms = await self._call(call_type, demo_id, model, timeout_ms, fn,
                                         max_key_tries=2 if online else max(8, len(self.clients) * 3))
             self.usage.add(demo_id, call_type, model, sum(len(t) for t in chunk) // 4, 0, False, ms)
-            vecs = np.array([e.values for e in resp.embeddings], dtype=np.float32)
-            if vecs.shape != (len(chunk), dim):
+            try:
+                vecs = np.array([e.values for e in resp.embeddings], dtype=np.float32)
+            except (TypeError, ValueError) as exc:
+                raise GeminiError("bad_output", "embedding response is missing or invalid") from exc
+            if (vecs.shape != (len(chunk), dim) or not np.isfinite(vecs).all()
+                    or np.any(np.linalg.norm(vecs, axis=1) == 0)):
                 raise GeminiError("bad_output", f"embedding shape {vecs.shape}")
             out.append(vecs)
         return l2_normalize(np.vstack(out)) if out else np.zeros((0, dim), np.float32)
@@ -314,7 +356,7 @@ class GeminiPool(BaseGemini):
         try:
             return json.loads(text)
         except json.JSONDecodeError:
-            raise GeminiError("bad_output", text[:200]) from None
+            raise GeminiError("bad_output", "Gemini trả JSON không hợp lệ") from None
 
 
 def make_gemini(settings: Settings) -> BaseGemini:

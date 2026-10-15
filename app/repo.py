@@ -19,6 +19,13 @@ def _d(r) -> dict | None:
 
 
 # ---------------- demos ----------------
+async def lock_demo(conn, demo_id: int) -> None:
+    # All catalog writers lock the parent first, in the same order as embedding
+    # checkpoints. This also serializes overlapping replace imports.
+    if not await conn.fetchval("SELECT id FROM demos WHERE id=$1 FOR UPDATE", demo_id):
+        raise ValueError("bảng dữ liệu đã bị xóa")
+
+
 async def get_demo(db, slug: str) -> dict | None:
     return _d(await db.fetchrow("SELECT * FROM demos WHERE slug=$1", slug))
 
@@ -47,6 +54,7 @@ async def create_demo(db, data: dict) -> dict:
 async def update_demo(pool: asyncpg.Pool, demo_id: int, data: dict) -> dict:
     allowed = {k: v for k, v in data.items() if k in ("name", "industry", "thresholds", "settings")}
     async with pool.acquire() as conn, conn.transaction():
+        await lock_demo(conn, demo_id)
         if allowed:
             sets = ", ".join(f"{k}=${i + 2}" for i, k in enumerate(allowed))
             await conn.execute(f"UPDATE demos SET {sets} WHERE id=$1", demo_id, *allowed.values())
@@ -65,6 +73,7 @@ async def list_defs(db, demo_id: int) -> list[dict]:
 
 
 async def upsert_defs(conn, demo_id: int, defs: list[dict], replace: bool = False) -> None:
+    await lock_demo(conn, demo_id)
     if replace:
         keys = [d["key"] for d in defs]
         await conn.execute("DELETE FROM attribute_definitions WHERE demo_id=$1 AND NOT (key = ANY($2::text[]))",
@@ -85,6 +94,7 @@ async def upsert_defs(conn, demo_id: int, defs: list[dict], replace: bool = Fals
 
 
 async def delete_def(db, demo_id: int, key: str) -> None:
+    await lock_demo(db, demo_id)
     await db.execute("DELETE FROM attribute_definitions WHERE demo_id=$1 AND key=$2", demo_id, key)
 
 
@@ -101,6 +111,7 @@ async def get_product(db, demo_id: int, pid: int) -> dict | None:
 async def upsert_products(conn, demo_id: int, rows: list[dict], mode: str = "upsert") -> dict[str, int]:
     """mode: upsert (giữ sản phẩm không có trong file) | replace (xoá sản phẩm không có trong file).
     Trả map sku -> id."""
+    await lock_demo(conn, demo_id)
     if mode == "replace":
         await conn.execute("DELETE FROM products WHERE demo_id=$1 AND NOT (sku = ANY($2::text[]))",
                            demo_id, [r["sku"] for r in rows])
@@ -125,6 +136,7 @@ async def upsert_products(conn, demo_id: int, rows: list[dict], mode: str = "ups
 
 
 async def patch_product(conn, demo_id: int, pid: int, data: dict) -> dict | None:
+    await lock_demo(conn, demo_id)
     allowed = {k: v for k, v in data.items() if k in PRODUCT_CORE}
     if not allowed:
         return await get_product(conn, demo_id, pid)
@@ -134,6 +146,7 @@ async def patch_product(conn, demo_id: int, pid: int, data: dict) -> dict | None
 
 
 async def delete_product(conn, demo_id: int, pid: int) -> None:
+    await lock_demo(conn, demo_id)
     await conn.execute("DELETE FROM products WHERE demo_id=$1 AND id=$2", demo_id, pid)
 
 
@@ -163,8 +176,14 @@ async def replace_vectors(conn, demo_id: int, keep: set[tuple[int, str, str]], n
     stale = [c for c in cur if c not in keep and c[0] in snapshot_pids]
     for pid, kind, h in stale:
         await conn.execute("DELETE FROM product_vectors WHERE product_id=$1 AND kind=$2 AND text_hash=$3", pid, kind, h)
+    await add_vectors(conn, demo_id, new_rows)
+    return len(stale)
+
+
+async def add_vectors(conn, demo_id: int, new_rows: list[dict]) -> int:
+    """Append a completed batch without removing any earlier checkpoints."""
     if new_rows:
-        live = {r["id"] for r in await conn.fetch("SELECT id FROM products WHERE demo_id=$1", demo_id)}
+        live = {r["id"] for r in await conn.fetch("SELECT id FROM products WHERE demo_id=$1 FOR KEY SHARE", demo_id)}
         rows = [(r["product_id"], r["kind"], r["source_text"], r["text_hash"], r["embed_model"], r["vec_int8"],
                  r["scale"], r["vec_f32"]) for r in new_rows if r["product_id"] in live]
         if rows:
@@ -172,7 +191,8 @@ async def replace_vectors(conn, demo_id: int, keep: set[tuple[int, str, str]], n
                 """INSERT INTO product_vectors(product_id, kind, source_text, text_hash, embed_model, vec_int8, scale, vec_f32)
                    VALUES($1,$2,$3,$4,$5,$6,$7,$8) ON CONFLICT (product_id, kind, text_hash) DO NOTHING""",
                 rows)
-    return len(stale)
+        return len(rows)
+    return 0
 
 
 # ---------------- eval cases ----------------

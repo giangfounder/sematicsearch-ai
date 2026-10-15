@@ -38,6 +38,9 @@ class Settings(BaseSettings):
     gemini_max_concurrency: int = 16
     # Free tier: 100 request/phút cho embed (mỗi văn bản trong batch tính 1). Paid tier: tăng lên 3000+
     embed_doc_rpm: int = 90
+    embed_batch_size: int = 30
+    embed_concurrency: int = 1
+    job_concurrency: int = 2
     llm_offline_rpm: int = 30
     llm_rpm_limit: int = 0
 
