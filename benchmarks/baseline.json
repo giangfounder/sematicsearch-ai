@@ -1,0 +1,107 @@
+﻿{
+    "meta":  {
+                 "demo":  "dienmay",
+                 "provider":  "gemini",
+                 "embed_model":  "gemini-embedding-001",
+                 "embed_dim":  768,
+                 "mode":  "auto",
+                 "concurrency":  2,
+                 "when":  "2026-10-14 11:53:23"
+             },
+    "search":  {
+                   "n":  20,
+                   "concurrency":  2,
+                   "mode":  "auto",
+                   "cold":  true,
+                   "wall_s":  13.46,
+                   "qps":  1.49,
+                   "warmup_ms":  {
+                                     "n":  5,
+                                     "p50":  1425.8,
+                                     "p95":  1674.8,
+                                     "p99":  1724.6,
+                                     "max":  1737.0,
+                                     "mean":  1462.0
+                                 },
+                   "latency_ms":  {
+                                      "total":  {
+                                                    "n":  20,
+                                                    "p50":  1520.1,
+                                                    "p95":  1795.0,
+                                                    "p99":  1796.8,
+                                                    "max":  1797.2,
+                                                    "mean":  1271.6
+                                                },
+                                      "understand":  {
+                                                         "n":  20,
+                                                         "p50":  1511.8,
+                                                         "p95":  1788.8,
+                                                         "p99":  1793.0,
+                                                         "max":  1794.0,
+                                                         "mean":  1133.6
+                                                     },
+                                      "embed":  {
+                                                    "n":  20,
+                                                    "p50":  445.4,
+                                                    "p95":  524.3,
+                                                    "p99":  883.0,
+                                                    "max":  972.7,
+                                                    "mean":  474.7
+                                                },
+                                      "retrieve":  {
+                                                       "n":  20,
+                                                       "p50":  2.4,
+                                                       "p95":  3.3,
+                                                       "p99":  3.4,
+                                                       "max":  3.4,
+                                                       "mean":  2.3
+                                                   },
+                                      "rerank":  {
+                                                     "n":  20,
+                                                     "p50":  0.0,
+                                                     "p95":  0.0,
+                                                     "p99":  0.0,
+                                                     "max":  0.0,
+                                                     "mean":  0.0
+                                                 }
+                                  },
+                   "fallback_rate":  0.35,
+                   "rerank_rate":  0.0
+               },
+    "quality":  {
+                    "slug":  "dienmay",
+                    "split":  "test",
+                    "mode":  "auto",
+                    "n_cases":  97,
+                    "n_product_cases":  89,
+                    "hit@1":  0.9663,
+                    "hit@3":  0.9775,
+                    "mrr":  0.9738,
+                    "status_accuracy":  0.8557,
+                    "matched_wrong_rate":  0.013,
+                    "rerank_rate":  0.268,
+                    "fallback_rate":  0.1443,
+                    "latency_ms":  {
+                                       "understand":  {
+                                                          "p50":  3.4,
+                                                          "p95":  1723.1
+                                                      },
+                                       "embed":  {
+                                                     "p50":  2.2,
+                                                     "p95":  450.0
+                                                 },
+                                       "retrieve":  {
+                                                        "p50":  1.6,
+                                                        "p95":  2.6
+                                                    },
+                                       "rerank":  {
+                                                      "p50":  1063.8,
+                                                      "p95":  1640.4
+                                                  },
+                                       "total":  {
+                                                     "p50":  950.7,
+                                                     "p95":  1725.0
+                                                 }
+                                   }
+                }
+}
