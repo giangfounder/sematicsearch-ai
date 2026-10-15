@@ -182,6 +182,22 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     async def logo():
         return FileResponse(STATIC / "logo.png", media_type="image/png")
 
+    @app.get("/favicon.ico", include_in_schema=False)
+    async def favicon():
+        return FileResponse(STATIC / "favicon.ico", media_type="image/x-icon")
+
+    @app.get("/favicon-32x32.png", include_in_schema=False)
+    async def favicon32():
+        return FileResponse(STATIC / "favicon-32x32.png", media_type="image/png")
+
+    @app.get("/favicon-16x16.png", include_in_schema=False)
+    async def favicon16():
+        return FileResponse(STATIC / "favicon-16x16.png", media_type="image/png")
+
+    @app.get("/apple-touch-icon.png", include_in_schema=False)
+    async def apple_touch_icon():
+        return FileResponse(STATIC / "apple-touch-icon.png", media_type="image/png")
+
     return app
 
 
