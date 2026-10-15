@@ -36,7 +36,7 @@
 </script>
 <div class="login-page grid min-h-dvh place-items-center px-5 py-10">
   <main class="login-card w-full max-w-[380px]">
-    <div class="flex items-center justify-center gap-3 font-bold text-xl"><img src="/logo.png" alt="" width="48" height="48"/><span>semsearch</span></div>
+    <div class="flex items-center justify-center gap-3 text-xl"><img src="/logo.png" alt="" width="48" height="48"/><span class="wordmark text-3xl">semsearch</span></div>
     <h1 class="mt-9">{t('Đăng nhập','Sign in')}</h1>
     <form on:submit|preventDefault={()=>login()} aria-busy={busy} class="space-y-5 mt-7">
       <label class="field"><span>Email</span><input bind:this={emailInput} bind:value={email} type="email" name="email" autocomplete="username" required placeholder="you@company.com" aria-invalid={invalid || undefined} aria-describedby={error?'login-error':undefined} on:input={()=>{error='';initialError='';invalid=false;}}/></label>
@@ -47,8 +47,10 @@
     </form>
     <div class:hidden={!googleLoading && !googleEnabled && !googleError} class="mt-6">
       <div class="flex items-center gap-4 text-xs text-muted mb-5"><span class="h-px flex-1 bg-line"></span>{t('hoặc','or')}<span class="h-px flex-1 bg-line"></span></div>
-      <div class="min-h-11 flex justify-center" inert={busy} class:opacity-50={busy} bind:this={googleBox}></div>
-      {#if googleLoading}<div class="flex justify-center"><span class="spinner text-brand"></span></div>{/if}
+      <div class="relative flex min-h-11 items-center justify-center">
+        <div class="w-full flex justify-center" inert={busy} class:opacity-50={busy} bind:this={googleBox}></div>
+        {#if googleLoading}<span class="spinner text-brand absolute"></span>{/if}
+      </div>
       <Notice error={googleError} retry={initGoogle} {lang}/>
     </div>
     <div class="mt-9 pt-5 border-t border-line flex justify-between items-center text-xs text-muted"><span>Semsearch Console</span><button class="min-h-11 px-2 underline underline-offset-4" on:click={toggleLang}>{lang==='vi'?'English':'Tiếng Việt'}</button></div>

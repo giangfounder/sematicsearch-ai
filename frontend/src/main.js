@@ -3,6 +3,8 @@ import '@fontsource/be-vietnam-pro/vietnamese-400.css';
 import '@fontsource/be-vietnam-pro/latin-400.css';
 import '@fontsource/be-vietnam-pro/vietnamese-600.css';
 import '@fontsource/be-vietnam-pro/latin-600.css';
+import '@fontsource/outfit/latin-600.css';
+import '@fontsource/outfit/latin-700.css';
 import './style.css';
 import App from './App.svelte';
 const target=document.getElementById('app');

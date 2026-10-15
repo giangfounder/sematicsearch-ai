@@ -1,11 +1,11 @@
 {
   "index.html": {
-    "file": "assets/index-gJXyMe88.js",
+    "file": "assets/index-C9h48uKl.js",
     "name": "index",
     "src": "index.html",
     "isEntry": true,
     "css": [
-      "assets/index-qUPekcg3.css"
+      "assets/index-BrLuMZBd.css"
     ],
     "assets": [
       "assets/be-vietnam-pro-vietnamese-400-normal-CRcqvyg1.woff2",
@@ -15,7 +15,11 @@
       "assets/be-vietnam-pro-vietnamese-600-normal-nyU-ZL2p.woff2",
       "assets/be-vietnam-pro-vietnamese-600-normal-DkpCIyan.woff",
       "assets/be-vietnam-pro-latin-600-normal-BZDkUTrt.woff2",
-      "assets/be-vietnam-pro-latin-600-normal-5IO4e7bK.woff"
+      "assets/be-vietnam-pro-latin-600-normal-5IO4e7bK.woff",
+      "assets/outfit-latin-600-normal-B7SfZ07L.woff2",
+      "assets/outfit-latin-600-normal-BEfTtDA7.woff",
+      "assets/outfit-latin-700-normal-Cu9v6i1X.woff2",
+      "assets/outfit-latin-700-normal-D4itBLBr.woff"
     ]
   },
   "node_modules/@fontsource/be-vietnam-pro/files/be-vietnam-pro-latin-400-normal.woff": {
@@ -49,5 +53,21 @@
   "node_modules/@fontsource/be-vietnam-pro/files/be-vietnam-pro-vietnamese-600-normal.woff2": {
     "file": "assets/be-vietnam-pro-vietnamese-600-normal-nyU-ZL2p.woff2",
     "src": "node_modules/@fontsource/be-vietnam-pro/files/be-vietnam-pro-vietnamese-600-normal.woff2"
+  },
+  "node_modules/@fontsource/outfit/files/outfit-latin-600-normal.woff": {
+    "file": "assets/outfit-latin-600-normal-BEfTtDA7.woff",
+    "src": "node_modules/@fontsource/outfit/files/outfit-latin-600-normal.woff"
+  },
+  "node_modules/@fontsource/outfit/files/outfit-latin-600-normal.woff2": {
+    "file": "assets/outfit-latin-600-normal-B7SfZ07L.woff2",
+    "src": "node_modules/@fontsource/outfit/files/outfit-latin-600-normal.woff2"
+  },
+  "node_modules/@fontsource/outfit/files/outfit-latin-700-normal.woff": {
+    "file": "assets/outfit-latin-700-normal-D4itBLBr.woff",
+    "src": "node_modules/@fontsource/outfit/files/outfit-latin-700-normal.woff"
+  },
+  "node_modules/@fontsource/outfit/files/outfit-latin-700-normal.woff2": {
+    "file": "assets/outfit-latin-700-normal-Cu9v6i1X.woff2",
+    "src": "node_modules/@fontsource/outfit/files/outfit-latin-700-normal.woff2"
   }
 }

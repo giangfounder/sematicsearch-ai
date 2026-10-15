@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @theme {
   --font-sans: 'Be Vietnam Pro', 'Segoe UI', sans-serif;
+  --font-display: 'Outfit', 'Be Vietnam Pro', 'Segoe UI', sans-serif;
   --color-brand: #176552;
   --color-brand-dark: #104e40;
   --color-ink: #203b34;
@@ -92,6 +93,10 @@
   .dd.inline .dd-btn { width:auto;min-width:0; }
   .dd.picker .dd-btn { min-height:42px;border-color:transparent;background:transparent;font-weight:600; }
   .dd.picker .dd-btn:hover:enabled { background:#edf3ef; }
+  .wordmark { font-family:var(--font-display);font-weight:700;letter-spacing:-1.2px;line-height:1;color:#6d5df0; }
+  @supports (-webkit-background-clip:text) or (background-clip:text) {
+    .wordmark { background:linear-gradient(96deg,#00b4ff 0%,#5b7bf5 52%,#7b2fff 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent; }
+  }
 }
 @keyframes spin { to {transform:rotate(360deg)} }
 @media(prefers-reduced-motion:reduce) { *,*::before,*::after { transition:none!important;animation:none!important;scroll-behavior:auto!important; } }
