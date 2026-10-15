@@ -7,3 +7,4 @@ pgdata/
 *.egg-info/
 reports/
 .localpg/
+frontend/node_modules/

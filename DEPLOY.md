@@ -1,5 +1,18 @@
 # Deploy lên server thật (luôn bật)
 
+> Môi trường đang sử dụng: AWS EC2 (Amazon Linux 2023), Docker Compose.
+> Xem [vận hành và phục hồi import/embedding](docs/IMPORT_EMBEDDING.md).
+> Các bước Oracle bên dưới là hướng dẫn cũ, không phản ánh cấu hình EC2 hiện tại.
+
+## Giao diện Svelte + Tailwind
+
+Nguồn nằm trong `frontend/`; xem [hướng dẫn frontend](frontend/README.md).
+`docker compose build app` tự build UI bằng Node ở stage riêng; image chạy thực tế chỉ có Python.
+Khi deploy thủ công, luôn cập nhật đồng bộ `app/static/index.html`, assets đi kèm và
+`app/main.py` (phục vụ `/assets`, gzip và cache). Không chỉ copy riêng HTML.
+Trước khi thay image, gắn tag image đang chạy để rollback; không cần đổi schema,
+xoá dữ liệu hay tạo lại vector cho cập nhật UI này.
+
 Project đóng gói Docker đa kiến trúc (amd64 + arm64), chạy bằng **một lệnh** trên bất kỳ server nào có Docker.
 Khuyến nghị server **miễn phí, luôn bật**: **Oracle Cloud Always Free** (VM.Standard.A1.Flex ARM, 4 OCPU / 24GB,
 free vĩnh viễn). Dùng được mọi VPS khác (DigitalOcean, Hetzner, AWS Lightsail…).

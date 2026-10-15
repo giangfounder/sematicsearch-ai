@@ -3,12 +3,16 @@ from __future__ import annotations
 
 import asyncio
 import logging
+import re
 from contextlib import asynccontextmanager
 from pathlib import Path
 
 from fastapi import FastAPI, Request
 from fastapi.responses import FileResponse, ORJSONResponse
+from fastapi.staticfiles import StaticFiles
+from starlette.middleware.gzip import GZipMiddleware
 
+from app import repo
 from app.accounts import AccountStore
 from app.api import accounts_api, admin, auth, search, tables
 from app.auth_google import make_google_verifier
@@ -17,6 +21,7 @@ from app.config import Settings, get_settings
 from app.db import VersionListener, create_pool, migrate
 from app.gemini.pool import GeminiError, make_gemini
 from app.jobs import JobRunner
+from app.ingest.vectors import embed_demo
 from app.keys import KeyStore
 from app.logs import LogWriter
 from app.search.pipeline import SearchService
@@ -24,6 +29,14 @@ from app.security import RedactFilter
 
 STATIC = Path(__file__).parent / "static"
 log = logging.getLogger("app")
+
+
+class VersionedAssets(StaticFiles):
+    async def get_response(self, path: str, scope):
+        response = await super().get_response(path, scope)
+        if re.search(r"-[A-Za-z0-9_-]{8,}\.(?:js|css|woff2?)$", path):
+            response.headers["Cache-Control"] = "public, max-age=31536000, immutable"
+        return response
 
 
 def setup_logging() -> None:
@@ -67,8 +80,26 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         indexes = IndexManager(pool)
         logs = LogWriter(pool, gem)
         await logs.start()
-        jobs = JobRunner(pool)
-        await jobs.recover()
+        jobs = JobRunner(pool, settings.job_concurrency)
+
+        async def embed_job(ctx, demo_id, params):
+            # A later import can invalidate an in-flight snapshot. Re-plan from
+            # the committed checkpoints, with a bounded number of restarts.
+            for attempt in range(3):
+                try:
+                    result = await embed_demo(pool, gem, demo_id, per_minute=settings.embed_doc_rpm,
+                                              timeout_ms=settings.offline_timeout_ms,
+                                              batch=settings.embed_batch_size, concurrency=settings.embed_concurrency,
+                                              progress=ctx.progress, checkpoint=ctx.checkpoint)
+                    demo = await repo.get_demo_by_id(pool, demo_id)
+                    if demo:
+                        await indexes.reload(demo["slug"])
+                    return result
+                except GeminiError as exc:
+                    if exc.reason != "catalog_changed" or attempt == 2:
+                        raise
+
+        jobs.register("embed", embed_job)
         keys = KeyStore(pool, settings.table_key_encryption_key.get_secret_value())
         await keys.start()
         accounts = AccountStore(pool)
@@ -85,6 +116,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         app.state.keys = keys
         app.state.accounts = accounts
         app.state.google_verify = make_google_verifier(settings)
+        await jobs.recover()
         warm = asyncio.create_task(warmup(gem)) if gem.provider == "gemini" else None
         try:
             yield
@@ -101,6 +133,16 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     app = FastAPI(title="Product Semantic Search", version="1.0.0", lifespan=lifespan,
                   default_response_class=ORJSONResponse)
+    app.add_middleware(GZipMiddleware, minimum_size=1000, compresslevel=5)
+
+    @app.middleware("http")
+    async def private_auth_responses(request: Request, call_next):
+        response = await call_next(request)
+        if request.url.path.startswith("/v1/auth/"):
+            response.headers["Cache-Control"] = "no-store"
+        return response
+
+    app.mount("/assets", VersionedAssets(directory=STATIC / "assets", check_dir=False), name="ui-assets")
     app.include_router(auth.router)
     app.include_router(accounts_api.router)
     app.include_router(search.router)

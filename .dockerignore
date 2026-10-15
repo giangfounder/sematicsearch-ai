@@ -6,3 +6,4 @@ pgdata
 .env
 tests
 reports
+frontend/node_modules

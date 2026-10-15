@@ -1,3 +1,11 @@
+# Compile Svelte/Tailwind once. Node and development dependencies stay out of runtime.
+FROM node:24-alpine AS ui
+WORKDIR /ui/frontend
+COPY frontend/package.json frontend/package-lock.json ./
+RUN npm ci
+COPY frontend ./
+RUN npm run build
+
 # Multi-arch: chạy được cả amd64 và arm64 (Oracle A1). Không có torch/model local.
 FROM python:3.11-slim
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PIP_NO_CACHE_DIR=1
@@ -5,6 +13,7 @@ WORKDIR /srv
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 COPY app ./app
+COPY --from=ui /ui/app/static/ ./app/static/
 COPY migrations ./migrations
 COPY seeds ./seeds
 COPY scripts ./scripts
