@@ -2,7 +2,7 @@
   import {onMount,onDestroy} from 'svelte';
   import {client,createLoader,tablePath,demoPath,changed,isAbort,fmt} from '../lib/api.js';
   import {draft,saveDraft} from '../lib/drafts.js';
-  import Button from '../components/Button.svelte';import Icon from '../components/Icon.svelte';import Notice from '../components/Notice.svelte';import Confirm from '../components/Confirm.svelte';
+  import Button from '../components/Button.svelte';import Icon from '../components/Icon.svelte';import Notice from '../components/Notice.svelte';import Confirm from '../components/Confirm.svelte';import Select from '../components/Select.svelte';
   export let table;export let lang='vi';
   const resource=createLoader(),key=`rows:${table.slug}`,saved=draft(key,{query:'',offset:0,editing:null});
   let query=saved.query,offset=saved.offset,editing=saved.editing,expanded={},busy='',error='',success='',confirm=null,fileInput,importMode='upsert',timer,alive=true;
@@ -31,7 +31,7 @@
 <section class="panel">
   <div class="flex flex-wrap items-end gap-3 mb-5">
     <form class="flex flex-1 min-w-52 gap-2 max-w-md" on:submit|preventDefault={filter}><label class="sr-only" for="row-query">{t('Tìm trong dữ liệu','Filter data')}</label><input id="row-query" type="search" placeholder={t('Tìm trong dữ liệu…','Filter data…')} bind:value={query} on:input={schedule}/><Button type="submit" busy={$resource.loading}><Icon name="search" size={17}/>{t('Lọc','Filter')}</Button></form>
-    <div class="flex flex-wrap gap-2 sm:ml-auto"><Button on:click={()=>edit(null)} disabled={!!busy}><Icon name="plus" size={17}/>{t('Thêm dòng','Add row')}</Button><label class="btn" class:opacity-50={!!busy}><Icon name="upload" size={17}/>{busy==='import'?t('Đang nhập…','Importing…'):t('Nhập file','Import file')}<input class="sr-only" bind:this={fileInput} type="file" accept=".xlsx,.xls,.csv,.json,.jsonl" disabled={!!busy} on:change={chooseFile}/></label><select class="w-auto text-xs" bind:value={importMode} disabled={!!busy} aria-label={t('Cách nhập','Import mode')}><option value="upsert">{t('Thêm / cập nhật','Add / update')}</option><option value="replace">{t('Thay thế','Replace')}</option></select></div>
+    <div class="flex flex-wrap gap-2 sm:ml-auto"><Button on:click={()=>edit(null)} disabled={!!busy}><Icon name="plus" size={17}/>{t('Thêm dòng','Add row')}</Button><label class="btn" class:opacity-50={!!busy}><Icon name="upload" size={17}/>{busy==='import'?t('Đang nhập…','Importing…'):t('Nhập file','Import file')}<input class="sr-only" bind:this={fileInput} type="file" accept=".xlsx,.xls,.csv,.json,.jsonl" disabled={!!busy} on:change={chooseFile}/></label><Select variant="inline" size="sm" bind:value={importMode} disabled={!!busy} label={t('Cách nhập','Import mode')} options={[{value:'upsert',label:t('Thêm / cập nhật','Add / update')},{value:'replace',label:t('Thay thế','Replace')}]}/></div>
   </div>
   <Notice {error} {success} {lang}/><Notice error={$resource.error} retry={load} {lang}/>
   {#if editing}

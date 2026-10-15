@@ -1,6 +1,6 @@
 <script>
   import {onDestroy} from 'svelte';import {client,createLoader,isAbort,fmt} from '../lib/api.js';import {draft,saveDraft} from '../lib/drafts.js';
-  import Button from '../components/Button.svelte';import Icon from '../components/Icon.svelte';import Notice from '../components/Notice.svelte';
+  import Button from '../components/Button.svelte';import Icon from '../components/Icon.svelte';import Notice from '../components/Notice.svelte';import Select from '../components/Select.svelte';
   export let table;export let lang='vi';
   const resource=createLoader(),key=`search:${table.slug}`,saved=draft(key,{query:'',mode:'auto',topK:3,context:null});
   let query=saved.query,mode=saved.mode,topK=saved.topK,context=saved.context,queryInput,submitted='',feedbackBusy=false,feedbackError='',feedbackSuccess='',correctId='',addEval=false,alive=true;
@@ -18,7 +18,7 @@
 <section class="search-box panel">
   <div class="flex items-center gap-2 text-brand text-sm font-semibold mb-5"><Icon name="search" size={18}/>{t('Bạn muốn tìm gì?','What are you looking for?')}</div>
   <form class="flex flex-col sm:flex-row gap-3" on:submit|preventDefault={search}><label class="sr-only" for="search-query">{t('Câu hỏi tìm kiếm','Search question')}</label><input id="search-query" bind:this={queryInput} bind:value={query} maxlength="1000" required placeholder={t(`Hỏi về dữ liệu trong ${table.name}…`,`Ask a question about ${table.name}…`)} class="search-input flex-1"/><Button type="submit" variant="primary" busy={$resource.loading}><Icon name="search" size={18}/>{t('Tìm kiếm','Search')}</Button></form>
-  <div class="flex flex-wrap gap-x-6 gap-y-3 mt-5"><label class="flex items-center gap-3 text-xs text-muted"><span>{t('Chế độ','Mode')}</span><select class="w-auto text-xs min-h-10" bind:value={mode}><option value="auto">{t('Tự động','Automatic')}</option><option value="fast">{t('Nhanh','Fast')}</option><option value="accurate">{t('Chính xác','Accurate')}</option></select></label><label class="flex items-center gap-3 text-xs text-muted"><span>{t('Kết quả','Results')}</span><select class="w-auto text-xs min-h-10" bind:value={topK}>{#each [1,2,3,4,5] as n}<option value={n}>{n}</option>{/each}</select></label></div>
+  <div class="flex flex-wrap gap-x-6 gap-y-3 mt-5"><div class="flex items-center gap-3 text-xs text-muted"><span>{t('Chế độ','Mode')}</span><Select variant="inline" size="sm" bind:value={mode} label={t('Chế độ','Mode')} options={[{value:'auto',label:t('Tự động','Automatic')},{value:'fast',label:t('Nhanh','Fast')},{value:'accurate',label:t('Chính xác','Accurate')}]}/></div><div class="flex items-center gap-3 text-xs text-muted"><span>{t('Kết quả','Results')}</span><Select variant="inline" size="sm" bind:value={topK} label={t('Kết quả','Results')} options={[1,2,3,4,5]}/></div></div>
   {#if context}<div class="flex flex-wrap gap-2 items-center bg-canvas rounded-lg mt-5 p-3 text-xs"><Icon name="clock" size={16}/>{t('Đang hỏi tiếp:','Follow-up:')} {context.previous_text}<button class="text-action ml-auto" on:click={()=>context=null}>{t('Bắt đầu lại','Start over')}</button></div>{/if}
 </section>
 <Notice error={$resource.error} retry={search} {lang}/>
