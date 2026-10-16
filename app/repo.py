@@ -66,7 +66,7 @@ async def delete_demo(db, demo_id: int) -> None:
     await db.execute("DELETE FROM demos WHERE id=$1", demo_id)
 
 
-async def set_demo_embed_model(db, demo_id: int, model: str, dim: int) -> bool:
+async def set_demo_embed_model(db, demo_id: int, model: str, dim: int, *, expected_version: int | None = None) -> bool:
     """Đổi model embed của bảng (khi Gemini hết quota và phải chuyển sang GPT).
 
     Vector theo model cũ vẫn nằm trong bảng nhưng bị index bỏ qua, nên query và doc
@@ -75,8 +75,10 @@ async def set_demo_embed_model(db, demo_id: int, model: str, dim: int) -> bool:
     """
     async with db.acquire() as conn, conn.transaction():
         await lock_demo(conn, demo_id)
-        cur = await conn.fetchval("SELECT embed_model FROM demos WHERE id=$1", demo_id)
-        if cur == model:
+        cur = await conn.fetchrow("SELECT embed_model, data_version FROM demos WHERE id=$1 FOR UPDATE", demo_id)
+        if cur is None or cur["embed_model"] == model:
+            return False
+        if expected_version is not None and cur["data_version"] != expected_version:
             return False
         await conn.execute("UPDATE demos SET embed_model=$2, embed_dim=$3 WHERE id=$1", demo_id, model, dim)
         await bump_version(conn, demo_id)

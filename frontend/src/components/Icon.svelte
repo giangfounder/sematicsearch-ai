@@ -3,6 +3,7 @@
   export let size = 20;
   const paths = {
     search:'M21 21l-5-5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0',
+    chat:'M21 11a9 9 0 0 1-9 9H4l-3 2 2-6a9 9 0 1 1 18-5ZM7 10h10M7 14h6',
     table:'M4 4h16v16H4zM4 10h16M10 4v16M4 15h16',
     code:'m8 6-6 6 6 6m8-12 6 6-6 6m-3-15-2 18',
     key:'M15 8a5 5 0 1 1-3-4M12 8l8-6m-3 3 3 3m-6 0 3 3',

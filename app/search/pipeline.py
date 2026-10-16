@@ -23,7 +23,7 @@ from app.text.normalize import normalize_query, norm_text, strip_accents
 from app.text.vn_numbers import spoken_to_digits
 
 DEFAULT_FLAGS = {
-    "understand": True, "rules": True, "multi_vector": True, "bm25": True, "entity": True,
+    "understand": True, "embedding": True, "rules": True, "multi_vector": True, "bm25": True, "entity": True,
     "entity_in_prompt": True, "soft_filter": True, "relax": True, "float_rescore": True,
     "composite": True, "context": True, "rerank": True, "baseline": False,
     "embed_rewritten": None, "persistent_cache": None, "soft_deadline_ms": None, "concurrent_rerank": True, "entity_fastpath": True,
@@ -223,7 +223,9 @@ class SearchService:
         t_par = time.perf_counter()
         und_task = (asyncio.create_task(self._timed(self._understand(idx, text, ctx, cand_names, persist)))
                     if fl["understand"] and not fast_entity else None)
-        qvec, err, lat["embed"] = await self._timed(self._embed(idx, text_norm, persist))
+        qvec, err = None, None
+        if fl["embedding"]:
+            qvec, err, lat["embed"] = await self._timed(self._embed(idx, text_norm, persist))
         if err:
             fallback.append(f"embed_{err}")
         # Rerank song song với hiểu câu: entity linking + rule đã chạy cục bộ nên có thể truy xuất suy đoán

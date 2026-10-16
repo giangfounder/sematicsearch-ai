@@ -21,7 +21,7 @@ log = logging.getLogger("gemini")
 # timeout ngắn thật sự do client cắt bằng asyncio.wait_for trong _call.
 SERVER_MIN_DEADLINE_MS = 10000
 _RETRY_RE = re.compile(r"retryDelay['\"]?\s*:\s*['\"](\d+(?:\.\d+)?)s")
-_KEY_RE = re.compile(r"AIza[0-9A-Za-z_\-]{20,}|AQ\.[0-9A-Za-z_\-]{20,}|sk-[0-9A-Za-z_\-]{20,}")
+_KEY_RE = re.compile(r"AIza[0-9A-Za-z_\-]{20,}|AQ\.[0-9A-Za-z_\-]{20,}|sk-[0-9A-Za-z_\-]{20,}|LLM[_|][0-9A-Za-z_|\-]{20,}")
 
 
 def redact(s: str) -> str:
@@ -366,9 +366,12 @@ def make_gemini(settings: Settings) -> BaseGemini:
         primary: BaseGemini = FakeGemini(settings)
     else:
         primary = GeminiPool(settings)
-    if settings.gpt_enabled:
+    if settings.gpt_enabled or settings.meta_enabled:
         from app.gemini.fallback import FallbackGemini
         from app.gemini.openai_provider import OpenAICompatProvider
+        from app.gemini.meta_provider import MetaModelProvider
 
-        return FallbackGemini(primary, OpenAICompatProvider(settings))
+        return FallbackGemini(primary,
+                              OpenAICompatProvider(settings) if settings.gpt_enabled else None,
+                              MetaModelProvider(settings) if settings.meta_enabled else None)
     return primary

@@ -113,7 +113,7 @@ export function createTableCache(api = client) {
       .finally(()=>{if (pending === task) pending=null;});
     pending=task; return task;
   }
-  return {subscribe:state.subscribe,load,invalidate(){loadedAt=0;}};
+  return {subscribe:state.subscribe,load,invalidate(){generation++;pending=null;loadedAt=0;}};
 }
 export const tables = createTableCache();
 export const jobs = writable({});

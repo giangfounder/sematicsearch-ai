@@ -143,6 +143,41 @@ async def ask_get(slug: str, request: Request, text: str = Query(min_length=1, m
     return await _ask(request, slug, text, mode, top_k)
 
 
+@admin.post("/v1/tables/{slug}/chat-context")
+async def chat_context(slug: str, body: AskBody, request: Request) -> JSONResponse:
+    """Owner-scoped, bounded lexical context for browser chat. Zero AI calls.
+
+    Never expose raw imported columns or credentials to the external chat service.
+    The browser sends these excerpts only after the user enables table context.
+    """
+    await demo_or_404(request, slug)
+    try:
+        result = await st(request).search.search(slug, {"text": body.text, "top_k": 3, "mode": "fast"}, flags={
+            "understand": False, "embedding": False, "rerank": False,
+            "embed_rewritten": False, "persistent_cache": False, "context": False,
+        })
+    except NotFound:
+        raise HTTPException(409, "Bảng đang nạp dữ liệu; vui lòng thử lại.") from None
+    rows = []
+    for product in result["products"][:3]:
+        row = {k: product.get(k) for k in ("product_id", "sku", "name", "price", "price_unit", "in_stock")}
+        row["name"] = str(row.get("name") or "")[:240]
+        row["sku"] = str(row.get("sku") or "")[:80]
+        row["price_unit"] = str(row.get("price_unit") or "")[:40]
+        row["attributes"] = [{"label": str(a.get("label") or "")[:60],
+                              "value": str(a.get("display") or "")[:120]}
+                             for a in product.get("attributes", [])[:6]]
+        description = product.get("data", {}).get("short_description")
+        if description:
+            row["description"] = str(description)[:400]
+        # Keep each complete record; never truncate serialized JSON mid-field.
+        if len(json.dumps(rows + [row], ensure_ascii=False)) > 3000:
+            break
+        rows.append(row)
+    return JSONResponse({"rows": rows, "data_version": result["data_version"], "retrieval": "lexical",
+                         "external_ai_calls": 0}, headers={"Cache-Control": "no-store"})
+
+
 @public.put("/v1/tables/{slug}/rows")
 async def upsert_rows(slug: str, body: RowsBody, request: Request) -> dict:
     authorize(request, slug, "write")

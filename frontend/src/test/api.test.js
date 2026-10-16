@@ -63,6 +63,11 @@ describe('session isolation',()=>{
 });
 
 describe('table cache',()=>{
+  it('cannot publish a pre-mutation read after invalidation',async()=>{
+    const old=defer(),latest=defer();const request=vi.fn().mockReturnValueOnce(old.promise).mockReturnValueOnce(latest.promise);
+    const cache=createTableCache({request,onReset:()=>{}});const first=cache.load();cache.invalidate();const second=cache.load(true);
+    latest.resolve([{slug:'new'}]);await second;old.resolve([{slug:'old'}]);await first;expect(get(cache).data[0].slug).toBe('new');
+  });
   it('preserves the last good catalog on refresh failure and reports the error',async()=>{
     const request=vi.fn().mockResolvedValueOnce([{slug:'existing'}]).mockRejectedValueOnce(Error('offline'));
     const cache=createTableCache({request,onReset:()=>{}});await cache.load();await cache.load(true);

@@ -1,5 +1,5 @@
 export const tabs = [
-  ['try','Tìm kiếm','Search','search'],['rows','Dữ liệu','Data','table'],['api','Tích hợp API','API integration','code'],
+  ['try','Tìm kiếm','Search','search'],['chat','Trò chuyện AI','AI chat','chat'],['rows','Dữ liệu','Data','table'],['api','Tích hợp API','API integration','code'],
   ['keys','Khoá API','API keys','key'],['eval','Đánh giá','Evaluation','chart'],['enrich','Bổ sung dữ liệu','Enrichment','spark'],
   ['logs','Nhật ký','Logs','clock'],['settings','Cài đặt','Settings','settings'],
 ];

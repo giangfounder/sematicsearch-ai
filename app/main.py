@@ -85,29 +85,34 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         async def embed_job(ctx, demo_id, params):
             # A later import can invalidate an in-flight snapshot. Re-plan from
             # the committed checkpoints, with a bounded number of restarts.
-            switched = False
+            fallback_model = None
             for attempt in range(3):
                 try:
                     result = await embed_demo(pool, gem, demo_id, per_minute=settings.embed_doc_rpm,
                                               timeout_ms=settings.offline_timeout_ms,
                                               batch=settings.embed_batch_size, concurrency=settings.embed_concurrency,
-                                              progress=ctx.progress, checkpoint=ctx.checkpoint)
+                                              progress=ctx.progress, checkpoint=ctx.checkpoint,
+                                              target_model=fallback_model)
+                    if fallback_model and result["source_model"] != fallback_model:
+                        activated = await repo.set_demo_embed_model(pool, demo_id, fallback_model,
+                                                                   result["embed_dim"],
+                                                                   expected_version=result["data_version"])
+                        if not activated:
+                            raise GeminiError("catalog_changed", "dữ liệu thay đổi trước khi kích hoạt vector GPT")
+                        log.warning("activated completed GPT embedding for table %s: %s", demo_id, fallback_model)
                     demo = await repo.get_demo_by_id(pool, demo_id)
                     if demo:
                         await indexes.reload(demo["slug"])
                     return result
                 except GeminiError as exc:
-                    # Gemini hết quota / bị rate limit bền vững -> chuyển bảng sang
-                    # model GPT và embed lại từ đầu. Vector theo model cũ bị loại khỏi
-                    # index nên query và doc luôn cùng một không gian vector.
+                    # Stage GPT checkpoints first. If GPT is also unavailable, keep
+                    # the active model and all old vectors; never expose a half-built space.
                     if (exc.reason in ("quota_exhausted", "rate_limited", "breaker_open")
-                            and not switched and settings.gpt_enabled):
+                            and fallback_model is None and settings.gpt_enabled and attempt < 2):
                         demo = await repo.get_demo_by_id(pool, demo_id)
                         if demo and demo["embed_model"] != settings.openai_embed_model:
-                            await repo.set_demo_embed_model(pool, demo_id, settings.openai_embed_model,
-                                                            demo["embed_dim"] or settings.embed_dim)
-                            switched = True
-                            log.warning("Gemini %s: chuyển bảng %s sang model GPT %s",
+                            fallback_model = settings.openai_embed_model
+                            log.warning("Gemini %s: staging GPT vectors for table %s, model %s",
                                         exc.reason, demo_id, settings.openai_embed_model)
                             continue
                     if exc.reason != "catalog_changed" or attempt == 2:

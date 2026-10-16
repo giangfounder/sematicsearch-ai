@@ -51,7 +51,8 @@ class RateLimiter:
 
 
 async def embed_demo(pool, gem: BaseGemini, demo_id: int, *, per_minute: int, timeout_ms: int,
-                     progress=None, batch: int = 30, concurrency: int = 2, checkpoint=None) -> dict:
+                     progress=None, batch: int = 30, concurrency: int = 2, checkpoint=None,
+                     target_model: str | None = None) -> dict:
     started = time.perf_counter()
     # A coherent catalog snapshot; no database connection is held during API calls
     # or quota waits. The revision is checked again at every write.
@@ -62,7 +63,10 @@ async def embed_demo(pool, gem: BaseGemini, demo_id: int, *, per_minute: int, ti
         defs = await repo.list_defs(conn, demo_id)
         products = await repo.list_products(conn, demo_id)
         existing = await repo.existing_hashes(conn, demo_id)
-    model, dim = demo["embed_model"], demo["embed_dim"]
+    # Stage a fallback model without activating it. Readers continue using the
+    # original space until the job atomically activates a complete checkpoint.
+    source_model = demo["embed_model"]
+    model, dim = target_model or source_model, demo["embed_dim"]
     version = demo["data_version"]
     keep: set[tuple[int, str, str]] = set()
     todo: list[dict] = []
@@ -100,6 +104,7 @@ async def embed_demo(pool, gem: BaseGemini, demo_id: int, *, per_minute: int, ti
                 "retained_obsolete": len(existing - keep),
                 "completed_vectors": completed, "total_vectors": len(keep), "failed_vectors": len(failed),
                 "dead_letters": list(failed), "data_version": version,
+                "source_model": source_model, "embed_model": model, "embed_dim": dim,
                 "timing_ms": {"plan": round(plan_ms, 2), "api_total": round(sum(api_ms), 2),
                               "api_mean": round(float(np.mean(api_ms)), 2) if api_ms else None,
                               "api_calls": len(api_ms), "rate_wait": round(rate_wait_ms, 2),

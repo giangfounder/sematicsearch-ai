@@ -4,6 +4,7 @@
   import {parseRoute,tabs,href} from './lib/router.js';
   import Login from './views/Login.svelte';
   import Search from './views/Search.svelte';
+  import Chat from './views/Chat.svelte';
   import Rows from './views/Rows.svelte';
   import Api from './views/Api.svelte';
   import Keys from './views/Keys.svelte';
@@ -24,6 +25,7 @@
   try {lang=localStorage.getItem('ss_lang')==='en'?'en':'vi';}catch{}
   $: t=(vi,en)=>lang==='en'?en:vi;
   $: selected=$tables.data?.find(x=>x.slug===route.slug);
+  $: navigationSlug=route.slug || $tables.data?.[0]?.slug || '';
   $: title=route.type==='new'?t('Tạo bảng mới','Create table'):route.type==='accounts'?t('Quản lý tài khoản','Accounts'):tabs.find(x=>x[0]===route.tab)?.[lang==='vi'?1:2] || t('Không gian làm việc','Workspace');
   $: if($session.status==='ready') tables.load();
   $: if($session.status==='ready') focusMain();
@@ -56,7 +58,7 @@
       <p class="workspace-label">{t('Không gian làm việc','Workspace')}</p>
       <nav aria-label={t('Chức năng','Navigation')}>
         {#each tabs as [key,vi,en,icon]}
-          <a href={route.slug?href(route.slug,key):'#/'} class:active={route.type==='table'&&route.tab===key} aria-current={route.type==='table'&&route.tab===key?'page':undefined} class:nav-disabled={!route.slug}><Icon name={icon}/><span>{lang==='vi'?vi:en}</span></a>
+          <a href={navigationSlug?href(navigationSlug,key):'#/new'} class:active={route.type==='table'&&route.tab===key} aria-current={route.type==='table'&&route.tab===key?'page':undefined} class:nav-disabled={!navigationSlug}><Icon name={icon}/><span>{lang==='vi'?vi:en}</span></a>
         {/each}
       </nav>
       <div class="sidebar-bottom"><a href="#/new" class="btn w-full" class:primary={route.type==='new'}><Icon name="plus" size={18}/>{t('Tạo bảng mới','Create table')}</a><p class="text-xs text-muted mt-5 px-1">Semsearch Console</p></div>
@@ -86,6 +88,7 @@
           {#key route.key}
             <JobBanner slug={selected.slug} {lang}/>
             {#if route.tab==='try'}<Search table={selected} {lang}/>
+            {:else if route.tab==='chat'}<Chat table={selected} {lang}/>
             {:else if route.tab==='rows'}<Rows table={selected} {lang}/>
             {:else if route.tab==='api'}<Api table={selected} {lang}/>
             {:else if route.tab==='keys'}<Keys table={selected} {lang}/>
