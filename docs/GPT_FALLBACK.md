@@ -60,5 +60,19 @@ Gemini vectors matched current source hashes; the active model was restored to
 Gemini without deleting rows/vectors. It has 753 rows and needs 1,506 vectors in
 total: this recovery restores partial coverage, not a completed embedding job.
 
+## OpenRouter (LLM backup with model rotation)
+
+Set `OPENROUTER_API_KEY`, `OPENROUTER_FALLBACK=true`, and a comma-separated
+`OPENROUTER_MODELS` list (e.g. `:free` models). OpenRouter is OpenAI-compatible and
+is tried after Gemini → GPT → Meta for LLM calls only; it never serves embeddings.
+
+Unlike a normal key rotation, OpenRouter rate limits are **per model**. When the
+current model returns a transient error (`429`, quota, `5xx`, timeout, breaker) or
+produces invalid/unsupported JSON, the provider clears the key cooldown and moves to
+the next model in `OPENROUTER_MODELS`, bounded by the original request deadline. The
+model that last succeeded becomes the starting point for the next request. `:free`
+model IDs are volatile, so keep the list configurable and expect occasional `404`.
+
 Official references: [Embeddings](https://developers.openai.com/api/reference/resources/embeddings/methods/create),
-[Chat completions](https://developers.openai.com/api/reference/resources/chat/subresources/completions/methods/create).
+[Chat completions](https://developers.openai.com/api/reference/resources/chat/subresources/completions/methods/create),
+[OpenRouter quickstart](https://openrouter.ai/docs/quickstart).

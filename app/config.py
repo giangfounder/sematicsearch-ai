@@ -51,6 +51,13 @@ class Settings(BaseSettings):
     meta_base_url: str = "https://api.meta.ai/v1"
     meta_llm_model: str = "muse-spark-1.3"
     meta_fallback: bool = True
+    # OpenRouter: LLM dự phòng (OpenAI-compatible). Tự xoay giữa các model trong danh sách
+    # khi 1 model hết quota / rate limit / lỗi. Không dùng cho embedding (không trộn vector).
+    openrouter_api_key: SecretStr = SecretStr("")
+    openrouter_base_url: str = "https://openrouter.ai/api/v1"
+    openrouter_models: str = ("nvidia/nemotron-3-super-120b-a12b:free,liquid/lfm-2.5-2.6b:free,"
+                              "google/gemma-4-31b-it:free,dots-studio/dots-3-note-preview:free")
+    openrouter_fallback: bool = True
 
     # Free tier: 100 request/phút cho embed (mỗi văn bản trong batch tính 1). Paid tier: tăng lên 3000+
     embed_doc_rpm: int = 90
@@ -110,6 +117,18 @@ class Settings(BaseSettings):
     @property
     def meta_enabled(self) -> bool:
         return self.meta_fallback and bool(self.meta_keys)
+
+    @property
+    def openrouter_keys(self) -> list[str]:
+        return [k.strip() for k in self.openrouter_api_key.get_secret_value().split(",") if k.strip()]
+
+    @property
+    def openrouter_model_list(self) -> list[str]:
+        return [m.strip() for m in self.openrouter_models.split(",") if m.strip()]
+
+    @property
+    def openrouter_enabled(self) -> bool:
+        return self.openrouter_fallback and bool(self.openrouter_keys) and bool(self.openrouter_model_list)
 
     @property
     def api_key_set(self) -> set[str]:

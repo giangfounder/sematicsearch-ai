@@ -188,7 +188,11 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                              "embed": st.settings.gemini_embed_model, "dim": st.settings.embed_dim,
                              "fallback": {"enabled": st.settings.gpt_enabled,
                                           "llm": st.settings.openai_llm_model,
-                                          "embed": st.settings.openai_embed_model}}
+                                          "embed": st.settings.openai_embed_model},
+                             "meta": {"enabled": st.settings.meta_enabled,
+                                      "llm": st.settings.meta_llm_model},
+                             "openrouter": {"enabled": st.settings.openrouter_enabled,
+                                            "models": st.settings.openrouter_model_list}}
             svc = st.search
             out["cache"] = {"response": svc.resp_cache.stats(), "understand": svc.und_cache.stats(),
                             "embed": svc.emb_cache.stats()}

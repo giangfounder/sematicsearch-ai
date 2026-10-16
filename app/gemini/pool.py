@@ -366,12 +366,14 @@ def make_gemini(settings: Settings) -> BaseGemini:
         primary: BaseGemini = FakeGemini(settings)
     else:
         primary = GeminiPool(settings)
-    if settings.gpt_enabled or settings.meta_enabled:
+    if settings.gpt_enabled or settings.meta_enabled or settings.openrouter_enabled:
         from app.gemini.fallback import FallbackGemini
         from app.gemini.openai_provider import OpenAICompatProvider
         from app.gemini.meta_provider import MetaModelProvider
+        from app.gemini.openrouter_provider import OpenRouterProvider
 
         return FallbackGemini(primary,
                               OpenAICompatProvider(settings) if settings.gpt_enabled else None,
-                              MetaModelProvider(settings) if settings.meta_enabled else None)
+                              MetaModelProvider(settings) if settings.meta_enabled else None,
+                              OpenRouterProvider(settings) if settings.openrouter_enabled else None)
     return primary

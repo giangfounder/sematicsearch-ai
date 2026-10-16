@@ -19,17 +19,28 @@ log = logging.getLogger("gemini.fallback")
 
 
 class FallbackGemini(BaseGemini):
-    def __init__(self, primary: BaseGemini, secondary: BaseGemini | None = None,
-                 tertiary: BaseGemini | None = None):
+    def __init__(self, primary: BaseGemini, *extras: BaseGemini | None):
         super().__init__(primary.s)
         self.primary = primary
-        self.secondary = secondary
-        self.tertiary = tertiary
-        self.providers = [p for p in (primary, secondary, tertiary) if p is not None]
+        # Giữ đúng vị trí các khe (secondary, tertiary, quaternary); bỏ None khỏi chuỗi gọi.
+        self.slots = list(extras)
+        self.providers = [p for p in (primary, *extras) if p is not None]
         self.usage = primary.usage
         for provider in self.providers:
             provider.usage = self.usage
         self.breakers = primary.breakers
+
+    @property
+    def secondary(self) -> BaseGemini | None:
+        return self.slots[0] if len(self.slots) > 0 else None
+
+    @property
+    def tertiary(self) -> BaseGemini | None:
+        return self.slots[1] if len(self.slots) > 1 else None
+
+    @property
+    def quaternary(self) -> BaseGemini | None:
+        return self.slots[2] if len(self.slots) > 2 else None
 
     @property
     def provider(self) -> str:
@@ -90,4 +101,5 @@ class FallbackGemini(BaseGemini):
             "primary": self.primary.health(),
             "fallback": self.secondary.health() if self.secondary else None,
             "tertiary": self.tertiary.health() if self.tertiary else None,
+            "quaternary": self.quaternary.health() if self.quaternary else None,
         }
